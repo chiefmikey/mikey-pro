@@ -2,7 +2,7 @@
 
 # **Mikey Pro** _Style Guide_
 
-## Lint and format code (the way Mikey likes it)
+### Lint and format code (the way Mikey likes it)
 
 _Compilation of packages, plugins, style guides, and custom rules for
 maintaining bougie code_
