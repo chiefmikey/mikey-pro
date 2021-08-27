@@ -1,3 +1,5 @@
+<div width="100%" align="center">
+
 # **Mikey Pro** _Style Guide_
 
 ## Lint and format code (the way Mikey likes it)
@@ -8,9 +10,9 @@ maintaining bougie code_
 <table>
   <thead>
     <tr>
-      <th align="left">Works With</th>
-      <th align="left">Styles From</th>
-      <th align="left">Depends On</th>
+      <th align="center">Works With</th>
+      <th align="center">Styles From</th>
+      <th align="center">Depends On</th>
     </tr>
   </thead>
   <tbody>
@@ -36,3 +38,5 @@ maintaining bougie code_
     </tr>
   </tbody>
 </table>
+
+</div>
