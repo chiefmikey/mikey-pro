@@ -1,0 +1,43 @@
+{
+ "eslint.validate": [
+    "json",
+    "markdown"
+  ],
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  },
+  "css.validate": false,
+  "less.validate": false,
+  "scss.validate": false,
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "[javascript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[json]": {
+      "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "stylelint.vscode-stylelint"
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "stylelint.vscode-stylelint"
+  },
+  "eslint.format.enable": true,
+  "[markdown]": {
+    "editor.wordWrap": "on",
+    "editor.quickSuggestions": true,
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "eslint.alwaysShowStatus": true,
+  "prettier.jsxSingleQuote": true,
+  "prettier.trailingComma": "all",
+  "prettier.vueIndentScriptAndStyle": true,
+  "prettier.requireConfig": true
+}
