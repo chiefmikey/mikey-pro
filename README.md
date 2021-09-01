@@ -20,9 +20,11 @@ maintaining bougie code_
       <td valign="top">
         JavaScript <br />
         HTML <br />
-        CSS <br />
         JSON <br />
         Markdown
+        CSS <br />
+        SCSS <br />
+        Less <br />
       </td>
       <td valign="top">
         AirBnB <br />
