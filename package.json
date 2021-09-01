@@ -1,25 +1,10 @@
 {
-  "name": "mikey-pro-style-guide",
-  "version": "1.0.0",
+  "name": "mikey-pro-style",
+  "version": "0.1.0",
   "description": "Mikey Pro Style Guide",
-  "keywords": [
-    "mikey-pro",
-    "style-guide"
-  ],
-  "homepage": "https://github.com/mikey-pro/style-guide#readme",
-  "bugs": {
-    "url": "https://github.com/mikey-pro/style-guide/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/mikey-pro/style-guide.git"
-  },
-  "license": "MIT",
-  "author": "Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)",
-  "contributors": [
-    "Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)"
-  ],
-  "devDependencies": {
+  "dependencies": {
+    "@html-eslint/eslint-plugin": "^0.11.0",
+    "@html-eslint/parser": "^0.11.0",
     "eslint": "^7.32.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-config-prettier": "^8.3.0",
@@ -37,5 +22,173 @@
     "stylelint": "^13.13.1",
     "stylelint-config-standard": "^22.0.0",
     "stylelint-order": "^4.1.0"
+  },
+  "files": [
+    "vscode-settings.json",
+    "README.md",
+    "LICENSE"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mikey-pro/mikey-pro-style.git"
+  },
+  "homepage": "https://github.com/mikey-pro/mikey-pro-style#readme",
+  "author": "Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)",
+  "bugs": {
+    "url": "https://github.com/mikey-pro/mikey-pro-style/issues"
+  },
+  "keywords": [
+    "mikey-pro-style",
+    "mikey-pro",
+    "mikey",
+    "pro",
+    "style",
+    "guide",
+    "style-guide"
+  ],
+  "contributors": [
+    "Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)"
+  ],
+  "prettier": {
+    "bracketSpacing": true,
+    "printWidth": 80,
+    "proseWrap": "always",
+    "singleQuote": true,
+    "tabWidth": 2,
+    "trailingComma": "all",
+    "useTabs": false
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "es6": true,
+      "node": true
+    },
+    "parserOptions": {
+      "ecmaVersion": 2020
+    },
+    "settings": {
+      "json/sort-package-json": "pro"
+    },
+    "plugins": [
+      "import",
+      "prettier",
+      "json-format",
+      "css-modules",
+      "@html-eslint",
+      "disable-autofix"
+    ],
+    "extends": [
+      "airbnb-base",
+      "eslint:recommended",
+      "plugin:sonarjs/recommended",
+      "plugin:compat/recommended",
+      "plugin:css-modules/recommended",
+      "plugin:prettier/recommended"
+    ],
+    "rules": {
+      "class-methods-use-this": "off",
+      "func-names": "off",
+      "no-console": "off",
+      "no-process-exit": "off",
+      "no-underscore-dangle": "off",
+      "no-unused-vars": "warn",
+      "object-shorthand": "off",
+      "import/extensions": "off",
+      "prettier/prettier": [
+        "error"
+      ]
+    },
+    "overrides": [
+      {
+        "files": [
+          "*.md"
+        ],
+        "parser": "markdown-eslint-parser",
+        "extends": [
+          "plugin:md/recommended"
+        ],
+        "rules": {
+          "md/remark": [
+            "error",
+            {
+              "plugins": [
+                "preset-lint-markdown-style-guide",
+                [
+                  "lint-emphasis-marker",
+                  "_"
+                ]
+              ]
+            }
+          ],
+          "prettier/prettier": [
+            "error",
+            {
+              "parser": "markdown"
+            }
+          ]
+        }
+      },
+      {
+        "files": [
+          "*.html"
+        ],
+        "parser": "@html-eslint/parser",
+        "extends": [
+          "plugin:@html-eslint/recommended"
+        ],
+        "rules": {
+          "@html-eslint/indent": "off",
+          "@html-eslint/no-extra-spacing-attrs": "off",
+          "@html-eslint/require-closing-tags": "off",
+          "prettier/prettier": [
+            "error",
+            {
+              "parser": "html"
+            }
+          ],
+          "disable-autofix/@html-eslint/require-closing-tags": [
+            "error",
+            {
+              "selfClosing": "always"
+            }
+          ]
+        }
+      }
+    ],
+    "ignorePatterns": [
+      "!.*",
+      "node_modules",
+      "vendor",
+      "dist"
+    ]
+  },
+  "stylelint": {
+    "extends": "stylelint-config-standard",
+    "plugins": [
+      "stylelint-order"
+    ],
+    "rules": {
+      "order/order": [
+        "custom-properties",
+        "declarations"
+      ],
+      "order/properties-order": [
+        "width",
+        "height"
+      ]
+    },
+    "ignoreFiles": [
+      "**/*.js",
+      "**/*.cjs",
+      "**/*.mjs",
+      "**/*.json",
+      ".*.js",
+      ".*.cjs",
+      ".*.mjs",
+      ".*.json",
+      ".*"
+    ]
   }
 }
