@@ -10,9 +10,9 @@ maintaining bougie code_
 <table>
   <thead>
     <tr>
-      <th align="center">Works With</th>
-      <th align="center">Styles From</th>
-      <th align="center">Depends On</th>
+      <th align="center">Languages</th>
+      <th align="center">Rules</th>
+      <th align="center">Dependencies</th>
     </tr>
   </thead>
   <tbody>
@@ -28,6 +28,8 @@ maintaining bougie code_
         AirBnB <br />
         Sonar <br />
         Compat <br />
+        ESLint <br />
+        Prettier <br />
         Remark
       </td>
       <td valign="top">
