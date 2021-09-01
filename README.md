@@ -7,7 +7,7 @@
 _Compilation of packages, plugins, style guides, and custom rules for
 maintaining bougie code_
 
-<table>
+<table align="center">
   <thead>
     <tr>
       <th align="center">Languages</th>
