@@ -1,15 +1,15 @@
 {
-  "name": "mikey-pro",
+  "name": "@mikey-pro/style-guide",
   "version": "1.0.0",
   "description": "Mikey Pro Style Guide",
   "keywords": [
-    "mikey-pro-style-guide",
+    "@mikey-pro/style-guide",
     "mikey-pro",
     "mikey",
     "pro",
+    "style-guide",
     "style",
-    "guide",
-    "style-guide"
+    "guide"
   ],
   "homepage": "https://github.com/mikey-pro/style-guide#readme",
   "bugs": {
