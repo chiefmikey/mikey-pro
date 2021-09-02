@@ -1,18 +1,26 @@
 <div width="100%" align="center">
 
-# **Mikey Pro** _Style Guide_
+# **Mikey Pro**
 
-### Lint and format code (the way Mikey likes it)
+### [Style Guide](https://github.com/mikey-pro/style-guide) + [Theme](https://github.com/mikey-pro/theme)
 
-_Compilation of packages, plugins, style guides, and custom rules for
-maintaining bougie code_
+<br>
 
-<table align="center">
+</div>
+
+## **@mikey-pro/style-guide**
+
+### Lint and Format Code (the way Mikey likes it)
+
+_A compilation of packages, plugins, style guides, custom configurations and
+rules for maintaining bougie code_
+
+<table>
   <thead>
     <tr>
-      <th align="center">Languages</th>
-      <th align="center">Rules</th>
-      <th align="center">Dependencies</th>
+      <th>Languages</th>
+      <th>Rules</th>
+      <th>Packages</th>
     </tr>
   </thead>
   <tbody>
@@ -20,19 +28,20 @@ maintaining bougie code_
       <td valign="top">
         JavaScript <br />
         HTML <br />
-        JSON <br />
-        Markdown
         CSS <br />
         SCSS <br />
         Less <br />
+        JSON <br />
+        Markdown <br />
       </td>
       <td valign="top">
         AirBnB <br />
-        Sonar <br />
-        Compat <br />
         ESLint <br />
         Prettier <br />
-        Remark
+        Sonar <br />
+        Compat <br />
+        Remark <br />
+        HTML ESLint
       </td>
       <td valign="top">
         ESLint <br />
@@ -43,4 +52,32 @@ maintaining bougie code_
   </tbody>
 </table>
 
-</div>
+## Usage
+
+### Install
+
+```shell
+npm i -D @mikey-pro/style-guide
+
+yarn add -D @mikey-pro/style-guide
+```
+
+### Configure
+
+Add bundled configs to `package.json`:
+
+```json
+{
+  "eslintConfig": {
+    "extends": [
+      "@mikey-pro/eslint-config"
+    ]
+  },
+  "prettier": "@mikey-pro/prettier-config",
+  "stylelint": {
+    "extends": [
+      "@mikey-pro/stylelint-config"
+    ]
+  }
+}
+```
