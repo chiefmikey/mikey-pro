@@ -1,53 +1,38 @@
 {
   "name": "@mikey-pro/style-guide",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Mikey Pro Style Guide",
+  "peerDependencies": {
+    "@mikey-pro/eslint-config": "^1.0.0",
+    "@mikey-pro/prettier-config": "^1.0.0",
+    "@mikey-pro/stylelint-config": "^1.0.0"
+  },
+  "files": [
+    "vscode-settings.json",
+    "README.md",
+    "LICENSE"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mikey-pro/style-guide.git"
+  },
+  "homepage": "https://github.com/mikey-pro/style-guide#readme",
+  "author": "Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)",
+  "bugs": {
+    "url": "https://github.com/mikey-pro/style-guide/issues"
+  },
   "keywords": [
     "@mikey-pro/style-guide",
     "mikey-pro",
     "mikey",
     "pro",
     "style-guide",
+    "styleguide",
     "style",
     "guide"
   ],
-  "homepage": "https://github.com/mikey-pro/style-guide#readme",
-  "bugs": {
-    "url": "https://github.com/mikey-pro/style-guide/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/mikey-pro/style-guide.git"
-  },
-  "license": "MIT",
-  "author": "Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)",
   "contributors": [
     "Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)"
-  ],
-  "files": [
-    "vscode-settings.json",
-    "README.md",
-    "LICENSE"
-  ],
-  "dependencies": {
-    "@html-eslint/eslint-plugin": "^0.11.0",
-    "@html-eslint/parser": "^0.11.0",
-    "eslint": "^7.32.0",
-    "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-import-resolver-alias": "^1.1.2",
-    "eslint-plugin-compat": "^3.13.0",
-    "eslint-plugin-css-modules": "^2.11.0",
-    "eslint-plugin-disable-autofix": "^0.1.1",
-    "eslint-plugin-import": "^2.24.2",
-    "eslint-plugin-json": "^3.1.0",
-    "eslint-plugin-json-format": "^2.0.1",
-    "eslint-plugin-md": "^1.0.19",
-    "eslint-plugin-prettier": "^3.4.1",
-    "eslint-plugin-sonar": "^0.6.1",
-    "prettier": "^2.3.2",
-    "stylelint": "^13.13.1",
-    "stylelint-config-standard": "^22.0.0",
-    "stylelint-order": "^4.1.0"
-  }
+  ]
 }
