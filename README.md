@@ -18,9 +18,9 @@ rules for maintaining bougie code_
 <table>
   <thead>
     <tr>
-      <th>Languages</th>
-      <th>Rules</th>
-      <th>Packages</th>
+      <th align="left">Languages</th>
+      <th align="left">Rules</th>
+      <th align="left">Packages</th>
     </tr>
   </thead>
   <tbody>
