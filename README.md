@@ -6,7 +6,7 @@
   <img src="mikey-pro-logo.png" />
 </a>
 
-### [Style Guide](https://github.com/mikey-pro/style-guide) + [Theme](https://github.com/mikey-pro/theme)
+## [Style Guide](https://github.com/mikey-pro/style-guide) + [Theme](https://github.com/mikey-pro/theme)
 
 <br />
 
