@@ -2,7 +2,9 @@
 
 # **Mikey Pro**
 
-### [Style Guide](https://github.com/mikey-pro/style-guide) + [Theme](https://github.com/mikey-pro/theme)
+![Mikey Pro logo](/mikey-pro-logo.png)
+
+## [Style Guide](https://github.com/mikey-pro/style-guide) + [Theme](https://github.com/mikey-pro/theme)
 
 <br />
 
