@@ -5,7 +5,7 @@
 ### [Style Guide](https://github.com/mikey-pro/style-guide) + [Theme](https://github.com/mikey-pro/theme)
 
 <a href="https://github.com/mikey-pro">
-  <img src="mikey-pro-logo.png" style="width: 33%" />
+  <img src="mikey-pro-logo.png" style="min-width: 33%" />
 </a>
 
 <br />
