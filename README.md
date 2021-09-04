@@ -14,7 +14,9 @@
 
 ## **@mikey-pro/style-guide**
 
-### Lint and Format Code (the way Mikey likes it)
+### Lint and Format Code
+
+#### (the way Mikey likes it)
 
 _A compilation of packages, plugins, style guides, custom configurations and
 rules for maintaining bougie code_
