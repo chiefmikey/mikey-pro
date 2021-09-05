@@ -84,7 +84,7 @@ Add bundled configs to `package.json`:
 }
 ```
 
-##### Das it!
+##### Das it :)
 
 <br />
 
@@ -107,3 +107,5 @@ Update in `package.json`:
   }
 }
 ```
+
+##### U did it!
