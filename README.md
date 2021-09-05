@@ -90,7 +90,7 @@ Add bundled configs to `package.json`:
 
 ### Compatibility with React and JSX:
 
-Install an additional ESLint configuration which includes React rules:
+Install an [additional ESLint configuration](https://github.com/mikey-pro/eslint-config-react) which includes React rules:
 
 ```shell
 npm i -D @mikey-pro/eslint-config-react
