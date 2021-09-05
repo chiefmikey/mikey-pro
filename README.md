@@ -109,3 +109,25 @@ Update in `package.json`:
 ```
 
 ##### U did it!
+
+### Compatibility with Vue:
+
+Install an [additional ESLint configuration](https://github.com/mikey-pro/eslint-config-vue) which includes Vue rules:
+
+```shell
+npm i -D @mikey-pro/eslint-config-vue
+
+yarn add -D @mikey-pro/eslint-config-vue
+```
+
+Update in `package.json`:
+
+```json
+{
+  "eslintConfig": {
+    "extends": "@mikey-pro/eslint-config-vue"
+  }
+}
+```
+
+##### Gud job...
