@@ -84,6 +84,10 @@ Add bundled configs to `package.json`:
 }
 ```
 
+##### Das it!
+
+<br />
+
 ### Compatibility with React and JSX:
 
 Install an additional ESLint configuration which includes React rules:
