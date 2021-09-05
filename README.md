@@ -20,7 +20,7 @@ rules for maintaining bougie code_
 <table>
   <thead>
     <tr>
-      <th align="left">Languages</th>
+      <th align="left">Compatibility</th>
       <th align="left">Rules</th>
       <th align="left">Packages</th>
     </tr>
@@ -29,6 +29,8 @@ rules for maintaining bougie code_
     <tr>
       <td valign="top">
         JavaScript <br />
+        React <br />
+        JSX <br />
         HTML <br />
         CSS <br />
         SCSS <br />
@@ -78,6 +80,26 @@ Add bundled configs to `package.json`:
   "prettier": "@mikey-pro/prettier-config",
   "stylelint": {
     "extends": "@mikey-pro/stylelint-config"
+  }
+}
+```
+
+### Compatibility with React and JSX:
+
+Install an additional ESLint configuration which includes React rules:
+
+```shell
+npm i -D @mikey-pro/eslint-config-react
+
+yarn add -D @mikey-pro/eslint-config-react
+```
+
+Update in `package.json`:
+
+```json
+{
+  "eslintConfig": {
+    "extends": "@mikey-pro/eslint-config-react"
   }
 }
 ```
