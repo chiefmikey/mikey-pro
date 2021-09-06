@@ -130,4 +130,38 @@ Update in `package.json`:
 }
 ```
 
+It is recommended to also [use Vetur](https://github.com/vuejs/vetur) with your
+Vue project to provide syntax highlighting and additional features in VSCode
+
+[Install Vetur for VSCode](https://marketplace.visualstudio.com/items?itemName=octref.vetur)
+
+Add `vetur.config.js` to the root directory with the correct paths:
+
+```js
+module.exports = {
+  settings: {
+    'vetur.useWorkspaceDependencies': true,
+    'vetur.experimental.templateInterpolationService': true,
+  },
+  projects: [
+    {
+      root: './',
+      package: './package.json',
+      globalComponents: ['./client/src/components/**/*.vue'],
+      tsconfig: './client/jsconfig.json',
+    },
+  ],
+};
+```
+
+Add `jsconfig.json` with a glob pattern that includes all of your `.vue` files:
+
+```json
+{
+  "include": [
+    "./src/**/*"
+  ]
+}
+```
+
 ##### Gud job...
