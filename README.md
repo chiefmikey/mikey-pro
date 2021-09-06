@@ -34,7 +34,6 @@ rules for maintaining bougie code_
         HTML <br />
         CSS <br />
         SCSS <br />
-        Less <br />
         JSON <br />
         Markdown <br />
       </td>
