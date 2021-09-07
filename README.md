@@ -30,6 +30,7 @@ rules for maintaining bougie code_
       <td valign="top">
         JavaScript <br />
         React <br />
+        Vue <br />
         JSX <br />
         HTML <br />
         CSS <br />
