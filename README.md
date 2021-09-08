@@ -110,6 +110,8 @@ Update in `package.json`:
 
 ##### U did it!
 
+<br />
+
 ### Compatibility with Vue:
 
 Install an [additional ESLint configuration](https://github.com/mikey-pro/eslint-config-vue) which includes Vue rules:
