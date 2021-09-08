@@ -1,9 +1,10 @@
 {
   "name": "@mikey-pro/style-guide",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Mikey Pro Style Guide",
   "peerDependencies": {
-    "@mikey-pro/eslint-config-babel": "^1.1.2",
+    "@mikey-pro/eslint-config-babel": "^1.1.3",
+    "@mikey-pro/eslint-config-ecma": "^1.0.12",
     "@mikey-pro/prettier-config": "^1.0.4",
     "@mikey-pro/stylelint-config": "^1.0.4"
   },
