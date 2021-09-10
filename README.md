@@ -8,7 +8,7 @@
     <a href="https://github.com/mikey-pro/theme">Theme</a>
   </h3>
   <a href="https://github.com/mikey-pro">
-    <img src="mikey-pro-logo.svg" style="width: 275px" alt="Mikey Pro Logo" />
+    <img src="img/mikey-pro-logo.svg" style="width: 275px" alt="Mikey Pro Logo" />
   </a>
   <br />
 </div>
@@ -88,7 +88,7 @@ rules for maintaining bougie code_
 
 ### Chonk Alert
 
-<div><img src="dino-size.svg" style="width: 275px" alt="Dino chonk" /></div>
+<div><img src="img/dino-size.svg" style="width: 275px" alt="Dino chonk" /></div>
 
 This package brings together a lot of great tools! A LOT
 
