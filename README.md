@@ -25,7 +25,7 @@ rules for maintaining bougie code_
     <tr>
       <th align="left">Compatibility</th>
       <th align="left">Rules</th>
-      <th align="left">Packages</th>
+      <th align="left">Configs</th>
     </tr>
   </thead>
   <tbody>
