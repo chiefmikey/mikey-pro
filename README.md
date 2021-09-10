@@ -49,7 +49,7 @@ rules for maintaining bougie code_
         Compat <br />
         Remark <br />
         Stylelint <br />
-        HTML-ESLint
+        @HTML
       </td>
       <td valign="top">
         ESLint <br />
