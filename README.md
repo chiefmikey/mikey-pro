@@ -48,7 +48,8 @@ rules for maintaining bougie code_
         Sonar <br />
         Compat <br />
         Remark <br />
-        HTML ESLint
+        Stylelint <br />
+        HTML-ESLint
       </td>
       <td valign="top">
         ESLint <br />
