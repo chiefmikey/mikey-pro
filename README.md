@@ -23,9 +23,9 @@ rules for maintaining bougie code_
 <table>
   <thead>
     <tr>
-      <th align="left">Compatibility</th>
-      <th align="left">Rules</th>
-      <th align="left">Configs</th>
+      <th align="left">Compatibility</a></th>
+      <th align="left">Rules</a></th>
+      <th align="left">Configs</a></th>
     </tr>
   </thead>
   <tbody>
@@ -52,9 +52,9 @@ rules for maintaining bougie code_
         @HTML
       </td>
       <td valign="top">
-        ESLint <br />
-        Prettier <br />
-        Stylelint
+        <a href="https://github.com/mikey-pro/eslint-config">ESLint</a><br />
+        <a href="https://github.com/mikey-pro/prettier-config">Prettier</a><br />
+        <a href="https://github.com/mikey-pro/stylelint-config">Stylelint</a>
       </td>
     </tr>
   </tbody>
