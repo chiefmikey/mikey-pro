@@ -91,8 +91,6 @@ rules for maintaining bougie code_
 
 This package brings together a lot of great tools! A LOT
 
-<br />
-
 ## Usage
 
 ### Install
