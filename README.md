@@ -71,7 +71,7 @@ rules for maintaining bougie code_
 <div>
   <a href="https://www.npmjs.com/package/@mikey-pro/style-guide"
     ><img
-      src="https://img.shields.io/bundlephobia/min/@mikey-pro/style-guide?color=9987d8&label=package%20size&logo=ok&style=for-the-badge"
+      src="https://img.shields.io/bundlephobia/min/@mikey-pro/style-guide?color=9987d8&label=package%20size&style=for-the-badge"
       alt="Package size badge"
       height="20px"
   /></a>
