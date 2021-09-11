@@ -3,8 +3,7 @@
     <b>Mikey Pro</b>
   </h1>
   <h3>
-    <a href="https://github.com/mikey-pro/style-guide">Style Guide</a>
-    +
+    <a href="https://github.com/mikey-pro/style-guide">Style Guide</a> +
     <a href="https://github.com/mikey-pro/theme">Theme</a>
   </h3>
   <a href="https://github.com/mikey-pro">
