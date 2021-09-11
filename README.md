@@ -92,6 +92,18 @@ rules for maintaining bougie code_
 
 This package brings together a lot of great tools! A LOT
 
+## Requirements
+
+Install these VSCode extensions:
+
+<a href="https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint">ESLint</a> +
+<a href="https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode">Prettier</a> +
+<a href="https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint">Stylelint</a>
+
+Add <a href="https://github.com/mikey-pro/style-guide/blob/main/vscode-settings.json">these preferences</a> to `settings.json`
+
+
+
 ## Usage
 
 ### Install
@@ -117,10 +129,6 @@ Add bundled configs to `package.json`:
   }
 }
 ```
-
-### VSCode
-
-Include <a href="https://github.com/mikey-pro/style-guide/blob/main/vscode-settings.json">these options</a> in `settings.json`
 
 ##### Das it :)
 
