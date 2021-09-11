@@ -92,8 +92,6 @@ rules for maintaining bougie code_
 
 This package brings together a lot of great tools! A LOT
 
-<br />
-
 ## Requirements
 
 Install these VSCode extensions:
@@ -155,8 +153,6 @@ Update in `package.json`:
   }
 }
 ```
-
-<br />
 
 ### Vue
 
