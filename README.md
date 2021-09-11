@@ -139,7 +139,7 @@ npm i -D @mikey-pro/eslint-config-react
 yarn add -D @mikey-pro/eslint-config-react
 ```
 
-Update in `package.json`:
+Update `package.json`:
 
 ```json
 {
@@ -159,7 +159,7 @@ npm i -D @mikey-pro/eslint-config-vue
 yarn add -D @mikey-pro/eslint-config-vue
 ```
 
-Update in `package.json`:
+Update `package.json`:
 
 ```json
 {
