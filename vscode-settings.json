@@ -11,11 +11,6 @@
   "css.validate": false,
   "less.validate": false,
   "scss.validate": false,
-  "editor.codeActionsOnSave": {
-    "source.fixAll": true
-  },
-  "editor.formatOnPaste": true,
-  "editor.formatOnSave": true,
   "[typescript]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
@@ -61,5 +56,10 @@
     "sugarss",
     "vue-postcss",
     "xls"
-  ]
+  ],
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  },
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true
 }
