@@ -101,8 +101,6 @@ Install these VSCode extensions:
 
 Add <a href="https://github.com/mikey-pro/style-guide/blob/main/vscode-settings.json">these preferences</a> to `settings.json`
 
-<br />
-
 ## Usage
 
 ### Install
@@ -128,8 +126,6 @@ Add bundled configs to `package.json`:
   }
 }
 ```
-
-<br />
 
 ## Compatibility
 
