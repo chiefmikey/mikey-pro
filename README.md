@@ -92,6 +92,8 @@ rules for maintaining bougie code_
 
 This package brings together a lot of great tools! A LOT
 
+<br />
+
 ## Requirements
 
 Install these VSCode extensions:
@@ -102,7 +104,7 @@ Install these VSCode extensions:
 
 Add <a href="https://github.com/mikey-pro/style-guide/blob/main/vscode-settings.json">these preferences</a> to `settings.json`
 
-
+<br />
 
 ## Usage
 
@@ -130,11 +132,11 @@ Add bundled configs to `package.json`:
 }
 ```
 
-##### Das it :)
-
 <br />
 
-### Compatibility with React and JSX:
+## Compatibility
+
+### React
 
 Install an [additional ESLint configuration](https://github.com/mikey-pro/eslint-config-react) which includes React rules:
 
@@ -154,11 +156,9 @@ Update in `package.json`:
 }
 ```
 
-##### U did it!
-
 <br />
 
-### Compatibility with Vue:
+### Vue
 
 Install an [additional ESLint configuration](https://github.com/mikey-pro/eslint-config-vue) which includes Vue rules:
 
@@ -211,5 +211,3 @@ Add `jsconfig.json` with a glob pattern that includes all of your `.vue` files:
   ]
 }
 ```
-
-##### Gud job...
