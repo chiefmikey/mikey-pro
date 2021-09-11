@@ -1,14 +1,13 @@
 {
   "name": "@mikey-pro/style-guide",
-  "version": "1.4.6",
+  "version": "1.4.7",
   "description": "Mikey Pro Style Guide",
   "peerDependencies": {
-    "@mikey-pro/eslint-config": "^1.3.0",
-    "@mikey-pro/prettier-config": "^1.0.4",
-    "@mikey-pro/stylelint-config": "^1.0.4"
+    "@mikey-pro/eslint-config": "^1.3.2",
+    "@mikey-pro/prettier-config": "^1.0.5",
+    "@mikey-pro/stylelint-config": "^1.0.5"
   },
   "files": [
-    "vscode-settings.json",
     "README.md",
     "LICENSE"
   ],
