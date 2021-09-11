@@ -65,7 +65,7 @@ rules for maintaining bougie code_
     ><img
       src="https://img.shields.io/librariesio/release/npm/@mikey-pro/style-guide?color=8fbe61&style=for-the-badge"
       alt="Dependencies badge"
-      height="20px"
+      height="3vh"
   /></a>
 </div>
 <div>
@@ -73,7 +73,7 @@ rules for maintaining bougie code_
     ><img
       src="https://img.shields.io/bundlephobia/min/@mikey-pro/style-guide?color=9987d8&label=package%20size&style=for-the-badge"
       alt="Package size badge"
-      height="20px"
+      height="3vh"
   /></a>
 </div>
 
@@ -82,7 +82,7 @@ rules for maintaining bougie code_
     ><img
       src="https://img.shields.io/npm/dw/@mikey-pro/style-guide?color=5dacb7&style=for-the-badge"
       alt="Downloads badge"
-      height="20px"
+      height="3vh"
   /></a>
 </div>
 
@@ -117,6 +117,10 @@ Add bundled configs to `package.json`:
   }
 }
 ```
+
+### VSCode
+
+Include <a href="https://github.com/mikey-pro/style-guide/blob/main/vscode-settings.json">these options</a> in `settings.json`
 
 ##### Das it :)
 
