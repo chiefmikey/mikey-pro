@@ -3,9 +3,9 @@
   "version": "1.4.7",
   "description": "Mikey Pro Style Guide",
   "peerDependencies": {
-    "@mikey-pro/eslint-config": "^1.3.2",
-    "@mikey-pro/prettier-config": "^1.0.5",
-    "@mikey-pro/stylelint-config": "^1.0.5"
+    "@mikey-pro/eslint-config": "^1.3.3",
+    "@mikey-pro/prettier-config": "^1.0.6",
+    "@mikey-pro/stylelint-config": "^1.0.6"
   },
   "files": [
     "README.md",
