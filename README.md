@@ -75,8 +75,6 @@ Add <a href="https://github.com/mikey-pro/style-guide/blob/main/vscode-settings.
 
 ```shell
 npm i -D @mikey-pro/style-guide
-
-yarn add -D @mikey-pro/style-guide
 ```
 
 ### Configure
