@@ -115,6 +115,26 @@ Update `package.json`:
 }
 ```
 
+### Preact
+
+Install an [additional ESLint configuration](https://github.com/mikey-pro/eslint-config-preact) which includes Preact rules:
+
+```shell
+npm i -D @mikey-pro/eslint-config-preact
+
+yarn add -D @mikey-pro/eslint-config-preact
+```
+
+Update `package.json`:
+
+```json
+{
+  "eslintConfig": {
+    "extends": "@mikey-pro/eslint-config-preact"
+  }
+}
+```
+
 ### Vue
 
 Install an [additional ESLint configuration](https://github.com/mikey-pro/eslint-config-vue) which includes Vue rules:
