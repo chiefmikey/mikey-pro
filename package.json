@@ -3,7 +3,7 @@
   "version": "1.5.9",
   "description": "Mikey Pro Style Guide",
   "peerDependencies": {
-    "@mikey-pro/eslint-config": "^1.5.1",
+    "@mikey-pro/eslint-config": "^1.5.2",
     "@mikey-pro/prettier-config": "^1.0.7",
     "@mikey-pro/stylelint-config": "^1.0.10"
   },
