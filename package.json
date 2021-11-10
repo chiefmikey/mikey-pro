@@ -1,6 +1,6 @@
 {
   "name": "@mikey-pro/style-guide",
-  "version": "2.1.7",
+  "version": "2.1.8",
   "description": "Mikey Pro Style Guide",
   "dependencies": {
     "@mikey-pro/eslint-config": "^2.1.7",
