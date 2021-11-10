@@ -33,6 +33,7 @@ rules for maintaining bougie code_
       <td valign="top">
         JavaScript <br />
         React <br />
+        Preact <br />
         Vue <br />
         JSX <br />
         HTML <br />
@@ -42,11 +43,14 @@ rules for maintaining bougie code_
         Markdown <br />
       </td>
       <td valign="top">
+        Standard <br />
         AirBnB <br />
+        Unicorn <br />
         ESLint <br />
         Prettier <br />
         Sonar <br />
         Compat <br />
+        jsx-a11y <br />
         Remark <br />
         Stylelint <br />
         @HTML
@@ -66,6 +70,7 @@ rules for maintaining bougie code_
 <a href="https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint">ESLint</a> |
 <a href="https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode">Prettier</a> |
 <a href="https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint">Stylelint</a>
+<a href="https://marketplace.visualstudio.com/items?itemName=octref.vetur">Vetur</a>
 
 Add <a href="https://github.com/mikey-pro/style-guide/blob/main/vscode-settings.json">these preferences</a> to `settings.json`
 
@@ -90,101 +95,5 @@ Add bundled configs to `package.json`:
   "stylelint": {
     "extends": "@mikey-pro/stylelint-config"
   }
-}
-```
-
-## Compatibility
-
-### React
-
-Install an [additional ESLint configuration](https://github.com/mikey-pro/eslint-config-react) which includes React rules:
-
-```shell
-npm i -D @mikey-pro/eslint-config-react
-
-yarn add -D @mikey-pro/eslint-config-react
-```
-
-Update `package.json`:
-
-```json
-{
-  "eslintConfig": {
-    "extends": "@mikey-pro/eslint-config-react"
-  }
-}
-```
-
-### Preact
-
-Install an [additional ESLint configuration](https://github.com/mikey-pro/eslint-config-preact) which includes Preact rules:
-
-```shell
-npm i -D @mikey-pro/eslint-config-preact
-
-yarn add -D @mikey-pro/eslint-config-preact
-```
-
-Update `package.json`:
-
-```json
-{
-  "eslintConfig": {
-    "extends": "@mikey-pro/eslint-config-preact"
-  }
-}
-```
-
-### Vue
-
-Install an [additional ESLint configuration](https://github.com/mikey-pro/eslint-config-vue) which includes Vue rules:
-
-```shell
-npm i -D @mikey-pro/eslint-config-vue
-
-yarn add -D @mikey-pro/eslint-config-vue
-```
-
-Update `package.json`:
-
-```json
-{
-  "eslintConfig": {
-    "extends": "@mikey-pro/eslint-config-vue"
-  }
-}
-```
-
-It is recommended to also [use Vetur](https://github.com/vuejs/vetur) with your
-Vue project to provide syntax highlighting and additional features in VSCode
-
-[Install Vetur for VSCode](https://marketplace.visualstudio.com/items?itemName=octref.vetur)
-
-Add `vetur.config.js` to the root directory with the correct paths:
-
-```js
-module.exports = {
-  settings: {
-    'vetur.useWorkspaceDependencies': true,
-    'vetur.experimental.templateInterpolationService': true,
-  },
-  projects: [
-    {
-      root: './',
-      package: './package.json',
-      globalComponents: ['./client/src/components/**/*.vue'],
-      tsconfig: './client/jsconfig.json',
-    },
-  ],
-};
-```
-
-Add `jsconfig.json` with a glob pattern that includes all of your `.vue` files:
-
-```json
-{
-  "include": [
-    "./src/**/*"
-  ]
 }
 ```
