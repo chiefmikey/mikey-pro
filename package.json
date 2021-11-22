@@ -5,7 +5,7 @@
   "dependencies": {
     "@mikey-pro/eslint-config": "^2.3.3",
     "@mikey-pro/prettier-config": "^1.2.0",
-    "@mikey-pro/stylelint-config": "^2.0.2"
+    "@mikey-pro/stylelint-config": "^2.0.3"
   },
   "files": [
     "README.md",
