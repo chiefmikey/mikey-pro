@@ -89,7 +89,7 @@ Add bundled configs to `package.json`:
 ```json
 {
   "eslintConfig": {
-    "extends": "@mikey-pro/eslint-config"
+    "extends": "@mikey-pro"
   },
   "prettier": "@mikey-pro/prettier-config",
   "stylelint": {
