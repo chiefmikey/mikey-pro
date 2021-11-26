@@ -35,6 +35,7 @@ rules for maintaining bougie code_
         React <br />
         Preact <br />
         Vue <br />
+        Svelte<br />
         JSX <br />
         HTML <br />
         CSS <br />
@@ -43,9 +44,10 @@ rules for maintaining bougie code_
         Markdown <br />
       </td>
       <td valign="top">
+        Unicorn <br />
         Standard <br />
         AirBnB <br />
-        Unicorn <br />
+        GitHub <br />
         ESLint <br />
         Prettier <br />
         Sonar <br />
@@ -71,6 +73,7 @@ rules for maintaining bougie code_
 <a href="https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode">Prettier</a> |
 <a href="https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint">Stylelint</a>
 <a href="https://marketplace.visualstudio.com/items?itemName=octref.vetur">Vetur</a>
+<a href="https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode">Svelte</a>
 
 Add <a href="https://github.com/mikey-pro/style-guide/blob/main/vscode-settings.json">these preferences</a> to `settings.json`
 
@@ -79,7 +82,7 @@ Add <a href="https://github.com/mikey-pro/style-guide/blob/main/vscode-settings.
 ### Install
 
 ```shell
-npm i -D @mikey-pro/style-guide
+npm i -D @mikey-pro/style-guide eslint prettier stylelint
 ```
 
 ### Configure
