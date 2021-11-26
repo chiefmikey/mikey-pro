@@ -55,6 +55,7 @@ rules for maintaining bougie code_
         jsx-a11y <br />
         Remark <br />
         Stylelint <br />
+        @Primer <br />
         @HTML
       </td>
       <td valign="top">
