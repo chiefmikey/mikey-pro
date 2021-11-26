@@ -71,8 +71,8 @@ rules for maintaining bougie code_
 <a href="https://code.visualstudio.com/">VSCode</a> with these extensions:
 <a href="https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint">ESLint</a> |
 <a href="https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode">Prettier</a> |
-<a href="https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint">Stylelint</a>
-<a href="https://marketplace.visualstudio.com/items?itemName=octref.vetur">Vetur</a>
+<a href="https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint">Stylelint</a> |
+<a href="https://marketplace.visualstudio.com/items?itemName=octref.vetur">Vetur</a> |
 <a href="https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode">Svelte</a>
 
 Add <a href="https://github.com/mikey-pro/style-guide/blob/main/vscode-settings.json">these preferences</a> to `settings.json`
