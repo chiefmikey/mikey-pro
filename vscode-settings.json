@@ -1,16 +1,52 @@
 {
+  "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  },
+
+  "eslint.enable": true,
+  "eslint.alwaysShowStatus": true,
+  "eslint.useESLintClass": true,
+  "eslint.lintTask.enable": true,
+  "eslint.format.enable": true,
   "eslint.validate": [
     "json",
     "markdown",
     "html",
     "javascript",
     "javascriptreact",
-    "vue"
+    "vue",
+    "svelte",
+    "typescript",
+    "typescriptreact"
   ],
+
+  "prettier.jsxSingleQuote": true,
+  "prettier.trailingComma": "all",
+  "prettier.vueIndentScriptAndStyle": true,
+  "prettier.requireConfig": true,
+
+  "stylelint.reportNeedlessDisables": true,
+  "stylelint.validate": [
+    "css",
+    "less",
+    "postcss",
+    "sass",
+    "scss",
+    "source.css.styled",
+    "styled-css",
+    "sugarss",
+    "vue-postcss",
+    "xls"
+  ],
+
   "javascript.validate.enable": false,
   "css.validate": false,
   "less.validate": false,
   "scss.validate": false,
+
   "[typescript]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
@@ -37,29 +73,18 @@
   },
   "[markdown]": {
     "editor.wordWrap": "on",
-    "editor.quickSuggestions": true,
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
-  "eslint.format.enable": true,
-  "prettier.jsxSingleQuote": true,
-  "prettier.trailingComma": "all",
-  "prettier.vueIndentScriptAndStyle": true,
-  "prettier.requireConfig": true,
-  "stylelint.validate": [
-    "css",
-    "less",
-    "postcss",
-    "sass",
-    "scss",
-    "source.css.styled",
-    "styled-css",
-    "sugarss",
-    "vue-postcss",
-    "xls"
-  ],
-  "editor.codeActionsOnSave": {
-    "source.fixAll": true
+  "[svelte]": {
+    "editor.defaultFormatter": "svelte.svelte-vscode"
   },
-  "editor.formatOnPaste": true,
-  "editor.formatOnSave": true
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[dockercompose]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[sonic-pi]": {
+    "editor.defaultFormatter": "jakearl.vscode-sonic-pi"
+  }
 }
