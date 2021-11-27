@@ -20,54 +20,52 @@
 _A curated compilation of packages, plugins, style guides, custom
 configurations and modified rules for consistently writing top shelf code_
 
-<div align="center">
-  <table>
-    <thead>
-      <tr>
-        <th align="left">Compatibility</a></th>
-        <th align="left">Rules</a></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td valign="top">
-          JavaScript <br />
-          React <br />
-          Preact <br />
-          Vue <br />
-          Svelte<br />
-          JSX <br />
-          HTML <br />
-          CSS <br />
-          SCSS <br />
-          LESS <br />
-          JSON <br />
-          JSONC <br />
-          JSON5 <br />
-          Markdown <br />
-          Properties <br />
-        </td>
-        <td valign="top">
-          Unicorn <br />
-          Standard <br />
-          AirBnB <br />
-          GitHub <br />
-          ESLint <br />
-          Prettier <br />
-          Sonar <br />
-          Compat <br />
-          Import <br />
-          JSX-A11y <br />
-          Hooks <br />
-          Remark <br />
-          Stylelint <br />
-          @Primer <br />
-          @HTML
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+<table>
+  <thead>
+    <tr>
+      <th align="left">Compatibility</a></th>
+      <th align="left">Rules</a></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td valign="top">
+        JavaScript <br />
+        React <br />
+        Preact <br />
+        Vue <br />
+        Svelte<br />
+        JSX <br />
+        HTML <br />
+        CSS <br />
+        SCSS <br />
+        LESS <br />
+        JSON <br />
+        JSONC <br />
+        JSON5 <br />
+        Markdown <br />
+        Properties <br />
+      </td>
+      <td valign="top">
+        Unicorn <br />
+        Standard <br />
+        AirBnB <br />
+        GitHub <br />
+        ESLint <br />
+        Prettier <br />
+        Sonar <br />
+        Compat <br />
+        Import <br />
+        JSX-A11y <br />
+        Hooks <br />
+        Remark <br />
+        Stylelint <br />
+        @Primer <br />
+        @HTML
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 ## Requirements
 
@@ -96,7 +94,7 @@ npm i -D @mikey-pro/style-guide eslint prettier stylelint
 
 ### Configure
 
-Add bundled configs to `package.json` then restart the ESLint server
+Add bundled configs to `package.json` then restart ESLint server
 
 ```json
 {
