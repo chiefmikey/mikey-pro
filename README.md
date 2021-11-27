@@ -17,8 +17,8 @@
 
 ### Lint and Format Code (the way Mikey likes it)
 
-_A very specific compilation of packages, plugins, style guides, custom configurations and
-modified rules for writing seriously good code_
+_A very specific compilation of packages, plugins, style guides, custom
+configurations and modified rules for writing seriously good code_
 
 <table>
   <thead>
@@ -65,8 +65,10 @@ modified rules for writing seriously good code_
         @HTML
       </td>
       <td valign="top">
-        <a href="https://github.com/mikey-pro/eslint-config">ESLint</a><br />
-        <a href="https://github.com/mikey-pro/prettier-config">Prettier</a><br />
+        <a href="https://github.com/mikey-pro/eslint-config">ESLint</a>
+<br />
+        <a href="https://github.com/mikey-pro/prettier-config">Prettier</a>
+<br />
         <a href="https://github.com/mikey-pro/stylelint-config">Stylelint</a>
       </td>
     </tr>
@@ -76,13 +78,19 @@ modified rules for writing seriously good code_
 ## Requirements
 
 <a href="https://code.visualstudio.com/">VSCode</a> with these extensions:
-<a href="https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint">ESLint</a> |
-<a href="https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode">Prettier</a> |
-<a href="https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint">Stylelint</a> |
-<a href="https://marketplace.visualstudio.com/items?itemName=octref.vetur">Vetur</a> |
+<a href="https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint">ESLint</a>
+|
+<a href="https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode">Prettier</a>
+|
+<a href="https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint">Stylelint</a>
+|
+<a href="https://marketplace.visualstudio.com/items?itemName=octref.vetur">Vetur</a>
+|
 <a href="https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode">Svelte</a>
 
-Add <a href="https://github.com/mikey-pro/style-guide/blob/main/vscode-settings.json">these preferences</a> to `settings.json`
+Add
+<a href="https://github.com/mikey-pro/style-guide/blob/main/vscode-settings.json">these
+preferences</a> to `settings.json`
 
 ## Usage
 
