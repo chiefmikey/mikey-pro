@@ -17,63 +17,65 @@
 
 ### Lint and Format Code (the way Mikey likes it)
 
-_A very specific compilation of packages, plugins, style guides, custom
-configurations and modified rules for writing seriously good code_
+_A curated compilation of packages, plugins, style guides, custom
+configurations and modified rules for writing top shelf consistent code_
 
-<table>
-  <thead>
-    <tr>
-      <th align="left">Compatibility</a></th>
-      <th align="left">Rules</a></th>
-      <th align="left">Configs</a></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td valign="top">
-        JavaScript <br />
-        React <br />
-        Preact <br />
-        Vue <br />
-        Svelte<br />
-        JSX <br />
-        HTML <br />
-        CSS <br />
-        SCSS <br />
-        LESS <br />
-        JSON <br />
-        JSONC <br />
-        JSON5 <br />
-        Markdown <br />
-        Properties <br />
-      </td>
-      <td valign="top">
-        Unicorn <br />
-        Standard <br />
-        AirBnB <br />
-        GitHub <br />
-        ESLint <br />
-        Prettier <br />
-        Sonar <br />
-        Compat <br />
-        Import <br />
-        JSX-A11y <br />
-        Hooks <br />
-        Remark <br />
-        Stylelint <br />
-        @Primer <br />
-        @HTML
-      </td>
-      <td valign="top">
-        <a href="https://github.com/mikey-pro/eslint-config">ESLint</a>
-<br />
-        <a href="https://github.com/mikey-pro/prettier-config">Prettier</a>
-<br />
-        <a href="https://github.com/mikey-pro/stylelint-config">Stylelint</a>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<div align="center">
+  <table>
+    <thead>
+      <tr>
+        <th align="left">Compatibility</a></th>
+        <th align="left">Rules</a></th>
+        <th align="left">Configs</a></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td valign="top">
+          JavaScript <br />
+          React <br />
+          Preact <br />
+          Vue <br />
+          Svelte<br />
+          JSX <br />
+          HTML <br />
+          CSS <br />
+          SCSS <br />
+          LESS <br />
+          JSON <br />
+          JSONC <br />
+          JSON5 <br />
+          Markdown <br />
+          Properties <br />
+        </td>
+        <td valign="top">
+          Unicorn <br />
+          Standard <br />
+          AirBnB <br />
+          GitHub <br />
+          ESLint <br />
+          Prettier <br />
+          Sonar <br />
+          Compat <br />
+          Import <br />
+          JSX-A11y <br />
+          Hooks <br />
+          Remark <br />
+          Stylelint <br />
+          @Primer <br />
+          @HTML
+        </td>
+        <td valign="top">
+          <a href="https://github.com/mikey-pro/eslint-config">ESLint</a>
+  <br />
+          <a href="https://github.com/mikey-pro/prettier-config">Prettier</a>
+  <br />
+          <a href="https://github.com/mikey-pro/stylelint-config">Stylelint</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 ## Requirements
 
