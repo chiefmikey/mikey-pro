@@ -110,8 +110,8 @@ Add bundled configs to `package.json` then restart ESLint server
 
 ## Resources
 
-[Mikey Pro ESLint Config](https://github.com/mikey-pro/eslint-config)
+[@mikey-pro/eslint-config](https://github.com/mikey-pro/eslint-config)
 
-[Mikey Pro Prettier Config](https://github.com/mikey-pro/prettier-config)
+[@mikey-pro/prettier-config](https://github.com/mikey-pro/prettier-config)
 
-[Mikey Pro Stylelint Config](https://github.com/mikey-pro/stylelint-config)
+[@mikey-pro/stylelint-config](https://github.com/mikey-pro/stylelint-config)
