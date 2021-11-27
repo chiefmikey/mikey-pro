@@ -27,7 +27,8 @@
     "vue",
     "svelte",
     "typescript",
-    "typescriptreact"
+    "typescriptreact",
+    "properties"
   ],
 
   "stylelint.reportNeedlessDisables": true,
