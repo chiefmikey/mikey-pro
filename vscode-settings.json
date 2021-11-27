@@ -13,6 +13,13 @@
   "eslint.format.enable": true,
   "eslint.validate": [
     "json",
+    "jsonc",
+    "json5",
+    "yaml",
+    "toml",
+    "css",
+    "scss",
+    "less",
     "markdown",
     "html",
     "javascript",
@@ -22,11 +29,6 @@
     "typescript",
     "typescriptreact"
   ],
-
-  "prettier.jsxSingleQuote": true,
-  "prettier.trailingComma": "all",
-  "prettier.vueIndentScriptAndStyle": true,
-  "prettier.requireConfig": true,
 
   "stylelint.reportNeedlessDisables": true,
   "stylelint.validate": [
