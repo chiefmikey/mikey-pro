@@ -26,7 +26,6 @@ configurations and modified rules for writing top shelf consistent code_
       <tr>
         <th align="left">Compatibility</a></th>
         <th align="left">Rules</a></th>
-        <th align="left">Configs</a></th>
       </tr>
     </thead>
     <tbody>
@@ -64,13 +63,6 @@ configurations and modified rules for writing top shelf consistent code_
           Stylelint <br />
           @Primer <br />
           @HTML
-        </td>
-        <td valign="top">
-          <a href="https://github.com/mikey-pro/eslint-config">ESLint</a>
-  <br />
-          <a href="https://github.com/mikey-pro/prettier-config">Prettier</a>
-  <br />
-          <a href="https://github.com/mikey-pro/stylelint-config">Stylelint</a>
         </td>
       </tr>
     </tbody>
@@ -117,3 +109,11 @@ Add bundled configs to `package.json` then restart the ESLint server
   }
 }
 ```
+
+## Resources
+
+[Mikey Pro ESLint Config](https://github.com/mikey-pro/eslint-config)
+
+[Mikey Pro Prettier Config](https://github.com/mikey-pro/prettier-config)
+
+[Mikey Pro Stylelint Config](https://github.com/mikey-pro/stylelint-config)
