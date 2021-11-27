@@ -17,8 +17,8 @@
 
 ### Lint and Format Code (the way Mikey likes it)
 
-_A compilation of packages, plugins, style guides, custom configurations and
-rules for maintaining bougie code_
+_A very specific compilation of packages, plugins, style guides, custom configurations and
+modified rules for writing seriously good code_
 
 <table>
   <thead>
@@ -40,8 +40,12 @@ rules for maintaining bougie code_
         HTML <br />
         CSS <br />
         SCSS <br />
+        LESS <br />
         JSON <br />
+        JSONC <br />
+        JSON5 <br />
         Markdown <br />
+        Properties <br />
       </td>
       <td valign="top">
         Unicorn <br />
@@ -52,7 +56,9 @@ rules for maintaining bougie code_
         Prettier <br />
         Sonar <br />
         Compat <br />
-        jsx-a11y <br />
+        Import <br />
+        JSX-A11y <br />
+        Hooks <br />
         Remark <br />
         Stylelint <br />
         @Primer <br />
@@ -88,14 +94,14 @@ npm i -D @mikey-pro/style-guide eslint prettier stylelint
 
 ### Configure
 
-Add bundled configs to `package.json`:
+Add bundled configs to `package.json` then restart the ESLint server
 
 ```json
 {
-  "eslintConfig": {
-    "extends": "@mikey-pro"
-  },
   "prettier": "@mikey-pro/prettier-config",
+  "eslintConfig": {
+    "extends": "@mikey-pro/eslint-config"
+  },
   "stylelint": {
     "extends": "@mikey-pro/stylelint-config"
   }
