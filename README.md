@@ -94,7 +94,7 @@ npm i -D @mikey-pro/style-guide eslint prettier stylelint
 
 ### Configure
 
-Add bundled configs to `package.json` then restart ESLint server
+Add bundled configs to `package.json` and then reload
 
 ```json
 {
