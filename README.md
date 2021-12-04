@@ -111,7 +111,5 @@ Add bundled configs to `package.json` and then reload
 ## Resources
 
 [@mikey-pro/eslint-config](https://github.com/mikey-pro/eslint-config)
-
 [@mikey-pro/prettier-config](https://github.com/mikey-pro/prettier-config)
-
 [@mikey-pro/stylelint-config](https://github.com/mikey-pro/stylelint-config)
