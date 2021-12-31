@@ -77,8 +77,6 @@ Install extensions:
 <a href="https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint">Stylelint</a>
 
 Additional support:
-<a href="https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint">TypeScript</a>
-|
 <a href="https://marketplace.visualstudio.com/items?itemName=octref.vetur">Vetur</a>
 |
 <a href="https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode">Svelte</a>
