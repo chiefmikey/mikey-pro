@@ -83,7 +83,6 @@ Additional support:
 |
 <a href="https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode">Svelte</a>
 
-Super saiyan:
 Add
 <a href="https://github.com/mikey-pro/style-guide/blob/main/vscode-settings.json">these
 preferences</a> to `settings.json`
