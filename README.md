@@ -30,6 +30,7 @@ configurations and modified rules for consistently writing top shelf code_
   <tbody>
     <tr>
       <td valign="top">
+        TypeScript <br />
         JavaScript <br />
         React <br />
         Preact <br />
@@ -68,17 +69,21 @@ configurations and modified rules for consistently writing top shelf code_
 
 ## Requirements
 
-<a href="https://code.visualstudio.com/">VSCode</a> with these extensions:
+Install extensions:
 <a href="https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint">ESLint</a>
 |
 <a href="https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode">Prettier</a>
 |
 <a href="https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint">Stylelint</a>
+
+Additional support:
+<a href="https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint">TypeScript</a>
 |
 <a href="https://marketplace.visualstudio.com/items?itemName=octref.vetur">Vetur</a>
 |
 <a href="https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode">Svelte</a>
 
+Super saiyan:
 Add
 <a href="https://github.com/mikey-pro/style-guide/blob/main/vscode-settings.json">these
 preferences</a> to `settings.json`
@@ -110,5 +115,7 @@ Add bundled configs to `package.json` and then reload
 ## Resources
 
 [@mikey-pro/eslint-config](https://github.com/mikey-pro/eslint-config)
+
 [@mikey-pro/prettier-config](https://github.com/mikey-pro/prettier-config)
+
 [@mikey-pro/stylelint-config](https://github.com/mikey-pro/stylelint-config)
