@@ -50,7 +50,6 @@ and modified rules for consistently writing top shelf code_
       <td valign="top">
         Unicorn <br />
         Standard <br />
-        GitHub <br />
         ESLint <br />
         Prettier <br />
         Sonar <br />
