@@ -17,8 +17,8 @@
 
 ### Lint and Format Code (the way Mikey likes it)
 
-_A curated compilation of packages, plugins, style guides, custom
-configurations and modified rules for consistently writing top shelf code_
+_A curated compilation of packages, plugins, style guides, custom configurations
+and modified rules for consistently writing top shelf code_
 
 <table>
   <thead>
