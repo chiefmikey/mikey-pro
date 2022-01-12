@@ -5,7 +5,6 @@
   "editor.codeActionsOnSave": {
     "source.fixAll": true
   },
-
   "eslint.enable": true,
   "eslint.alwaysShowStatus": true,
   "eslint.useESLintClass": true,
@@ -27,7 +26,6 @@
     "typescriptreact",
     "properties"
   ],
-
   "stylelint.reportNeedlessDisables": true,
   "stylelint.validate": [
     "css",
@@ -41,12 +39,10 @@
     "vue-postcss",
     "xls"
   ],
-
   "javascript.validate.enable": false,
   "css.validate": false,
   "less.validate": false,
   "scss.validate": false,
-
   "[typescript]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
