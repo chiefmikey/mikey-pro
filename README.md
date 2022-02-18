@@ -29,20 +29,20 @@ and modified rules for consistently writing top shelf code_
   <tbody>
     <tr>
       <td valign="top">
-        TypeScript :
-        JavaScript :
-        React :
-        Preact :
-        Vue :
-        Svelte:
-        JSX :
-        HTML :
-        CSS :
-        SCSS :
-        LESS :
-        JSON :
-        JSONC :
-        JSON5 :
+        TypeScript -
+        JavaScript -
+        React -
+        Preact -
+        Vue -
+        Svelte-
+        JSX -
+        HTML -
+        CSS -
+        SCSS -
+        LESS -
+        JSON -
+        JSONC -
+        JSON5 -
         Markdown
       </td>
     </tr>
