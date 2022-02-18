@@ -24,43 +24,26 @@ and modified rules for consistently writing top shelf code_
   <thead>
     <tr>
       <th align="left">Compatibility</a></th>
-      <th align="left">Rules</a></th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td valign="top">
-        TypeScript <br />
-        JavaScript <br />
-        React <br />
-        Preact <br />
-        Vue <br />
-        Svelte<br />
-        JSX <br />
-        HTML <br />
-        CSS <br />
-        SCSS <br />
-        LESS <br />
-        JSON <br />
-        JSONC <br />
-        JSON5 <br />
-        Markdown <br />
-        Properties <br />
-      </td>
-      <td valign="top">
-        Unicorn <br />
-        Standard <br />
-        ESLint <br />
-        Prettier <br />
-        Sonar <br />
-        Compat <br />
-        Import <br />
-        JSX-A11y <br />
-        Hooks <br />
-        Remark <br />
-        Stylelint <br />
-        @Primer <br />
-        @HTML
+        TypeScript |
+        JavaScript |
+        React |
+        Preact |
+        Vue |
+        Svelte|
+        JSX |
+        HTML |
+        CSS |
+        SCSS |
+        LESS |
+        JSON |
+        JSONC |
+        JSON5 |
+        Markdown
       </td>
     </tr>
   </tbody>
