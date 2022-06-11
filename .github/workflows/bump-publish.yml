@@ -24,7 +24,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: filter='to_entries | map("[\(.key)]=\(.value)") |
-            reduce .[] as $item ("associativeArray=("; . + ($item|@sh) + " ") + ")"' && arrayAsString=$(cat ${{needs.bump}} | jq --raw-output "${filter}") && echo "$arrayAsString" && echo $associativeArray
+            reduce .[] as $item ("associativeArray=("; . + ($item|@sh) + " ") + ")"' && arrayAsString=$(cat $needs.bump | jq --raw-output "${filter}") && echo "$arrayAsString" && echo $associativeArray
       - uses: softprops/action-gh-release@v1
 
   publish-github:
