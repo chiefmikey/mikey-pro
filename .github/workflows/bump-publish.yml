@@ -23,7 +23,7 @@ jobs:
     needs: bump
     steps:
       - uses: actions/checkout@v3
-      - run: test=$(echo $jobs | jq --raw-output) && echo $test
+      - run: test=$(echo $jobs | jq --raw-output) && echo $test && balls=balls && echo $balls
       - uses: softprops/action-gh-release@v1
 
   publish-github:
