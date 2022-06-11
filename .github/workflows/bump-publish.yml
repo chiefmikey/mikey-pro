@@ -23,7 +23,8 @@ jobs:
     needs: bump
     steps:
       - uses: actions/checkout@v3
-      - run: echo ${{needs.bump}} | jq
+      - run: filter='to_entries | map("[\(.key)]=\(.value)") |
+            reduce .[] as $item ("associativeArray=("; . + ($item|@sh) + " ") + ")"' && arrayAsString=$(cat "$json" | jq --raw-output "${filter}") && -A "$arrayAsString" && echo $associativeArray
       - uses: softprops/action-gh-release@v1
 
   publish-github:
