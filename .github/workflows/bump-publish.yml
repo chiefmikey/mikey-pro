@@ -23,14 +23,7 @@ jobs:
     needs: bump
     steps:
       - uses: actions/checkout@v3
-      - run: touch test.txt \
-         && echo 'hey' >> test.txt \
-         && echo "$needs" > test.txt \
-         && cat test.txt \
-         && test="$needs" \
-         && echo $test \
-         && balls=balls \
-         && echo $balls
+      - run: echo "$GITHUB_CONTEXT"
       - uses: softprops/action-gh-release@v1
 
   publish-github:
