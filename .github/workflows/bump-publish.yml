@@ -23,9 +23,14 @@ jobs:
     needs: bump
     steps:
       - uses: actions/checkout@v3
-      - run: touch test.txt && echo 'hey' >> test.txt && printf "$needs" > test.txt \
-         && cat test.txt && printf ${{needs}} && test=$(jq -r <<< ${{needs}}) \
-         && echo $test && balls=balls && echo $balls
+      - run: touch test.txt \
+         && echo 'hey' >> test.txt \
+         && echo "$needs" > test.txt \
+         && cat test.txt \
+         && test="$needs" \
+         && echo $test \
+         && balls=balls \
+         && echo $balls
       - uses: softprops/action-gh-release@v1
 
   publish-github:
