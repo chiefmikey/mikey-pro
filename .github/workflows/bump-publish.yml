@@ -15,8 +15,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           ref: ${{ github.ref }}
-
-      - name: 'Bump'
+      - name: Bump
         id: version-bump
         uses: 'phips28/gh-action-bump-version@master'
         with:
@@ -24,6 +23,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Checkout
+        uses: actions/checkout@v3
       - name: Release
         uses: softprops/action-gh-release@v1
 
@@ -33,7 +34,6 @@ jobs:
           node-version: '16.x'
           registry-url: 'https://npm.pkg.github.com'
           scope: '@mikey-pro'
-
       - name: Publish github
         run: npm publish
         env:
