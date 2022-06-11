@@ -23,7 +23,7 @@ jobs:
     needs: bump
     steps:
       - uses: actions/checkout@v3
-      - run: echo ${{needs.bump}} | jq -r
+      - run: echo ${{needs.bump}} | jq
       - uses: softprops/action-gh-release@v1
 
   publish-github:
