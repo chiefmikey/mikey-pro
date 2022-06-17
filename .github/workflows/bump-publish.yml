@@ -17,7 +17,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: true
-      - run: VERSION='${{ toJSON(steps.bump.outputs.tag) }}'
+      - run: VERSION=${{ toJSON(steps.bump.outputs.tag) }}
       - run: echo version $VERSION
       - run: echo version no v $VERSION:1
       - run: jq '.version=$VERSION:1' package.json
