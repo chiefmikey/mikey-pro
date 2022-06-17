@@ -40,4 +40,4 @@ jobs:
         id: release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
-      - run: echo ${{ toJSON(needs.bump.outputs.tag) }} && echo ${{ toJSON(needs) }}
+      - run: echo ${{ toJSON(jobs.bump.outputs.tag) }} && echo ${{ toJSON(jobs) }}
