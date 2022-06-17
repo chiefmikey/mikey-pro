@@ -25,7 +25,7 @@ jobs:
           && cat ./package.json
           && git config --global user.email "wolfemikl@gmail.com"
           && git config --global user.name "Mikl Wolfe"
-          && git commit -am $VERSION_JSON
+          && git commit -am $VERSION
           && git push origin main
           
         env:
