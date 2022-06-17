@@ -18,7 +18,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: true
       - run: 
-          jq -n --arg version ${VERSION:1} '.version = $version' ./package.json
+          echo test "${version:1}"
+          && echo test2 "${VERSION:1}"
+          && jq -n --arg version ${VERSION:1} '.version = $version' ./package.json
           && cat ./package.json
           && git commit -am $VERSION_JSON
           && git push origin main
