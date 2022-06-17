@@ -30,7 +30,7 @@ jobs:
           git commit -am $VERSION && git push origin main
         env:
           VERSION: ${{ steps.bump.outputs.tag }}
-          VERSION_JSON: ${{ toJSON(steps.bump.outputs.tag }}
+          VERSION_JSON: ${{ toJSON(steps.bump.outputs.tag) }}
 
   release:
     name: Release
