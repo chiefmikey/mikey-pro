@@ -29,7 +29,7 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v3
-      - run: echo ref ${{ toJSON(github.ref) }} github ${{ toJSON(github) }} refs/tags/${{ toJSON(steps.bump_package.outputs.tag }}
+      - run: echo ref ${{ toJSON(github.ref) }} github ${{ toJSON(github) }} refs/tags/$VERSION
       - name: Release new tag
         id: release_tag
         uses: softprops/action-gh-release@v1
