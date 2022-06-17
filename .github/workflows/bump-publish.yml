@@ -18,7 +18,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: true
       - run: 
-          echo test $VERSION
+          apt install -y sponge
+          && echo test $VERSION
           && echo test2 "${VERSION:1}"
           && jq -n --arg version ${VERSION:1} '.version = $version' ./package.json|sponge ./package.json
           && cat ./package.json
