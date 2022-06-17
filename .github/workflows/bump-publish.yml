@@ -19,7 +19,6 @@ jobs:
           WITH_V: true
       - run: 
           tmp=$(mktemp)
-          && jq '.address = "abcde"' test.json > "$tmp" && mv "$tmp" test.json
           && jq --arg version ${VERSION:1} '.version = $version' package.json > '$tmp'
           && mv '$tmp' package.json
           && cat ./package.json
