@@ -17,12 +17,20 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: true
-      - run: VERSION=${{ toJSON(steps.bump.outputs.tag) }}
-      - run: echo 'version $VERSION'
-      - run: echo 'version no v $VERSION:1'
-      - run: echo test 2 ${VERSION:1}
-      - run: jq '.version=${VERSION:1}' package.json
-      - run: git commit -am '${{ toJSON(steps.bump.tag) }}' && git push origin main
+      - run: 
+          echo $VERSION \
+          echo $VERSION:1 \
+          echo ${VERSION} \
+          echo ${VERSION:1} \
+          echo $VERSION_JSON \
+          echo $VERSION_JSON:1 \
+          echo ${VERSION_JSON} \
+          echo ${VERSION_JSON:1} \
+          jq '.version=$VERSION:1' package.json \
+          git commit -am $VERSION && git push origin main
+        env:
+          VERSION: ${{ steps.bump.outputs.tag }}
+          VERSION_JSON: ${{ toJSON(steps.bump.outputs.tag }}
 
   release:
     name: Release
