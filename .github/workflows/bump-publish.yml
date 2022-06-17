@@ -17,9 +17,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: true
-      - run: echo version "$'${{ toJSON(steps.bump.tag) }}':1"
-      - run: jq '.version="$'${{ toJSON(steps.bump.tag) }}':1" package.json
-      - run: git commit -am '${{ steps.bump.tag }}'
+      - run: echo version '${{ toJSON(steps.bump.tag:1) }}'
+      - run: jq '.version='${{ toJSON(steps.bump.tag:1) }}' package.json
+      - run: git commit -am '${{ toJSON(steps.bump.tag) }}' && git push origin main
 
   release:
     name: Release
