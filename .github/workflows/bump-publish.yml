@@ -25,9 +25,8 @@ jobs:
           && cat ./package.json
           && git config --global user.email "wolfemikl@gmail.com"
           && git config --global user.name "Mikl Wolfe"
-          && git commit -am $VERSION
+          && git commit -am ${VERSION:1}
           && git push origin main
-          
         env:
           VERSION: ${{ steps.bump.outputs.tag }}
           VERSION_JSON: ${{ toJSON(steps.bump.outputs.tag) }}
