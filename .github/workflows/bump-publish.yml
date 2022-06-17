@@ -23,12 +23,13 @@ jobs:
     needs: bump
     steps:
       - uses: actions/checkout@v3
-      - run: echo '${{ toJSON(github) }}'
-      - run: echo '${{ toJSON(job) }}'
-      - run: echo '${{ toJSON(steps) }}'
-      - run: echo '${{ toJSON(runner) }}'
-      - run: echo '${{ toJSON(strategy) }}'
-      - run: echo '${{ toJSON(matrix) }}'
+      - run: echo needs '${{ toJSON(needs) }}'
+      - run: echo github '${{ toJSON(github) }}'
+      - run: echo job '${{ toJSON(job) }}'
+      - run: echo steps '${{ toJSON(steps) }}'
+      - run: echo runner '${{ toJSON(runner) }}'
+      - run: echo stategy '${{ toJSON(strategy) }}'
+      - run: echo matrix '${{ toJSON(matrix) }}'
       - uses: softprops/action-gh-release@v1
 
   publish-github:
