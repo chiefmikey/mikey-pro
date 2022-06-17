@@ -26,9 +26,9 @@ jobs:
 #           && git config --global user.name "Mikl Wolfe"
 #           && git commit -am ${VERSION:1}
 #           && git push origin main
-        env:
-          VERSION: ${{ steps.bump.outputs.tag }}
-          VERSION_JSON: ${{ toJSON(steps.bump.outputs.tag) }}
+#         env:
+#           VERSION: ${{ steps.bump.outputs.tag }}
+#           VERSION_JSON: ${{ toJSON(steps.bump.outputs.tag) }}
 
   release:
     name: Release
