@@ -19,7 +19,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: true
-      - run: echo ${{ github }}
+      - run: echo ${{ toJSON(github) }}
 
   release:
     name: Release
@@ -29,7 +29,7 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v3
-      - run: echo ref ${{ github.ref }} github ${{ github }} refs/tags/${{ steps.bump_package.outputs.tag }}
+      - run: echo ref ${{ toJSON(github.ref) }} github ${{ toJSON(github) }} refs/tags/${{ toJSON(steps.bump_package.outputs.tag }}
       - name: Release new tag
         id: release_tag
         uses: softprops/action-gh-release@v1
