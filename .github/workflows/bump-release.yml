@@ -20,11 +20,14 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: true
       - run: echo ${{ github.ref }}
+      - run: echo ${{ steps.bump-tag.outputs }}
 
   release:
     name: Release
     runs-on: ubuntu-latest
     needs: bump
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v3
       - run: echo ${{ github.ref }}
