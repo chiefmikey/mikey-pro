@@ -23,7 +23,7 @@ jobs:
     needs: bump
     steps:
       - uses: actions/checkout@v3
-      - run: echo needs '${{ toJSON(needs) }}'
+      - run: echo needs.bump '${{ toJSON(needs) }}'
       - run: echo github '${{ toJSON(github) }}'
       - run: echo job '${{ toJSON(job) }}'
       - run: echo steps '${{ toJSON(steps) }}'
