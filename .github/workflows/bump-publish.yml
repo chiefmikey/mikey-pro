@@ -18,10 +18,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: true
       - run: 
-          sudo apt-get install -y moreutils
-          && echo test $VERSION
-          && echo test2 "${VERSION:1}"
-          && cat ./package.json | jq --arg version ${VERSION:1} '.version |= $version'
+          tmp=$(mktemp)
+          && jq '.address = "abcde"' test.json > "$tmp" && mv "$tmp" test.json
+          && jq --arg version ${VERSION:1} '.version = $version' package.json > '$tmp'
+          && mv '$tmp' package.json
           && cat ./package.json
           && git config --global user.email "wolfemikl@gmail.com"
           && git config --global user.name "Mikl Wolfe"
