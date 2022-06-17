@@ -42,5 +42,5 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/')
       - run: echo $test && echo $test2
         env:
-          test: ${{ job.bump.outputs.tag }}
+          test: wow
           test2: ${{ job }}
