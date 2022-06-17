@@ -31,6 +31,7 @@ jobs:
       - run: echo stategy '${{ toJSON(strategy) }}'
       - run: echo matrix '${{ toJSON(matrix) }}'
       - uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
 
   publish-github:
       name: Publish github
