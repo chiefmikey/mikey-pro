@@ -40,6 +40,6 @@ jobs:
         id: release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
-      - run: echo $test
+      - run: echo $TEST
         env:
-          TEST: wow
+          TEST: ${{ steps.bump.outputs.tag }}
