@@ -42,4 +42,4 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/')
       - run: echo $TEST
         env:
-          TEST: ${{ needs.bump.outputs.tag }}
+          TEST: ${{ needs.bump }}
