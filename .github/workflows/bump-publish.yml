@@ -18,7 +18,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: true
       - run: 
-          jq '.version=${VERSION:1}' package.json
+          jq (.version=${VERSION:1}) package.json
           && cat package.json
           && cat ./package.json
           && git commit -am $VERSION
