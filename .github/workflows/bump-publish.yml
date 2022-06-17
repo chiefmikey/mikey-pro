@@ -18,10 +18,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: true
       - run: 
-          jq -n --arg version '${VERSION}' '.version = $version' package.json
-          && cat package.json
+          jq -n --arg version ${VERSION:1} '.version = $version' ./package.json
           && cat ./package.json
-          && git commit -am $VERSION
+          && git commit -am $VERSION_JSON
           && git push origin main
         env:
           VERSION: ${{ steps.bump.outputs.tag }}
