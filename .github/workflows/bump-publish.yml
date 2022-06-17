@@ -17,6 +17,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: true
+      - run: echo version '${{ toJSON(steps.bump) }}'
+      - run: echo test '${{ steps.bump }}'
+      - run: jq '.version='${{ steps.bump.tag }}' package.json
+      - run: git commit -am '${{ steps.bump.tag }}'
 
   release:
     name: Release
@@ -28,7 +32,6 @@ jobs:
         id: release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
-      - run: echo output '${{ toJSON(steps.bump) }}'
 
   publish-github:
       name: Publish github
