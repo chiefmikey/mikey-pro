@@ -20,10 +20,13 @@ jobs:
       - run: 
           echo test "${version:1}"
           && echo test2 "${VERSION:1}"
-          && jq -n --arg version ${VERSION:1} '.version = $version' ./package.json
+          && jq -n --arg version ${VERSION:1} '.[version] = $version' ./package.json
           && cat ./package.json
+          && git config --global user.email "wolfemikl@gmail.com"
+          && git config --global user.name "Mikl Wolfe"
           && git commit -am $VERSION_JSON
           && git push origin main
+          
         env:
           VERSION: ${{ steps.bump.outputs.tag }}
           VERSION_JSON: ${{ toJSON(steps.bump.outputs.tag) }}
