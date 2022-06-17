@@ -29,7 +29,6 @@ jobs:
       - name: Release new tag
         id: release-tag
         uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/')
       - name: Bump and push package.json
         id: bump-package
         run: 
@@ -39,7 +38,7 @@ jobs:
           && cat ./package.json
           && git config --global user.email "wolfemikl@gmail.com"
           && git config --global user.name "Mikl Wolfe"
-          && git commit -am ${VERSION}
+          && git commit -am ${VERSION:1}
           && git push origin main
         env:
           VERSION: ${{ needs.bump.outputs.tag }}
