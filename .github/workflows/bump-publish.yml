@@ -20,7 +20,7 @@ jobs:
       - run: 
           echo test $VERSION
           && echo test2 "${VERSION:1}"
-          && jq -n --arg version ${VERSION:1} '.version = $version' ./package.json
+          && jq -n --arg version ${VERSION:1} '.version = $version' ./package.json | sponge ./package.json
           && cat ./package.json
           && git config --global user.email "wolfemikl@gmail.com"
           && git config --global user.name "Mikl Wolfe"
