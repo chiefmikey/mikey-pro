@@ -19,8 +19,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: true
-      - run: echo ${{ github.ref }}
-      - run: echo ${{ toJSON(steps.bump-tag.outputs) }}
+      - run: echo ${{ github }}
 
   release:
     name: Release
@@ -30,9 +29,9 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v3
-      - run: echo ${{ github.ref }}
+      - run: echo ref ${{ github.ref }} github ${{ github }} refs/tags/${{ steps.bump_package.outputs.tag }}
       - name: Release new tag
-        id: release-tag
+        id: release_tag
         uses: softprops/action-gh-release@v1
       - name: Bump and push package.json
         id: bump-package
