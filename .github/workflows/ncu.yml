@@ -1,0 +1,20 @@
+on:
+  repository_dispatch:
+    types: [ncu]
+jobs:
+  ncu:
+    name: ncu
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+          with:
+            node-version: '16.x'
+      - name: Update packages with ncu
+        id: ncu-steps
+        run: 
+          npx npm-check-updates
+          && git config --global user.email "wolfemikl@gmail.com"
+          && git config --global user.name "Mikl Wolfe"
+          && git commit -am 'Update dependencies'
+          && git push origin main
