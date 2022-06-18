@@ -44,6 +44,8 @@ jobs:
       needs: release
       env: 
         VERSION: ${{ needs.release.outputs.VERSION }}
+      outputs:
+        SHA: ${{ steps.bump-package.outputs.SHA }}
       steps:
         - uses: actions/checkout@v3
         - name: Bump and push package.json
@@ -56,6 +58,8 @@ jobs:
             && git config --global user.name "Mikl Wolfe"
             && git commit -am ${VERSION:1}
             && git push origin main
+            && SHA=$(git rev-parse origin/main)
+            && echo '::set-output name=SHA::${SHA}'
           
   publish-github:
       name: Publish github
@@ -66,6 +70,8 @@ jobs:
         packages: write
       steps:
         - uses: actions/checkout@v3
+          with:
+            ref: ${{ needs.package-bump.outputs.SHA }}
         - uses: actions/setup-node@v3
           with:
             node-version: '16.x'
