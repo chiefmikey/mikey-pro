@@ -73,7 +73,7 @@ jobs:
         - run: echo ${SHA}
         - uses: actions/checkout@v3
           with:
-            ref: ${env.SHA}
+            ref: ${SHA}
         - uses: actions/setup-node@v3
           with:
             node-version: '16.x'
@@ -92,10 +92,10 @@ jobs:
       env:
         SHA: ${{ needs.package-bump.outputs.SHA }}
       steps:
-        - run: echo ${env.SHA}
+        - run: echo ${SHA}
         - uses: actions/checkout@v3
           with:
-            ref: ${env.SHA}
+            ref: ${SHA}
         - uses: actions/setup-node@v3
           with:
             node-version: '16.x'
