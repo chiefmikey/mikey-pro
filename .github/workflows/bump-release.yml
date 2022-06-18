@@ -29,6 +29,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: echo refs/tags/${VERSION}
+        env:
+          VERSION: ${{ needs.bump.outputs.tag }}
       - name: Release new tag
         id: release_tag
         uses: softprops/action-gh-release@v1
