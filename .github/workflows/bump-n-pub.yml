@@ -70,7 +70,6 @@ jobs:
       env:
         SHA: ${{ needs.package-bump.outputs.SHA }}
       steps:
-        - run: echo ${SHA}
         - uses: actions/checkout@v3
           with:
             ref: ${{ env.SHA }}
@@ -92,7 +91,6 @@ jobs:
       env:
         SHA: ${{ needs.package-bump.outputs.SHA }}
       steps:
-        - run: echo ${SHA}
         - uses: actions/checkout@v3
           with:
             ref: ${{ env.SHA }}
