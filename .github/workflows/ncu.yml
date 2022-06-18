@@ -5,11 +5,14 @@ jobs:
   ncu:
     name: ncu
     runs-on: ubuntu-latest
+    permissions: 
+      contents: read&write
+      
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
-          with:
-            node-version: '16.x'
+        with:
+          node-version: '16.x'
       - name: Update packages with ncu
         id: ncu-steps
         run: 
