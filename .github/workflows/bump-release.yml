@@ -43,7 +43,7 @@ jobs:
           && jq --arg version ${VERSION:1} '.version = $version' package.json > '$tmp'
           && mv '$tmp' package.json
           && cat ./package.json
-          && git config --global user.email "<>"
-          && git config --global user.name "GitHub Actions Bot"
+          && git config --global user.email "actions@github.com"
+          && git config --global user.name "GitHub Actions"
           && git commit -am ${VERSION:1}
           && git push origin main
