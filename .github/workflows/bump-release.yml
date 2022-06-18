@@ -30,20 +30,20 @@ jobs:
       VERSION: ${{ needs.bump.outputs.tag }}
     steps:
       - uses: actions/checkout@v3
-      - run: echo refs/tags/${env.VERSION} ${{ github.ref }}
+      - run: echo refs/tags/${VERSION} ${{ github.ref }}
       - name: Release new tag
         id: release-tag
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${env.VERSION}
+          tag_name: ${VERSION}
       - name: Bump and push package.json
         id: bump-package
         run: 
           tmp=$(mktemp)
-          && jq --arg version ${env.VERSION:1} '.version = $version' package.json > '$tmp'
+          && jq --arg version ${VERSION:1} '.version = $version' package.json > '$tmp'
           && mv '$tmp' package.json
           && cat ./package.json
-          && git config --global user.email "wolfemikl@gmail.com"
-          && git config --global user.name "Mikl Wolfe"
-          && git commit -am ${env.VERSION:1}
+          && git config --global user.email "<>"
+          && git config --global user.name "GitHub Actions Bot"
+          && git commit -am ${VERSION:1}
           && git push origin main
