@@ -58,8 +58,7 @@ jobs:
             && git config --global user.name "Mikl Wolfe"
             && git commit -am ${VERSION:1}
             && git push origin main
-            && SHA=$(git rev-parse origin/main)
-            && echo '::set-output name=SHA::${SHA}'
+            && echo '::set-output name=SHA::$(git rev-parse origin/main)'
           
   publish-github:
       name: Publish github
@@ -68,10 +67,12 @@ jobs:
       permissions:
         contents: read
         packages: write
+      env:
+        SHA: ${{ needs.package-bump.outputs.SHA }}
       steps:
         - uses: actions/checkout@v3
           with:
-            ref: ${{ needs.package-bump.outputs.SHA }}
+            ref: ${SHA}
         - uses: actions/setup-node@v3
           with:
             node-version: '16.x'
@@ -87,8 +88,12 @@ jobs:
       name: Publish npm
       runs-on: ubuntu-latest
       needs: package-bump
+      env:
+        SHA: ${{ needs.package-bump.outputs.SHA }}
       steps:
         - uses: actions/checkout@v3
+          with:
+            ref: ${SHA}
         - uses: actions/setup-node@v3
           with:
             node-version: '16.x'
