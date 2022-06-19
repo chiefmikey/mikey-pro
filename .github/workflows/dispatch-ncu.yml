@@ -1,9 +1,11 @@
+name: Node-Check-Updates
 on:
   repository_dispatch:
     types: [ncu]
+
 jobs:
   ncu:
-    name: Dispatch NCU
+    name: Run NCU
     runs-on: ubuntu-latest
     permissions: 
       contents: write
@@ -12,7 +14,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '16.x'
-      - name: Update packages with ncu
+      - name: Update packages with NCU
         id: ncu-steps
         env:
           GITHUB_TOKEN: ${{ secrets.DISPATCH_TOKEN }}
