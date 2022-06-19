@@ -3,11 +3,10 @@ on:
     types: [ncu]
 jobs:
   ncu:
-    name: ncu
+    name: Dispatch NCU
     runs-on: ubuntu-latest
     permissions: 
       contents: write
-      
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -15,6 +14,8 @@ jobs:
           node-version: '16.x'
       - name: Update packages with ncu
         id: ncu-steps
+        env:
+          GITHUB_TOKEN: ${{ secrets.DISPATCH_TOKEN }}
         run: 
           npx npm-check-updates -u
           && git config --global user.email "wolfemikl@gmail.com"
