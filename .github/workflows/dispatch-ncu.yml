@@ -16,7 +16,7 @@ jobs:
       - name: Update packages with ncu
         id: ncu-steps
         run: 
-          npx npm-check-updates
+          npx npm-check-updates -u
           && git config --global user.email "wolfemikl@gmail.com"
           && git config --global user.name "Mikl Wolfe"
           && git commit -am 'Update dependencies'
