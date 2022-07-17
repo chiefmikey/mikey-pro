@@ -6,17 +6,17 @@ on:
       - main
 
 jobs:
-  tag:
-    name: Tag
+  create-tag:
+    name: Create Tag
     runs-on: ubuntu-latest
     outputs:
-      tag: ${{ steps.bump-tag.outputs.tag }}
+      tag: ${{ steps.tag-steps.outputs.tag }}
     steps:
       - uses: actions/checkout@v3
         with:
           fetch-depth: '0'
-      - name: Bump Tag
-        id: bump-tag
+      - name: Bump Version Tag
+        id: tag-steps
         uses: anothrNick/github-tag-action@1.39.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -25,34 +25,33 @@ jobs:
   publish-release:
     name: Publish Release
     runs-on: ubuntu-latest
-    needs: tag
+    needs: create-tag
     permissions:
       contents: write
     env:
-      VERSION: ${{ needs.tag.outputs.tag }}
+      VERSION: ${{ needs.create-tag.outputs.tag }}
     outputs:
       VERSION: ${{ env.VERSION }}
     steps:
       - uses: actions/checkout@v3
       - name: Release Bumped Tag
-        id: release-tag
         uses: softprops/action-gh-release@v1
         with:
           name: v${{ env.VERSION }}
           tag_name: ${{ env.VERSION }}
           
-  package-bump:
-      name: Package Bump
+  bump-package:
+      name: Bump Package
       runs-on: ubuntu-latest
       needs: publish-release
       env: 
         VERSION: ${{ needs.publish-release.outputs.VERSION }}
       outputs:
-        SHA: ${{ steps.bump.outputs.SHA }}
+        SHA: ${{ steps.bump-steps.outputs.SHA }}
       steps:
         - uses: actions/checkout@v3
         - name: Bump Package Version
-          id: bump
+          id: bump-steps
           run: 
             tmp=$(mktemp)
             && jq --arg version ${VERSION} '.version = $version' package.json > '$tmp'
@@ -66,12 +65,12 @@ jobs:
   publish-github:
       name: Publish Github
       runs-on: ubuntu-latest
-      needs: package-bump
+      needs: bump-package
       permissions:
         contents: read
         packages: write
       env:
-        SHA: ${{ needs.package-bump.outputs.SHA }}
+        SHA: ${{ needs.bump-package.outputs.SHA }}
       steps:
         - name: Checkout
           uses: actions/checkout@v3
@@ -84,7 +83,6 @@ jobs:
             registry-url: 'https://npm.pkg.github.com'
             scope: '@mikey-pro'
         - name: Publish to Github
-          id: github-steps
           run: npm publish
           env:
             NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -92,9 +90,9 @@ jobs:
   publish-npm:
       name: Publish Npm
       runs-on: ubuntu-latest
-      needs: package-bump
+      needs: bump-package
       env:
-        SHA: ${{ needs.package-bump.outputs.SHA }}
+        SHA: ${{ needs.bump-package.outputs.SHA }}
       steps:
         - name: Checkout
           uses: actions/checkout@v3
@@ -106,7 +104,6 @@ jobs:
             node-version: '16.x'
             registry-url: 'https://registry.npmjs.org'
         - name: Publish to Npm
-          id: npm-steps
           run: npm publish --access public
           env:
              NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
