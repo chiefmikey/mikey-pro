@@ -25,79 +25,79 @@ jobs:
           WITH_V: false
           
   bump-package:
-      name: Bump Package
-      runs-on: ubuntu-latest
-      needs: create-tag
-      env: 
-        TAG: ${{ needs.create-tag.outputs.TAG }}
-      outputs:
-        TAG: ${{ env.TAG }}
-        SHA: ${{ steps.bump-steps.outputs.SHA }}
-      steps:
-        - name: Checkout
-          uses: actions/checkout@v3
+    name: Bump Package
+    runs-on: ubuntu-latest
+    needs: create-tag
+    env: 
+      TAG: ${{ needs.create-tag.outputs.TAG }}
+    outputs:
+      TAG: ${{ env.TAG }}
+      SHA: ${{ steps.bump-steps.outputs.SHA }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
 
-        - name: Bump Package Version
-          id: bump-steps
-          run: 
-            tmp=$(mktemp)
-            && jq --arg version ${TAG} '.version = $version' package.json > '$tmp'
-            && mv '$tmp' package.json
-            && git config --global user.email "wolfemikl@gmail.com"
-            && git config --global user.name "Mikl Wolfe"
-            && git commit -am ${TAG}
-            && git push origin main
-            && echo ::set-output name=SHA::$(git rev-parse origin/main)
+      - name: Bump Package Version
+        id: bump-steps
+        run: 
+          tmp=$(mktemp)
+          && jq --arg version ${TAG} '.version = $version' package.json > '$tmp'
+          && mv '$tmp' package.json
+          && git config --global user.email "wolfemikl@gmail.com"
+          && git config --global user.name "Mikl Wolfe"
+          && git commit -am ${TAG}
+          && git push origin main
+          && echo ::set-output name=SHA::$(git rev-parse origin/main)
           
   publish-github:
-      name: Publish Github
-      runs-on: ubuntu-latest
-      needs: bump-package
-      permissions:
-        contents: read
-        packages: write
-      env:
-        SHA: ${{ needs.bump-package.outputs.SHA }}
-      steps:
-        - name: Checkout
-          uses: actions/checkout@v3
-          with:
-            ref: ${{ env.SHA }}
+    name: Publish Github
+    runs-on: ubuntu-latest
+    needs: bump-package
+    permissions:
+      contents: read
+      packages: write
+    env:
+      SHA: ${{ needs.bump-package.outputs.SHA }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ env.SHA }}
 
-        - name: Setup Node
-          uses: actions/setup-node@v3
-          with:
-            node-version: '16.x'
-            registry-url: 'https://npm.pkg.github.com'
-            scope: '@mikey-pro'
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@mikey-pro'
 
-        - name: Publish to Github
-          run: npm publish
-          env:
-            NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Publish to Github
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   publish-npm:
-      name: Publish Npm
-      runs-on: ubuntu-latest
-      needs: bump-package
-      env:
-        SHA: ${{ needs.bump-package.outputs.SHA }}
-      steps:
-        - name: Checkout
-          uses: actions/checkout@v3
-          with:
-            ref: ${{ env.SHA }}
+    name: Publish Npm
+    runs-on: ubuntu-latest
+    needs: bump-package
+    env:
+      SHA: ${{ needs.bump-package.outputs.SHA }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ env.SHA }}
 
-        - name: Setup Node
-          uses: actions/setup-node@v3
-          with:
-            node-version: '16.x'
-            registry-url: 'https://registry.npmjs.org'
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+          registry-url: 'https://registry.npmjs.org'
 
-        - name: Publish to Npm
-          run: npm publish --access public
-          env:
-             NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Publish to Npm
+        run: npm publish --access public
+        env:
+           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
              
   publish-release:
     name: Publish Release
