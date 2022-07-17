@@ -10,7 +10,7 @@ jobs:
     name: Create Tag
     runs-on: ubuntu-latest
     outputs:
-      tag: ${{ steps.tag-steps.outputs.tag }}
+      TAG: ${{ steps.tag-steps.outputs.tag }}
     steps:
       - uses: actions/checkout@v3
         with:
@@ -21,32 +21,15 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: false
-
-  publish-release:
-    name: Publish Release
-    runs-on: ubuntu-latest
-    needs: create-tag
-    permissions:
-      contents: write
-    env:
-      VERSION: ${{ needs.create-tag.outputs.tag }}
-    outputs:
-      VERSION: ${{ env.VERSION }}
-    steps:
-      - uses: actions/checkout@v3
-      - name: Release Bumped Tag
-        uses: softprops/action-gh-release@v1
-        with:
-          name: v${{ env.VERSION }}
-          tag_name: ${{ env.VERSION }}
           
   bump-package:
       name: Bump Package
       runs-on: ubuntu-latest
-      needs: publish-release
+      needs: create-tag
       env: 
-        VERSION: ${{ needs.publish-release.outputs.VERSION }}
+        TAG: ${{ needs.create-tag.outputs.TAG }}
       outputs:
+        TAG: ${{ env.TAG }}
         SHA: ${{ steps.bump-steps.outputs.SHA }}
       steps:
         - uses: actions/checkout@v3
@@ -54,23 +37,41 @@ jobs:
           id: bump-steps
           run: 
             tmp=$(mktemp)
-            && jq --arg version ${VERSION} '.version = $version' package.json > '$tmp'
+            && jq --arg version ${TAG} '.version = $version' package.json > '$tmp'
             && mv '$tmp' package.json
             && git config --global user.email "wolfemikl@gmail.com"
             && git config --global user.name "Mikl Wolfe"
-            && git commit -am ${VERSION}
+            && git commit -am ${TAG}
             && git push origin main
             && echo ::set-output name=SHA::$(git rev-parse origin/main)
+
+  publish-release:
+    name: Publish Release
+    runs-on: ubuntu-latest
+    needs: bump-package
+    permissions:
+      contents: write
+    env:
+      TAG: ${{ needs.bump-package.outputs.TAG }}
+    outputs:
+      SHA: ${{ steps.bump-steps.outputs.SHA }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Release Bumped Tag
+        uses: softprops/action-gh-release@v1
+        with:
+          name: v${{ env.TAG }}
+          tag_name: ${{ env.TAG }}
           
   publish-github:
       name: Publish Github
       runs-on: ubuntu-latest
-      needs: bump-package
+      needs: publish-release
       permissions:
         contents: read
         packages: write
       env:
-        SHA: ${{ needs.bump-package.outputs.SHA }}
+        SHA: ${{ needs.publish-release.outputs.SHA }}
       steps:
         - name: Checkout
           uses: actions/checkout@v3
@@ -90,9 +91,9 @@ jobs:
   publish-npm:
       name: Publish Npm
       runs-on: ubuntu-latest
-      needs: bump-package
+      needs: publish-release
       env:
-        SHA: ${{ needs.bump-package.outputs.SHA }}
+        SHA: ${{ needs.publish-release.outputs.SHA }}
       steps:
         - name: Checkout
           uses: actions/checkout@v3
