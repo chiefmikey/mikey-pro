@@ -12,7 +12,8 @@ jobs:
     outputs:
       TAG: ${{ steps.tag-steps.outputs.tag }}
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
         with:
           fetch-depth: '0'
       - name: Bump Version Tag
@@ -32,7 +33,8 @@ jobs:
         TAG: ${{ env.TAG }}
         SHA: ${{ steps.bump-steps.outputs.SHA }}
       steps:
-        - uses: actions/checkout@v3
+        - name: Checkout
+          uses: actions/checkout@v3
         - name: Bump Package Version
           id: bump-steps
           run: 
@@ -44,34 +46,16 @@ jobs:
             && git commit -am ${TAG}
             && git push origin main
             && echo ::set-output name=SHA::$(git rev-parse origin/main)
-
-  publish-release:
-    name: Publish Release
-    runs-on: ubuntu-latest
-    needs: bump-package
-    permissions:
-      contents: write
-    env:
-      TAG: ${{ needs.bump-package.outputs.TAG }}
-    outputs:
-      SHA: ${{ steps.bump-steps.outputs.SHA }}
-    steps:
-      - uses: actions/checkout@v3
-      - name: Release Bumped Tag
-        uses: softprops/action-gh-release@v1
-        with:
-          name: v${{ env.TAG }}
-          tag_name: ${{ env.TAG }}
           
   publish-github:
       name: Publish Github
       runs-on: ubuntu-latest
-      needs: publish-release
+      needs: bump-package
       permissions:
         contents: read
         packages: write
       env:
-        SHA: ${{ needs.publish-release.outputs.SHA }}
+        SHA: ${{ needs.bump-package.outputs.SHA }}
       steps:
         - name: Checkout
           uses: actions/checkout@v3
@@ -91,9 +75,9 @@ jobs:
   publish-npm:
       name: Publish Npm
       runs-on: ubuntu-latest
-      needs: publish-release
+      needs: bump-package
       env:
-        SHA: ${{ needs.publish-release.outputs.SHA }}
+        SHA: ${{ needs.bump-package.outputs.SHA }}
       steps:
         - name: Checkout
           uses: actions/checkout@v3
@@ -108,3 +92,20 @@ jobs:
           run: npm publish --access public
           env:
              NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+             
+  publish-release:
+    name: Publish Release
+    runs-on: ubuntu-latest
+    needs: [bump-package, publish-github, publish-npm]
+    permissions:
+      contents: write
+    env:
+      TAG: ${{ needs.bump-package.outputs.TAG }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Release Bumped Tag
+        uses: softprops/action-gh-release@v1
+        with:
+          name: v${{ env.TAG }}
+          tag_name: ${{ env.TAG }}
