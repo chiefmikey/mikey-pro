@@ -34,6 +34,9 @@
     "vue-eslint-parser": "^9.1"
   },
   "files": [
+    "eslint-config/",
+    "prettier-config/",
+    "stylelint-config/",
     "README.md",
     "LICENSE"
   ],
