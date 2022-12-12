@@ -1,11 +1,11 @@
 {
   "name": "mikey-pro",
-  "version": "5.0.1",
+  "version": "5.0.2",
   "description": "Mikey Pro Style Guide",
   "dependencies": {
-    "@mikey-pro/eslint-config": "^5.0.1",
-    "@mikey-pro/prettier-config": "^5.0.1",
-    "@mikey-pro/stylelint-config": "^5.0.1"
+    "@mikey-pro/eslint-config": "^5.0.2",
+    "@mikey-pro/prettier-config": "^5.0.2",
+    "@mikey-pro/stylelint-config": "^5.0.2"
   },
   "files": [
     "README.md",
