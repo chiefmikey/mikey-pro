@@ -1,32 +1,34 @@
 {
-  "name": "mikey-pro",
+  "name": "@mikey-pro/prettier-config",
   "version": "5.0.1",
-  "description": "Mikey Pro Style Guide",
-  "dependencies": {
-    "@mikey-pro/eslint-config": "^5.0.1",
-    "@mikey-pro/prettier-config": "^5.0.1",
-    "@mikey-pro/stylelint-config": "^5.0.1"
-  },
+  "description": "Mikey Pro Prettier configuration",
+  "main": "index.js",
   "files": [
+    "index.js",
     "README.md",
     "LICENSE"
   ],
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mikey-pro/style-guide.git"
+    "url": "git+https://github.com/mikey-pro/prettier-config.git"
   },
   "homepage": "https://github.com/mikey-pro/style-guide#readme",
   "author": "Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)",
   "bugs": {
-    "url": "https://github.com/mikey-pro/style-guide/issues"
+    "url": "https://github.com/mikey-pro/prettier-config/issues"
   },
   "keywords": [
+    "@mikey-pro/prettier-config",
+    "@mikey-pro",
     "mikey-pro",
     "mikey",
     "pro",
+    "prettier-config",
+    "prettierconfig",
+    "prettier",
+    "config",
     "style-guide",
-    "styleguide",
     "style",
     "guide"
   ],

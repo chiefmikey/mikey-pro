@@ -1,32 +1,34 @@
 {
-  "name": "mikey-pro",
+  "name": "@mikey-pro/stylelint-config",
   "version": "5.0.1",
-  "description": "Mikey Pro Style Guide",
-  "dependencies": {
-    "@mikey-pro/eslint-config": "^5.0.1",
-    "@mikey-pro/prettier-config": "^5.0.1",
-    "@mikey-pro/stylelint-config": "^5.0.1"
-  },
+  "description": "Mikey Pro Stylelint configuration",
+  "main": "index.js",
   "files": [
+    "index.js",
     "README.md",
     "LICENSE"
   ],
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mikey-pro/style-guide.git"
+    "url": "git+https://github.com/mikey-pro/stylelint-config.git"
   },
   "homepage": "https://github.com/mikey-pro/style-guide#readme",
   "author": "Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)",
   "bugs": {
-    "url": "https://github.com/mikey-pro/style-guide/issues"
+    "url": "https://github.com/mikey-pro/stylelint-config/issues"
   },
   "keywords": [
+    "@mikey-pro/stylelint-config",
+    "@mikey-pro",
     "mikey-pro",
     "mikey",
     "pro",
+    "stylelint-config",
+    "stylelintconfig",
+    "stylelint",
+    "config",
     "style-guide",
-    "styleguide",
     "style",
     "guide"
   ],
