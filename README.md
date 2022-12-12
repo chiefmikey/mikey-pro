@@ -4,16 +4,9 @@
   </h1>
   <h3>
     <a href="https://github.com/mikey-pro/style-guide">Style Guide</a>
-    +
-    <a href="https://github.com/mikey-pro/theme">Theme</a>
   </h3>
-  <a href="https://github.com/mikey-pro">
-    <img src="img/mikey-pro-logo.svg" style="height: 75px" alt="Mikey Pro Logo" />
-  </a>
   <br />
 </div>
-
-## **@mikey-pro/style-guide**
 
 ### Lint and Format Code (the way Mikey likes it)
 
@@ -63,16 +56,12 @@ Additional support:
 |
 <a href="https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode">Svelte</a>
 
-Add
-<a href="https://github.com/mikey-pro/style-guide/blob/main/vscode-settings.json">these
-preferences</a> to `settings.json`
-
 ## Usage
 
 ### Install
 
 ```shell
-npm i -D @mikey-pro/style-guide eslint prettier stylelint
+npm i -D mikey-pro eslint prettier stylelint
 ```
 
 ### Configure
@@ -81,20 +70,12 @@ Add bundled configs to `package.json` and then reload
 
 ```json
 {
-  "prettier": "@mikey-pro/prettier-config",
+  "prettier": "mikey-pro/prettier-config",
   "eslintConfig": {
-    "extends": "@mikey-pro/eslint-config"
+    "extends": "mikey-pro/eslint-config"
   },
   "stylelint": {
-    "extends": "@mikey-pro/stylelint-config"
+    "extends": "mikey-pro/stylelint-config"
   }
 }
 ```
-
-## Resources
-
-[@mikey-pro/eslint-config](https://github.com/mikey-pro/eslint-config)
-
-[@mikey-pro/prettier-config](https://github.com/mikey-pro/prettier-config)
-
-[@mikey-pro/stylelint-config](https://github.com/mikey-pro/stylelint-config)
