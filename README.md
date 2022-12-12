@@ -2,7 +2,6 @@
   <h1>
     <b>Mikey Pro</b>
   </h1>
-  <br />
 </div>
 
 ### Lint and Format Code (the way Mikey likes it)
