@@ -2,8 +2,6 @@
   <h1>
     <b>Mikey Pro</b>
   </h1>
-  <h3>
-    <a href="https://github.com/mikey-pro/style-guide">Style Guide</a>
   <br />
 </div>
 
