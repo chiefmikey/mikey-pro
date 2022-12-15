@@ -1,7 +1,7 @@
 {
   "name": "mikey-pro",
   "version": "5.0.7",
-  "description": "Mikey Pro Style Guide",
+  "description": "Mikey Pro",
   "dependencies": {
     "@mikey-pro/eslint-config": "^5.0.7",
     "@mikey-pro/prettier-config": "^5.0.7",
@@ -28,7 +28,11 @@
     "style-guide",
     "styleguide",
     "style",
-    "guide"
+    "guide",
+    "lint",
+    "linter",
+    "format",
+    "formatter"
   ],
   "contributors": [
     "Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)"
