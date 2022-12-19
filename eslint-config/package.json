@@ -1,9 +1,13 @@
 {
   "name": "@mikey-pro/eslint-config",
-  "version": "5.0.7",
+  "version": "6.0.0",
   "description": "Mikey Pro ESLint configuration",
   "main": "index.js",
-  "files": ["index.js", "README.md", "LICENSE"],
+  "files": [
+    "index.js",
+    "README.md",
+    "LICENSE"
+  ],
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -28,6 +32,10 @@
     "style",
     "guide"
   ],
-  "contributors": ["Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)"],
-  "browserslist": ["defaults"]
+  "contributors": [
+    "Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)"
+  ],
+  "browserslist": [
+    "defaults"
+  ]
 }

@@ -1,6 +1,6 @@
 {
   "name": "mikey-pro",
-  "version": "5.0.7",
+  "version": "6.0.0",
   "description": "Mikey Pro",
   "dependencies": {
     "@mikey-pro/eslint-config": "^5.0.7",
@@ -41,7 +41,10 @@
     "prettier": ">=2.8.1",
     "stylelint": ">=14.16.0"
   },
-  "files": ["README.md", "LICENSE"],
+  "files": [
+    "README.md",
+    "LICENSE"
+  ],
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -65,5 +68,7 @@
     "format",
     "formatter"
   ],
-  "contributors": ["Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)"]
+  "contributors": [
+    "Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)"
+  ]
 }
