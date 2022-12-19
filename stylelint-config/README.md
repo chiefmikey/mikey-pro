@@ -2,9 +2,6 @@
   <h1>
     <b>Mikey Pro</b>
   </h1>
-  <h3>
-    <a href="https://github.com/mikey-pro/style-guide">Style Guide</a>
-  <br />
 </div>
 
 ## **@mikey-pro/stylelint-config**
@@ -16,7 +13,7 @@ _A preset Stylelint configuration_
 ### Install
 
 ```shell
-npm i -D @mikey-pro/stylelint-config
+npm i -D mikey-pro
 ```
 
 ### Configure
@@ -26,9 +23,7 @@ Extend to Stylelint in `package.json`:
 ```json
 {
   "stylelint": {
-    "extends": [
-      "@mikey-pro/stylelint-config"
-    ]
+    "extends": ["@mikey-pro/stylelint-config"]
   }
 }
 ```
