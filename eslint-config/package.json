@@ -3,42 +3,7 @@
   "version": "5.0.7",
   "description": "Mikey Pro ESLint configuration",
   "main": "index.js",
-  "dependencies": {
-    "@babel/core": "^7.20.5",
-    "@babel/eslint-parser": "^7.19",
-    "@babel/eslint-plugin": "^7.19",
-    "@babel/plugin-transform-react-jsx": "^7.19.0",
-    "@babel/preset-env": "^7.20",
-    "@html-eslint/eslint-plugin": "^0.15.0",
-    "@html-eslint/parser": "^0.15.0",
-    "@typescript-eslint/eslint-plugin": "^5.46.0",
-    "@typescript-eslint/parser": "^5.46.0",
-    "@vue/babel-plugin-jsx": "^1.1.1",
-    "eslint-config-prettier": "^8.5",
-    "eslint-config-react-app": "^7.0.1",
-    "eslint-import-resolver-typescript": "^3.5.2",
-    "eslint-plugin-compat": "^4.0",
-    "eslint-plugin-css-modules": "^2.11",
-    "eslint-plugin-disable-autofix": "^3.1.1",
-    "eslint-plugin-jsonc": "^2.5.0",
-    "eslint-plugin-markdownlint": "^0.4.0",
-    "eslint-plugin-n": "^15.6.0",
-    "eslint-plugin-only-warn": "^1.1.0",
-    "eslint-plugin-prettier": "^4.2",
-    "eslint-plugin-promise": "^6.1.1",
-    "eslint-plugin-sonarjs": "^0.17.0",
-    "eslint-plugin-svelte3": "^4.0.0",
-    "eslint-plugin-toml": "^0.3.1",
-    "eslint-plugin-unicorn": "^45.0.1",
-    "eslint-plugin-vue": "^9.8",
-    "eslint-plugin-yaml": "^0.5.0",
-    "vue-eslint-parser": "^9.1"
-  },
-  "files": [
-    "index.js",
-    "README.md",
-    "LICENSE"
-  ],
+  "files": ["index.js", "README.md", "LICENSE"],
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -63,10 +28,6 @@
     "style",
     "guide"
   ],
-  "contributors": [
-    "Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)"
-  ],
-  "browserslist": [
-    "defaults"
-  ]
+  "contributors": ["Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)"],
+  "browserslist": ["defaults"]
 }
