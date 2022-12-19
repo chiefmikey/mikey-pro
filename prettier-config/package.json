@@ -3,11 +3,7 @@
   "version": "5.0.7",
   "description": "Mikey Pro Prettier configuration",
   "main": "index.js",
-  "files": [
-    "index.js",
-    "README.md",
-    "LICENSE"
-  ],
+  "files": ["index.js", "README.md", "LICENSE"],
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -32,7 +28,5 @@
     "style",
     "guide"
   ],
-  "contributors": [
-    "Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)"
-  ]
+  "contributors": ["Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)"]
 }
