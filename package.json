@@ -36,6 +36,11 @@
     "eslint-plugin-yaml": "^0.5.0",
     "vue-eslint-parser": "^9.1"
   },
+  "peerDependencies": {
+    "eslint": ">=8.30.0",
+    "prettier": ">=2.8.1",
+    "stylelint": ">=14.16.0"
+  },
   "files": ["README.md", "LICENSE"],
   "license": "MIT",
   "repository": {
