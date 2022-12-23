@@ -23,12 +23,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: false
-          
+
   bump-package:
     name: Bump Package
     runs-on: ubuntu-latest
     needs: create-tag
-    env: 
+    env:
       TAG: ${{ needs.create-tag.outputs.TAG }}
     outputs:
       TAG: ${{ env.TAG }}
@@ -39,16 +39,16 @@ jobs:
 
       - name: Bump Package Version
         id: bump-steps
-        run: 
+        run: |
           tmp=$(mktemp)
-          && jq --arg version ${TAG} '.version = $version' package.json > '$tmp'
-          && mv '$tmp' package.json
-          && git config --global user.email "wolfemikl@gmail.com"
-          && git config --global user.name "Mikl Wolfe"
-          && git commit -am ${TAG}
-          && git push origin main
-          && echo ::set-output name=SHA::$(git rev-parse origin/main)
-          
+          jq --arg version ${TAG} '.version = $version' package.json > '$tmp'
+          mv '$tmp' package.json
+          git config --global user.email "wolfemikl@gmail.com"
+          git config --global user.name "Mikl Wolfe"
+          git commit -am ${TAG}
+          git push origin main
+          echo ::set-output name=SHA::$(git rev-parse origin/main)
+
   publish-github:
     name: Publish Github
     runs-on: ubuntu-latest
@@ -69,7 +69,6 @@ jobs:
         with:
           node-version: '16.x'
           registry-url: 'https://npm.pkg.github.com'
-          scope: '@mikey-pro'
 
       - name: Publish to Github
         run: npm publish
@@ -98,7 +97,7 @@ jobs:
         run: npm publish --access public
         env:
            NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-             
+
   publish-release:
     name: Publish Release
     runs-on: ubuntu-latest
