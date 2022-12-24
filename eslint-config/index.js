@@ -236,6 +236,7 @@ module.exports = {
     'unicorn',
     'sonarjs',
     'only-warn',
+    '@cypress/json',
   ],
   root: true,
   rules: {
@@ -432,10 +433,10 @@ module.exports = {
     'valid-jsdoc': 0,
   },
   settings: {
-    'json/sort-package-json': 'pro',
     polyfills: ['Promise'],
     react: {
       version: 'detect',
     },
+    'json/json-with-comments-files': [],
   },
 };
