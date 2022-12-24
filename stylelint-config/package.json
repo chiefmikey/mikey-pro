@@ -1,9 +1,13 @@
 {
   "name": "@mikey-pro/stylelint-config",
-  "version": "6.0.0",
+  "version": "6.0.3",
   "description": "Mikey Pro Stylelint configuration",
   "main": "index.js",
-  "files": ["index.js", "README.md", "LICENSE"],
+  "files": [
+    "index.js",
+    "README.md",
+    "LICENSE"
+  ],
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -27,6 +31,5 @@
     "style-guide",
     "style",
     "guide"
-  ],
-  "contributors": ["Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)"]
+  ]
 }
