@@ -26,6 +26,7 @@ module.exports = {
     '.vscode',
     '.github',
     'tsconfig.json',
+    '.env',
   ],
   overrides: [
     {
