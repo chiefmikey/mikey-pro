@@ -190,6 +190,7 @@ module.exports = {
     {
       extends: ['plugin:jsonc/recommended-with-jsonc'],
       files: ['*.json', '*.jsonc', '*rc'],
+      ignorePatterns: ['**/package.json'],
       parser: 'jsonc-eslint-parser',
       rules: {
         'prettier/prettier': [1, { parser: 'json' }],
