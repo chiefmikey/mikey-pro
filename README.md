@@ -57,7 +57,7 @@ Additional support:
 ### Install
 
 ```shell
-npm i -D mikey-pro eslint prettier stylelint
+npm i -D mikey-pro
 ```
 
 ### Configure
