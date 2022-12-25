@@ -458,10 +458,10 @@ module.exports = {
       'typings',
       'productName',
       'license',
-      'repository',
-      'homepage',
-      'bugs',
       'author',
+      'homepage',
+      'repository',
+      'bugs',
     ],
   },
 };
