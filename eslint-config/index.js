@@ -439,5 +439,6 @@ module.exports = {
       version: 'detect',
     },
     'json/json-with-comments-files': [],
+    'json/package-json-sort-order': ['bugs', 'author'],
   },
 };
