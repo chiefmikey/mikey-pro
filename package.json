@@ -1,6 +1,6 @@
 {
   "name": "mikey-pro",
-  "version": "6.0.10",
+  "version": "6.0.11",
   "description": "Mikey Pro",
   "dependencies": {
     "@babel/core": "^7.20.7",
@@ -11,7 +11,7 @@
     "@cypress/eslint-plugin-json": "^3.2.3",
     "@html-eslint/eslint-plugin": "^0.15.0",
     "@html-eslint/parser": "^0.15.0",
-    "@mikey-pro/eslint-config": "^6.0.10",
+    "@mikey-pro/eslint-config": "^6.0.11",
     "@mikey-pro/prettier-config": "^6.0.3",
     "@mikey-pro/stylelint-config": "^6.0.3",
     "@typescript-eslint/eslint-plugin": "^5.47.0",
@@ -46,16 +46,15 @@
     "README.md",
     "LICENSE"
   ],
-  "license": "MIT",
+  "homepage": "https://github.com/chiefmikey/mikey-pro#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/chiefmikey/mikey-pro.git"
   },
-  "homepage": "https://github.com/chiefmikey/mikey-pro#readme",
-  "author": "Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)",
   "bugs": {
     "url": "https://github.com/chiefmikey/mikey-pro/issues"
   },
+  "license": "MIT",
   "keywords": [
     "mikey-pro",
     "mikey",
@@ -68,5 +67,6 @@
     "linter",
     "format",
     "formatter"
-  ]
+  ],
+  "author": "Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)"
 }
