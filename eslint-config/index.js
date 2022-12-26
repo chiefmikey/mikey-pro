@@ -461,11 +461,11 @@ module.exports = {
       'homepage',
       'repository',
       'bugs',
+      'license',
+      'keywords',
       'author',
       'contributors',
-      'license',
       'funding',
-      'keywords',
     ],
   },
 };
