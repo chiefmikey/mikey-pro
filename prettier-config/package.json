@@ -8,16 +8,16 @@
     "README.md",
     "LICENSE"
   ],
-  "license": "MIT",
+  "homepage": "https://github.com/chiefmikey/mikey-pro#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/chiefmikey/mikey-pro.git"
   },
-  "homepage": "https://github.com/chiefmikey/mikey-pro#readme",
-  "author": "Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)",
   "bugs": {
     "url": "https://github.com/chiefmikey/mikey-pro/issues"
   },
+  "author": "Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)",
+  "license": "MIT",
   "keywords": [
     "@mikey-pro/prettier-config",
     "@mikey-pro",
