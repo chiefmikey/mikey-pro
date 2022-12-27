@@ -1,0 +1,38 @@
+{
+  "name": "@mikey-pro/eslint-config",
+  "version": "6.1.0",
+  "description": "Mikey Pro ESLint configuration",
+  "main": "index.js",
+  "files": [
+    "index.js",
+    "README.md",
+    "LICENSE"
+  ],
+  "homepage": "https://github.com/chiefmikey/mikey-pro#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chiefmikey/mikey-pro.git"
+  },
+  "bugs": {
+    "url": "https://github.com/chiefmikey/mikey-pro/issues"
+  },
+  "author": "Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)",
+  "license": "MIT",
+  "keywords": [
+    "@mikey-pro/eslint-config",
+    "@mikey-pro",
+    "mikey-pro",
+    "mikey",
+    "pro",
+    "eslint-config",
+    "eslintconfig",
+    "eslint",
+    "config",
+    "style-guide",
+    "style",
+    "guide"
+  ],
+  "browserslist": [
+    "defaults"
+  ]
+}
