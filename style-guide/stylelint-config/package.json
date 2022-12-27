@@ -16,7 +16,6 @@
   "bugs": {
     "url": "https://github.com/chiefmikey/mikey-pro/issues"
   },
-  "author": "Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)",
   "license": "MIT",
   "keywords": [
     "@mikey-pro/stylelint-config",
@@ -31,5 +30,6 @@
     "style-guide",
     "style",
     "guide"
-  ]
+  ],
+  "author": "Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)"
 }
