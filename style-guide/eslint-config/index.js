@@ -95,6 +95,7 @@ module.exports = {
       extends: ['plugin:markdownlint/recommended'],
       parser: 'eslint-plugin-markdownlint/parser',
       rules: {
+        'markdownlint/MD033': 0,
         'prettier/prettier': [1, { parser: 'markdown' }],
       },
     },
