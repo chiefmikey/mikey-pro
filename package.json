@@ -2,6 +2,13 @@
   "name": "mikey-pro",
   "version": "1.0.0",
   "description": "Mikey Pro",
+  "scripts": {
+    "publish-eslint": "cd ./style-guide/eslint-config && npm publish --access public",
+    "publish-mikey-pro": "cd ./style-guide && npm publish --access public",
+    "publish-prettier": "cd ./style-guide/prettier-config && npm publish --access public",
+    "publish-prod": "npm run publish-eslint && npm run publish-prettier && npm run publish-stylelint && npm run publish-mikey-pro",
+    "publish-stylelint": "cd ./style-guide/stylelint-config && npm publish --access public"
+  },
   "devDependencies": {
     "mikey-pro": "^6.1.1"
   },
