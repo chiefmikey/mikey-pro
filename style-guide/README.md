@@ -1,7 +1,7 @@
 <div width="100%" align="center">
-  <h1>
+  <a href="https://github.com/chiefmikey/mikey-pro">
     <b>Mikey Pro</b>
-  </h1>
+  </a>
   <h2>Style Guide</h2>
   <h4>Lint and Format Code (the way Mikey likes it)</h4>
 </div>
