@@ -1,12 +1,14 @@
 <div width="100%" align="center">
   <h1>
-    <b>Mikey Pro</b>
+    <a href="https://github.com/chiefmikey/mikey-pro">
+      <b>Mikey Pro</b>
+    </a>
   </h1>
 </div>
 
 ## **@mikey-pro/stylelint-config**
 
-_A preset Stylelint configuration_
+A preset Stylelint configuration
 
 ## Usage
 
