@@ -92,10 +92,10 @@ module.exports = {
     },
     {
       files: ['*.md'],
-      extends: ['plugin:markdownlint/recommended'],
       parser: 'eslint-plugin-markdownlint/parser',
+      extends: ['plugin:markdownlint/recommended'],
       rules: {
-        'markdownlint/MD033': 0,
+        'markdownlint/md033': 0,
         'prettier/prettier': [1, { parser: 'markdown' }],
       },
     },
