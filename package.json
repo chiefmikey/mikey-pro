@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Mikey Pro",
   "scripts": {
+    "fix": "eslint --fix --ignore-pattern ./**/*",
     "publish-eslint": "cd ./style-guide/eslint-config && npm publish --access public",
     "publish-mikey-pro": "cd ./style-guide && npm publish --access public",
     "publish-prettier": "cd ./style-guide/prettier-config && npm publish --access public",
