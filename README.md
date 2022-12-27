@@ -8,18 +8,18 @@
     <tbody>
       <tr>
         <td align="center">
-          <h2>
+          <h3>
             <a href="https://github.com/chiefmikey/mikey-pro/style-guide">
               Style Guide
             </a>
-          </h2>
-          Lint and format code
+          </h3>
+          <h5>Lint and format code</h5>
         </td>
         <td align="center">
-          <h2>
+          <h3>
             <a href="https://github.com/chiefmikey/mikey-pro/theme"> Theme </a>
-          </h2>
-          Look good, feel good
+          </h3>
+          <h5>Look good, feel good</h5>
         </td>
       </tr>
     </tbody>
