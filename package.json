@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Mikey Pro",
   "scripts": {
-    "fix": "eslint --fix --ignore-pattern ./**/*",
+    "fix": "eslint --fix '**/*'",
     "publish": "npm run publish-eslint && npm run publish-prettier && npm run publish-stylelint && npm run publish-mikey-pro",
     "publish-eslint": "cd ./style-guide/eslint-config && npm publish --access public",
     "publish-eslint-only": "npm run publish-eslint && npm run publish-mikey-pro && npm run sync",
