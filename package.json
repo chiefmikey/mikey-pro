@@ -9,10 +9,14 @@
     "publish-eslint-only": "npm run publish-eslint && npm run publish-mikey-pro",
     "publish-mikey-pro": "cd ./style-guide && npm publish --access public && sleep 10 && npm install",
     "publish-prettier": "cd ./style-guide/prettier-config && npm publish --access public",
-    "publish-stylelint": "cd ./style-guide/stylelint-config && npm publish --access public"
+    "publish-stylelint": "cd ./style-guide/stylelint-config && npm publish --access public",
+    "check-eslint": "npm info eslint",
+    "check-prettier": "npm info prettier",
+    "check-stylelint": "npm info stylelint",
+    "check-dev": "npm run check-eslint; npm run check-prettier; npm run check-stylelint; "
   },
   "devDependencies": {
-    "mikey-pro": "^6.1.6"
+    "mikey-pro": "^6.1.7"
   },
   "files": [
     "README.md",
