@@ -17,11 +17,8 @@ module.exports = {
     'plugin:prettier/recommended',
   ],
   ignorePatterns: [
-    '!package.json',
-    'package-lock.json',
-    'LICENSE',
-    '**/dist/**/*',
-    '**/vendor/**/*',
+    '**/*',
+    '!**/*.{js,jsx,ts,tsx,css,scss,less,yaml,yml,toml,md,md.json,html,vue,svelte}',
   ],
   overrides: [
     {
