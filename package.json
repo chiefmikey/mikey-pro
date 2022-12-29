@@ -7,10 +7,10 @@
     "publish": "npm run publish-eslint && npm run publish-prettier && npm run publish-stylelint && npm run publish-mikey-pro",
     "publish-eslint": "cd ./style-guide/eslint-config && npm publish --access public",
     "publish-eslint-only": "npm run publish-eslint && npm run publish-mikey-pro",
-    "publish-mikey-pro": "cd ./style-guide && npm publish --access public && npm run sync",
+    "publish-mikey-pro": "cd ./style-guide && npm publish --access public && npm run sleep",
     "publish-prettier": "cd ./style-guide/prettier-config && npm publish --access public",
     "publish-stylelint": "cd ./style-guide/stylelint-config && npm publish --access public",
-    "sync": "sleep 10 && npm install"
+    "sleep": "sleep 10 && npm install"
   },
   "devDependencies": {
     "mikey-pro": "^6.1.5"
