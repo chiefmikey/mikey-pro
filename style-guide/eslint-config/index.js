@@ -434,7 +434,7 @@ module.exports = {
           camelCase: true,
           pascalCase: true,
         },
-        ignore: ['*.md'],
+        ignore: ['.*.md'],
       },
     ],
     'unicorn/import-index': [1, { ignoreImports: true }],
