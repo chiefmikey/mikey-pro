@@ -13,7 +13,7 @@
     "sleep": "sleep 10 && npm install"
   },
   "devDependencies": {
-    "mikey-pro": "^6.1.5"
+    "mikey-pro": "^6.1.6"
   },
   "files": [
     "README.md",
