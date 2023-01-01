@@ -8,6 +8,7 @@
     "check-prettier": "npm info prettier",
     "check-stylelint": "npm info stylelint",
     "fix": "eslint --fix '**/*'",
+    "ncu": "cd ./style-guide && ncu -u",
     "publish": "npm run publish-eslint && npm run publish-prettier && npm run publish-stylelint && npm run publish-mikey-pro",
     "publish-eslint": "cd ./style-guide/eslint-config && npm publish --access public",
     "publish-eslint-only": "npm run publish-eslint && npm run publish-mikey-pro",
