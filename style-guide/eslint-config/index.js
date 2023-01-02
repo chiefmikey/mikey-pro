@@ -211,6 +211,11 @@ module.exports = {
         'prettier/prettier': [1, { parser: 'json5' }],
       },
     },
+    {
+      files: ['*.test.*'],
+      plugins: ['jest'],
+      extends: ['plugin:jest/all'],
+    },
   ],
   parser: '@babel/eslint-parser',
   parserOptions: {
