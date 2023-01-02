@@ -22,17 +22,17 @@ and modified rules for consistently writing top shelf code_
         JavaScript -
         React -
         Preact -
+        Jest -
         Vue -
         Svelte-
-        JSX -
+        Markdown -
         HTML -
         CSS -
         SCSS -
         LESS -
         JSON -
         JSONC -
-        JSON5 -
-        Markdown
+        JSON5
       </td>
     </tr>
   </tbody>
@@ -51,6 +51,8 @@ Additional support:
 <a href="https://marketplace.visualstudio.com/items?itemName=octref.vetur">Vetur</a>
 |
 <a href="https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode">Svelte</a>
+|
+<a href="https://marketplace.visualstudio.com/items?itemName=timonwong.shellcheck">ShellCheck</a>
 
 ## Usage
 
