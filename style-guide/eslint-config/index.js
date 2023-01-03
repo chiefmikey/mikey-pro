@@ -450,6 +450,9 @@ module.exports = {
     react: {
       version: 'detect',
     },
+    jest: {
+      version: 29,
+    },
     'json/json-with-comments-files': [],
     'json/package-json-sort-order': [
       'name',
