@@ -17,7 +17,7 @@
     "publish-stylelint": "cd ./style-guide/stylelint-config && npm publish --access public"
   },
   "devDependencies": {
-    "mikey-pro": "^6.2.0"
+    "mikey-pro": "^6.2.1"
   },
   "files": [
     "README.md",
