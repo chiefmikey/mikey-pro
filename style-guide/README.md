@@ -23,6 +23,7 @@ and modified rules for consistently writing top shelf code_
         React -
         Preact -
         Jest -
+        Cypress -
         Vue -
         Svelte-
         Markdown -

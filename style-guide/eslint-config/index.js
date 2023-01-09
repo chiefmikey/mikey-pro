@@ -216,6 +216,11 @@ module.exports = {
       plugins: ['jest'],
       extends: ['plugin:jest/all'],
     },
+    {
+      files: ['*.cy.*'],
+      plugins: ['cypress'],
+      extends: ['plugin:cypress/recommended'],
+    },
   ],
   parser: '@babel/eslint-parser',
   parserOptions: {
