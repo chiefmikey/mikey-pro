@@ -22,6 +22,7 @@
     "eslint-import-resolver-typescript": "^3.5.2",
     "eslint-plugin-compat": "^4.0",
     "eslint-plugin-css-modules": "^2.11",
+    "eslint-plugin-cypress": "^2.12.1",
     "eslint-plugin-disable-autofix": "^3.1.1",
     "eslint-plugin-jest": "^27.2.1",
     "eslint-plugin-jsonc": "^2.6.0",
