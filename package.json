@@ -12,13 +12,13 @@
     "publish": "npm run publish-eslint && npm run publish-prettier && npm run publish-stylelint && npm run publish-mikey-pro",
     "publish-eslint": "cd ./style-guide/eslint-config && npm publish --access public",
     "publish-eslint-only": "npm run publish-eslint && npm run publish-mikey-pro",
-    "publish-mikey-pro": "CWD=$(pwd) && cd ./style-guide && npm publish --access public && sleep 10 && cd $PWD && npm run update",
+    "publish-mikey-pro": "CWD=$(pwd) && cd ./style-guide && npm publish --access public && sleep 10 && cd $CWD && npm run update",
     "publish-prettier": "cd ./style-guide/prettier-config && npm publish --access public",
     "publish-stylelint": "cd ./style-guide/stylelint-config && npm publish --access public",
     "update": "ncu -u && npm i"
   },
   "devDependencies": {
-    "mikey-pro": "^6.2.2"
+    "mikey-pro": "^6.2.3"
   },
   "files": [
     "README.md",
