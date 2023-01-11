@@ -3,10 +3,6 @@
   "version": "1.0.0",
   "description": "Mikey Pro",
   "scripts": {
-    "check-dev": "npm run check-eslint; npm run check-prettier; npm run check-stylelint; ",
-    "check-eslint": "npm info eslint",
-    "check-prettier": "npm info prettier",
-    "check-stylelint": "npm info stylelint",
     "fix": "eslint --fix '**/*'",
     "ncu": "cd ./style-guide && ncu -u",
     "publish": "npm run publish-eslint && npm run publish-prettier && npm run publish-stylelint && npm run publish-mikey-pro",
@@ -18,7 +14,7 @@
     "update": "ncu -u && npm i"
   },
   "devDependencies": {
-    "mikey-pro": "^6.3.0"
+    "mikey-pro": "^6.4.0"
   },
   "files": [
     "README.md",
