@@ -4,7 +4,6 @@
   </a>
   <h2>Style Guide</h2>
   <h4>Lint and Format Code (the way Mikey likes it)</h4>
-</div>
 
 _A curated compilation of packages, plugins, style guides, custom configurations
 and modified rules for consistently writing top shelf code_
@@ -55,6 +54,8 @@ and modified rules for consistently writing top shelf code_
     </tr>
   </tbody>
 </table>
+</div>
+  
 
 ## Requirements
 
