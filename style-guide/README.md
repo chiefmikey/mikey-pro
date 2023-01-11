@@ -12,28 +12,45 @@ and modified rules for consistently writing top shelf code_
 <table>
   <thead>
     <tr>
-      <th align="left">Compatibility</a></th>
+      <th align="left">Languages</th>
+      <th align="left">Frameworks</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td valign="top">
-        TypeScript -
-        JavaScript -
-        React -
-        Preact -
-        Jest -
-        Cypress -
-        Vue -
-        Svelte-
-        Markdown -
-        HTML -
-        CSS -
-        SCSS -
-        LESS -
-        JSON -
-        JSONC -
+        TypeScript
+        <br>
+        JavaScript
+        <br>
+        Markdown
+        <br>
+        HTML
+        <br>
+        CSS
+        <br>
+        SCSS
+        <br>
+        LESS
+        <br>
+        JSON
+        <br>
+        JSONC
+        <br>
         JSON5
+      </td>
+      <td valign="top">
+        React
+        <br>
+        Preact
+        <br>
+        Svelte
+        <br>
+        Vue
+        <br>
+        Jest
+        <br>
+        Cypress
       </td>
     </tr>
   </tbody>
