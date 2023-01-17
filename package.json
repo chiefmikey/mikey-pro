@@ -14,7 +14,7 @@
     "update": "ncu -u && npm i"
   },
   "devDependencies": {
-    "mikey-pro": "^6.4.0"
+    "mikey-pro": "^6.4.1"
   },
   "files": [
     "README.md",
