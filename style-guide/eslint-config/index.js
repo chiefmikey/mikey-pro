@@ -215,6 +215,9 @@ module.exports = {
       files: ['*.test.*'],
       plugins: ['jest'],
       extends: ['plugin:jest/all'],
+      rules: {
+        'unicorn/no-array-callback-reference': 0,
+      },
     },
     {
       files: ['*.cy.*'],
