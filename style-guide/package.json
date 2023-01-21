@@ -1,12 +1,12 @@
 {
   "name": "mikey-pro",
-  "version": "6.4.1",
+  "version": "6.4.2",
   "description": "Mikey Pro Style Guide",
   "dependencies": {
     "@babel/core": "^7.20.12",
     "@babel/eslint-parser": "^7.19",
     "@babel/eslint-plugin": "^7.19",
-    "@babel/plugin-transform-react-jsx": "^7.20.7",
+    "@babel/plugin-transform-react-jsx": "^7.20.13",
     "@babel/preset-env": "^7.20",
     "@cypress/eslint-plugin-json": "^3.2.3",
     "@html-eslint/eslint-plugin": "^0.15.0",
