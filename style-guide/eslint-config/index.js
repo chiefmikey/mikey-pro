@@ -222,6 +222,12 @@ module.exports = {
       },
     },
     {
+      files: ['*.test.js'],
+      rules: {
+        'jest/unbound-method': 0,
+      },
+    },
+    {
       files: ['*.cy.*'],
       plugins: ['cypress'],
       extends: ['plugin:cypress/recommended'],
