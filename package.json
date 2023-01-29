@@ -1,6 +1,6 @@
 {
   "name": "mikey-pro",
-  "version": "6.4.3",
+  "version": "6.4.11",
   "description": "Mikey Pro",
   "scripts": {
     "fix": "eslint --fix '**/*'",
@@ -14,7 +14,7 @@
     "update": "ncu -u && npm i"
   },
   "devDependencies": {
-    "mikey-pro": "^6.4.3"
+    "mikey-pro": "^6.4.11"
   },
   "files": [
     "README.md",
