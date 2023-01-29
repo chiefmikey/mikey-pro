@@ -9,7 +9,6 @@ module.exports = {
   extends: [
     'eslint:recommended',
     'react-app',
-    'react-app/jest',
     'plugin:unicorn/all',
     'plugin:sonarjs/recommended',
     'plugin:compat/recommended',
@@ -214,7 +213,7 @@ module.exports = {
     {
       files: ['*.test.*'],
       plugins: ['jest'],
-      extends: ['plugin:jest/all'],
+      extends: ['plugin:jest/all', 'react-app/jest'],
       rules: {
         'unicorn/no-array-callback-reference': 0,
       },
