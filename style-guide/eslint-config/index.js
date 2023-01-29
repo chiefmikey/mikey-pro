@@ -1,3 +1,5 @@
+import path from 'node:path';
+
 module.exports = {
   env: {
     browser: true,
@@ -46,8 +48,8 @@ module.exports = {
         },
         ecmaVersion: 'latest',
         extraFileExtensions: ['.vue', '.svelte'],
-        project: 'tsconfig.json',
         sourceType: 'module',
+        tsconfigRootDir: path.join(__dirname, '../../..'),
       },
       plugins: ['@typescript-eslint'],
       rules: {
