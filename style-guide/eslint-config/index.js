@@ -213,7 +213,7 @@ module.exports = {
     {
       files: ['*.test.*'],
       plugins: ['jest'],
-      extends: ['plugin:jest/all', 'react-app/jest'],
+      extends: ['plugin:jest/all'],
       rules: {
         'unicorn/no-array-callback-reference': 0,
       },
