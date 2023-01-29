@@ -52,6 +52,7 @@ module.exports = {
       },
       plugins: ['@typescript-eslint'],
       rules: {
+        '@typescript-eslint/unbound-method': 0,
         '@typescript-eslint/naming-convention': 0,
         'import/default': 0,
         'import/named': 0,
