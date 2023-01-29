@@ -46,9 +46,8 @@ module.exports = {
         },
         ecmaVersion: 'latest',
         extraFileExtensions: ['.vue', '.svelte'],
-        project: ['../../../tsconfig.json'],
+        project: 'tsconfig.json',
         sourceType: 'module',
-        tsconfigRootDir: __dirname,
       },
       plugins: ['@typescript-eslint'],
       rules: {
