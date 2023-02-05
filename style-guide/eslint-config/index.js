@@ -368,6 +368,8 @@ module.exports = {
     'prefer-rest-params': 1,
     'prefer-spread': 1,
     'prefer-template': 1,
+    'prefer-const': 0,
+    'disable-autofix/prefer-const': 1,
     'prettier/prettier': [1, { parser: 'babel' }],
     'quote-props': [1, 'as-needed'],
     quotes: [
