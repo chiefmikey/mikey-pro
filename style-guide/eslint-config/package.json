@@ -1,6 +1,6 @@
 {
   "name": "@mikey-pro/eslint-config",
-  "version": "6.4.11",
+  "version": "6.4.13",
   "description": "Mikey Pro ESLint configuration",
   "main": "index.js",
   "files": [
