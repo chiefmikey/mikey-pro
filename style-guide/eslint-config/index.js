@@ -381,7 +381,7 @@ module.exports = {
       },
     ],
     radix: 1,
-    'react-hooks/exhaustive-deps': 1,
+    'react-hooks/exhaustive-deps': 0,
     'react-hooks/rules-of-hooks': 1,
     'react/display-name': [1, { ignoreTranspilerName: false }],
     'react/function-component-definition': [
