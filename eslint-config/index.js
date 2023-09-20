@@ -10,6 +10,7 @@ module.exports = {
   },
   extends: [
     'eslint:recommended',
+    'react-app',
     'plugin:unicorn/all',
     'plugin:compat/recommended',
     'plugin:css-modules/recommended',
