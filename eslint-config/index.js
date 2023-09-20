@@ -218,11 +218,6 @@ module.exports = {
       extends: ['plugin:jest/all'],
       rules: {
         'unicorn/no-array-callback-reference': 0,
-      },
-    },
-    {
-      files: ['*.test.js'],
-      rules: {
         'jest/unbound-method': 0,
       },
     },
