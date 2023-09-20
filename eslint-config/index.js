@@ -35,27 +35,6 @@ module.exports = {
   ],
   overrides: [
     {
-      files: ['*.ts', '*.tsx'],
-      parserOptions: {
-        ecmaFeatures: {
-          jsx: true,
-        },
-        ecmaVersion: 'latest',
-        extraFileExtensions: ['.vue', '.svelte'],
-        sourceType: 'module',
-        project: 'tsconfig.json',
-        tsconfigRootDir: path.join(__dirname, '../../..'),
-      },
-      rules: {
-        'import/default': 0,
-        'import/named': 0,
-        'import/namespace': 0,
-        'import/no-named-as-default-member': 0,
-        'import/no-unresolved': 0,
-        'prettier/prettier': [1, { parser: 'typescript' }],
-      },
-    },
-    {
       files: ['*.css'],
       rules: {
         'prettier/prettier': [1, { parser: 'css' }],
