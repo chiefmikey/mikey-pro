@@ -1,6 +1,6 @@
 {
   "name": "mikey-pro",
-  "version": "6.5.11",
+  "version": "6.5.12",
   "description": "Mikey Pro Style Guide",
   "dependencies": {
     "@babel/core": "^7.23.0",
