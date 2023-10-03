@@ -8,6 +8,7 @@
     "@babel/eslint-plugin": "^7.22",
     "@babel/plugin-transform-react-jsx": "^7.22.15",
     "@babel/preset-env": "^7.22",
+    "@babel/preset-react": "^7.22.15",
     "@cypress/eslint-plugin-json": "^3.2.3",
     "@html-eslint/eslint-plugin": "^0.19.1",
     "@html-eslint/parser": "^0.19.1",
