@@ -5,11 +5,11 @@
   <h2>Style Guide</h2>
   <h4>Lint and Format Code (the way Mikey likes it)</h4>
 
-_A curated compilation of packages, plugins, style guides, custom configurations <br>
-and modified rules for consistently writing top shelf code_
-  
+_A curated compilation of packages, plugins, style guides, custom configurations
+<br> and modified rules for consistently writing top shelf code_
+
 #### Compatibility
-  
+
 <table>
   <thead>
     <tr>
@@ -57,8 +57,6 @@ and modified rules for consistently writing top shelf code_
   </tbody>
 </table>
 </div>
-  
-
 ## Requirements
 
 Install extensions:
