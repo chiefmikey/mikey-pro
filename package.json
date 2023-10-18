@@ -23,6 +23,7 @@
     "eslint-config-react-app-bump": "^1.0.16",
     "eslint-import-resolver-typescript": "^3.6.1",
     "eslint-plugin-compat": "^4.2",
+    "svelte-eslint-parser": "^0.33.1",
     "eslint-plugin-css-modules": "^2.11",
     "eslint-plugin-cypress": "^2.15.1",
     "eslint-plugin-disable-autofix": "^4.0.5",
