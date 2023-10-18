@@ -1,6 +1,6 @@
 {
   "name": "mikey-pro",
-  "version": "6.6.4",
+  "version": "6.6.5",
   "description": "Mikey Pro Style Guide",
   "dependencies": {
     "@babel/core": "^7.23.2",
@@ -12,9 +12,9 @@
     "@cypress/eslint-plugin-json": "^3.2.3",
     "@html-eslint/eslint-plugin": "^0.19.1",
     "@html-eslint/parser": "^0.19.1",
-    "@mikey-pro/eslint-config": "^6.6.1",
-    "@mikey-pro/prettier-config": "^6.1.1",
-    "@mikey-pro/stylelint-config": "^6.1.1",
+    "@mikey-pro/eslint-config": "^6.6.4",
+    "@mikey-pro/prettier-config": "^6.6.4",
+    "@mikey-pro/stylelint-config": "^6.6.4",
     "@typescript-eslint/eslint-plugin": "^6.8.0",
     "@typescript-eslint/parser": "^6.8.0",
     "@vue/babel-plugin-jsx": "^1.1.5",
