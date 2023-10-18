@@ -187,9 +187,9 @@ module.exports = {
     {
       files: ['*.svelte'],
       extends: ['plugin:svelte/all'],
-      parser: "svelte-eslint-parser",
+      parser: 'svelte-eslint-parser',
       parserOptions: {
-        parser: "@typescript-eslint/parser",
+        parser: '@typescript-eslint/parser',
       },
       rules: {
         'import/first': 0,
