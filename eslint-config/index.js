@@ -186,8 +186,7 @@ module.exports = {
     },
     {
       files: ['*.svelte'],
-      plugins: ['svelte3'],
-      processor: 'svelte3/svelte3',
+      extends: ['plugin:svelte/all'],
       rules: {
         'import/first': 0,
         'import/no-duplicates': 0,
