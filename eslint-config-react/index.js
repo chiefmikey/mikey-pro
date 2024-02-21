@@ -60,4 +60,35 @@ module.exports = {
       version: 'detect',
     },
   },
+  overrides: [
+    {
+      extends: [
+        'plugin:@typescript-eslint/recommended',
+        'plugin:@typescript-eslint/recommended-requiring-type-checking',
+      ],
+      files: ['*.ts', '*.tsx'],
+      parser: '@typescript-eslint/parser',
+      parserOptions: {
+        ecmaFeatures: {
+          jsx: true,
+        },
+        ecmaVersion: 'latest',
+        extraFileExtensions: ['.vue', '.svelte'],
+        sourceType: 'module',
+        project: 'tsconfig.json',
+        tsconfigRootDir: path.join(__dirname, '../../..'),
+      },
+      plugins: ['@typescript-eslint'],
+      rules: {
+        '@typescript-eslint/unbound-method': 0,
+        '@typescript-eslint/naming-convention': 0,
+        'import/default': 0,
+        'import/named': 0,
+        'import/namespace': 0,
+        'import/no-named-as-default-member': 0,
+        'import/no-unresolved': 0,
+        'prettier/prettier': [1, { parser: 'typescript' }],
+      },
+    },
+  ],
 };
