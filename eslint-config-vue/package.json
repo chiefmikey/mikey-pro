@@ -1,8 +1,14 @@
 {
-  "name": "@mikey-pro/prettier-config",
+  "name": "@mikey-pro/eslint-config-vue",
   "version": "6.6.5",
-  "description": "Mikey Pro Prettier configuration",
+  "description": "Mikey Pro ESLint Vue configuration",
   "main": "index.js",
+  "dependencies": {
+    "@babel/plugin-transform-react-jsx": "^7.23.4",
+    "@vue/babel-plugin-jsx": "^1.2.1",
+    "eslint-plugin-vue": "^9.21",
+    "vue-eslint-parser": "^9.4"
+  },
   "files": [
     "index.js",
     "README.md",
@@ -18,18 +24,21 @@
   },
   "license": "MIT",
   "keywords": [
-    "@mikey-pro/prettier-config",
+    "@mikey-pro/eslint-config",
     "@mikey-pro",
     "mikey-pro",
     "mikey",
     "pro",
-    "prettier-config",
-    "prettierconfig",
-    "prettier",
+    "eslint-config",
+    "eslintconfig",
+    "eslint",
     "config",
     "style-guide",
     "style",
     "guide"
   ],
-  "author": "Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)"
+  "author": "Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)",
+  "browserslist": [
+    "defaults"
+  ]
 }

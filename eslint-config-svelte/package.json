@@ -1,8 +1,13 @@
 {
-  "name": "@mikey-pro/prettier-config",
+  "name": "@mikey-pro/eslint-config-svelte",
   "version": "6.6.5",
-  "description": "Mikey Pro Prettier configuration",
+  "description": "Mikey Pro ESLint Svelte configuration",
   "main": "index.js",
+  "dependencies": {
+    "eslint-plugin-svelte": "^2.35.1",
+    "svelte": "^4.2.10",
+    "svelte-eslint-parser": "^0.33.1"
+  },
   "files": [
     "index.js",
     "README.md",
@@ -18,18 +23,21 @@
   },
   "license": "MIT",
   "keywords": [
-    "@mikey-pro/prettier-config",
+    "@mikey-pro/eslint-config",
     "@mikey-pro",
     "mikey-pro",
     "mikey",
     "pro",
-    "prettier-config",
-    "prettierconfig",
-    "prettier",
+    "eslint-config",
+    "eslintconfig",
+    "eslint",
     "config",
     "style-guide",
     "style",
     "guide"
   ],
-  "author": "Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)"
+  "author": "Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)",
+  "browserslist": [
+    "defaults"
+  ]
 }
