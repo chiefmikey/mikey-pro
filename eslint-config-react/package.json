@@ -5,7 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "@babel/preset-react": "^7.23.3",
-    "eslint-config-react-app-bump": "^1.0.21"
+    "eslint-config-react-app-bump": "^1.0.22"
   },
   "files": [
     "index.js",
