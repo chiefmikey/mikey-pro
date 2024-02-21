@@ -1,6 +1,6 @@
 {
   "name": "@mikey-pro/eslint-config",
-  "version": "7.0.0",
+  "version": "7.0.1",
   "description": "Mikey Pro ESLint configuration",
   "main": "index.js",
   "dependencies": {
@@ -12,8 +12,8 @@
     "@cypress/eslint-plugin-json": "^3.2.3",
     "@html-eslint/eslint-plugin": "^0.23.1",
     "@html-eslint/parser": "^0.23.0",
-    "@typescript-eslint/eslint-plugin": "^6.21.0",
-    "@typescript-eslint/parser": "^6.21.0",
+    "@typescript-eslint/eslint-plugin": "^7.0.2",
+    "@typescript-eslint/parser": "^7.0.2",
     "eslint-config-prettier": "^9.1",
     "eslint-config-react-app-bump": "^1.0.21",
     "eslint-import-resolver-typescript": "^3.6.1",
@@ -21,7 +21,7 @@
     "eslint-plugin-css-modules": "^2.12",
     "eslint-plugin-cypress": "^2.15.1",
     "eslint-plugin-disable-autofix": "^4.2.0",
-    "eslint-plugin-jest": "^27.6.3",
+    "eslint-plugin-jest": "^27.9.0",
     "eslint-plugin-jsonc": "^2.13.0",
     "eslint-plugin-markdownlint": "^0.5.0",
     "eslint-plugin-n": "^16.6.2",
