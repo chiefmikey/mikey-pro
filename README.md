@@ -20,11 +20,9 @@ _A curated compilation of packages, plugins, style guides, custom configurations
   <tbody>
     <tr>
       <td valign="top">
-        TypeScript
-        <br>
         JavaScript
         <br>
-        Markdown
+        TypeScript
         <br>
         HTML
         <br>
@@ -33,6 +31,10 @@ _A curated compilation of packages, plugins, style guides, custom configurations
         SCSS
         <br>
         LESS
+        <br>
+        Markdown
+        <br>
+        YAML
         <br>
         JSON
         <br>
@@ -43,8 +45,6 @@ _A curated compilation of packages, plugins, style guides, custom configurations
       <td valign="top">
         React
         <br>
-        Preact
-        <br>
         Svelte
         <br>
         Vue
@@ -54,6 +54,7 @@ _A curated compilation of packages, plugins, style guides, custom configurations
         Cypress
       </td>
     </tr>
+
   </tbody>
 </table>
 </div>
