@@ -80,7 +80,7 @@ npm i -D mikey-pro
 
 ### Configuration
 
-Add bundled configs to `package.json` and then reload
+Add bundled configs to `package.json`
 
 ```json
 {
@@ -101,7 +101,7 @@ Each framework configuration extends the base `@mikey-pro/eslint-config`
 #### React
 
 ```shell
-npm i -D mikey-pro @mikey-pro-react
+npm i -D mikey-pro @mikey-pro/eslint-config-react
 ```
 
 ```json
@@ -115,7 +115,7 @@ npm i -D mikey-pro @mikey-pro-react
 #### Svelte
 
 ```shell
-npm i -D mikey-pro @mikey-pro-svelte
+npm i -D mikey-pro @mikey-pro/eslint-config-svelte
 ```
 
 ```json
@@ -132,7 +132,7 @@ Extension</a>
 #### Vue
 
 ```shell
-npm i -D mikey-pro @mikey-pro-vue
+npm i -D mikey-pro @mikey-pro/eslint-config-vue
 ```
 
 ```json
