@@ -68,10 +68,6 @@ Install extensions:
 <a href="https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint">Stylelint</a>
 
 Additional support:
-<a href="https://marketplace.visualstudio.com/items?itemName=octref.vetur">Vetur</a>
-|
-<a href="https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode">Svelte</a>
-|
 <a href="https://marketplace.visualstudio.com/items?itemName=timonwong.shellcheck">ShellCheck</a>
 
 ## Usage
@@ -82,7 +78,7 @@ Additional support:
 npm i -D mikey-pro
 ```
 
-### Configure
+### Configuration
 
 Add bundled configs to `package.json` and then reload
 
@@ -97,3 +93,55 @@ Add bundled configs to `package.json` and then reload
   }
 }
 ```
+
+### Frameworks
+
+Each framework configuration extends the base `@mikey-pro/eslint-config`
+
+#### React
+
+```shell
+npm i -D mikey-pro @mikey-pro-react
+```
+
+```json
+{
+  "eslintConfig": {
+    "extends": "@mikey-pro/eslint-config-react"
+  }
+}
+```
+
+#### Svelte
+
+```shell
+npm i -D mikey-pro @mikey-pro-svelte
+```
+
+```json
+{
+  "eslintConfig": {
+    "extends": "@mikey-pro/eslint-config-svelte"
+  }
+}
+```
+
+<a href="https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode">Svelte
+Extension</a>
+
+#### Vue
+
+```shell
+npm i -D mikey-pro @mikey-pro-vue
+```
+
+```json
+{
+  "eslintConfig": {
+    "extends": "@mikey-pro/eslint-config-vue"
+  }
+}
+```
+
+<a href="https://marketplace.visualstudio.com/items?itemName=octref.vetur">Vetur
+Extension</a>
