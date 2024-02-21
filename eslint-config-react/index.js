@@ -1,10 +1,16 @@
 const path = require('node:path');
 
+const baseConfig = require('@mikey-pro/eslint-config');
+
 module.exports = {
-  extends: ['@mikey-pro/eslint-config', 'react-app-bump'],
+  ...baseConfig,
+  extends: [...baseConfig.extends, 'react-app-bump'],
   parserOptions: {
+    ...baseConfig.parserOptions,
     babelOptions: {
+      ...baseConfig.parserOptions.babelOptions,
       presets: [
+        ...baseConfig.parserOptions.babelOptions.presets,
         [
           '@babel/preset-react',
           {
@@ -15,6 +21,7 @@ module.exports = {
     },
   },
   rules: {
+    ...baseConfig.rules,
     'react/display-name': [1, { ignoreTranspilerName: false }],
     'react/function-component-definition': [
       0,
@@ -56,46 +63,9 @@ module.exports = {
     'react/state-in-constructor': 0,
   },
   settings: {
+    ...baseConfig.settings,
     react: {
       version: 'detect',
     },
   },
-  overrides: [
-    {
-      extends: [
-        'plugin:@typescript-eslint/recommended',
-        'plugin:@typescript-eslint/recommended-requiring-type-checking',
-        'plugin:import/typescript',
-      ],
-      files: ['*.ts', '*.tsx'],
-      parser: '@typescript-eslint/parser',
-      parserOptions: {
-        ecmaFeatures: {
-          jsx: true,
-        },
-        ecmaVersion: 'latest',
-        extraFileExtensions: ['.vue', '.svelte'],
-        sourceType: 'module',
-        project: 'tsconfig.json',
-        tsconfigRootDir: path.join(__dirname, '../../..'),
-      },
-      plugins: ['@typescript-eslint'],
-      rules: {
-        '@typescript-eslint/unbound-method': 0,
-        '@typescript-eslint/naming-convention': 0,
-
-        'prettier/prettier': [1, { parser: 'typescript' }],
-      },
-      settings: {
-        'import/parsers': {
-          '@typescript-eslint/parser': ['.ts', '.tsx'],
-        },
-        'import/resolver': {
-          typescript: {
-            alwaysTryTypes: true,
-          },
-        },
-      },
-    },
-  ],
 };
