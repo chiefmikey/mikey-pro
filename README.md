@@ -57,6 +57,7 @@ _A curated compilation of packages, plugins, style guides, custom configurations
   </tbody>
 </table>
 </div>
+
 ## Requirements
 
 Install extensions:
