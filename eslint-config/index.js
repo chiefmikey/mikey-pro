@@ -89,9 +89,9 @@ module.exports = {
       },
     },
     {
-      extends: ['plugin:yaml/recommended'],
+      extends: ['plugin:yml/standard'],
       files: ['*.yaml', '*.yml'],
-      plugins: ['yaml'],
+      parser: 'yaml-eslint-parser',
       rules: {
         'prettier/prettier': [1, { parser: 'yaml' }],
       },
