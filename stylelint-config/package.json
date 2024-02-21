@@ -3,6 +3,9 @@
   "version": "7.0.0",
   "description": "Mikey Pro Stylelint configuration",
   "main": "index.js",
+  "dependencies": {
+    "stylelint-config-standard-scss": "^13.0.0"
+  },
   "files": [
     "index.js",
     "README.md",
