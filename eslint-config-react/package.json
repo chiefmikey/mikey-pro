@@ -1,6 +1,6 @@
 {
   "name": "@mikey-pro/eslint-config-react",
-  "version": "7.0.0",
+  "version": "7.0.3",
   "description": "Mikey Pro ESLint React configuration",
   "main": "index.js",
   "dependencies": {
