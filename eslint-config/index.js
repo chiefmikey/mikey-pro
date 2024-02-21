@@ -94,7 +94,7 @@ module.exports = {
       parser: 'yaml-eslint-parser',
       rules: {
         'yml/quotes': [1, { prefer: 'double', avoidEscape: true }],
-        'prettier/prettier': 0,
+        'prettier/prettier': [1, { parser: 'yaml', singleQuote: false }],
       },
     },
     {
