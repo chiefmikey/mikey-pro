@@ -1,6 +1,6 @@
 {
   "name": "@mikey-pro/eslint-config-svelte",
-  "version": "6.6.5",
+  "version": "7.0.0",
   "description": "Mikey Pro ESLint Svelte configuration",
   "main": "index.js",
   "dependencies": {
