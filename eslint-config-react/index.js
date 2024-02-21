@@ -65,6 +65,7 @@ module.exports = {
       extends: [
         'plugin:@typescript-eslint/recommended',
         'plugin:@typescript-eslint/recommended-requiring-type-checking',
+        'plugin:import/typescript',
       ],
       files: ['*.ts', '*.tsx'],
       parser: '@typescript-eslint/parser',
@@ -82,12 +83,18 @@ module.exports = {
       rules: {
         '@typescript-eslint/unbound-method': 0,
         '@typescript-eslint/naming-convention': 0,
-        'import/default': 0,
-        'import/named': 0,
-        'import/namespace': 0,
-        'import/no-named-as-default-member': 0,
-        'import/no-unresolved': 0,
+
         'prettier/prettier': [1, { parser: 'typescript' }],
+      },
+      settings: {
+        'import/parsers': {
+          '@typescript-eslint/parser': ['.ts', '.tsx'],
+        },
+        'import/resolver': {
+          typescript: {
+            alwaysTryTypes: true,
+          },
+        },
       },
     },
   ],
