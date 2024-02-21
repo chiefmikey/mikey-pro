@@ -1,8 +1,11 @@
 const path = require('node:path');
 
+const baseConfig = require('@mikey-pro/eslint-config');
+
 module.exports = {
-  extends: ['@mikey-pro/eslint-config'],
+  ...baseConfig,
   overrides: [
+    ...baseConfig.overrides,
     {
       extends: ['plugin:vue/vue3-recommended'],
       files: ['*.vue'],
