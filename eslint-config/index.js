@@ -93,7 +93,8 @@ module.exports = {
       files: ['*.yaml', '*.yml'],
       parser: 'yaml-eslint-parser',
       rules: {
-        'prettier/prettier': [1, { parser: 'yaml' }],
+        'yml/quotes': [1, { prefer: 'double', avoidEscape: true }],
+        'prettier/prettier': 0,
       },
     },
     {
