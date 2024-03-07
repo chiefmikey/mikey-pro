@@ -1,11 +1,11 @@
 {
   "name": "@mikey-pro/eslint-config-react",
-  "version": "7.1.0",
+  "version": "7.2.0",
   "description": "Mikey Pro ESLint React configuration",
   "main": "index.js",
   "dependencies": {
     "@babel/preset-react": "^7.23.3",
-    "eslint-config-react-app-bump": "^1.0.22"
+    "eslint-config-react-app-bump": "^1.0.25"
   },
   "files": [
     "index.js",
