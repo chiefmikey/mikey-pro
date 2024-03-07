@@ -1,5 +1,3 @@
-const path = require('node:path');
-
 const baseConfig = require('@mikey-pro/eslint-config');
 
 module.exports = {
@@ -39,15 +37,15 @@ module.exports = {
         sourceType: 'module',
       },
       rules: {
-        'prettier/prettier': 1,
+        'prettier/prettier': 'warn',
         'vue/component-tags-order': [
-          1,
+          'warn',
           {
             order: [['script', 'template'], 'style'],
           },
         ],
         'vue/html-self-closing': [
-          1,
+          'warn',
           {
             html: {
               component: 'always',

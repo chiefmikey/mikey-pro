@@ -1,5 +1,3 @@
-const path = require('node:path');
-
 const baseConfig = require('@mikey-pro/eslint-config');
 
 module.exports = {
@@ -14,11 +12,11 @@ module.exports = {
         parser: '@typescript-eslint/parser',
       },
       rules: {
-        'import/first': 0,
-        'import/no-duplicates': 0,
-        'import/no-mutable-exports': 0,
-        'import/no-unresolved': 0,
-        'prettier/prettier': 0,
+        'import/first': 'off',
+        'import/no-duplicates': 'off',
+        'import/no-mutable-exports': 'off',
+        'import/no-unresolved': 'off',
+        'prettier/prettier': 'off',
       },
     },
   ],

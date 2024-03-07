@@ -1,5 +1,3 @@
-const path = require('node:path');
-
 const baseConfig = require('@mikey-pro/eslint-config');
 
 module.exports = {
@@ -22,37 +20,37 @@ module.exports = {
   },
   rules: {
     ...baseConfig.rules,
-    'react/display-name': [1, { ignoreTranspilerName: false }],
+    'react/display-name': ['warn', { ignoreTranspilerName: false }],
     'react/function-component-definition': [
-      0,
+      'off',
       { namedComponents: 'arrow-function' },
     ],
-    'react/jsx-curly-spacing': 1,
-    'react/jsx-key': [1, { checkFragmentShorthand: true }],
+    'react/jsx-curly-spacing': 'warn',
+    'react/jsx-key': ['warn', { checkFragmentShorthand: true }],
     'react/jsx-no-bind': [
-      1,
+      'warn',
       {
         allowArrowFunctions: true,
         allowFunctions: true,
         ignoreRefs: true,
       },
     ],
-    'react/jsx-no-comment-textnodes': 1,
-    'react/jsx-no-duplicate-props': 1,
-    'react/jsx-no-target-blank': 1,
-    'react/jsx-no-undef': 1,
-    'react/jsx-tag-spacing': [1, { beforeSelfClosing: 'always' }],
-    'react/jsx-uses-vars': 1,
-    'react/no-danger': 1,
-    'react/no-deprecated': 1,
-    'react/no-did-mount-set-state': 1,
-    'react/no-did-update-set-state': 1,
-    'react/no-find-dom-node': 1,
-    'react/no-is-mounted': 1,
-    'react/no-string-refs': 1,
-    'react/prefer-es6-class': 1,
-    'react/prefer-stateless-function': 1,
-    'react/require-render-return': 1,
+    'react/jsx-no-comment-textnodes': 'warn',
+    'react/jsx-no-duplicate-props': 'warn',
+    'react/jsx-no-target-blank': 'warn',
+    'react/jsx-no-undef': 'warn',
+    'react/jsx-tag-spacing': ['warn', { beforeSelfClosing: 'always' }],
+    'react/jsx-uses-vars': 'warn',
+    'react/no-danger': 'warn',
+    'react/no-deprecated': 'warn',
+    'react/no-did-mount-set-state': 'warn',
+    'react/no-did-update-set-state': 'warn',
+    'react/no-find-dom-node': 'warn',
+    'react/no-is-mounted': 'warn',
+    'react/no-string-refs': 'warn',
+    'react/prefer-es6-class': 'warn',
+    'react/prefer-stateless-function': 'warn',
+    'react/require-render-return': 'warn',
     'react/self-closing-comp': [
       'error',
       {
@@ -60,7 +58,7 @@ module.exports = {
         html: false,
       },
     ],
-    'react/state-in-constructor': 0,
+    'react/state-in-constructor': 'off',
   },
   settings: {
     ...baseConfig.settings,
