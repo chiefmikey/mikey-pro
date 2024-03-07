@@ -1,12 +1,12 @@
 {
   "name": "@mikey-pro/eslint-config-vue",
-  "version": "7.1.0",
+  "version": "7.2.0",
   "description": "Mikey Pro ESLint Vue configuration",
   "main": "index.js",
   "dependencies": {
     "@babel/plugin-transform-react-jsx": "^7.23.4",
     "@vue/babel-plugin-jsx": "^1.2.1",
-    "eslint-plugin-vue": "^9.21",
+    "eslint-plugin-vue": "^9.22",
     "vue-eslint-parser": "^9.4"
   },
   "files": [
