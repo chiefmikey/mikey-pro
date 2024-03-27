@@ -4,7 +4,7 @@
   "description": "Mikey Pro ESLint React configuration",
   "main": "index.js",
   "dependencies": {
-    "@babel/preset-react": "^7.23.3",
+    "@babel/preset-react": "^7.24.1",
     "eslint-config-react-app-bump": "^1.0.25"
   },
   "files": [
