@@ -5,8 +5,8 @@
   "main": "index.js",
   "dependencies": {
     "@babel/plugin-transform-react-jsx": "^7.23.4",
-    "@vue/babel-plugin-jsx": "^1.2.1",
-    "eslint-plugin-vue": "^9.22",
+    "@vue/babel-plugin-jsx": "^1.2.2",
+    "eslint-plugin-vue": "^9.24",
     "vue-eslint-parser": "^9.4"
   },
   "files": [
