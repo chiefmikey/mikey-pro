@@ -406,6 +406,8 @@ module.exports = {
       },
     ],
     'unicorn/import-index': ['warn', { ignoreImports: true }],
+    '@cypress/json/json-with-comments':
+      '[**/tsconfig.json, .vscode/**, **/cypress.json, **/cypress.jsonc, **/cypress.json5]',
   },
   settings: {
     polyfills: ['Promise'],
