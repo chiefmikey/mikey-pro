@@ -2,14 +2,22 @@ const baseConfig = require('@mikey-pro/eslint-config');
 
 module.exports = {
   ...baseConfig,
+  parserOptions: {
+    ...baseConfig.parserOptions,
+    extraFileExtensions: ['.svelte'],
+  },
+  extends: [...baseConfig.extends, 'plugin:svelte/all'],
   overrides: [
     ...baseConfig.overrides,
     {
       files: ['*.svelte'],
-      extends: ['plugin:svelte/all'],
       parser: 'svelte-eslint-parser',
       parserOptions: {
-        parser: '@typescript-eslint/parser',
+        parser: {
+          js: '@babel/eslint-parser',
+          ts: '@typescript-eslint/parser',
+          typescript: '@typescript-eslint/parser',
+        },
       },
       rules: {
         'import/first': 'off',
