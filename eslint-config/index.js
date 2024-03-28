@@ -120,7 +120,6 @@ module.exports = {
         'prettier/prettier': ['warn', { parser: 'json' }],
       },
       settings: {
-        'json/json-with-comments-files': [],
         'json/package-json-sort-order': [
           'name',
           'version',
@@ -406,10 +405,9 @@ module.exports = {
       },
     ],
     'unicorn/import-index': ['warn', { ignoreImports: true }],
-    '@cypress/json/json-with-comments':
-      '[**/tsconfig.json, .vscode/**, **/cypress.json, **/cypress.jsonc, **/cypress.json5]',
   },
   settings: {
+    'json/json-with-comments-files': [],
     polyfills: ['Promise'],
     jest: {
       version: 29,
