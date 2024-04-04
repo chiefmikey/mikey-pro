@@ -144,5 +144,5 @@ npm i -D mikey-pro @mikey-pro/eslint-config-vue
 }
 ```
 
-<a href="https://marketplace.visualstudio.com/items?itemName=octref.vetur">Vetur
+<a href="https://marketplace.visualstudio.com/items?itemName=Vue.volar">Vue
 Extension</a>
