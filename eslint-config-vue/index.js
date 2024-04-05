@@ -37,7 +37,7 @@ module.exports = {
         sourceType: 'module',
       },
       rules: {
-        'prettier/prettier': 'warn',
+        'prettier/prettier': ['warn', { parser: 'vue' }],
         'vue/component-tags-order': [
           'warn',
           {
@@ -56,6 +56,7 @@ module.exports = {
             svg: 'always',
           },
         ],
+        'vue/singleline-html-element-content-newline': 'off',
       },
     },
   ],
