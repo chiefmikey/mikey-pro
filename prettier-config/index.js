@@ -17,4 +17,5 @@ module.exports = {
 
   // Vue
   vueIndentScriptAndStyle: false,
+  singleAttributePerLine: true,
 };
