@@ -1,6 +1,6 @@
 {
   "name": "@mikey-pro/prettier-config",
-  "version": "7.2.1",
+  "version": "7.2.5",
   "description": "Mikey Pro Prettier configuration",
   "main": "index.js",
   "files": [
