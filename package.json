@@ -1,11 +1,11 @@
 {
   "name": "mikey-pro",
-  "version": "7.3.0",
+  "version": "7.3.1",
   "description": "Mikey Pro Style Guide",
   "dependencies": {
-    "@mikey-pro/eslint-config": "^7.2.4",
+    "@mikey-pro/eslint-config": "^7.3.1",
     "@mikey-pro/prettier-config": "^7.2.5",
-    "@mikey-pro/stylelint-config": "^7.3.0",
+    "@mikey-pro/stylelint-config": "^7.3.1",
     "eslint": "^8.57.0",
     "prettier": "^3.2.5",
     "stylelint": "^16.3.1"
