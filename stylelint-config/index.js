@@ -1,5 +1,9 @@
 module.exports = {
-  extends: ['stylelint-config-standard', 'stylelint-config-standard-scss'],
+  extends: [
+    'stylelint-config-standard',
+    'stylelint-config-standard-scss',
+    'stylelint-config-recommended-vue',
+  ],
   ignoreFiles: [
     '**/*.js',
     '**/*.cjs',
@@ -8,4 +12,7 @@ module.exports = {
     '**/*.json',
     '**/*.pi',
   ],
+  rules: {
+    'custom-property-pattern': '^--[a-zA-Z0-9-]+[a-zA-Z0-9-]+$',
+  },
 };
