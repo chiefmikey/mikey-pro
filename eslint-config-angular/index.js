@@ -54,7 +54,7 @@ module.exports = {
             parser: 'angular',
           },
         ],
-        '@angular-eslint/template/alt-text': 'error',
+        '@angular-eslint/template/alt-text': 'warn',
       },
     },
   ],
