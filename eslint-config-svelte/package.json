@@ -1,11 +1,11 @@
 {
   "name": "@mikey-pro/eslint-config-svelte",
-  "version": "7.2.2",
+  "version": "7.4.0",
   "description": "Mikey Pro ESLint Svelte configuration",
   "main": "index.js",
   "dependencies": {
-    "eslint-plugin-svelte": "^2.35.1",
-    "svelte-eslint-parser": "^0.33.1"
+    "eslint-plugin-svelte": "^2.37.0",
+    "svelte-eslint-parser": "^0.34.1"
   },
   "files": [
     "index.js",
