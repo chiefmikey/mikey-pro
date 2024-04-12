@@ -13,8 +13,8 @@ module.exports = {
     'plugin:unicorn/all',
     'plugin:compat/recommended',
     'plugin:css-modules/recommended',
-    'plugin:prettier/recommended',
     'plugin:import/recommended',
+    'plugin:prettier/recommended',
   ],
   ignorePatterns: [
     '**/dist/**/*',
@@ -35,12 +35,12 @@ module.exports = {
   ],
   overrides: [
     {
+      files: ['*.ts', '*.tsx'],
       extends: [
-        'plugin:@typescript-eslint/recommended',
+        'plugin:@typescript-eslint/all',
         'plugin:@typescript-eslint/recommended-requiring-type-checking',
         'plugin:import/typescript',
       ],
-      files: ['*.ts', '*.tsx'],
       parser: '@typescript-eslint/parser',
       parserOptions: {
         ecmaFeatures: {
