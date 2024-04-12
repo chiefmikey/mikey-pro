@@ -14,7 +14,7 @@ module.exports = {
         'plugin:@typescript-eslint/recommended-requiring-type-checking',
         'plugin:import/typescript',
         'plugin:@angular-eslint/all',
-        'plugin:@angular-eslint/template/all',
+        'plugin:@angular-eslint/template/process-inline-templates',
       ],
       parserOptions: {
         project: 'tsconfig.json',
@@ -54,6 +54,7 @@ module.exports = {
             parser: 'angular',
           },
         ],
+        '@angular-eslint/template/alt-text': 'error',
       },
     },
   ],
