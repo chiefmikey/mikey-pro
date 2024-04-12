@@ -1,6 +1,6 @@
 {
   "name": "@mikey-pro/eslint-config-angular",
-  "version": "7.4.3",
+  "version": "7.4.4",
   "description": "Mikey Pro ESLint Angular configuration",
   "main": "index.js",
   "dependencies": {
