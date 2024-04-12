@@ -53,7 +53,7 @@ module.exports = {
             overrides: {
               accessors: 'explicit',
               constructors: 'no-public',
-              methods: 'explicit',
+              methods: 'no-public',
               properties: 'off',
               parameterProperties: 'explicit',
             },
