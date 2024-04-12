@@ -36,7 +36,7 @@ module.exports = {
     {
       files: ['*.html'],
       excludedFiles: ['*inline-template-*.component.html'],
-      extends: ['plugin:@angular-eslint/template/all', 'plugin:prettier/all'],
+      extends: ['plugin:@angular-eslint/template/all', 'plugin:prettier/recommended'],
       rules: {
         'prettier/prettier': [
           'warn',
