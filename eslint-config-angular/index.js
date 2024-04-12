@@ -46,6 +46,10 @@ module.exports = {
         '@typescript-eslint/no-unnecessary-condition': 'off',
         '@typescript-eslint/prefer-nullish-coalescing': 'off',
         '@typescript-eslint/strict-boolean-expressions': 'off',
+        '@typescript-eslint/consistent-type-imports': [
+          'warn',
+          { fixStyle: 'inline-type-imports' },
+        ],
         '@typescript-eslint/explicit-member-accessibility': [
           'warn',
           {
