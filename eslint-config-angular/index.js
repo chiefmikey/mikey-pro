@@ -13,6 +13,10 @@ module.exports = {
         'plugin:@angular-eslint/all',
         'plugin:@angular-eslint/template/all',
       ],
+      parserOptions: {
+        project: 'tsconfig.json',
+        tsconfigRootDir: path.join(__dirname, '../../..'),
+      },
       rules: {
         '@angular-eslint/directive-selector': [
           'warn',
@@ -36,7 +40,10 @@ module.exports = {
     {
       files: ['*.html'],
       excludedFiles: ['*inline-template-*.component.html'],
-      extends: ['plugin:@angular-eslint/template/all', 'plugin:prettier/recommended'],
+      extends: [
+        'plugin:@angular-eslint/template/all',
+        'plugin:prettier/recommended',
+      ],
       rules: {
         'prettier/prettier': [
           'warn',
