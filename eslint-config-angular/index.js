@@ -8,6 +8,7 @@ module.exports = {
     ...baseConfig.overrides,
     {
       files: ['*.ts'],
+      parser: '@typescript-eslint/parser',
       extends: [
         'plugin:@typescript-eslint/all',
         'plugin:@typescript-eslint/recommended-requiring-type-checking',
