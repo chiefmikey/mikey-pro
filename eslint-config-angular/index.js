@@ -37,6 +37,8 @@ module.exports = {
             style: 'kebab-case',
           },
         ],
+        '@angular-eslint/prefer-standalone': 'off',
+        '@angular-eslint/prefer-standalone-component': 'off',
         'prettier/prettier': ['warn', { parser: 'angular' }],
       },
     },
