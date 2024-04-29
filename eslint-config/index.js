@@ -34,7 +34,7 @@ module.exports = {
     'LICENSE',
     'CNAME',
   ],
-  overrides: [...overrides],
+  overrides: [...overrides.base],
   parser: '@babel/eslint-parser',
   parserOptions: {
     babelOptions: {

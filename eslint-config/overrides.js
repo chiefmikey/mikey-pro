@@ -262,7 +262,7 @@ const cypress = {
   extends: ['plugin:cypress/recommended'],
 };
 
-module.exports = {
+const all = {
   ts,
   css,
   scss,
@@ -278,4 +278,28 @@ module.exports = {
   jestJs,
   jestTs,
   cypress,
+};
+
+const base = {
+  ts,
+  css,
+  scss,
+  less,
+  yaml,
+  toml,
+  md,
+  packageJson,
+  mdJson,
+  html,
+  jsonc,
+  json5,
+  jestJs,
+  jestTs,
+  cypress,
+};
+
+module.exports = {
+  ...all,
+  all: Object.values(all),
+  base: Object.values(base),
 };
