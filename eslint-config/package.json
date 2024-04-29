@@ -36,6 +36,7 @@
   },
   "files": [
     "index.js",
+    "overrides.js",
     "README.md",
     "LICENSE"
   ],

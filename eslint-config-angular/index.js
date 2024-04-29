@@ -1,34 +1,19 @@
-const path = require('node:path');
-
 const baseConfig = require('@mikey-pro/eslint-config');
+const overrides = require('@mikey-pro/eslint-config/overrides');
 
 module.exports = {
   ...baseConfig,
   overrides: [
     ...baseConfig.overrides,
     {
-      files: ['*.ts'],
-      parser: '@typescript-eslint/parser',
+      ...overrides.ts,
       extends: [
-        'plugin:@typescript-eslint/all',
-        'plugin:@typescript-eslint/recommended-requiring-type-checking',
-        'plugin:import/typescript',
+        ...overrides.ts.extends,
         'plugin:@angular-eslint/all',
         'plugin:@angular-eslint/template/process-inline-templates',
       ],
-      parserOptions: {
-        project: 'tsconfig.json',
-        tsconfigRootDir: path.join(__dirname, '../../..'),
-      },
       rules: {
-        '@angular-eslint/directive-selector': [
-          'warn',
-          {
-            type: 'attribute',
-            prefix: 'app',
-            style: 'camelCase',
-          },
-        ],
+        ...overrides.ts.rules,
         '@angular-eslint/component-selector': [
           'warn',
           {
@@ -37,59 +22,32 @@ module.exports = {
             style: 'kebab-case',
           },
         ],
-        '@angular-eslint/prefer-standalone': 'off',
-        '@angular-eslint/prefer-standalone-component': 'off',
         '@angular-eslint/consistent-component-styles': 'off',
-        '@angular-eslint/prefer-on-push-component-change-detection': 'off',
-        '@typescript-eslint/prefer-readonly-parameter-types': 'off',
-        '@typescript-eslint/parameter-properties': 'off',
-        '@typescript-eslint/prefer-readonly': 'off',
-        '@typescript-eslint/no-unnecessary-condition': 'off',
-        '@typescript-eslint/prefer-nullish-coalescing': 'off',
-        '@typescript-eslint/strict-boolean-expressions': 'off',
-        '@typescript-eslint/class-methods-use-this': 'off',
-        '@typescript-eslint/consistent-type-imports': [
-          'warn',
-          { fixStyle: 'inline-type-imports' },
-        ],
-        '@typescript-eslint/explicit-member-accessibility': [
+        '@angular-eslint/directive-selector': [
           'warn',
           {
-            accessibility: 'explicit',
-            overrides: {
-              accessors: 'explicit',
-              constructors: 'no-public',
-              methods: 'no-public',
-              properties: 'off',
-              parameterProperties: 'explicit',
-            },
+            type: 'attribute',
+            prefix: 'app',
+            style: 'camelCase',
           },
         ],
+        '@angular-eslint/prefer-on-push-component-change-detection': 'off',
+        '@angular-eslint/prefer-standalone': 'off',
+        '@angular-eslint/prefer-standalone-component': 'off',
         'prettier/prettier': ['warn', { parser: 'typescript' }],
       },
     },
     {
-      files: ['*.html'],
+      ...overrides.html,
       extends: [
-        'plugin:@html-eslint/recommended',
+        ...overrides.html.extends,
         'plugin:@angular-eslint/template/recommended',
         'plugin:@angular-eslint/template/accessibility',
-        'plugin:prettier/recommended',
       ],
       parser: '@angular-eslint/template-parser',
-      plugins: ['@html-eslint'],
       rules: {
-        '@html-eslint/indent': 'off',
-        '@html-eslint/no-extra-spacing-attrs': 'off',
-        '@html-eslint/require-closing-tags': 'off',
-        '@html-eslint/element-newline': 'off',
-        'disable-autofix/@html-eslint/require-closing-tags': [
-          'warn',
-          { selfClosing: 'always' },
-        ],
-        'spaced-comment': 'off',
+        ...overrides.html.rules,
         '@angular-eslint/template/alt-text': 'warn',
-        strict: 'off',
         'prettier/prettier': [
           'warn',
           {
