@@ -6,9 +6,9 @@
     "@mikey-pro/eslint-config": "^7.5.2",
     "@mikey-pro/prettier-config": "^7.2.5",
     "@mikey-pro/stylelint-config": "^7.3.1",
-    "eslint": "^8.57.0",
+    "eslint": "^9.2.0",
     "prettier": "^3.2.5",
-    "stylelint": "^16.4.0"
+    "stylelint": "^16.5.0"
   },
   "files": [
     "README.md",
