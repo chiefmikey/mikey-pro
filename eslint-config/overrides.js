@@ -30,7 +30,7 @@ const ts = {
       {
         accessibility: 'explicit',
         overrides: {
-          accessors: 'explicit',
+          accessors: 'off',
           constructors: 'no-public',
           methods: 'explicit',
           properties: 'off',
@@ -251,6 +251,7 @@ const jestTs = {
     jest: true,
   },
   rules: {
+    '@typescript-eslint/no-floating-promises': ['warn', { ignoreVoid: true }],
     'unicorn/no-array-callback-reference': 'off',
     'jest/unbound-method': 'off',
   },
@@ -262,40 +263,51 @@ const cypress = {
   extends: ['plugin:cypress/recommended'],
 };
 
+const tests = {
+  ...ts,
+  files: ['*.spec.ts'],
+  rules: {
+    ...ts.rules,
+    '@typescript-eslint/no-floating-promises': 'off',
+  },
+};
+
 const all = {
-  ts,
+  tests,
+  jestTs,
+  jestJs,
+  cypress,
+  packageJson,
+  mdJson,
   css,
   scss,
   less,
   yaml,
   toml,
   md,
-  packageJson,
-  mdJson,
-  html,
   jsonc,
   json5,
-  jestJs,
-  jestTs,
-  cypress,
+  html,
+  ts,
 };
 
 const base = {
-  ts,
+  tests,
+  jestTs,
+  jestJs,
+  cypress,
+  packageJson,
+  mdJson,
   css,
   scss,
   less,
   yaml,
   toml,
   md,
-  packageJson,
-  mdJson,
-  html,
   jsonc,
   json5,
-  jestJs,
-  jestTs,
-  cypress,
+  html,
+  ts,
 };
 
 module.exports = {
