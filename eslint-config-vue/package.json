@@ -1,6 +1,6 @@
 {
   "name": "@mikey-pro/eslint-config-vue",
-  "version": "7.5.0",
+  "version": "7.5.3",
   "description": "Mikey Pro ESLint Vue configuration",
   "main": "index.js",
   "dependencies": {
