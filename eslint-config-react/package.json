@@ -1,12 +1,12 @@
 {
   "name": "@mikey-pro/eslint-config-react",
-  "version": "8.0.1",
+  "version": "8.0.2",
   "description": "Mikey Pro ESLint React configuration",
   "type": "module",
   "main": "index.js",
   "dependencies": {
     "@babel/preset-react": "^7.26.3",
-    "@mikey-pro/eslint-config": "workspace:^",
+    "@mikey-pro/eslint-config": "workspace:*",
     "eslint-config-react-app-bump": "^1.0.25",
     "eslint-plugin-jest-dom": "^5.5.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
@@ -18,7 +18,7 @@
   },
   "peerDependencies": {
     "@babel/core": "^7.24.0",
-    "@mikey-pro/eslint-config": "workspace:^",
+    "@mikey-pro/eslint-config": "workspace:*",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
     "eslint": "^8.57.0",
