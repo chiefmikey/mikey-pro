@@ -4,8 +4,8 @@
   "description": "Mikey Pro ESLint Svelte configuration",
   "main": "index.js",
   "dependencies": {
-    "eslint-plugin-svelte": "^2.39.0",
-    "svelte-eslint-parser": "^0.36.0"
+    "eslint-plugin-svelte": "^2.46.1",
+    "svelte-eslint-parser": "^0.43.0"
   },
   "files": [
     "index.js",

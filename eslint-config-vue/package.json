@@ -4,9 +4,9 @@
   "description": "Mikey Pro ESLint Vue configuration",
   "main": "index.js",
   "dependencies": {
-    "@babel/plugin-transform-react-jsx": "^7.24.6",
-    "@vue/babel-plugin-jsx": "^1.2.2",
-    "eslint-plugin-vue": "^9.26",
+    "@babel/plugin-transform-react-jsx": "^7.25.9",
+    "@vue/babel-plugin-jsx": "^1.2.5",
+    "eslint-plugin-vue": "^9.32",
     "vue-eslint-parser": "^9.4"
   },
   "files": [
