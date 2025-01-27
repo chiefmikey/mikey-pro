@@ -4,9 +4,9 @@
   "description": "Mikey Pro Stylelint configuration",
   "main": "index.js",
   "dependencies": {
-    "stylelint-config-recommended-vue": "^1.5.0",
-    "stylelint-config-standard": "^36.0.0",
-    "stylelint-config-standard-scss": "^13.1.0"
+    "stylelint-config-recommended-vue": "^1.6.0",
+    "stylelint-config-standard": "^37.0.0",
+    "stylelint-config-standard-scss": "^14.0.0"
   },
   "files": [
     "index.js",
