@@ -1,29 +1,40 @@
-const path = require('node:path');
+import path from 'node:path';
+import typescriptParser from '@typescript-eslint/parser';
+import typeScriptPlugin from '@typescript-eslint/eslint-plugin';
+import importPlugin from 'eslint-plugin-import';
+import markdownPlugin from 'eslint-plugin-markdownlint';
 
 const ts = {
   files: ['*.ts', '*.tsx'],
-  extends: [
-    'plugin:@typescript-eslint/all',
-    'plugin:@typescript-eslint/recommended-requiring-type-checking',
-    'plugin:import/typescript',
-  ],
-  parser: '@typescript-eslint/parser',
-  parserOptions: {
-    ecmaFeatures: {
-      jsx: true,
+  languageOptions: {
+    parser: typescriptParser,
+    parserOptions: {
+      ecmaFeatures: {
+        jsx: true,
+      },
+      ecmaVersion: 'latest',
+      extraFileExtensions: ['.vue', '.svelte'],
+      sourceType: 'module',
+      project: 'tsconfig.json',
+      tsconfigRootDir: path.join(__dirname, '../../..'),
     },
-    ecmaVersion: 'latest',
-    extraFileExtensions: ['.vue', '.svelte'],
-    sourceType: 'module',
-    project: 'tsconfig.json',
-    tsconfigRootDir: path.join(__dirname, '../../..'),
   },
-  plugins: ['@typescript-eslint'],
+  plugins: {
+    '@typescript-eslint': typeScriptPlugin,
+    import: importPlugin,
+  },
   rules: {
+    ...typeScriptPlugin.configs.all.rules,
+    ...typeScriptPlugin.configs['recommended-requiring-type-checking'].rules,
+    ...importPlugin.configs.typescript.rules,
     '@typescript-eslint/class-methods-use-this': 'off',
     '@typescript-eslint/consistent-type-imports': [
-      'warn',
-      { fixStyle: 'inline-type-imports' },
+      'error',
+      {
+        prefer: 'type-imports',
+        fixStyle: 'separate-type-imports',
+        disallowTypeAnnotations: false,
+      },
     ],
     '@typescript-eslint/explicit-member-accessibility': [
       'warn',
@@ -138,9 +149,14 @@ const toml = {
 
 const md = {
   files: ['*.md'],
-  parser: 'eslint-plugin-markdownlint/parser',
-  extends: ['plugin:markdownlint/recommended'],
+  languageOptions: {
+    parser: 'eslint-plugin-markdownlint/parser',
+  },
+  plugins: {
+    markdownlint: markdownPlugin,
+  },
   rules: {
+    ...markdownPlugin.configs.recommended.rules,
     'markdownlint/md033': 'off',
     'markdownlint/md041': 'off',
     'prettier/prettier': ['warn', { parser: 'markdown' }],
@@ -239,6 +255,12 @@ const jestJs = {
   rules: {
     'unicorn/no-array-callback-reference': 'off',
     'jest/unbound-method': 'off',
+    'unicorn/prevent-abbreviations': [
+      'warn',
+      {
+        ignore: [/e2e/],
+      }
+    ],
   },
 };
 
@@ -253,6 +275,12 @@ const jestTs = {
   rules: {
     'unicorn/no-array-callback-reference': 'off',
     'jest/unbound-method': 'off',
+    'unicorn/prevent-abbreviations': [
+      'warn',
+      {
+        ignore: [/e2e/],
+      }
+    ],
   },
 };
 
@@ -262,7 +290,7 @@ const cypress = {
   extends: ['plugin:cypress/recommended'],
 };
 
-const all = {
+export const baseOverrides = [
   ts,
   css,
   scss,
@@ -278,28 +306,4 @@ const all = {
   jestJs,
   jestTs,
   cypress,
-};
-
-const base = {
-  ts,
-  css,
-  scss,
-  less,
-  yaml,
-  toml,
-  md,
-  packageJson,
-  mdJson,
-  html,
-  jsonc,
-  json5,
-  jestJs,
-  jestTs,
-  cypress,
-};
-
-module.exports = {
-  ...all,
-  all: Object.values(all),
-  base: Object.values(base),
-};
+];

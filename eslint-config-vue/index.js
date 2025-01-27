@@ -1,17 +1,16 @@
-const baseConfig = require('@mikey-pro/eslint-config');
+import baseConfig from '@mikey-pro/eslint-config';
+import vuePlugin from 'eslint-plugin-vue';
+import vueRecommended from 'eslint-plugin-vue/lib/configs/vue3-recommended.js';
 
-module.exports = {
+const vueConfig = [
   ...baseConfig,
-  overrides: [
-    ...baseConfig.overrides,
-    {
-      extends: ['plugin:vue/vue3-recommended'],
-      files: ['*.vue'],
+  {
+    files: ['*.vue'],
+    languageOptions: {
       parser: 'vue-eslint-parser',
       parserOptions: {
         babelOptions: {
           plugins: [
-            'eslint-plugin-vue',
             [
               '@babel/plugin-transform-react-jsx',
               {
@@ -36,28 +35,37 @@ module.exports = {
         requireConfigFile: false,
         sourceType: 'module',
       },
-      rules: {
-        'vue/component-tags-order': [
-          'warn',
-          {
-            order: [['script', 'template'], 'style'],
-          },
-        ],
-        'vue/html-self-closing': [
-          'warn',
-          {
-            html: {
-              component: 'always',
-              normal: 'always',
-              void: 'always',
-            },
-            math: 'always',
-            svg: 'always',
-          },
-        ],
-        'vue/singleline-html-element-content-newline': 'off',
-        'prettier/prettier': ['warn', { parser: 'vue' }],
-      },
     },
-  ],
-};
+    plugins: {
+      vue: vuePlugin,
+    },
+    rules: {
+      ...vueRecommended.rules,
+      'vue/component-tags-order': [
+        'warn',
+        {
+          order: [['script', 'template'], 'style'],
+        },
+      ],
+      'vue/html-self-closing': [
+        'warn',
+        {
+          html: {
+            component: 'always',
+            normal: 'always',
+            void: 'always',
+          },
+          math: 'always',
+          svg: 'always',
+        },
+      ],
+      'vue/singleline-html-element-content-newline': 'off',
+      'prettier/prettier': ['warn', { parser: 'vue' }],
+    },
+  },
+];
+
+export default vueConfig;
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = vueConfig;
+}
