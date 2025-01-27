@@ -1,15 +1,15 @@
 {
   "name": "@mikey-pro/stylelint-config",
-  "version": "8.0.0",
+  "version": "8.0.1",
   "description": "Mikey Pro Stylelint configuration",
   "main": "index.js",
   "dependencies": {
     "stylelint-config-recommended-vue": "^1.6.0",
     "stylelint-config-standard": "^37.0.0",
     "stylelint-config-standard-scss": "^14.0.0",
-    "stylelint-declaration-strict-value": "^1.10.4",
+    "stylelint-declaration-strict-value": "^1.10.7",
     "stylelint-order": "^6.0.4",
-    "stylelint-scss": "^6.2.1",
+    "stylelint-scss": "^6.10.1",
     "postcss": "^8.5.1",
     "postcss-scss": "^4.0.9"
   },

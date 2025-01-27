@@ -1,6 +1,6 @@
 {
   "name": "@mikey-pro/eslint-config-angular",
-  "version": "8.0.0",
+  "version": "8.0.1",
   "description": "Mikey Pro ESLint Angular configuration",
   "main": "index.js",
   "dependencies": {
@@ -8,9 +8,9 @@
     "@angular-eslint/eslint-plugin-template": "^19.0.2",
     "@angular-eslint/template-parser": "^19.0.2",
     "@mikey-pro/eslint-config": "workspace:^",
-    "@typescript-eslint/eslint-plugin": "^7.0.0",
-    "@typescript-eslint/parser": "^7.0.0",
-    "eslint-plugin-prettier": "^5.0.0"
+    "@typescript-eslint/eslint-plugin": "^8.22.0",
+    "@typescript-eslint/parser": "^8.22.0",
+    "eslint-plugin-prettier": "^5.2.3"
   },
   "files": [
     "index.js",
