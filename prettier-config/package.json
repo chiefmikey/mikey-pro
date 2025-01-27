@@ -1,6 +1,6 @@
 {
   "name": "@mikey-pro/prettier-config",
-  "version": "7.2.5",
+  "version": "8.0.0",
   "description": "Mikey Pro Prettier configuration",
   "main": "index.js",
   "files": [
@@ -31,5 +31,13 @@
     "style",
     "guide"
   ],
-  "author": "Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)"
+  "author": "Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)",
+  "type": "module",
+  "peerDependencies": {
+    "prettier": "^3.2.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  }
 }
