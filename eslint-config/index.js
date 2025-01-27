@@ -1,5 +1,5 @@
 import babelParser from '@babel/eslint-parser';
-import cypressJson from '@cypress/json';
+import cypressJson from '@cypress/eslint-plugin-json';
 import eslintJs from '@eslint/js';
 import compatPlugin from 'eslint-plugin-compat';
 import cssModules from 'eslint-plugin-css-modules';
