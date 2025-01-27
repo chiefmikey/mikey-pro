@@ -11,10 +11,17 @@ import prettier from 'eslint-plugin-prettier';
 import prettierRecommended from 'eslint-plugin-prettier/config/recommended';
 import unicorn from 'eslint-plugin-unicorn';
 import globals from 'globals';
+import securityPlugin from 'eslint-plugin-security';
+import promisePlugin from 'eslint-plugin-promise';
+import importSortPlugin from 'eslint-plugin-simple-import-sort';
+import perfectionistPlugin from 'eslint-plugin-perfectionist';
+import noSecretsPlugin from 'eslint-plugin-no-secrets';
+import noOnlyTestsPlugin from 'eslint-plugin-no-only-tests';
 
 import { baseOverrides } from './overrides';
 import { baseRules } from './rules';
 
+/** @type {import('eslint').Linter.Config[]} */
 const config = [
   {
     ignores: [
@@ -57,11 +64,11 @@ const config = [
         requireConfigFile: false,
       },
       globals: {
-        ...globals.browser: true,
-        ...globals.commonjs: true,
-        ...globals.es2022: true,
-        ...globals.es6: true,
-        ...globals.node: true,
+        ...globals.browser,
+        ...globals.commonjs,
+        ...globals.es2022,
+        ...globals.es6,
+        ...globals.node
       },
     },
     plugins: {
@@ -72,6 +79,12 @@ const config = [
       'only-warn': onlyWarn,
       '@cypress/json': cypressJson,
       import: importPlugin,
+      security: securityPlugin,
+      promise: promisePlugin,
+      'simple-import-sort': importSortPlugin,
+      perfectionist: perfectionistPlugin,
+      'no-secrets': noSecretsPlugin,
+      'no-only-tests': noOnlyTestsPlugin,
     },
     rules: {
       ...baseRules,
@@ -80,12 +93,45 @@ const config = [
       ...cssModules.configs.recommended.rules,
       ...importRecommended.rules,
       ...prettierRecommended.rules,
+      // Security
+      'security/detect-object-injection': 'warn',
+      'security/detect-possible-timing-attacks': 'warn',
+      'security/detect-non-literal-regexp': 'warn',
+
+      // Promises
+      'promise/always-return': 'warn',
+      'promise/no-return-wrap': 'warn',
+      'promise/param-names': 'error',
+      'promise/catch-or-return': 'warn',
+
+      // Better import sorting
+      'simple-import-sort/imports': 'warn',
+      'simple-import-sort/exports': 'warn',
+
+      // Better code organization
+      'perfectionist/sort-objects': ['warn', {
+        type: 'natural',
+        order: 'asc',
+      }],
+      'perfectionist/sort-named-imports': 'warn',
+
+      // Security and testing
+      'no-secrets/no-secrets': ['warn', { tolerance: 4.5 }],
+      'no-only-tests/no-only-tests': 'warn',
+
+      // Enhanced import rules
+      'import/no-cycle': 'warn',
+      'import/no-useless-path-segments': 'warn',
+      'import/no-anonymous-default-export': 'warn',
     },
     settings: {
       'json/json-with-comments-files': [],
-      polyfills: ['Promise'],
+      polyfills: ['Promise', 'fetch', 'URLSearchParams'],
       jest: {
         version: 29,
+      },
+      'import/parsers': {
+        '@typescript-eslint/parser': ['.ts', '.tsx', '.mts', '.cts'],
       },
     },
   },
@@ -93,6 +139,8 @@ const config = [
 ];
 
 export default config;
+export { baseRules } from './rules.js';
+export { baseOverrides } from './overrides.js';
 
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = config;
