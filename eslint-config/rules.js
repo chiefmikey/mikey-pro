@@ -1,10 +1,18 @@
-module.exports = {
-  camelcase: 'warn',
+export const baseRules = {
+  camelcase: [
+    'error',
+    {
+      properties: 'never',
+      ignoreDestructuring: true,
+      ignoreImports: true,
+      ignoreGlobals: true,
+    },
+  ],
   'class-methods-use-this': 'off',
   'constructor-super': 'warn',
   'dot-notation': 'warn',
   'func-names': 'off',
-  'import/extensions': ['warn', 'never', { ignorePackages: true }],
+  'import/extensions': ['warn', 'ignorePackages', { ts: 'never' }],
   'import/no-commonjs': 'off',
   'import/default': 'off',
   'import/named': 'off',
@@ -152,6 +160,20 @@ module.exports = {
       ignore: ['.*.md'],
     },
   ],
+  'unicorn/no-abbreviations': [
+      'error',
+      {
+        'allowList': {
+          'e2e': true
+        }
+      }
+    ],
+      'unicorn/prevent-abbreviations': [
+      'warn',
+      {
+        ignore: [/e2e/],
+      }
+    ],
   'unicorn/import-index': ['warn', { ignoreImports: true }],
   'prettier/prettier': ['warn', { parser: 'babel' }],
 };

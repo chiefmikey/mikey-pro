@@ -7,6 +7,8 @@ module.exports = {
   trailingComma: 'all',
   bracketSpacing: true,
   proseWrap: 'always',
+  jsxBracketSameLine: true,
+  htmlWhitespaceSensitivity: 'ignore',
 
   // Svelte
   svelteSortOrder: 'options-scripts-markup-styles',
