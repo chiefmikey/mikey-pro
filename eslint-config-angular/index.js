@@ -1,22 +1,23 @@
 import baseConfig from '@mikey-pro/eslint-config';
 import angularPlugin from '@angular-eslint/eslint-plugin';
-import typeScriptPlugin from '@typescript-eslint/eslint-plugin';
 import angularTemplatePlugin from '@angular-eslint/eslint-plugin-template';
-import angularAll from '@angular-eslint/eslint-plugin/dist/configs/all';
-import angularTemplateRecommended from '@angular-eslint/eslint-plugin-template/dist/configs/recommended';
-import angularTemplateAccessibility from '@angular-eslint/eslint-plugin-template/dist/configs/accessibility';
-import angularTemplateProcessInline from '@angular-eslint/eslint-plugin/dist/configs/template/process-inline-templates';
-import overrides from '@mikey-pro/eslint-config/overrides';
+import angularTemplateParser from '@angular-eslint/template-parser';
+import typeScriptPlugin from '@typescript-eslint/eslint-plugin';
+import * as typeScriptParser from '@typescript-eslint/parser';
 
+/** @type {import('eslint').Linter.Config[]} */
 const angularConfig = [
   ...baseConfig,
   {
-    files: ['*.ts'],
+    files: ['*.ts', '*.tsx'],
     languageOptions: {
-      parser: '@typescript-eslint/parser',
+      parser: typeScriptParser,
       parserOptions: {
-        ...overrides.ts.languageOptions.parserOptions,
-      },
+        ecmaVersion: 'latest',
+        sourceType: 'module',
+        project: ['./tsconfig.json', './tsconfig.*.json'],
+        createDefaultProgram: false
+      }
     },
     plugins: {
       '@angular-eslint': angularPlugin,
@@ -26,6 +27,21 @@ const angularConfig = [
       ...angularAll.rules,
       ...angularTemplateProcessInline.rules,
       ...overrides.ts.rules,
+      // Angular specific
+      '@angular-eslint/component-class-suffix': 'error',
+      '@angular-eslint/contextual-lifecycle': 'error',
+      '@angular-eslint/no-async-lifecycle-method': 'error',
+      '@angular-eslint/no-empty-lifecycle-method': 'error',
+      '@angular-eslint/use-component-view-encapsulation': 'warn',
+      '@angular-eslint/use-injectable-provided-in': 'error',
+      '@angular-eslint/use-lifecycle-interface': 'error',
+
+      // Template rules
+      '@angular-eslint/template/accessibility-valid-aria': 'error',
+      '@angular-eslint/template/no-duplicate-attributes': 'error',
+      '@angular-eslint/template/use-track-by-function': 'warn',
+
+      // Existing rules...
       'unicorn/filename-case': 'off',
       '@angular-eslint/component-selector': [
         'warn',
@@ -52,23 +68,85 @@ const angularConfig = [
       '@typescript-eslint/consistent-type-imports': 'off',
       'import/extensions': ['warn', 'ignorePackages', { ts: 'never' }],
       'prettier/prettier': ['warn', { parser: 'typescript' }],
+
+      // Additional Component Rules
+      '@angular-eslint/no-forward-ref': 'error',
+      '@angular-eslint/no-output-native': 'error',
+      '@angular-eslint/use-pipe-transform-interface': 'error',
+
+      // Performance
+      '@angular-eslint/prefer-output-readonly': 'error',
+      '@angular-eslint/no-output-on-prefix': 'error',
+      '@angular-eslint/relative-url-prefix': 'error',
+
+      // RxJS
+      '@angular-eslint/rxjs-prefer-angular-takeuntil': 'error',
+      '@angular-eslint/rxjs-prefer-angular-async-pipe': 'warn',
+
+      // Template Safety
+      '@angular-eslint/template/no-negated-async': 'error',
+      '@angular-eslint/template/use-track-by-function': ['error', {
+        trackByPrefix: 'trackBy'
+      }],
+      '@angular-eslint/template/no-call-expression': 'error',
+
+      // Performance
+      '@angular-eslint/prefer-standalone-component': 'error',
+      '@angular-eslint/use-component-selector': 'error',
+      '@angular-eslint/prefer-output-readonly': ['error', {
+        allowProtected: true
+      }],
+
+      // Standalone Components
+      '@angular-eslint/prefer-standalone-component': ['error', {
+        checkProviders: true,
+        checkStyles: true
+      }],
+      '@angular-eslint/no-host-metadata-property': ['error', {
+        allowStatic: true
+      }],
+
+      // Signals
+      '@angular-eslint/prefer-output-readonly': ['error', {
+        allowProtected: true,
+        allowSignals: true
+      }],
+      '@angular-eslint/no-output-native': ['error', {
+        allowSignals: true
+      }],
+
+      // Performance
+      '@angular-eslint/prefer-on-push-component-change-detection': ['error', {
+        allowDefault: false
+      }],
+      '@angular-eslint/use-component-selector': ['error', {
+        checkCustomElements: true
+      }]
     },
     settings: {
       ...baseConfig.settings,
       'import/resolver': {
         typescript: {
           alwaysTryTypes: true,
+          project: './tsconfig.json'
         },
       },
+      'import/internal-regex': '^@(core|shared|features)/',
     },
   },
   {
-    files: ['*.html'],
+    files: ['*.component.html'],
     languageOptions: {
-      parser: '@angular-eslint/template-parser',
+      parser: angularTemplateParser,
       parserOptions: {
-        ...overrides.html.languageOptions.parserOptions,
-      },
+        ecmaVersion: 'latest',
+        sourceType: 'module',
+        project: ['./tsconfig.json', './tsconfig.*.json'],
+        templateParser: {
+          checkAttributes: true,
+          checkElements: true
+        }
+      }
     },
     plugins: {
       '@angular-eslint/template': angularTemplatePlugin,

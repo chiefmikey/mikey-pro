@@ -6,7 +6,11 @@
   "dependencies": {
     "@angular-eslint/eslint-plugin": "^19.0.2",
     "@angular-eslint/eslint-plugin-template": "^19.0.2",
-    "@angular-eslint/template-parser": "^19.0.2"
+    "@angular-eslint/template-parser": "^19.0.2",
+    "@mikey-pro/eslint-config": "^7.5.3",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "eslint-plugin-prettier": "^5.0.0"
   },
   "files": [
     "index.js",
@@ -39,5 +43,24 @@
   "author": "Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)",
   "browserslist": [
     "defaults"
-  ]
+  ],
+  "peerDependencies": {
+    "@angular/core": ">=16.0.0",
+    "eslint": "^8.57.0",
+    "prettier": "^3.2.0",
+    "typescript": ">=5.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@angular/core": {
+      "optional": false
+    },
+    "typescript": {
+      "optional": false
+    }
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  }
 }

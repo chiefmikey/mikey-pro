@@ -2,10 +2,26 @@
   "name": "@mikey-pro/eslint-config-svelte",
   "version": "7.5.3",
   "description": "Mikey Pro ESLint Svelte configuration",
+  "type": "module",
   "main": "index.js",
   "dependencies": {
+    "@babel/eslint-parser": "^7.24.0",
+    "@mikey-pro/eslint-config": "workspace:^",
+    "@typescript-eslint/parser": "^7.0.0",
     "eslint-plugin-svelte": "^2.46.1",
     "svelte-eslint-parser": "^0.43.0"
+  },
+  "peerDependencies": {
+    "@mikey-pro/eslint-config": "workspace:^",
+    "eslint": "^8.57.0",
+    "prettier": "^3.2.0",
+    "svelte": "^4.2.0",
+    "typescript": ">=5.0.0"
+  },
+  "peerDependenciesMeta": {
+    "typescript": {
+      "optional": true
+    }
   },
   "files": [
     "index.js",
@@ -38,5 +54,9 @@
   "author": "Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)",
   "browserslist": [
     "defaults"
-  ]
+  ],
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  }
 }
