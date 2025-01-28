@@ -1,6 +1,6 @@
 {
   "name": "@mikey-pro/eslint-config",
-  "version": "8.0.7",
+  "version": "8.0.8",
   "description": "Mikey Pro ESLint configuration",
   "main": "index.js",
   "types": "index.d.ts",
@@ -122,8 +122,17 @@
     "yarn": ">=4.0.0"
   },
   "exports": {
-    ".": "./index.js",
-    "./rules": "./rules.js",
-    "./overrides": "./overrides.js"
+    ".": {
+      "import": "./index.js",
+      "require": "./index.js"
+    },
+    "./rules": {
+      "import": "./rules.js",
+      "require": "./rules.js"
+    },
+    "./overrides": {
+      "import": "./overrides.js",
+      "require": "./overrides.js"
+    }
   }
 }

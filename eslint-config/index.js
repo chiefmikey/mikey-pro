@@ -16,8 +16,8 @@ import perfectionistPlugin from 'eslint-plugin-perfectionist';
 import noSecretsPlugin from 'eslint-plugin-no-secrets';
 import noOnlyTestsPlugin from 'eslint-plugin-no-only-tests';
 
-import { baseOverrides } from './overrides';
-import { baseRules } from './rules';
+import { baseOverrides } from './overrides.js';
+import { baseRules } from './rules.js';
 
 /** @type {import('eslint').Linter.Config[]} */
 const config = [
@@ -90,7 +90,12 @@ const config = [
       ...compatPlugin.configs.recommended.rules,
       ...cssModules.configs.recommended.rules,
       ...importPlugin.configs.recommended.rules,
-      'prettier/prettier': 'warn',
+      'prettier/prettier': ['warn', {
+        parser: 'babel',
+        endOfLine: 'lf',
+        singleQuote: true,
+        trailingComma: 'all'
+      }],
 
       // Security
       'security/detect-object-injection': 'warn',
@@ -132,6 +137,12 @@ const config = [
       'import/parsers': {
         '@typescript-eslint/parser': ['.ts', '.tsx', '.mts', '.cts'],
       },
+      'import/extensions': ['.js', '.jsx', '.ts', '.tsx', '.mjs', '.cjs'],
+      'import/resolver': {
+        node: {
+          extensions: ['.js', '.jsx', '.ts', '.tsx', '.mjs', '.cjs']
+        }
+      },
     },
   },
   ...baseOverrides,
@@ -140,7 +151,3 @@ const config = [
 export default config;
 export { baseRules } from './rules.js';
 export { baseOverrides } from './overrides.js';
-
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = config;
-}
