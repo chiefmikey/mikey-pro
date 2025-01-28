@@ -7,7 +7,6 @@ import disableAutofix from 'eslint-plugin-disable-autofix';
 import importPlugin from 'eslint-plugin-import';
 import onlyWarn from 'eslint-plugin-only-warn';
 import prettier from 'eslint-plugin-prettier';
-import prettierRecommended from 'eslint-plugin-prettier/config/recommended';
 import unicorn from 'eslint-plugin-unicorn';
 import globals from 'globals';
 import securityPlugin from 'eslint-plugin-security';
@@ -91,7 +90,8 @@ const config = [
       ...compatPlugin.configs.recommended.rules,
       ...cssModules.configs.recommended.rules,
       ...importPlugin.configs.recommended.rules,
-      ...prettierRecommended.rules,
+      'prettier/prettier': 'warn',
+
       // Security
       'security/detect-object-injection': 'warn',
       'security/detect-possible-timing-attacks': 'warn',
