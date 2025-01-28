@@ -1,8 +1,11 @@
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import typescriptParser from '@typescript-eslint/parser';
 import typeScriptPlugin from '@typescript-eslint/eslint-plugin';
 import importPlugin from 'eslint-plugin-import';
 import markdownPlugin from 'eslint-plugin-markdownlint';
+
+const currentDir = path.dirname(fileURLToPath(import.meta.url));
 
 const ts = {
   files: ['*.ts', '*.tsx'],
@@ -16,7 +19,7 @@ const ts = {
       extraFileExtensions: ['.vue', '.svelte'],
       sourceType: 'module',
       project: 'tsconfig.json',
-      tsconfigRootDir: path.join(__dirname, '../../..'),
+      tsconfigRootDir: path.join(currentDir, '../../..'),
     },
   },
   plugins: {

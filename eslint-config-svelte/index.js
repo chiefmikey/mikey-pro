@@ -1,8 +1,11 @@
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import baseConfig from '@mikey-pro/eslint-config';
 import sveltePlugin from 'eslint-plugin-svelte';
 import svelteAll from 'eslint-plugin-svelte/configs/all';
 import typescriptParser from '@typescript-eslint/parser';
-import path from 'path';
+
+const currentDir = path.dirname(fileURLToPath(import.meta.url));
 
 /** @type {import('eslint').Linter.Config[]} */
 const svelteConfig = [
@@ -15,7 +18,7 @@ const svelteConfig = [
         ecmaVersion: 'latest',
         sourceType: 'module',
         project: ['./tsconfig.json', './tsconfig.*.json'],
-        tsconfigRootDir: path.join(__dirname, '../../..'),
+        tsconfigRootDir: path.join(currentDir, '../../..'),
         extraFileExtensions: ['.svelte'],
         parser: {
           js: '@babel/eslint-parser',
