@@ -202,21 +202,12 @@ export const baseRules = {
 
   // Security
   'security/detect-non-literal-fs-filename': 'error',
-  'security/detect-unsafe-regex': ['error', {
-    allowDollarMatchAll: false,
-    maxLength: 50
-  }],
+  'security/detect-unsafe-regex': 'error',
   'security/detect-buffer-noassert': 'error',
   'security/detect-child-process': 'warn',
   'security/detect-disable-mustache-escape': 'error',
-  'security/detect-possible-timing-attacks': ['error', {
-    threshold: 8,
-    catchAliases: true
-  }],
-  'security/detect-non-literal-regexp': ['error', {
-    report: 'error',
-    warnOnDynamicRegexp: true
-  }],
+  'security/detect-possible-timing-attacks': 'error',
+  'security/detect-non-literal-regexp': 'error',
   'security/detect-non-literal-require': 'error',
 
   // Better testing
