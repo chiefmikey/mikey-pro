@@ -4,6 +4,7 @@ import typescriptParser from '@typescript-eslint/parser';
 import typeScriptPlugin from '@typescript-eslint/eslint-plugin';
 import importPlugin from 'eslint-plugin-import';
 import markdownPlugin from 'eslint-plugin-markdownlint';
+import jestPlugin from 'eslint-plugin-jest';
 
 const currentDir = path.dirname(fileURLToPath(import.meta.url));
 
@@ -357,13 +358,17 @@ const json5 = {
 };
 
 const jestJs = {
-  files: ['*.test.js'],
-  plugins: ['jest'],
+  files: ['*.test.js', '**/__tests__/**/*.js'],
+  plugins: {
+    jest: jestPlugin,
+  },
   extends: ['plugin:jest/all'],
   env: {
     jest: true,
   },
   rules: {
+    'jest/prefer-spy-on': 'warn',
+    'jest/require-top-level-describe': 'error',
     'unicorn/no-array-callback-reference': 'off',
     'jest/unbound-method': 'off',
     'unicorn/prevent-abbreviations': [
@@ -376,14 +381,19 @@ const jestJs = {
 };
 
 const jestTs = {
-  files: ['*.test.ts'],
+  files: ['*.test.ts', '**/__tests__/**/*.ts'],
   parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint', 'jest'],
+  plugins: {
+    '@typescript-eslint': typeScriptPlugin,
+    jest: jestPlugin,
+  },
   extends: ['plugin:jest/all'],
   env: {
     jest: true,
   },
   rules: {
+    'jest/prefer-spy-on': 'warn',
+    'jest/require-top-level-describe': 'error',
     'unicorn/no-array-callback-reference': 'off',
     'jest/unbound-method': 'off',
     'unicorn/prevent-abbreviations': [
