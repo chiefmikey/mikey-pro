@@ -233,11 +233,6 @@ export const baseRules = {
   'security/detect-child-process': 'warn',
   'security/detect-disable-mustache-escape': 'error',
 
-  // Functional Programming
-  'functional/no-let': 'warn',
-  'functional/prefer-readonly-type': 'warn',
-  'functional/no-mixed-type': 'warn',
-
   // Code Organization
   'typescript-sort-keys/interface': 'warn',
   'typescript-sort-keys/string-enum': 'warn',
@@ -270,10 +265,6 @@ export const baseRules = {
       ]
     }
   ],
-
-  // Immutability
-  'immutable/no-mutation': 'warn',
-  'immutable/no-let': 'warn',
 
   // Performance
   'optimize-regex/optimize-regex': 'warn',
