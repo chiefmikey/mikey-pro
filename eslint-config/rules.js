@@ -73,6 +73,14 @@ export const baseRules = {
         '`with` is disallowed in strict mode because it makes code impossible to predict and optimize.',
       selector: 'WithStatement',
     },
+    {
+      selector: "CallExpression[callee.property.name='reduce'][arguments.length<2]",
+      message: 'Provide initialValue to reduce'
+    },
+    {
+      selector: "CallExpression[callee.property.name='forEach']",
+      message: 'Use for...of instead'
+    }
   ],
   'no-shadow': 'off',
   'no-shadow-restricted-names': 'warn',
@@ -122,7 +130,7 @@ export const baseRules = {
   ],
   radix: 'warn',
   'filenames/match-regex': 'off',
-  'require-atomic-updates': 'error',
+  'require-atomic-updates': ['error', { allowProperties: false }],
   'sort-imports': 'off',
   'rest-spread-spacing': 'off',
   semi: 'off',
@@ -176,7 +184,7 @@ export const baseRules = {
 
   // Error handling
   'no-await-in-loop': 'warn',
-  'no-promise-executor-return': 'error',
+  'no-promise-executor-return': ['error', { allowVoid: true }],
   'no-unsafe-optional-chaining': 'error',
 
   // Modern practices
@@ -193,8 +201,23 @@ export const baseRules = {
   'promise/prefer-await-to-callbacks': 'warn',
 
   // Security
-  'security/detect-non-literal-fs-filename': 'warn',
-  'security/detect-unsafe-regex': 'error',
+  'security/detect-non-literal-fs-filename': 'error',
+  'security/detect-unsafe-regex': ['error', {
+    allowDollarMatchAll: false,
+    maxLength: 50
+  }],
+  'security/detect-buffer-noassert': 'error',
+  'security/detect-child-process': 'warn',
+  'security/detect-disable-mustache-escape': 'error',
+  'security/detect-possible-timing-attacks': ['error', {
+    threshold: 8,
+    catchAliases: true
+  }],
+  'security/detect-non-literal-regexp': ['error', {
+    report: 'error',
+    warnOnDynamicRegexp: true
+  }],
+  'security/detect-non-literal-require': 'error',
 
   // Better testing
   'jest/prefer-spy-on': 'warn',
@@ -217,7 +240,9 @@ export const baseRules = {
   'etc/prefer-interface': 'error',
 
   // Enhanced Import Rules
-  'import/no-relative-parent-imports': 'warn',
+  'import/no-relative-parent-imports': ['error', {
+    ignore: ['@/components', '@/utils', '@/types']
+  }],
   'import/no-extraneous-dependencies': ['error', {
     devDependencies: ['**/*.test.{js,ts}', '**/*.spec.{js,ts}', '**/test/**']
   }],
@@ -225,11 +250,6 @@ export const baseRules = {
   // Better Promise Handling
   'promise/no-nesting': 'warn',
   'promise/prefer-await-to-then': 'warn',
-
-  // Security Enhancements
-  'security/detect-buffer-noassert': 'error',
-  'security/detect-child-process': 'warn',
-  'security/detect-disable-mustache-escape': 'error',
 
   // Code Organization
   'typescript-sort-keys/interface': 'warn',
@@ -242,14 +262,17 @@ export const baseRules = {
   'sonarjs/no-duplicated-branches': 'error',
   'sonarjs/max-switch-cases': ['warn', 10],
 
-  // Additional Security
-  'security/detect-possible-timing-attacks': ['error', { threshold: 10 }],
-  'security/detect-non-literal-regexp': ['error', { report: 'error' }],
-  'security/detect-non-literal-require': 'error',
-
-  // Better Type Safety
+  // Import Safety
+  'import/no-cycle': ['error', {
+    maxDepth: 1,
+    ignoreExternal: true
+  }],
   'import/no-relative-packages': 'error',
   'import/no-self-import': 'error',
+  'import/no-namespace': 'error',
+  'import/no-empty-named-blocks': 'error',
+  'import/no-duplicates': ['error', { 'prefer-inline': true }],
+  'import/no-import-module-exports': 'error',
 
   // Architecture Boundaries
   'boundaries/element-types': [
@@ -270,87 +293,6 @@ export const baseRules = {
   'radar/cognitive-complexity': ['error', 15],
 
   // Enhanced Security
-  'security/detect-non-literal-fs-filename': ['error', { allowInlineConfig: false }],
-  'security/detect-unsafe-regex': ['error', { allowDollarMatchAll: false }],
-  'security/detect-buffer-noassert': 'error',
-
-  // Better Type Safety
-  'import/no-cycle': ['error', { maxDepth: 1 }],
-  'import/no-relative-packages': 'error',
-  'unicorn/prefer-module': 'error',
-
-  // Code Style
-  'perfectionist/sort-named-imports': [
-    'warn',
-    {
-      type: 'natural',
-      order: 'asc',
-      'ignore-case': true
-    }
-  ],
-
-  // Enhanced Security
-  'security/detect-possible-timing-attacks': ['error', {
-    threshold: 8,
-    catchAliases: true
-  }],
-  'security/detect-non-literal-regexp': ['error', {
-    report: 'error',
-    warnOnDynamicRegexp: true
-  }],
-  'security/detect-unsafe-regex': ['error', {
-    maxLength: 50
-  }],
-
-  // Import Safety
-  'import/no-import-module-exports': 'error',
-  'import/no-relative-parent-imports': ['error', {
-    ignore: ['@/components', '@/utils', '@/types']
-  }],
-
-  // Better Code Organization
-  'perfectionist/sort-objects': ['error', {
-    type: 'natural',
-    order: 'asc',
-    'spread-last': true
-  }],
-  'perfectionist/sort-named-imports': ['error', {
-    type: 'natural',
-    order: 'asc',
-    'ignore-case': true
-  }],
-
-  // Advanced Performance
-  'no-restricted-syntax': [
-    'error',
-    {
-      selector: "CallExpression[callee.property.name='reduce'][arguments.length<2]",
-      message: 'Provide initialValue to reduce'
-    },
-    {
-      selector: "CallExpression[callee.property.name='forEach']",
-      message: 'Use for...of instead'
-    }
-  ],
-  'require-atomic-updates': ['error', { allowProperties: false }],
-  'no-constant-binary-expression': 'error',
-
-  // Better Error Handling
-  'no-implicit-coercion': ['error', { boolean: false, number: true, string: true }],
-  'unicorn/prefer-type-error': 'error',
-  'unicorn/no-useless-undefined': ['error', { checkArguments: true }],
-
-  // Enhanced Import Safety
-  'import/no-cycle': ['error', { maxDepth: 1, ignoreExternal: true }],
-  'import/no-relative-packages': 'error',
-  'import/no-self-import': 'error',
-
-  // Type Safety
-  'unicorn/prefer-at': 'error',
-  'unicorn/prefer-string-replace-all': 'error',
-  'unicorn/require-post-message-target-origin': 'error',
-
-  // Security
   'n/no-unsupported-features/es-syntax': ['error', {
     version: '>=18.0.0',
     ignores: ['modules', 'dynamicImport']
@@ -369,11 +311,25 @@ export const baseRules = {
 
   // Better Error Handling
   'max-classes-per-file': ['error', 1],
-  'no-promise-executor-return': ['error', { allowVoid: true }],
   'unicorn/catch-error-name': ['error', { name: 'error' }],
+  'unicorn/no-useless-undefined': ['error', { checkArguments: true }],
+  'unicorn/prefer-type-error': 'error',
 
-  // Enhanced Import Safety
-  'import/no-namespace': 'error',
-  'import/no-empty-named-blocks': 'error',
-  'import/no-duplicates': ['error', { 'prefer-inline': true }]
+  // Code Style
+  'perfectionist/sort-named-imports': ['error', {
+    type: 'natural',
+    order: 'asc',
+    'ignore-case': true
+  }],
+  'perfectionist/sort-objects': ['error', {
+    type: 'natural',
+    order: 'asc',
+    'spread-last': true
+  }],
+
+  // Advanced Performance
+  'no-implicit-coercion': ['error', { boolean: false, number: true, string: true }],
+  'unicorn/prefer-at': 'error',
+  'unicorn/prefer-string-replace-all': 'error',
+  'unicorn/require-post-message-target-origin': 'error'
 };
