@@ -3,7 +3,6 @@ import cypressJson from '@cypress/eslint-plugin-json';
 import eslintJs from '@eslint/js';
 import compatPlugin from 'eslint-plugin-compat';
 import cssModules from 'eslint-plugin-css-modules';
-import disableAutofix from 'eslint-plugin-disable-autofix';
 import importPlugin from 'eslint-plugin-import';
 import onlyWarn from 'eslint-plugin-only-warn';
 import prettier from 'eslint-plugin-prettier';
@@ -73,7 +72,6 @@ const config = [
       prettier,
       unicorn,
       'css-modules': cssModules,
-      'disable-autofix': disableAutofix,
       'only-warn': onlyWarn,
       '@cypress/json': cypressJson,
       import: importPlugin,
