@@ -110,8 +110,7 @@ export const baseRules = {
   'prefer-rest-params': 'warn',
   'prefer-spread': 'warn',
   'prefer-template': 'warn',
-  'prefer-const': 'off',
-  'disable-autofix/prefer-const': 'warn',
+  'prefer-const': 'warn',
   'quote-props': ['warn', 'as-needed'],
   quotes: [
     'off',
