@@ -1,6 +1,6 @@
 {
   "name": "@mikey-pro/eslint-config",
-  "version": "8.0.8",
+  "version": "8.0.9",
   "description": "Mikey Pro ESLint configuration",
   "main": "index.js",
   "types": "index.d.ts",
@@ -46,12 +46,10 @@
     "eslint-plugin-sonarjs": "^3.0.1",
     "eslint-plugin-regexp": "^2.7.0",
     "eslint-plugin-etc": "^2.0.3",
-    "eslint-plugin-functional": "^8.0.0",
     "eslint-plugin-typescript-sort-keys": "^3.3.0",
     "eslint-plugin-sort-destructure-keys": "^2.0.0",
     "eslint-plugin-write-good-comments": "^0.2.0",
     "eslint-plugin-boundaries": "^5.0.1",
-    "eslint-plugin-immutable": "^1.0.0",
     "eslint-plugin-radar": "^0.2.1",
     "eslint-plugin-optimize-regex": "^1.2.1"
   },
