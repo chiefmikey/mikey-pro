@@ -210,20 +210,13 @@ export const baseRules = {
   'security/detect-non-literal-regexp': 'error',
   'security/detect-non-literal-require': 'error',
 
-  // Better testing
-  'jest/prefer-spy-on': 'warn',
-  'jest/require-top-level-describe': 'error',
-
-  // Code Quality
-  'sonarjs/cognitive-complexity': ['error', 15],
-  'sonarjs/no-duplicate-string': ['error', 5],
-  'sonarjs/no-redundant-boolean': 'error',
-  'sonarjs/prefer-immediate-return': 'error',
+  'no-duplicate-imports': 'error',
+  'no-unreachable': 'error',
+  'no-constant-condition': 'error',
+  'complexity': ['error', { max: 15 }],
 
   // RegExp
   'regexp/no-missing-g-flag': 'error',
-  'regexp/no-useless-flag': 'error',
-  'regexp/prefer-quantifier': 'error',
 
   // Enhanced TypeScript
   'etc/no-commented-out-code': 'warn',
@@ -249,9 +242,6 @@ export const baseRules = {
 
   // Code Quality
   'write-good-comments/write-good-comments': 'warn',
-  'sonarjs/no-small-switch': 'warn',
-  'sonarjs/no-duplicated-branches': 'error',
-  'sonarjs/max-switch-cases': ['warn', 10],
 
   // Import Safety
   'import/no-cycle': ['error', {

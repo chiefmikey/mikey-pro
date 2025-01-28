@@ -14,6 +14,7 @@ import importSortPlugin from 'eslint-plugin-simple-import-sort';
 import perfectionistPlugin from 'eslint-plugin-perfectionist';
 import noSecretsPlugin from 'eslint-plugin-no-secrets';
 import noOnlyTestsPlugin from 'eslint-plugin-no-only-tests';
+import sonarjsPlugin from 'eslint-plugin-sonarjs';
 
 import { baseOverrides } from './overrides.js';
 import { baseRules } from './rules.js';
@@ -81,6 +82,7 @@ const config = [
       perfectionist: perfectionistPlugin,
       'no-secrets': noSecretsPlugin,
       'no-only-tests': noOnlyTestsPlugin,
+      sonarjs: sonarjsPlugin,
     },
     rules: {
       ...baseRules,
@@ -88,6 +90,7 @@ const config = [
       ...compatPlugin.configs.recommended.rules,
       ...cssModules.configs.recommended.rules,
       ...importPlugin.configs.recommended.rules,
+      ...sonarjsPlugin.configs.recommended.rules,
       'prettier/prettier': ['warn', {
         parser: 'babel',
         endOfLine: 'lf',
@@ -125,6 +128,15 @@ const config = [
       'import/no-cycle': 'warn',
       'import/no-useless-path-segments': 'warn',
       'import/no-anonymous-default-export': 'warn',
+
+      // SonarJS rules
+      'sonarjs/cognitive-complexity': ['error', 15],
+      'sonarjs/no-duplicate-string': ['error', 5],
+      'sonarjs/no-redundant-boolean': 'error',
+      'sonarjs/prefer-immediate-return': 'error',
+      'sonarjs/no-small-switch': 'warn',
+      'sonarjs/no-duplicated-branches': 'error',
+      'sonarjs/max-switch-cases': ['warn', 10],
     },
     settings: {
       'json/json-with-comments-files': [],
