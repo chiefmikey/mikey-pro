@@ -6,7 +6,7 @@
   "main": "index.js",
   "dependencies": {
     "@babel/preset-react": "^7.26.3",
-    "@mikey-pro/eslint-config": "^8.0.3",
+    "@mikey-pro/eslint-config": "^8.0.11",
     "eslint-config-react-app-bump": "^1.0.25",
     "eslint-plugin-jest-dom": "^5.5.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
@@ -17,15 +17,7 @@
     "eslint-plugin-testing-library": "^7.1.1"
   },
   "peerDependencies": {
-    "@babel/core": "^7.24.0",
-    "@mikey-pro/eslint-config": "^8.0.3",
-    "@types/react": "^18.2.0",
-    "@types/react-dom": "^18.2.0",
-    "eslint": "^8.57.0",
-    "prettier": "^3.2.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "typescript": ">=5.0.0"
+    "@mikey-pro/eslint-config": "^8.0.3"
   },
   "peerDependenciesMeta": {
     "@types/react": {
