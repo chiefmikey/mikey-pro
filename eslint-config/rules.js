@@ -171,7 +171,7 @@ export const baseRules = {
       ignore: [/e2e/]
     }
   ],
-  'unicorn/import-index': ['warn', { ignoreImports: true }],
+  'unicorn/import-index': 'warn',
   'prettier/prettier': ['warn', { parser: 'babel' }],
 
   // Error handling
