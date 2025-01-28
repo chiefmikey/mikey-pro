@@ -187,7 +187,6 @@ export const baseRules = {
   // Import rules
   'import/consistent-type-specifier-style': ['error', 'prefer-top-level'],
   'import/no-empty-named-blocks': 'error',
-  'import/no-reserved-dependencies': 'error',
 
   // Better promises
   'promise/no-multiple-resolved': 'error',
