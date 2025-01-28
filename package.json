@@ -2,6 +2,7 @@
   "name": "mikey-pro",
   "version": "8.0.12",
   "description": "Mikey Pro Style Guide",
+  "type": "module",
   "dependencies": {
     "@mikey-pro/eslint-config": "^8.0.12",
     "@mikey-pro/prettier-config": "^8.0.3",
