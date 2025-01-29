@@ -40,7 +40,7 @@ export const baseRules = {
   'no-delete-var': 'warn',
   'no-dupe-class-members': 'warn',
   'no-dupe-keys': 'warn',
-  'no-duplicate-imports': 'warn',
+  'no-duplicate-imports': 'error',
   'no-else-return': 'warn',
   'no-empty': 'off',
   'no-empty-pattern': 'off',
@@ -210,7 +210,6 @@ export const baseRules = {
   'security/detect-non-literal-regexp': 'error',
   'security/detect-non-literal-require': 'error',
 
-  'no-duplicate-imports': 'error',
   'no-unreachable': 'error',
   'no-constant-condition': 'error',
   'complexity': ['error', { max: 15 }],
@@ -251,7 +250,6 @@ export const baseRules = {
   'import/no-relative-packages': 'error',
   'import/no-self-import': 'error',
   'import/no-namespace': 'error',
-  'import/no-empty-named-blocks': 'error',
   'import/no-duplicates': ['error', { 'prefer-inline': true }],
   'import/no-import-module-exports': 'error',
 
