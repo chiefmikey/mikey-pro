@@ -11,17 +11,14 @@ const currentDir = path.dirname(fileURLToPath(import.meta.url));
 const ts = {
   files: ['*.ts', '*.tsx'],
   languageOptions: {
-    parser: typescriptParser,
-    parserOptions: {
-      ecmaFeatures: {
-        jsx: true,
-      },
-      ecmaVersion: 'latest',
-      extraFileExtensions: ['.vue', '.svelte'],
-      sourceType: 'module',
-      project: 'tsconfig.json',
-      tsconfigRootDir: path.join(currentDir, '../../..'),
+    ecmaFeatures: {
+      jsx: true,
     },
+    ecmaVersion: 'latest',
+    extraFileExtensions: ['.vue', '.svelte'],
+    sourceType: 'module',
+    project: 'tsconfig.json',
+    tsconfigRootDir: path.join(currentDir, '../../..'),
   },
   plugins: {
     '@typescript-eslint': typeScriptPlugin,
@@ -157,7 +154,6 @@ const ts = {
       'error',
       { ignoreArrowShorthand: true }
     ],
-    '@typescript-eslint/prefer-return-this-type': 'error',
     '@typescript-eslint/prefer-string-starts-ends-with': 'error',
     '@typescript-eslint/promise-function-async': 'error',
     '@typescript-eslint/require-array-sort-compare': [
@@ -261,9 +257,6 @@ const toml = {
 
 const md = {
   files: ['*.md'],
-  languageOptions: {
-    parser: 'eslint-plugin-markdownlint/parser',
-  },
   plugins: {
     markdownlint: markdownPlugin,
   },

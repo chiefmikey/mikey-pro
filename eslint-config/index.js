@@ -1,4 +1,3 @@
-import babelParser from '@babel/eslint-parser';
 import cypressJson from '@cypress/eslint-plugin-json';
 import eslintJs from '@eslint/js';
 import compatPlugin from 'eslint-plugin-compat';
@@ -15,6 +14,15 @@ import perfectionistPlugin from 'eslint-plugin-perfectionist';
 import noSecretsPlugin from 'eslint-plugin-no-secrets';
 import noOnlyTestsPlugin from 'eslint-plugin-no-only-tests';
 import sonarjsPlugin from 'eslint-plugin-sonarjs';
+import regexpPlugin from 'eslint-plugin-regexp';
+import etcPlugin from 'eslint-plugin-etc';
+import typescriptSortKeysPlugin from 'eslint-plugin-typescript-sort-keys';
+import sortDestructureKeysPlugin from 'eslint-plugin-sort-destructure-keys';
+import writeGoodCommentsPlugin from 'eslint-plugin-write-good-comments';
+import boundariesPlugin from 'eslint-plugin-boundaries';
+import nPlugin from 'eslint-plugin-n';
+import radarPlugin from 'eslint-plugin-radar';
+import optimizeRegexPlugin from 'eslint-plugin-optimize-regex';
 
 import { baseOverrides } from './overrides.js';
 import { baseRules } from './rules.js';
@@ -42,25 +50,10 @@ const config = [
   },
   eslintJs.configs.recommended,
   {
+    files: ['**/*.js', '**/*.jsx', '**/*.mjs', '**/*.cjs'],  // Add files pattern
     languageOptions: {
       ecmaVersion: 'latest',
       sourceType: 'module',
-      parser: babelParser,
-      parserOptions: {
-        babelOptions: {
-          presets: [
-            [
-              '@babel/preset-env',
-              {
-                targets: {
-                  node: 'current',
-                },
-              },
-            ],
-          ],
-        },
-        requireConfigFile: false,
-      },
       globals: {
         ...globals.browser,
         ...globals.commonjs,
@@ -68,6 +61,10 @@ const config = [
         ...globals.es6,
         ...globals.node
       },
+    },
+    linterOptions: {
+      noInlineConfig: true,
+      reportUnusedDisableDirectives: true,
     },
     plugins: {
       prettier,
@@ -83,6 +80,16 @@ const config = [
       'no-secrets': noSecretsPlugin,
       'no-only-tests': noOnlyTestsPlugin,
       sonarjs: sonarjsPlugin,
+      regexp: regexpPlugin,
+      etc: etcPlugin,
+      'typescript-sort-keys': typescriptSortKeysPlugin,
+      'sort-destructure-keys': sortDestructureKeysPlugin,
+      'write-good-comments': writeGoodCommentsPlugin,
+      boundaries: boundariesPlugin,
+      n: nPlugin,
+      radar: radarPlugin,
+      'optimize-regex': optimizeRegexPlugin,
+      compat: compatPlugin,
     },
     rules: {
       ...baseRules,
@@ -131,7 +138,7 @@ const config = [
 
       // SonarJS rules
       'sonarjs/cognitive-complexity': ['error', 15],
-      'sonarjs/no-duplicate-string': ['error', 5],
+      'sonarjs/no-duplicate-string': ['error', { threshold: 5 }],
       'sonarjs/no-redundant-boolean': 'error',
       'sonarjs/prefer-immediate-return': 'error',
       'sonarjs/no-small-switch': 'warn',
