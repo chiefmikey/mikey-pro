@@ -4,7 +4,6 @@ import compatPlugin from 'eslint-plugin-compat';
 import cssModules from 'eslint-plugin-css-modules';
 import importPlugin from 'eslint-plugin-import';
 import onlyWarn from 'eslint-plugin-only-warn';
-import prettier from 'eslint-plugin-prettier';
 import unicorn from 'eslint-plugin-unicorn';
 import globals from 'globals';
 import securityPlugin from 'eslint-plugin-security';
@@ -23,6 +22,7 @@ import boundariesPlugin from 'eslint-plugin-boundaries';
 import nPlugin from 'eslint-plugin-n';
 import radarPlugin from 'eslint-plugin-radar';
 import optimizeRegexPlugin from 'eslint-plugin-optimize-regex';
+import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 
 import { baseOverrides } from './overrides.js';
 import { baseRules } from './rules.js';
@@ -49,6 +49,7 @@ const config = [
     ],
   },
   eslintJs.configs.recommended,
+  eslintPluginPrettierRecommended,
   {
     files: ['**/*.js', '**/*.jsx', '**/*.mjs', '**/*.cjs'],  // Add files pattern
     languageOptions: {
@@ -67,7 +68,6 @@ const config = [
       reportUnusedDisableDirectives: true,
     },
     plugins: {
-      prettier,
       unicorn,
       'css-modules': cssModules,
       'only-warn': onlyWarn,
@@ -147,7 +147,7 @@ const config = [
     },
     settings: {
       'json/json-with-comments-files': [],
-      polyfills: ['Promise', 'fetch', 'URLSearchParams'],
+      polyfills: ['Promise', 'fetch', 'URLSearchParams', 'Array.prototype.includes'],
       jest: {
         version: 29,
       },
@@ -160,6 +160,18 @@ const config = [
           extensions: ['.js', '.jsx', '.ts', '.tsx', '.mjs', '.cjs']
         }
       },
+      boundaries: {
+        elements: [
+          { type: 'app', pattern: 'app/*' },
+          { type: 'pages', pattern: 'pages/*' },
+          { type: 'components', pattern: 'components/*' },
+          { type: 'hooks', pattern: 'hooks/*' },
+          { type: 'utils', pattern: 'utils/*' },
+          { type: 'services', pattern: 'services/*' },
+          { type: 'types', pattern: 'types/*' },
+          { type: 'config', pattern: 'config/*' }
+        ]
+      }
     },
   },
   ...baseOverrides,

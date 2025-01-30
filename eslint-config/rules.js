@@ -218,8 +218,6 @@ export const baseRules = {
   'regexp/no-missing-g-flag': 'error',
 
   // Enhanced TypeScript
-  'etc/no-commented-out-code': 'warn',
-  'etc/no-implicit-any-catch': 'error',
   'etc/prefer-interface': 'error',
 
   // Enhanced Import Rules
@@ -268,8 +266,6 @@ export const baseRules = {
 
   // Performance
   'optimize-regex/optimize-regex': 'warn',
-  'radar/no-duplicate-string': ['warn', 5],
-  'radar/cognitive-complexity': ['error', 15],
 
   // Enhanced Security
   'n/no-unsupported-features/es-syntax': ['error', {
