@@ -1,34 +1,10 @@
 const config = {
-  // Core formatting
-  printWidth: 80,
-  tabWidth: 2,
-  useTabs: false,
-  semi: true,
-  singleQuote: true,
-  quoteProps: 'as-needed',
-  trailingComma: 'all',
-  bracketSpacing: true,
-  bracketSameLine: false, // new name for jsxBracketSameLine
   arrowParens: 'always',
-  proseWrap: 'always',
-
-  // Enhanced whitespace handling
-  htmlWhitespaceSensitivity: 'css',
-  endOfLine: 'lf',
+  bracketSameLine: false,
+  bracketSpacing: true,
   embeddedLanguageFormatting: 'auto',
-  singleAttributePerLine: true,
-
-  // Framework-specific
-  vueIndentScriptAndStyle: false,
-
-  // Svelte
-  svelteSortOrder: 'options-scripts-markup-styles',
-  svelteStrictMode: true,
-  svelteBracketNewLine: true,
-  svelteAllowShorthand: false,
-  svelteIndentScriptAndStyle: false,
-
-  // Overrides for specific file types
+  endOfLine: 'lf',
+  htmlWhitespaceSensitivity: 'css',
   overrides: [
     {
       files: '*.md',
@@ -43,11 +19,21 @@ const config = {
       },
     },
   ],
+  printWidth: 80,
+  proseWrap: 'always',
+  quoteProps: 'as-needed',
+  semi: true,
+  singleAttributePerLine: true,
+  singleQuote: true,
+  svelteAllowShorthand: false,
+  svelteBracketNewLine: true,
+  svelteIndentScriptAndStyle: false,
+  svelteSortOrder: 'options-scripts-markup-styles',
+  svelteStrictMode: true,
+  tabWidth: 2,
+  trailingComma: 'all',
+  useTabs: false,
+  vueIndentScriptAndStyle: false,
 };
 
 export default config;
-
-// Support CommonJS environments
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = config;
-}
