@@ -27,7 +27,6 @@ import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
 import { baseOverrides } from './overrides.js';
 import { baseRules } from './rules.js';
 
-/** @type {import('eslint').Linter.Config[]} */
 const config = [
   {
     ignores: [
@@ -51,7 +50,7 @@ const config = [
   eslintJs.configs.recommended,
   eslintPluginPrettierRecommended,
   {
-    files: ['**/*.js', '**/*.jsx', '**/*.mjs', '**/*.cjs'],  // Add files pattern
+    files: ['**/*.js', '**/*.jsx', '**/*.mjs', '**/*.cjs'],
     languageOptions: {
       ecmaVersion: 'latest',
       sourceType: 'module',
@@ -178,5 +177,4 @@ const config = [
 ];
 
 export default config;
-export { baseRules } from './rules.js';
-export { baseOverrides } from './overrides.js';
+export { baseRules, baseOverrides };
