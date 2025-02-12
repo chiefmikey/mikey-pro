@@ -54,26 +54,16 @@ const vueConfig = [
       ...vueRecommended.rules,
 
       // Vue 3 Composition API
-      'vue/define-macros-order': ['warn', {
-        order: ['defineProps', 'defineEmits']
-      }],
-      'vue/define-props-declaration': ['error', 'type-based'],
       'vue/component-api-style': ['error', ['script-setup', 'composition']],
       'vue/no-ref-object-destructure': 'error',
       'vue/no-setup-props-destructure': 'error',
 
       // Best Practices
-      'vue/block-order': ['error', {
-        order: ['script', 'template', 'style']
-      }],
-      'vue/component-name-in-template-casing': ['error', 'PascalCase'],
-      'vue/no-duplicate-attr-inheritance': 'error',
       'vue/no-useless-v-bind': 'error',
       'vue/prefer-separate-static-class': 'error',
 
       // Performance
       'vue/no-async-in-computed-properties': 'error',
-      'vue/no-side-effects-in-computed-properties': 'error',
       'vue/no-static-inline-styles': 'warn',
 
       // Type Safety
@@ -85,8 +75,6 @@ const vueConfig = [
       'vue/component-options-name-casing': ['error', 'PascalCase'],
 
       // Best Practices
-      'vue/prefer-import-from-vue': 'error',
-      'vue/no-unused-refs': 'warn',
       'vue/no-required-prop-with-default': 'error',
       'vue/require-typed-ref': 'error',
       'vue/valid-define-props': 'error',
@@ -114,30 +102,14 @@ const vueConfig = [
       'prettier/prettier': ['warn', { parser: 'vue' }],
 
       // Enhanced Type Safety
-      'vue/define-emits-declaration': ['error', 'type-based'],
       'vue/no-export-in-script-setup': 'error',
 
       // Script Setup
-      'vue/script-setup-uses-vars': 'error',
       'vue/no-undef-components': ['error', {
         ignorePatterns: ['router-view', 'router-link'],
       }],
 
-      // Performance
-      'vue/no-unused-properties': ['warn', {
-        groups: ['props', 'data', 'computed', 'methods', 'setup'],
-      }],
-
       // Composables
-      'vue/define-macros-order': ['error', {
-        order: [
-          'defineOptions',
-          'defineProps',
-          'defineEmits',
-          'defineSlots',
-          'withDefaults'
-        ]
-      }],
       'vue/custom-event-name-casing': ['error', 'camelCase', {
         ignore: []
       }],
@@ -204,10 +176,6 @@ const vueConfig = [
       'vue/no-child-content': ['error', {
         'ignoreSlots': ['default']
       }],
-      'vue/no-duplicate-attr-inheritance': ['error', {
-        'ignoreKeys': ['class', 'style']
-      }],
-      'vue/prefer-define-options': 'error',
 
       // Better Type Safety
       'vue/define-props-declaration': ['error', {
@@ -231,7 +199,6 @@ const vueConfig = [
 
       // Vue 3.4+ Features
       'vue/next-tick-style': ['error', 'promise'],
-      'vue/prefer-prop-type-inference': 'error',
       'vue/require-typed-object-prop': 'error',
       'vue/no-deprecated-model-definition': ['error', {
         allowVue3Compat: false
@@ -264,9 +231,8 @@ const vueConfig = [
       // Performance Optimizations
       'vue/no-static-style': 'error',
       'vue/no-undef-properties': ['error', {
-        ignores: ['/^\\$/']
+        ignores: ['/^\$/']
       }],
-      'vue/valid-define-options': 'error',
 
       // Script Setup Safety
       'vue/script-setup-uses-vars': ['error', {

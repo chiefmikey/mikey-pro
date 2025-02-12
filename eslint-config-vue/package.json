@@ -1,16 +1,16 @@
 {
   "name": "@mikey-pro/eslint-config-vue",
-  "version": "8.0.3",
+  "version": "8.1.0",
   "description": "Mikey Pro ESLint Vue configuration",
   "type": "module",
   "main": "index.js",
   "dependencies": {
-    "@babel/core": "^7.26.7",
-    "@babel/eslint-parser": "^7.26.5",
+    "@babel/core": "^7.26.8",
+    "@babel/eslint-parser": "^7.26.8",
     "@babel/plugin-transform-react-jsx": "^7.25.9",
-    "@babel/preset-env": "^7.26.7",
-    "@mikey-pro/eslint-config": "^8.0.11",
-    "@typescript-eslint/parser": "^8.22.0",
+    "@babel/preset-env": "^7.26.8",
+    "@mikey-pro/eslint-config": "^8.0.19",
+    "@typescript-eslint/parser": "^8.24.0",
     "eslint-plugin-vue": "^9.32.0",
     "vue-eslint-parser": "^9.4.3"
   },
