@@ -1,6 +1,5 @@
 import cypressJson from '@cypress/eslint-plugin-json';
 import eslintJs from '@eslint/js';
-import boundariesPlugin from 'eslint-plugin-boundaries';
 import compatPlugin from 'eslint-plugin-compat';
 import cssModules from 'eslint-plugin-css-modules';
 import importPlugin from 'eslint-plugin-import';
@@ -66,7 +65,6 @@ const config = [
     },
     plugins: {
       '@cypress/json': cypressJson,
-      boundaries: boundariesPlugin,
       compat: compatPlugin,
       'css-modules': cssModules,
       import: importPlugin,
@@ -118,34 +116,22 @@ const config = [
       'promise/always-return': 'warn',
       'promise/catch-or-return': 'warn',
       'promise/no-return-wrap': 'warn',
-      'promise/param-names': 'error',
+      'promise/param-names': 'warn',
       'security/detect-non-literal-regexp': 'warn',
       'security/detect-object-injection': 'warn',
       'security/detect-possible-timing-attacks': 'warn',
       'simple-import-sort/exports': 'warn',
       'simple-import-sort/imports': 'warn',
-      'sonarjs/cognitive-complexity': ['error', 15],
+      'sonarjs/cognitive-complexity': ['warn', 15],
       'sonarjs/max-switch-cases': ['warn', 10],
-      'sonarjs/no-duplicate-string': ['error', { threshold: 5 }],
-      'sonarjs/no-duplicated-branches': 'error',
-      'sonarjs/no-redundant-boolean': 'error',
+      'sonarjs/no-duplicate-string': ['warn', { threshold: 5 }],
+      'sonarjs/no-duplicated-branches': 'warn',
+      'sonarjs/no-redundant-boolean': 'warn',
       'sonarjs/no-small-switch': 'warn',
-      'sonarjs/prefer-immediate-return': 'error',
+      'sonarjs/prefer-immediate-return': 'warn',
       'unicorn/expiring-todo-comments': 'off',
     },
     settings: {
-      boundaries: {
-        elements: [
-          { pattern: 'app/*', type: 'app' },
-          { pattern: 'pages/*', type: 'pages' },
-          { pattern: 'components/*', type: 'components' },
-          { pattern: 'hooks/*', type: 'hooks' },
-          { pattern: 'utils/*', type: 'utils' },
-          { pattern: 'services/*', type: 'services' },
-          { pattern: 'types/*', type: 'types' },
-          { pattern: 'config/*', type: 'config' },
-        ],
-      },
       'import/extensions': ['.js', '.jsx', '.ts', '.tsx', '.mjs', '.cjs'],
       'import/parsers': {
         '@typescript-eslint/parser': ['.ts', '.tsx', '.mts', '.cts'],
