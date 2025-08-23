@@ -27,7 +27,7 @@ const angularConfig = [
       ...angularAll.rules,
       ...angularTemplateProcessInline.rules,
       ...overrides.ts.rules,
-      // Angular specific
+      // Angular specific (deduplicated, only last occurrence kept)
       '@angular-eslint/component-class-suffix': 'error',
       '@angular-eslint/contextual-lifecycle': 'error',
       '@angular-eslint/no-async-lifecycle-method': 'error',
@@ -35,32 +35,19 @@ const angularConfig = [
       '@angular-eslint/use-component-view-encapsulation': 'warn',
       '@angular-eslint/use-injectable-provided-in': 'error',
       '@angular-eslint/use-lifecycle-interface': 'error',
-
-      // Template rules
       '@angular-eslint/template/accessibility-valid-aria': 'error',
       '@angular-eslint/template/no-duplicate-attributes': 'error',
-      '@angular-eslint/template/use-track-by-function': 'warn',
-
-      // Existing rules...
+      '@angular-eslint/template/use-track-by-function': ['error', { trackByPrefix: 'trackBy' }],
       'unicorn/filename-case': 'off',
       '@angular-eslint/component-selector': [
         'warn',
-        {
-          type: 'element',
-          prefix: 'app',
-          style: 'kebab-case',
-        },
+        { type: 'element', prefix: 'app', style: 'kebab-case' },
       ],
       '@angular-eslint/consistent-component-styles': 'off',
       '@angular-eslint/directive-selector': [
         'warn',
-        {
-          type: 'attribute',
-          prefix: '',
-          style: 'kebab-case',
-        },
+        { type: 'attribute', prefix: '', style: 'kebab-case' },
       ],
-      '@angular-eslint/prefer-on-push-component-change-detection': 'off',
       '@typescript-eslint/explicit-member-accessibility': [
         'warn',
         { accessibility: 'no-public' },
@@ -68,60 +55,20 @@ const angularConfig = [
       '@typescript-eslint/consistent-type-imports': 'off',
       'import/extensions': ['warn', 'ignorePackages', { ts: 'never' }],
       'prettier/prettier': ['warn', { parser: 'typescript' }],
-
-      // Additional Component Rules
       '@angular-eslint/no-forward-ref': 'error',
-      '@angular-eslint/no-output-native': 'error',
+      '@angular-eslint/no-output-native': ['error', { allowSignals: true }],
       '@angular-eslint/use-pipe-transform-interface': 'error',
-
-      // Performance
-      '@angular-eslint/prefer-output-readonly': 'error',
+      '@angular-eslint/prefer-output-readonly': ['error', { allowProtected: true, allowSignals: true }],
       '@angular-eslint/no-output-on-prefix': 'error',
       '@angular-eslint/relative-url-prefix': 'error',
-
-      // RxJS
       '@angular-eslint/rxjs-prefer-angular-takeuntil': 'error',
       '@angular-eslint/rxjs-prefer-angular-async-pipe': 'warn',
-
-      // Template Safety
       '@angular-eslint/template/no-negated-async': 'error',
-      '@angular-eslint/template/use-track-by-function': ['error', {
-        trackByPrefix: 'trackBy'
-      }],
       '@angular-eslint/template/no-call-expression': 'error',
-
-      // Performance
-      '@angular-eslint/prefer-standalone-component': 'error',
-      '@angular-eslint/use-component-selector': 'error',
-      '@angular-eslint/prefer-output-readonly': ['error', {
-        allowProtected: true
-      }],
-
-      // Standalone Components
-      '@angular-eslint/prefer-standalone-component': ['error', {
-        checkProviders: true,
-        checkStyles: true
-      }],
-      '@angular-eslint/no-host-metadata-property': ['error', {
-        allowStatic: true
-      }],
-
-      // Signals
-      '@angular-eslint/prefer-output-readonly': ['error', {
-        allowProtected: true,
-        allowSignals: true
-      }],
-      '@angular-eslint/no-output-native': ['error', {
-        allowSignals: true
-      }],
-
-      // Performance
-      '@angular-eslint/prefer-on-push-component-change-detection': ['error', {
-        allowDefault: false
-      }],
-      '@angular-eslint/use-component-selector': ['error', {
-        checkCustomElements: true
-      }]
+      '@angular-eslint/prefer-standalone-component': ['error', { checkProviders: true, checkStyles: true }],
+      '@angular-eslint/no-host-metadata-property': ['error', { allowStatic: true }],
+      '@angular-eslint/prefer-on-push-component-change-detection': ['error', { allowDefault: false }],
+      '@angular-eslint/use-component-selector': ['error', { checkCustomElements: true }]
     },
     settings: {
       ...baseConfig.settings,
@@ -167,7 +114,5 @@ const angularConfig = [
   },
 ];
 
+
 export default angularConfig;
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = angularConfig;
-}
