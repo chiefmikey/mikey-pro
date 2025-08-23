@@ -4,13 +4,13 @@
   "description": "Mikey Pro ESLint Angular configuration",
   "main": "index.js",
   "dependencies": {
-    "@angular-eslint/eslint-plugin": "^19.1.0",
-    "@angular-eslint/eslint-plugin-template": "^19.1.0",
-    "@angular-eslint/template-parser": "^19.1.0",
-    "@mikey-pro/eslint-config": "^8.1.0",
-    "@typescript-eslint/eslint-plugin": "^8.24.0",
-    "@typescript-eslint/parser": "^8.24.0",
-    "eslint-plugin-prettier": "^5.2.3"
+    "@angular-eslint/eslint-plugin": "^20.2.0",
+    "@angular-eslint/eslint-plugin-template": "^20.2.0",
+    "@angular-eslint/template-parser": "^20.2.0",
+    "@mikey-pro/eslint-config": "^8.1.1",
+  "@typescript-eslint/eslint-plugin": "^8.40.0",
+  "@typescript-eslint/parser": "^8.40.0",
+    "eslint-plugin-prettier": "^5.5.4"
   },
   "peerDependencies": {
     "@mikey-pro/eslint-config": "^8.1.0"
