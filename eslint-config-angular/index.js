@@ -1,118 +1,153 @@
-import baseConfig from '@mikey-pro/eslint-config';
-import angularPlugin from '@angular-eslint/eslint-plugin';
-import angularTemplatePlugin from '@angular-eslint/eslint-plugin-template';
+// Modern Angular ESLint configuration for Mikey Pro
+import angular from '@angular-eslint/eslint-plugin';
+import angularTemplate from '@angular-eslint/eslint-plugin-template';
 import angularTemplateParser from '@angular-eslint/template-parser';
-import typeScriptPlugin from '@typescript-eslint/eslint-plugin';
-import * as typeScriptParser from '@typescript-eslint/parser';
+import { baseConfig } from '@mikey-pro/eslint-config/base-config.js';
+import { baseOverrides } from '@mikey-pro/eslint-config/overrides.js';
 
-/** @type {import('eslint').Linter.Config[]} */
-const angularConfig = [
-  ...baseConfig,
-  {
-    files: ['*.ts', '*.tsx'],
-    languageOptions: {
-      parser: typeScriptParser,
-      parserOptions: {
-        ecmaVersion: 'latest',
-        sourceType: 'module',
-        project: ['./tsconfig.json', './tsconfig.*.json'],
-        createDefaultProgram: false
-      }
+// Angular-specific configuration
+const angularConfig = {
+  files: ['**/*.ts'],
+  languageOptions: {
+    parser: baseConfig.languageOptions.parser,
+    parserOptions: {
+      ...baseConfig.languageOptions.parserOptions,
+      project: './tsconfig.json',
     },
-    plugins: {
-      '@angular-eslint': angularPlugin,
-      '@typescript-eslint': typeScriptPlugin,
-    },
-    rules: {
-      ...angularAll.rules,
-      ...angularTemplateProcessInline.rules,
-      ...overrides.ts.rules,
-      // Angular specific (deduplicated, only last occurrence kept)
-      '@angular-eslint/component-class-suffix': 'error',
-      '@angular-eslint/contextual-lifecycle': 'error',
-      '@angular-eslint/no-async-lifecycle-method': 'error',
-      '@angular-eslint/no-empty-lifecycle-method': 'error',
-      '@angular-eslint/use-component-view-encapsulation': 'warn',
-      '@angular-eslint/use-injectable-provided-in': 'error',
-      '@angular-eslint/use-lifecycle-interface': 'error',
-      '@angular-eslint/template/accessibility-valid-aria': 'error',
-      '@angular-eslint/template/no-duplicate-attributes': 'error',
-      '@angular-eslint/template/use-track-by-function': ['error', { trackByPrefix: 'trackBy' }],
-      'unicorn/filename-case': 'off',
-      '@angular-eslint/component-selector': [
-        'warn',
-        { type: 'element', prefix: 'app', style: 'kebab-case' },
-      ],
-      '@angular-eslint/consistent-component-styles': 'off',
-      '@angular-eslint/directive-selector': [
-        'warn',
-        { type: 'attribute', prefix: '', style: 'kebab-case' },
-      ],
-      '@typescript-eslint/explicit-member-accessibility': [
-        'warn',
-        { accessibility: 'no-public' },
-      ],
-      '@typescript-eslint/consistent-type-imports': 'off',
-      'import/extensions': ['warn', 'ignorePackages', { ts: 'never' }],
-      'prettier/prettier': ['warn', { parser: 'typescript' }],
-      '@angular-eslint/no-forward-ref': 'error',
-      '@angular-eslint/no-output-native': ['error', { allowSignals: true }],
-      '@angular-eslint/use-pipe-transform-interface': 'error',
-      '@angular-eslint/prefer-output-readonly': ['error', { allowProtected: true, allowSignals: true }],
-      '@angular-eslint/no-output-on-prefix': 'error',
-      '@angular-eslint/relative-url-prefix': 'error',
-      '@angular-eslint/rxjs-prefer-angular-takeuntil': 'error',
-      '@angular-eslint/rxjs-prefer-angular-async-pipe': 'warn',
-      '@angular-eslint/template/no-negated-async': 'error',
-      '@angular-eslint/template/no-call-expression': 'error',
-      '@angular-eslint/prefer-standalone-component': ['error', { checkProviders: true, checkStyles: true }],
-      '@angular-eslint/no-host-metadata-property': ['error', { allowStatic: true }],
-      '@angular-eslint/prefer-on-push-component-change-detection': ['error', { allowDefault: false }],
-      '@angular-eslint/use-component-selector': ['error', { checkCustomElements: true }]
-    },
-    settings: {
-      ...baseConfig.settings,
-      'import/resolver': {
-        typescript: {
-          alwaysTryTypes: true,
-          project: './tsconfig.json'
-        },
+  },
+  plugins: {
+    '@angular-eslint': angular,
+  },
+  rules: {
+    // Angular rules
+    ...angular.configs.recommended.rules,
+
+    // Basic Angular-specific overrides
+    '@angular-eslint/component-class-suffix': [
+      'error',
+      { suffixes: ['Component', 'Page', 'View'] },
+    ],
+    '@angular-eslint/component-selector': [
+      'error',
+      {
+        prefix: 'app',
+        style: 'kebab-case',
+        type: 'element',
       },
-      'import/internal-regex': '^@(core|shared|features)/',
+    ],
+    '@angular-eslint/directive-class-suffix': [
+      'error',
+      { suffixes: ['Directive'] },
+    ],
+    '@angular-eslint/directive-selector': [
+      'error',
+      {
+        prefix: 'app',
+        style: 'camelCase',
+        type: 'attribute',
+      },
+    ],
+    '@angular-eslint/no-multiple-template-root': 'off', // Angular 17+ allows multiple roots
+    '@angular-eslint/use-lifecycle-interface': 'error',
+  },
+  settings: {
+    'import/resolver': {
+      typescript: {
+        alwaysTryTypes: true,
+      },
     },
   },
+};
+
+// Angular template configuration
+const angularTemplateConfig = {
+  files: ['**/*.html'],
+  languageOptions: {
+    parser: angularTemplateParser,
+    parserOptions: {
+      ecmaVersion: 'latest',
+      sourceType: 'module',
+    },
+  },
+  plugins: {
+    '@angular-eslint/template': angularTemplate,
+  },
+  rules: {
+    // Angular template rules
+    ...angularTemplate.configs.recommended.rules,
+
+    // Basic Angular template-specific overrides
+    '@angular-eslint/template/alt-text': 'error',
+    '@angular-eslint/template/click-events-have-key-events': 'error',
+    '@angular-eslint/template/conditional-complexity': ['error', { max: 3 }],
+    '@angular-eslint/template/cyclomatic-complexity': ['error', { max: 5 }],
+    '@angular-eslint/template/eqeqeq': 'error',
+    '@angular-eslint/template/iframe-title': 'error',
+    '@angular-eslint/template/interactive-supports-focus': 'error',
+    '@angular-eslint/template/label-has-associated-control': 'error',
+    '@angular-eslint/template/mouse-events-have-key-events': 'error',
+    '@angular-eslint/template/no-autofocus': 'error',
+    '@angular-eslint/template/no-duplicate-attributes': 'error',
+    '@angular-eslint/template/no-positive-tabindex': 'error',
+    '@angular-eslint/template/use-track-by-function': 'error',
+    '@angular-eslint/template/valid-aria': 'error',
+  },
+};
+
+// Export the complete Angular configuration
+export default [
+  // Global ignores
   {
-    files: ['*.component.html'],
-    languageOptions: {
-      parser: angularTemplateParser,
-      parserOptions: {
-        ecmaVersion: 'latest',
-        sourceType: 'module',
-        project: ['./tsconfig.json', './tsconfig.*.json'],
-        templateParser: {
-          checkAttributes: true,
-          checkElements: true
-        }
-      }
-    },
-    plugins: {
-      '@angular-eslint/template': angularTemplatePlugin,
-    },
-    rules: {
-      ...angularTemplateRecommended.rules,
-      ...angularTemplateAccessibility.rules,
-      ...overrides.html.rules,
-      '@angular-eslint/template/alt-text': 'warn',
-      '@html-eslint/element-newline': 'off',
-      'prettier/prettier': [
-        'warn',
-        {
-          parser: 'angular',
-        },
-      ],
-    },
+    ignores: [
+      '**/dist/**/*',
+      '**/vendor/**/*',
+      '**/node_modules/**/*',
+      '**/coverage/**/*',
+      '**/.next/**/*',
+      '**/.nuxt/**/*',
+      '**/.output/**/*',
+      '**/.vite/**/*',
+      '**/build/**/*',
+      '**/out/**/*',
+      '*.properties',
+      '*.cclibs',
+      '*.svg',
+      '*.png',
+      '*.jpg',
+      '*.jpeg',
+      '*.gif',
+      '*.ico',
+      '*.webp',
+      '*.aco',
+      '*.psd',
+      '*.ai',
+      '*.ase',
+      '*.sh',
+      '*.bat',
+      '*.cmd',
+      'package-lock.json',
+      'yarn.lock',
+      'pnpm-lock.yaml',
+      'LICENSE',
+      'CNAME',
+      '*.min.js',
+      '*.min.css',
+    ],
   },
+
+  // Base configuration
+  baseConfig,
+
+  // Angular-specific configuration
+  angularConfig,
+
+  // Angular template configuration
+  angularTemplateConfig,
+
+  // File-specific overrides
+  ...baseOverrides,
 ];
 
-
-export default angularConfig;
+// Export individual components for advanced usage
+export { baseConfig } from '@mikey-pro/eslint-config/base-config.js';
+export { baseOverrides } from '@mikey-pro/eslint-config/overrides.js';

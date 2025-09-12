@@ -18,9 +18,19 @@ A preset ESLint configuration
 npm i -D mikey-pro
 ```
 
-### Configure
+### Configure (Flat ESLint v9+ Recommended)
 
-Extend to ESLint in `package.json`:
+Create / update `eslint.config.js`:
+
+```js
+import mikeyPro from '@mikey-pro/eslint-config/flat';
+
+export default mikeyPro;
+```
+
+### Legacy Configuration (still supported)
+
+Extend in `package.json` (deprecated style):
 
 ```json
 {
@@ -29,3 +39,5 @@ Extend to ESLint in `package.json`:
   }
 }
 ```
+
+Both configurations are kept semantically equivalent; the legacy form will be removed in a future major release.

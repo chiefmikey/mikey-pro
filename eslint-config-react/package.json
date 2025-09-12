@@ -1,23 +1,23 @@
 {
   "name": "@mikey-pro/eslint-config-react",
-  "version": "8.1.0",
-  "description": "Mikey Pro ESLint React configuration",
+  "version": "9.0.0",
+  "description": "Mikey Pro ESLint React configuration - Ultimate React coding style guide",
   "type": "module",
   "main": "index.js",
   "dependencies": {
-    "@babel/preset-react": "^7.27.1",
-    "@mikey-pro/eslint-config": "^8.1.1",
+    "@babel/preset-react": "^7.28.0",
+    "@mikey-pro/eslint-config": "^9.0.0",
     "eslint-config-react-app-bump": "^1.0.25",
     "eslint-plugin-jest-dom": "^5.5.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
-  "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-perf": "^3.3.3",
     "eslint-plugin-react-refresh": "^0.4.20",
-    "eslint-plugin-testing-library": "^7.6.6"
+    "eslint-plugin-testing-library": "^7.6.8"
   },
   "peerDependencies": {
-    "@mikey-pro/eslint-config": "^8.1.0"
+    "@mikey-pro/eslint-config": "^9.0.0"
   },
   "peerDependenciesMeta": {
     "@types/react": {
@@ -29,6 +29,7 @@
   },
   "files": [
     "index.js",
+    "flat.js",
     "README.md",
     "LICENSE"
   ],
@@ -42,7 +43,7 @@
   },
   "license": "MIT",
   "keywords": [
-    "@mikey-pro/eslint-config",
+    "@mikey-pro/eslint-config-react",
     "@mikey-pro",
     "mikey-pro",
     "mikey",
@@ -51,15 +52,32 @@
     "eslintconfig",
     "eslint",
     "config",
+    "react",
+    "jsx",
     "style-guide",
     "style",
-    "guide"
+    "guide",
+    "eslint-9",
+    "flat-config"
   ],
   "author": "Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)",
   "browserslist": [
     "defaults"
   ],
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0",
+    "pnpm": ">=8.0.0",
+    "yarn": ">=4.0.0"
+  },
+  "exports": {
+    ".": {
+      "import": "./index.js",
+      "require": "./index.js"
+    },
+    "./flat": {
+      "import": "./flat.js",
+      "require": "./flat.js"
+    }
   }
 }

@@ -18,9 +18,16 @@ A preset ESLint Angular configuration
 npm i -D mikey-pro @mikey-pro/eslint-config-angular
 ```
 
-### Configure
+### Configure (Flat ESLint v9+ Recommended)
 
-Extend to ESLint in `package.json`:
+```js
+// eslint.config.js
+import angularConfig from '@mikey-pro/eslint-config-angular/flat';
+
+export default angularConfig;
+```
+
+### Legacy Configuration (still supported)
 
 ```json
 {

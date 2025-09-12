@@ -1,15 +1,15 @@
 {
   "name": "mikey-pro",
-  "version": "8.1.1",
+  "version": "9.0.0",
   "description": "Mikey Pro Style Guide",
   "type": "module",
   "dependencies": {
-    "@mikey-pro/eslint-config": "^8.1.1",
-    "@mikey-pro/prettier-config": "^8.1.1",
-    "@mikey-pro/stylelint-config": "^8.1.1",
-    "eslint": "^9.34.0",
+    "@mikey-pro/eslint-config": "file:./eslint-config",
+    "@mikey-pro/prettier-config": "file:./prettier-config",
+    "@mikey-pro/stylelint-config": "file:./stylelint-config",
+    "eslint": "^9.35.0",
     "prettier": "^3.6.2",
-    "stylelint": "^16.23.1"
+    "stylelint": "^16.24.0"
   },
   "files": [
     "README.md",

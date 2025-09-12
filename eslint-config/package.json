@@ -1,29 +1,31 @@
 {
   "name": "@mikey-pro/eslint-config",
-  "version": "8.1.1",
-  "description": "Mikey Pro ESLint configuration",
+  "version": "9.0.1",
+  "description": "Mikey Pro ESLint configuration - Ultimate coding style guide for excellence",
   "main": "index.js",
   "types": "index.d.ts",
   "sideEffects": false,
   "dependencies": {
-    "@babel/core": "^7.28.3",
-    "@babel/eslint-parser": "^7.28.0",
-    "@babel/eslint-plugin": "^7.27",
-    "@babel/preset-env": "^7.28",
+    "@babel/core": "^7.28.4",
+    "@babel/eslint-parser": "^7.28.4",
+    "@babel/eslint-plugin": "^7.27.1",
+    "@babel/preset-env": "^7.28.3",
     "@cypress/eslint-plugin-json": "^3.2.3",
-  "@eslint/js": "^9.34.0",
-    "@html-eslint/eslint-plugin": "^0.45.0",
-    "@html-eslint/parser": "^0.45.0",
-  "@typescript-eslint/eslint-plugin": "^8.40.0",
-  "@typescript-eslint/parser": "^8.40.0",
-  "eslint": "^9.34.0",
+    "@eslint/js": "^9.35.0",
+    "@html-eslint/eslint-plugin": "^0.46.2",
+    "@html-eslint/parser": "^0.46.2",
+    "@stylistic/eslint-plugin": "^5.3.1",
+    "@typescript-eslint/eslint-plugin": "^8.43.0",
+    "@typescript-eslint/parser": "^8.43.0",
+    "eslint": "^9.35.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-import-resolver-typescript": "^4.4.4",
     "eslint-plugin-boundaries": "^5.0.1",
     "eslint-plugin-compat": "^6.0.2",
-    "eslint-plugin-css-modules": "^2.12",
+    "eslint-plugin-css-modules": "^2.12.0",
     "eslint-plugin-cypress": "^5.1.1",
-  "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-filenames": "^1.3.2",
+    "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-jest": "^29.0.1",
     "eslint-plugin-jest-dom": "^5.5.0",
     "eslint-plugin-jsonc": "^2.20.1",
@@ -39,14 +41,14 @@
     "eslint-plugin-regexp": "^2.10.0",
     "eslint-plugin-security": "^3.0.1",
     "eslint-plugin-simple-import-sort": "^12.1.1",
-    "eslint-plugin-sonarjs": "^3.0.4",
+    "eslint-plugin-sonarjs": "^3.0.5",
     "eslint-plugin-sort-destructure-keys": "^2.0.0",
-    "eslint-plugin-testing-library": "^7.6.6",
+    "eslint-plugin-testing-library": "^7.6.8",
     "eslint-plugin-toml": "^0.12.0",
-  "eslint-plugin-unicorn": "^60.0.0",
+    "eslint-plugin-unicorn": "^61.0.2",
     "eslint-plugin-write-good-comments": "^0.2.0",
     "eslint-plugin-yml": "^1.18.0",
-    "globals": "^16.3.0",
+    "globals": "^16.4.0",
     "postcss": "^8.5.6",
     "postcss-scss": "^4.0.9",
     "yaml-eslint-parser": "^1.3.0"
@@ -67,6 +69,7 @@
   },
   "files": [
     "index.js",
+    "flat.js",
     "rules.js",
     "overrides.js",
     "README.md",
@@ -94,7 +97,14 @@
     "config",
     "style-guide",
     "style",
-    "guide"
+    "guide",
+    "eslint-9",
+    "flat-config",
+    "typescript",
+    "react",
+    "vue",
+    "svelte",
+    "angular"
   ],
   "author": "Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)",
   "browserslist": [
@@ -112,6 +122,10 @@
       "import": "./index.js",
       "require": "./index.js"
     },
+    "./flat": {
+      "import": "./flat.js",
+      "require": "./flat.js"
+    },
     "./rules": {
       "import": "./rules.js",
       "require": "./rules.js"
@@ -119,6 +133,10 @@
     "./overrides": {
       "import": "./overrides.js",
       "require": "./overrides.js"
+    },
+    "./base-config": {
+      "import": "./base-config.js",
+      "require": "./base-config.js"
     }
   }
 }

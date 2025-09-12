@@ -18,14 +18,29 @@ A preset ESLint Vue configuration
 npm i -D mikey-pro @mikey-pro/eslint-config-vue
 ```
 
-### Configure
+### Configure (Flat ESLint v9+ Default)
 
-Extend to ESLint in `package.json`:
+```js
+// eslint.config.js
+import vueConfig from '@mikey-pro/eslint-config-vue';
+
+export default vueConfig;
+```
+
+### Legacy (eslintrc) Configuration (still supported)
+
+Legacy consumers should explicitly import the legacy entry:
 
 ```json
 {
   "eslintConfig": {
-    "extends": ["@mikey-pro/eslint-config-vue"]
+    "extends": ["@mikey-pro/eslint-config-vue/legacy"]
   }
 }
+```
+
+Or via direct require:
+
+```js
+module.exports = require('@mikey-pro/eslint-config-vue/legacy');
 ```

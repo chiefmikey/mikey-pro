@@ -20,12 +20,12 @@ npm i -D mikey-pro
 
 ### Configure
 
-Extend to Prettier in `package.json`:
+Reference shareable config in `package.json`:
 
 ```json
 {
-  "prettier": {
-    "extends": ["@mikey-pro/prettier-config"]
-  }
+  "prettier": "@mikey-pro/prettier-config"
 }
 ```
+
+Prettier does not support an `extends` field; using the package string is the correct approach.
