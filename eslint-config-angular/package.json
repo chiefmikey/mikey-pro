@@ -1,22 +1,32 @@
 {
   "name": "@mikey-pro/eslint-config-angular",
-  "version": "8.1.0",
-  "description": "Mikey Pro ESLint Angular configuration",
+  "version": "9.0.0",
+  "description": "Mikey Pro ESLint Angular configuration - Ultimate Angular coding style guide",
+  "type": "module",
   "main": "index.js",
   "dependencies": {
     "@angular-eslint/eslint-plugin": "^20.2.0",
     "@angular-eslint/eslint-plugin-template": "^20.2.0",
     "@angular-eslint/template-parser": "^20.2.0",
-    "@mikey-pro/eslint-config": "^8.1.1",
-  "@typescript-eslint/eslint-plugin": "^8.40.0",
-  "@typescript-eslint/parser": "^8.40.0",
+    "@mikey-pro/eslint-config": "^9.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.43.0",
+    "@typescript-eslint/parser": "^8.43.0",
     "eslint-plugin-prettier": "^5.5.4"
   },
   "peerDependencies": {
-    "@mikey-pro/eslint-config": "^8.1.0"
+    "@mikey-pro/eslint-config": "^9.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@angular/core": {
+      "optional": false
+    },
+    "typescript": {
+      "optional": false
+    }
   },
   "files": [
     "index.js",
+    "flat.js",
     "README.md",
     "LICENSE"
   ],
@@ -30,7 +40,7 @@
   },
   "license": "MIT",
   "keywords": [
-    "@mikey-pro/eslint-config",
+    "@mikey-pro/eslint-config-angular",
     "@mikey-pro",
     "mikey-pro",
     "mikey",
@@ -39,25 +49,31 @@
     "eslintconfig",
     "eslint",
     "config",
+    "angular",
     "style-guide",
     "style",
-    "guide"
+    "guide",
+    "eslint-9",
+    "flat-config"
   ],
   "author": "Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)",
   "browserslist": [
     "defaults"
   ],
-  "peerDependenciesMeta": {
-    "@angular/core": {
-      "optional": false
-    },
-    "typescript": {
-      "optional": false
-    }
-  },
-  "type": "module",
   "engines": {
     "node": ">=18.0.0",
-    "npm": ">=9.0.0"
+    "npm": ">=9.0.0",
+    "pnpm": ">=8.0.0",
+    "yarn": ">=4.0.0"
+  },
+  "exports": {
+    ".": {
+      "import": "./index.js",
+      "require": "./index.js"
+    },
+    "./flat": {
+      "import": "./flat.js",
+      "require": "./flat.js"
+    }
   }
 }

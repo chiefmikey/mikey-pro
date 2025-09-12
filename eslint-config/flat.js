@@ -1,10 +1,8 @@
-// Modern ESLint 9 configuration for Mikey Pro
-// This is the main entry point that exports the flat config
+// Modern ESLint 9 Flat Configuration for Mikey Pro
+// Ultimate coding style guide for excellence
 
 import { baseConfig } from './base-config.js';
-import { baseOverrides } from './overrides.js';
 
-// Export the modern flat configuration
 export default [
   // Global ignores
   {
@@ -47,12 +45,4 @@ export default [
 
   // Base configuration
   baseConfig,
-
-  // File-specific overrides
-  ...baseOverrides,
 ];
-
-// Export individual components for advanced usage
-export { baseConfig } from './base-config.js';
-export { baseOverrides } from './overrides.js';
-export { baseRules } from './rules.js';

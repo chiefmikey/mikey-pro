@@ -18,9 +18,16 @@ A preset ESLint React configuration
 npm i -D mikey-pro @mikey-pro/eslint-config-react
 ```
 
-### Configure
+### Configure (Flat ESLint v9+ Recommended)
 
-Extend to ESLint in `package.json`:
+```js
+// eslint.config.js
+import reactConfig from '@mikey-pro/eslint-config-react/flat';
+
+export default reactConfig;
+```
+
+### Legacy Configuration (still supported)
 
 ```json
 {

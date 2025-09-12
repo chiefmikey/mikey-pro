@@ -1,33 +1,46 @@
+// Modern overrides for different file types and frameworks
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import typeScriptPlugin from '@typescript-eslint/eslint-plugin';
+import html from '@html-eslint/eslint-plugin';
+import htmlParser from '@html-eslint/parser';
+import tsPlugin from '@typescript-eslint/eslint-plugin';
+import tsParser from '@typescript-eslint/parser';
+import cypress from 'eslint-plugin-cypress';
 import importPlugin from 'eslint-plugin-import';
-import jestPlugin from 'eslint-plugin-jest';
-import markdownPlugin from 'eslint-plugin-markdownlint';
+import jest from 'eslint-plugin-jest';
+import markdownlint from 'eslint-plugin-markdownlint';
+import jsoncParser from 'jsonc-eslint-parser';
+import tomlParser from 'toml-eslint-parser';
+import yamlParser from 'yaml-eslint-parser';
 
-const currentDirectory = path.dirname(fileURLToPath(import.meta.url));
+const currentDirectory = import.meta.dirname;
 
-const ts = {
-  files: ['*.ts', '*.tsx'],
+// TypeScript configuration
+export const ts = {
+  files: ['**/*.ts', '**/*.tsx'],
   languageOptions: {
-    ecmaFeatures: {
-      jsx: true,
-    },
     ecmaVersion: 'latest',
-    extraFileExtensions: ['.vue', '.svelte'],
-    project: 'tsconfig.json',
+    parser: tsParser,
+    parserOptions: {
+      ecmaFeatures: { jsx: true },
+      extraFileExtensions: ['.vue', '.svelte'],
+      project: path.join(currentDirectory, '../../tsconfig.json'),
+      tsconfigRootDir: path.join(currentDirectory, '../..'),
+    },
     sourceType: 'module',
-    tsconfigRootDir: path.join(currentDirectory, '../../..'),
   },
   plugins: {
-    '@typescript-eslint': typeScriptPlugin,
+    '@typescript-eslint': tsPlugin,
     import: importPlugin,
   },
   rules: {
-    ...typeScriptPlugin.configs.all.rules,
-    ...typeScriptPlugin.configs['recommended-requiring-type-checking'].rules,
+    // TypeScript-specific rules
+    ...tsPlugin.configs.all.rules,
+    ...tsPlugin.configs['recommended-requiring-type-checking'].rules,
     ...importPlugin.configs.typescript.rules,
+
+    // Override some rules for better developer experience
     '@typescript-eslint/class-methods-use-this': 'off',
     '@typescript-eslint/consistent-generic-constructors': [
       'error',
@@ -36,10 +49,7 @@ const ts = {
     '@typescript-eslint/consistent-indexed-object-style': ['error', 'record'],
     '@typescript-eslint/consistent-type-assertions': [
       'error',
-      {
-        assertionStyle: 'as',
-        objectLiteralTypeAssertions: 'never',
-      },
+      { assertionStyle: 'as', objectLiteralTypeAssertions: 'never' },
     ],
     '@typescript-eslint/consistent-type-exports': [
       'error',
@@ -55,10 +65,7 @@ const ts = {
     ],
     '@typescript-eslint/explicit-function-return-type': [
       'warn',
-      {
-        allowExpressions: true,
-        allowTypedFunctionExpressions: true,
-      },
+      { allowExpressions: true, allowTypedFunctionExpressions: true },
     ],
     '@typescript-eslint/explicit-member-accessibility': [
       'warn',
@@ -100,19 +107,11 @@ const ts = {
     '@typescript-eslint/method-signature-style': ['error', 'property'],
     '@typescript-eslint/naming-convention': [
       'error',
-      {
-        format: ['PascalCase'],
-        selector: ['typeLike'],
-      },
-      {
-        format: ['PascalCase'],
-        prefix: ['T'],
-        selector: ['typeParameter'],
-      },
+      { format: ['PascalCase'], selector: ['typeLike'] },
+      { format: ['PascalCase'], prefix: ['T'], selector: ['typeParameter'] },
       {
         custom: {
           match: false,
-          message: 'Interface name should not be prefixed with "I"',
           regex: '^I[A-Z]',
         },
         format: ['PascalCase'],
@@ -140,9 +139,7 @@ const ts = {
     '@typescript-eslint/no-magic-numbers': 'off',
     '@typescript-eslint/no-misused-promises': [
       'error',
-      {
-        checksVoidReturn: false,
-      },
+      { checksVoidReturn: false },
     ],
     '@typescript-eslint/no-non-null-asserted-nullish-coalescing': 'error',
     '@typescript-eslint/no-redundant-type-constituents': 'error',
@@ -156,7 +153,6 @@ const ts = {
     '@typescript-eslint/no-unsafe-enum-comparison': 'error',
     '@typescript-eslint/no-unsafe-member-access': 'error',
     '@typescript-eslint/no-unsafe-unary-minus': 'error',
-    '@typescript-eslint/no-useless-template-literals': 'error',
     '@typescript-eslint/parameter-properties': [
       'error',
       { prefer: 'parameter-property' },
@@ -209,76 +205,81 @@ const ts = {
     '@typescript-eslint/switch-exhaustiveness-check': 'error',
     '@typescript-eslint/unbound-method': 'off',
     '@typescript-eslint/use-unknown-in-catch-callback-variable': 'off',
-    'deprecation/deprecation': 'warn',
-    'prettier/prettier': ['warn', { parser: 'typescript' }],
   },
   settings: {
     'import/parsers': {
       '@typescript-eslint/parser': ['.ts', '.tsx', '.d.ts'],
     },
     'import/resolver': {
-      typescript: {
-        alwaysTryTypes: true,
-      },
+      typescript: { alwaysTryTypes: true },
     },
   },
 };
 
-const css = {
-  files: ['*.css'],
+// CSS files
+export const css = {
+  files: ['**/*.css'],
   rules: {
     'prettier/prettier': ['warn', { parser: 'css' }],
   },
 };
 
-const scss = {
-  files: ['*.scss'],
+// SCSS files
+export const scss = {
+  files: ['**/*.scss'],
   rules: {
     'prettier/prettier': ['warn', { parser: 'scss' }],
   },
 };
 
-const less = {
-  files: ['*.less'],
+// Less files
+export const less = {
+  files: ['**/*.less'],
   rules: {
     'prettier/prettier': ['warn', { parser: 'less' }],
   },
 };
 
-const yaml = {
-  extends: ['plugin:yml/standard'],
-  files: ['*.yaml', '*.yml'],
-  parser: 'yaml-eslint-parser',
+// YAML files
+export const yaml = {
+  files: ['**/*.yaml', '**/*.yml'],
+  languageOptions: {
+    parser: yamlParser,
+  },
   rules: {
     'prettier/prettier': ['warn', { parser: 'yaml', singleQuote: false }],
     'yml/quotes': ['warn', { avoidEscape: true, prefer: 'double' }],
   },
 };
 
-const toml = {
-  extends: ['plugin:toml/standard'],
-  files: ['*.toml'],
-  parser: 'toml-eslint-parser',
+// TOML files
+export const toml = {
+  files: ['**/*.toml'],
+  languageOptions: {
+    parser: tomlParser,
+  },
   rules: {
     'prettier/prettier': 'off',
   },
 };
 
-const md = {
-  files: ['*.md'],
+// Markdown files
+export const md = {
+  files: ['**/*.md'],
   plugins: {
-    markdownlint: markdownPlugin,
+    markdownlint,
   },
   rules: {
-    ...markdownPlugin.configs.recommended.rules,
+    ...markdownlint.configs.recommended.rules,
     'markdownlint/md033': 'off',
     'markdownlint/md041': 'off',
     'prettier/prettier': ['warn', { parser: 'markdown' }],
   },
 };
 
-const packageJson = {
-  files: ['package.json'],
+// Package.json files
+export const packageJson = {
+  files: ['**/package.json'],
   rules: {
     'prettier/prettier': ['warn', { parser: 'json' }],
   },
@@ -314,106 +315,101 @@ const packageJson = {
   },
 };
 
-const mdJson = {
-  files: ['*.md.json'],
-  rules: {
-    'prettier/prettier': ['warn', { parser: 'json' }],
+// HTML files
+export const htmlConfig = {
+  files: ['**/*.html'],
+  languageOptions: {
+    parser: htmlParser,
   },
-};
-
-const html = {
-  extends: ['plugin:@html-eslint/recommended'],
-  files: ['*.html'],
-  parser: '@html-eslint/parser',
-  plugins: ['@html-eslint'],
+  plugins: {
+    '@html-eslint': html,
+  },
   rules: {
+    ...html.configs.recommended.rules,
     '@html-eslint/element-newline': 'off',
     '@html-eslint/indent': 'off',
     '@html-eslint/no-extra-spacing-attrs': 'off',
     '@html-eslint/require-closing-tags': 'off',
-    'disable-autofix/@html-eslint/require-closing-tags': [
-      'warn',
-      { selfClosing: 'always' },
-    ],
     'prettier/prettier': ['warn', { parser: 'html' }],
     'spaced-comment': 'off',
     strict: 'off',
   },
 };
 
-const jsonc = {
-  extends: ['plugin:jsonc/recommended-with-jsonc'],
-  files: ['*.jsonc', '*rc'],
-  parser: 'jsonc-eslint-parser',
+// JSONC files
+export const jsonc = {
+  files: ['**/*.jsonc', '**/*rc'],
+  languageOptions: {
+    parser: jsoncParser,
+  },
   rules: {
     'prettier/prettier': ['warn', { parser: 'json' }],
   },
 };
 
-const json5 = {
-  extends: ['plugin:jsonc/recommended-with-json5'],
-  files: ['*.json5'],
-  parser: 'jsonc-eslint-parser',
+// JSON5 files
+export const json5 = {
+  files: ['**/*.json5'],
+  languageOptions: {
+    parser: jsoncParser,
+  },
   rules: {
     'prettier/prettier': ['warn', { parser: 'json5' }],
   },
 };
 
-const jestJs = {
-  env: {
-    jest: true,
+// Jest JavaScript files
+export const jestJs = {
+  files: ['**/*.test.js', '**/__tests__/**/*.js'],
+  languageOptions: {
+    globals: { jest: true },
   },
-  extends: ['plugin:jest/all'],
-  files: ['*.test.js', '**/__tests__/**/*.js'],
   plugins: {
-    jest: jestPlugin,
+    jest,
   },
   rules: {
+    ...jest.configs.all.rules,
     'jest/prefer-spy-on': 'warn',
     'jest/require-top-level-describe': 'error',
     'jest/unbound-method': 'off',
     'unicorn/no-array-callback-reference': 'off',
-    'unicorn/prevent-abbreviations': [
-      'warn',
-      {
-        ignore: [/e2e/],
-      },
-    ],
+    'unicorn/prevent-abbreviations': ['warn', { ignore: [/e2e/] }],
   },
 };
 
-const jestTs = {
-  env: {
-    jest: true,
+// Jest TypeScript files
+export const jestTs = {
+  files: ['**/*.test.ts', '**/__tests__/**/*.ts'],
+  languageOptions: {
+    globals: { jest: true },
+    parser: tsParser,
   },
-  extends: ['plugin:jest/all'],
-  files: ['*.test.ts', '**/__tests__/**/*.ts'],
-  parser: '@typescript-eslint/parser',
   plugins: {
-    '@typescript-eslint': typeScriptPlugin,
-    jest: jestPlugin,
+    '@typescript-eslint': tsPlugin,
+    jest,
   },
   rules: {
+    ...jest.configs.all.rules,
     'jest/prefer-spy-on': 'warn',
     'jest/require-top-level-describe': 'error',
     'jest/unbound-method': 'off',
     'unicorn/no-array-callback-reference': 'off',
-    'unicorn/prevent-abbreviations': [
-      'warn',
-      {
-        ignore: [/e2e/],
-      },
-    ],
+    'unicorn/prevent-abbreviations': ['warn', { ignore: [/e2e/] }],
   },
 };
 
-const cypress = {
-  extends: ['plugin:cypress/recommended'],
-  files: ['*.cy.*'],
-  mdJson,
-  plugins: ['cypress'],
+// Cypress files
+export const cypressConfig = {
+  files: ['**/*.cy.*'],
+  plugins: {
+    cypress,
+  },
+  rules: {
+    ...cypress.configs.recommended.rules,
+  },
 };
 
+// Export all overrides
 export const baseOverrides = [
   ts,
   css,
@@ -423,11 +419,10 @@ export const baseOverrides = [
   toml,
   md,
   packageJson,
-  mdJson,
-  html,
+  htmlConfig,
   jsonc,
   json5,
   jestJs,
   jestTs,
-  cypress,
+  cypressConfig,
 ];

@@ -18,9 +18,16 @@ A preset ESLint Svelte configuration
 npm i -D mikey-pro @mikey-pro/eslint-config-svelte
 ```
 
-### Configure
+### Configure (Flat ESLint v9+ Recommended)
 
-Extend to ESLint in `package.json`:
+```js
+// eslint.config.js
+import svelteConfig from '@mikey-pro/eslint-config-svelte/flat';
+
+export default svelteConfig;
+```
+
+### Legacy Configuration (still supported)
 
 ```json
 {
