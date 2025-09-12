@@ -1,0 +1,59 @@
+{
+  "name": "mikey-pro",
+  "version": "0.0.0",
+  "description": "Mikey Pro",
+  "type": "module",
+  "scripts": {
+    "fix": "eslint --fix '**/*'",
+    "ncu": "find . -name 'package.json' ! -path '*node_modules*' -exec sh -c 'cd $(dirname {}) && pwd && ncu -u' \\;",
+    "npm:install": "find . -name 'package.json' ! -path '*node_modules*' -exec sh -c 'cd $(dirname {}) && pwd && npm install' \\;",
+    "publish:all": "npm run publish:eslint && npm run publish:react && npm run publish:svelte && npm run publish:vue && npm run publish:prettier && npm run publish:stylelint && npm run publish:mikey-pro",
+    "publish:eslint": "cd ./style-guide/eslint-config && npm publish --access public",
+    "publish:react": "cd ./style-guide/eslint-config-react && npm publish --access public",
+    "publish:svelte": "cd ./style-guide/eslint-config-svelte && npm publish --access public",
+    "publish:vue": "cd ./style-guide/eslint-config-vue && npm publish --access public",
+    "publish:angular": "cd ./style-guide/eslint-config-angular && npm publish --access public",
+    "publish:mikey-pro": "CWD=$(pwd) && cd ./style-guide && npm publish --access public && sleep 15 && cd $CWD && npm run update",
+    "publish:prettier": "cd ./style-guide/prettier-config && npm publish --access public",
+    "publish:stylelint": "cd ./style-guide/stylelint-config && npm publish --access public",
+    "update": "ncu -u && npm i",
+    "eslint": "npx eslint --config ./.eslintrc.cjs ."
+  },
+  "devDependencies": {
+    "mikey-pro": "file:./style-guide",
+    "svelte": "^5.38.10"
+  },
+  "files": [
+    "README.md",
+    "LICENSE"
+  ],
+  "homepage": "https://github.com/chiefmikey/mikey-pro#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chiefmikey/mikey-pro.git"
+  },
+  "bugs": {
+    "url": "https://github.com/chiefmikey/mikey-pro/issues"
+  },
+  "license": "MIT",
+  "keywords": [
+    "mikey-pro",
+    "mikey",
+    "pro",
+    "style guide",
+    "style-guide",
+    "lint",
+    "linter",
+    "format",
+    "formatter"
+  ],
+  "author": "Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)",
+  "funding": "https://github.com/sponsors/chiefmikey",
+  "prettier": "./.prettierrc.js",
+  "stylelint": {
+    "extends": "file:./style-guide/stylelint-config"
+  },
+  "eslintConfig": {
+    "extends": "./.eslintrc.cjs"
+  }
+}
