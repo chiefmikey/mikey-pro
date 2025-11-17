@@ -17,6 +17,8 @@ out/
 # Coverage
 coverage/
 .nyc_output/
+.vitest/
+*.lcov
 
 # Environment
 .env
@@ -86,3 +88,6 @@ public
 # Temporary folders
 tmp/
 temp/
+
+# Test project directory
+.test-project/

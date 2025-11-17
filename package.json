@@ -17,11 +17,18 @@
     "publish:prettier": "cd ./style-guide/prettier-config && npm publish --access public",
     "publish:stylelint": "cd ./style-guide/stylelint-config && npm publish --access public",
     "update": "ncu -u && npm i",
-    "eslint": "npx eslint --config ./.eslintrc.cjs ."
+    "eslint": "npx eslint --config ./eslint.config.js .",
+    "test": "npx vitest run",
+    "test:watch": "npx vitest",
+    "test:coverage": "npx vitest run --coverage",
+    "test:manual": "node tests/run-manual-tests.js",
+    "test:validate": "node tests/validate-all.js"
   },
   "devDependencies": {
     "mikey-pro": "file:./style-guide",
-    "svelte": "^5.38.10"
+    "prettier": "^3.6.2",
+    "svelte": "^5.38.10",
+    "vitest": "^2.1.8"
   },
   "files": [
     "README.md",
@@ -52,8 +59,5 @@
   "prettier": "./.prettierrc.js",
   "stylelint": {
     "extends": "file:./style-guide/stylelint-config"
-  },
-  "eslintConfig": {
-    "extends": "./.eslintrc.cjs"
   }
 }
