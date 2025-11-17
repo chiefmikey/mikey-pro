@@ -1,6 +1,9 @@
 # 🎯 Mikey Pro Style Guide - Ultimate Coding Companion
 
-**Version 9.0.0** - ESLint 9 Compatible | Modern Flat Configuration | Framework Agnostic
+**Version 9.0.1+** - ESLint 9 Compatible | Modern Flat Configuration | Framework Agnostic
+
+[![Tests](https://github.com/chiefmikey/mikey-pro/workflows/Tests/badge.svg)](https://github.com/chiefmikey/mikey-pro/actions)
+[![npm version](https://img.shields.io/npm/v/@mikey-pro/eslint-config.svg)](https://www.npmjs.com/package/@mikey-pro/eslint-config)
 
 Your "ultimate side kick encyclopedia dictionary rules monster" that ensures **top shelf excellence always**! 🚀
 
@@ -17,13 +20,13 @@ Your "ultimate side kick encyclopedia dictionary rules monster" that ensures **t
 
 | Package | Description | Status |
 |---------|-------------|--------|
-| `@mikey-pro/eslint-config` | Core ESLint configuration | ✅ Working |
-| `@mikey-pro/eslint-config-react` | React-specific rules | ✅ Working |
-| `@mikey-pro/eslint-config-vue` | Vue-specific rules | ✅ Working |
-| `@mikey-pro/eslint-config-svelte` | Svelte-specific rules | ✅ Working |
-| `@mikey-pro/eslint-config-angular` | Angular-specific rules | ✅ Working |
-| `@mikey-pro/prettier-config` | Prettier formatting | ✅ Working |
-| `@mikey-pro/stylelint-config` | CSS/SCSS linting | ✅ Working |
+| `@mikey-pro/eslint-config` | Core ESLint configuration (v9.0.1) | ✅ Working |
+| `@mikey-pro/eslint-config-react` | React-specific rules (v9.0.5) | ✅ Working |
+| `@mikey-pro/eslint-config-vue` | Vue-specific rules (v9.0.5) | ✅ Working |
+| `@mikey-pro/eslint-config-svelte` | Svelte-specific rules (v9.0.5) | ✅ Working |
+| `@mikey-pro/eslint-config-angular` | Angular-specific rules (v9.0.5) | ✅ Working |
+| `@mikey-pro/prettier-config` | Prettier formatting (v9.0.1) | ✅ Working |
+| `@mikey-pro/stylelint-config` | CSS/SCSS linting (v9.0.1) | ✅ Working |
 
 ## 🚀 Quick Start
 
@@ -222,6 +225,63 @@ export default [
    npx eslint . --fix
    ```
 
+## 🧪 Testing
+
+The project includes comprehensive tests to verify all configurations work correctly:
+
+```bash
+# Run all tests (requires vitest)
+npm test
+
+# Run tests in watch mode
+npm run test:watch
+
+# Run tests with coverage
+npm run test:coverage
+
+# Run manual tests (no dependencies required)
+npm run test:manual
+
+# Comprehensive validation (28 checks)
+npm run test:validate
+
+# Quick setup verification
+node tests/verify-setup.js
+```
+
+The test suite verifies:
+- All configs load without syntax errors
+- All framework configs work (React, Vue, Svelte, Angular)
+- All language variations work (TypeScript, JavaScript)
+- All file types work (JS, TS, JSX, Vue, Svelte, JSON, YAML, Markdown, HTML, TOML, CSS, SCSS)
+- Linting doesn't break
+- Formatting doesn't break
+- Integration workflows work correctly
+
+### Test Files
+
+- `tests/configs.test.js` - Configuration loading tests
+- `tests/linting.test.js` - Linting functionality tests
+- `tests/formatting.test.js` - Prettier formatting tests
+- `tests/integration.test.js` - End-to-end tests
+- `tests/file-types.test.js` - File type tests
+- `tests/rules.test.js` - Rule enforcement tests
+
+See [tests/README.md](tests/README.md) for detailed test documentation.
+
+## 📋 Available Commands
+
+### Development
+- `npm run eslint` - Lint all files
+- `npm run fix` - Auto-fix linting issues
+
+### Testing
+- `npm test` - Run full test suite with vitest
+- `npm run test:watch` - Watch mode for tests
+- `npm run test:coverage` - Generate coverage report
+- `npm run test:manual` - Run manual tests (no dependencies)
+- `npm run test:validate` - Comprehensive validation (28 checks)
+
 ## 📝 Contributing
 
 This style guide is designed to be your ultimate coding companion. If you find any issues or have suggestions for improvements, please feel free to contribute!
@@ -232,4 +292,4 @@ This style guide is designed to be your ultimate coding companion. If you find a
 
 ---
 
-**Mikey Pro Style Guide v9.0.0** - Your ultimate side kick encyclopedia dictionary rules monster! 🎉
+**Mikey Pro Style Guide v9.0.1+** (Core: 9.0.1, Frameworks: 9.0.5) - Your ultimate side kick encyclopedia dictionary rules monster! 🎉
