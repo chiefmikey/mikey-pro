@@ -1,25 +1,71 @@
 version: 2
 updates:
-  - package-ecosystem: github-actions
-    directory: /
+  # Enable version updates for npm
+  - package-ecosystem: "npm"
+    directory: "/"
     schedule:
-      interval: daily
-      time: 12:00
-      timezone: America/Denver
-    commit-message:
-      prefix: actions
+      interval: "weekly"
+    open-pull-requests-limit: 10
     labels:
-      - dependencies
-    open-pull-requests-limit: 100
+      - "dependencies"
+      - "automated"
 
-  - package-ecosystem: docker
-    directory: /
+  # Enable version updates for npm in style-guide packages
+  - package-ecosystem: "npm"
+    directory: "/style-guide/eslint-config"
     schedule:
-      interval: daily
-      time: 12:00
-      timezone: America/Denver
-    commit-message:
-      prefix: docker
+      interval: "weekly"
+    open-pull-requests-limit: 5
     labels:
-      - dependencies
-    open-pull-requests-limit: 100
+      - "dependencies"
+      - "eslint-config"
+      - "automated"
+
+  - package-ecosystem: "npm"
+    directory: "/style-guide/eslint-config-react"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+      - "eslint-config-react"
+      - "automated"
+
+  - package-ecosystem: "npm"
+    directory: "/style-guide/eslint-config-vue"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+      - "eslint-config-vue"
+      - "automated"
+
+  - package-ecosystem: "npm"
+    directory: "/style-guide/eslint-config-svelte"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+      - "eslint-config-svelte"
+      - "automated"
+
+  - package-ecosystem: "npm"
+    directory: "/style-guide/eslint-config-angular"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+      - "eslint-config-angular"
+      - "automated"
+
+  # Enable version updates for GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "github-actions"
+      - "automated"
