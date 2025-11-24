@@ -217,3 +217,4 @@ validateAll().catch((error) => {
   console.error('Validation error:', error);
   process.exit(1);
 });
+
