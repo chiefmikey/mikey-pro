@@ -7,7 +7,7 @@
     "fix": "eslint --fix '**/*'",
     "ncu": "find . -name 'package.json' ! -path '*node_modules*' -exec sh -c 'cd $(dirname {}) && pwd && ncu -u' \\;",
     "npm:install": "find . -name 'package.json' ! -path '*node_modules*' -exec sh -c 'cd $(dirname {}) && pwd && npm install' \\;",
-    "publish:all": "npm run publish:eslint && npm run publish:react && npm run publish:svelte && npm run publish:vue && npm run publish:prettier && npm run publish:stylelint && npm run publish:mikey-pro",
+    "publish:all": "npm run publish:eslint && npm run publish:angular && npm run publish:react && npm run publish:svelte && npm run publish:vue && npm run publish:prettier && npm run publish:stylelint && npm run publish:mikey-pro",
     "publish:eslint": "cd ./style-guide/eslint-config && npm publish --access public",
     "publish:react": "cd ./style-guide/eslint-config-react && npm publish --access public",
     "publish:svelte": "cd ./style-guide/eslint-config-svelte && npm publish --access public",
@@ -27,8 +27,8 @@
   "devDependencies": {
     "mikey-pro": "file:./style-guide",
     "prettier": "^3.6.2",
-    "svelte": "^5.38.10",
-    "vitest": "^2.1.8"
+    "svelte": "^5.43.14",
+    "vitest": "^4.0.13"
   },
   "files": [
     "README.md",
