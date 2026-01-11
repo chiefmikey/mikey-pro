@@ -27,19 +27,19 @@ jobs:
         npm ci
         # Install dependencies for style-guide packages
         echo "Installing eslint-config dependencies..."
-        cd style-guide/eslint-config && npm ci && cd ../..
+        cd style-guide/eslint-config && npm install && cd ../..
         echo "Installing eslint-config-react dependencies..."
-        cd style-guide/eslint-config-react && npm ci && cd ../..
+        cd style-guide/eslint-config-react && npm install && cd ../..
         echo "Installing eslint-config-vue dependencies..."
-        cd style-guide/eslint-config-vue && npm ci && cd ../..
+        cd style-guide/eslint-config-vue && npm install && cd ../..
         echo "Installing eslint-config-svelte dependencies..."
-        cd style-guide/eslint-config-svelte && npm ci && cd ../..
+        cd style-guide/eslint-config-svelte && npm install && cd ../..
         echo "Installing eslint-config-angular dependencies..."
-        cd style-guide/eslint-config-angular && npm ci && cd ../..
+        cd style-guide/eslint-config-angular && npm install && cd ../..
         echo "Installing prettier-config dependencies..."
-        cd style-guide/prettier-config && npm ci && cd ../..
+        cd style-guide/prettier-config && npm install && cd ../..
         echo "Installing stylelint-config dependencies..."
-        cd style-guide/stylelint-config && npm ci && cd ../..
+        cd style-guide/stylelint-config && npm install && cd ../..
 
     - name: Run full test suite
       run: npm test
