@@ -1,6 +1,6 @@
 {
   "name": "@mikey-pro/eslint-config",
-  "version": "9.0.6",
+  "version": "9.0.7",
   "description": "Mikey Pro ESLint configuration - Ultimate coding style guide for excellence",
   "main": "index.js",
   "types": "index.d.ts",

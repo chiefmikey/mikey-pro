@@ -1,6 +1,6 @@
 {
   "name": "@mikey-pro/eslint-config-vue",
-  "version": "9.0.6",
+  "version": "9.0.7",
   "description": "Mikey Pro ESLint Vue configuration - Ultimate Vue coding style guide",
   "type": "module",
   "main": "index.js",
