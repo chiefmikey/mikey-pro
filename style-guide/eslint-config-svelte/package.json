@@ -1,0 +1,74 @@
+{
+  "name": "@mikey-pro/eslint-config-svelte",
+  "version": "9.0.6",
+  "description": "Mikey Pro ESLint Svelte configuration - Ultimate Svelte coding style guide",
+  "type": "module",
+  "main": "index.js",
+  "dependencies": {
+    "@babel/eslint-parser": "^7.28.4",
+    "@mikey-pro/eslint-config": "^9.0.6",
+    "@typescript-eslint/parser": "^8.43.0",
+    "eslint-plugin-svelte": "^3.12.3",
+    "svelte-eslint-parser": "^1.3.2"
+  },
+  "peerDependencies": {
+    "@mikey-pro/eslint-config": "^9.0.6"
+  },
+  "peerDependenciesMeta": {
+    "typescript": {
+      "optional": true
+    }
+  },
+  "files": [
+    "index.js",
+    "flat.js",
+    "README.md",
+    "LICENSE"
+  ],
+  "homepage": "https://github.com/chiefmikey/mikey-pro#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chiefmikey/mikey-pro.git"
+  },
+  "bugs": {
+    "url": "https://github.com/chiefmikey/mikey-pro/issues"
+  },
+  "license": "MIT",
+  "keywords": [
+    "@mikey-pro/eslint-config-svelte",
+    "@mikey-pro",
+    "mikey-pro",
+    "mikey",
+    "pro",
+    "eslint-config",
+    "eslintconfig",
+    "eslint",
+    "config",
+    "svelte",
+    "style-guide",
+    "style",
+    "guide",
+    "eslint-9",
+    "flat-config"
+  ],
+  "author": "Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)",
+  "browserslist": [
+    "defaults"
+  ],
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0",
+    "pnpm": ">=8.0.0",
+    "yarn": ">=4.0.0"
+  },
+  "exports": {
+    ".": {
+      "import": "./index.js",
+      "require": "./index.js"
+    },
+    "./flat": {
+      "import": "./flat.js",
+      "require": "./flat.js"
+    }
+  }
+}
