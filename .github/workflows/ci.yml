@@ -25,9 +25,11 @@ jobs:
     - name: Install dependencies
       run: |
         npm ci
+        # Install peer dependencies needed for tests
+        npm install eslint-plugin-import eslint-plugin-n eslint-plugin-jest eslint-plugin-jest-dom
         # Install dependencies for style-guide packages
         echo "Installing eslint-config dependencies..."
-        cd style-guide/eslint-config && npm install eslint-plugin-import eslint-plugin-n && npm install && cd ../..
+        cd style-guide/eslint-config && npm install && cd ../..
         echo "Installing eslint-config-react dependencies..."
         cd style-guide/eslint-config-react && npm install && cd ../..
         echo "Installing eslint-config-vue dependencies..."

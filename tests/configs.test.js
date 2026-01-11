@@ -18,9 +18,9 @@ describe('ESLint Configuration Loading', () => {
       'index.js',
     );
 
-    // Skip in CI since dependencies may not be installed
-    if (process.env.CI || !existsSync(configPath)) {
-      console.log('Skipping config loading test in CI environment or when config file missing');
+    // Skip if config file doesn't exist
+    if (!existsSync(configPath)) {
+      console.log('Skipping config loading test when config file missing');
       return;
     }
 

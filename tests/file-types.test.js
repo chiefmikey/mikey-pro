@@ -185,9 +185,9 @@ describe('File Type Support', () => {
         'index.js',
       );
 
-      // Skip if config file doesn't exist or in CI
-      if (process.env.CI || !existsSync(configPath)) {
-        console.log('Skipping React JSX linting test in CI environment or when config file missing');
+      // Skip if config file doesn't exist
+      if (!existsSync(configPath)) {
+        console.log('Skipping React JSX linting test when config file missing');
         return;
       }
 
@@ -214,9 +214,9 @@ describe('File Type Support', () => {
         'index.js',
       );
 
-      // Skip if config file doesn't exist or in CI
-      if (process.env.CI || !existsSync(configPath)) {
-        console.log('Skipping Vue linting test in CI environment or when config file missing');
+      // Skip if config file doesn't exist
+      if (!existsSync(configPath)) {
+        console.log('Skipping Vue linting test when config file missing');
         return;
       }
 
@@ -243,9 +243,9 @@ describe('File Type Support', () => {
         'index.js',
       );
 
-      // Skip if config file doesn't exist or in CI
-      if (process.env.CI || !existsSync(configPath)) {
-        console.log('Skipping Svelte linting test in CI environment or when config file missing');
+      // Skip if config file doesn't exist
+      if (!existsSync(configPath)) {
+        console.log('Skipping Svelte linting test when config file missing');
         return;
       }
 
@@ -272,9 +272,9 @@ describe('File Type Support', () => {
         'index.js',
       );
 
-      // Skip if config file doesn't exist or in CI
-      if (process.env.CI || !existsSync(configPath)) {
-        console.log('Skipping Angular linting test in CI environment or when config file missing');
+      // Skip if config file doesn't exist
+      if (!existsSync(configPath)) {
+        console.log('Skipping Angular linting test when config file missing');
         return;
       }
 
