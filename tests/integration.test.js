@@ -185,10 +185,9 @@ describe('End-to-End Integration Tests', () => {
         overrideConfigFile: configPath,
       });
       const invalidFile = join(testFilesDir, 'nonexistent.js');
-      const results = await eslint.lintFiles([invalidFile]);
 
-      // Should return empty results or handle gracefully
-      expect(Array.isArray(results)).toBe(true);
+      // ESLint throws an error for invalid file paths, which is expected behavior
+      await expect(eslint.lintFiles([invalidFile])).rejects.toThrow();
     });
   });
 });

@@ -113,7 +113,7 @@ console.log(x + y);
       const eslintConfigPath = join(testProjectDir, 'eslint.config.js');
       writeFileSync(
         eslintConfigPath,
-        `export { default } from '@mikey-pro/eslint-config-react';`,
+        `export { default } from '${join(rootDir, 'style-guide/eslint-config-react/index.js')}';`,
       );
 
       // Create a React test file
@@ -149,7 +149,7 @@ export default Component;
       const eslintConfigPath = join(testProjectDir, 'eslint.config.js');
       writeFileSync(
         eslintConfigPath,
-        `export { default } from '@mikey-pro/eslint-config-vue';`,
+        `export { default } from '${join(rootDir, 'style-guide/eslint-config-vue/index.js')}';`,
       );
 
       // Create a Vue test file
@@ -204,10 +204,37 @@ console.log(user);
       const testFilePath = join(testProjectDir, 'user.ts');
       writeFileSync(testFilePath, tsFile);
 
+      // Create a proper tsconfig.json for the test
+      const tsconfigPath = join(testProjectDir, 'tsconfig.json');
+      writeFileSync(
+        tsconfigPath,
+        JSON.stringify({
+          compilerOptions: {
+            target: 'ES2022',
+            module: 'ESNext',
+            moduleResolution: 'node',
+            strict: true,
+            esModuleInterop: true,
+            skipLibCheck: true,
+            forceConsistentCasingInFileNames: true,
+            allowSyntheticDefaultImports: true,
+          },
+          include: ['*.ts'],
+        }, null, 2),
+      );
+
       // Lint the TypeScript file
       const eslint = new ESLint({
         cwd: testProjectDir,
         overrideConfigFile: eslintConfigPath,
+        overrideConfig: {
+          languageOptions: {
+            parserOptions: {
+              project: tsconfigPath,
+              tsconfigRootDir: testProjectDir,
+            },
+          },
+        },
       });
       const results = await eslint.lintFiles([testFilePath]);
 
