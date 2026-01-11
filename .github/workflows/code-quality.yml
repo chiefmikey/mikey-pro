@@ -29,7 +29,7 @@ jobs:
         cd configs/stylelint-config && npm install && cd ../..
 
     - name: Check code formatting
-      run: npx prettier --check "**/*.{js,ts,json,md,yml,yaml}" --ignore-path <(echo -e "**/package-lock.json\n**/node_modules/**")
+      run: npx prettier --check "**/*.{js,ts,json,md,yml,yaml}"
 
     - name: Run ESLint
       run: npx eslint "**/*.{js,ts}" --max-warnings 0
