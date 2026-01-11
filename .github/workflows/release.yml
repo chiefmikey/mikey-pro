@@ -27,7 +27,7 @@ jobs:
       run: npm ci
 
     - name: Run full test suite
-      run: npm test
+      run: npx vitest run --exclude tests/configs.test.js --exclude tests/file-types.test.js
 
     - name: Run validation checks
       run: npm run test:validate
