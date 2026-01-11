@@ -42,15 +42,17 @@ jobs:
         cd style-guide/stylelint-config && npm install && cd ../..
 
     - name: Run full test suite
-      run: npx vitest run --exclude tests/configs.test.js --exclude tests/file-types.test.js --exclude tests/integration.test.js --exclude tests/install-run.test.js --exclude tests/linting.test.js --exclude tests/rules.test.js --exclude tests/run-manual-tests.js --exclude tests/validate-all.js --exclude tests/verify-setup.js
+      run: npm test
 
     - name: Run validation checks
-      run: echo "Skipping validation checks in CI (require local config dependencies)"
+      run: npm run test:validate
 
     - name: Check package integrity
       run: |
-        npm run publish:all -- --dry-run || echo "⚠️ Package integrity check skipped (requires NPM_TOKEN)"
-        echo "✅ Package integrity check completed"
+        npm run publish:all -- --dry-run
+        echo "✅ Package integrity verified"
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
     - name: Upload test results
       uses: actions/upload-artifact@v4
