@@ -50,7 +50,7 @@ async function validateAll() {
   console.log('=== Configuration Loading ===');
   await test('Core config loads', async () => {
     const config = await import(
-      join(rootDir, 'style-guide', 'eslint-config', 'index.js')
+      join(rootDir, 'configs', 'eslint-config', 'index.js')
     );
     if (!config.default || !Array.isArray(config.default)) {
       throw new Error('Invalid config format');
@@ -59,7 +59,7 @@ async function validateAll() {
 
   await test('React config loads', async () => {
     const config = await import(
-      join(rootDir, 'style-guide', 'eslint-config-react', 'index.js')
+      join(rootDir, 'configs', 'eslint-config-react', 'index.js')
     );
     if (!config.default || !Array.isArray(config.default)) {
       throw new Error('Invalid config format');
@@ -68,7 +68,7 @@ async function validateAll() {
 
   await test('Vue config loads', async () => {
     const config = await import(
-      join(rootDir, 'style-guide', 'eslint-config-vue', 'index.js')
+      join(rootDir, 'configs', 'eslint-config-vue', 'index.js')
     );
     if (!config.default || !Array.isArray(config.default)) {
       throw new Error('Invalid config format');
@@ -77,7 +77,7 @@ async function validateAll() {
 
   await test('Svelte config loads', async () => {
     const config = await import(
-      join(rootDir, 'style-guide', 'eslint-config-svelte', 'index.js')
+      join(rootDir, 'configs', 'eslint-config-svelte', 'index.js')
     );
     if (!config.default || !Array.isArray(config.default)) {
       throw new Error('Invalid config format');
@@ -86,7 +86,7 @@ async function validateAll() {
 
   await test('Angular config loads', async () => {
     const config = await import(
-      join(rootDir, 'style-guide', 'eslint-config-angular', 'index.js')
+      join(rootDir, 'configs', 'eslint-config-angular', 'index.js')
     );
     if (!config.default || !Array.isArray(config.default)) {
       throw new Error('Invalid config format');

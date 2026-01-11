@@ -13,7 +13,7 @@ describe('ESLint Configuration Loading', () => {
   it('should load core config without errors', async () => {
     const configPath = join(
       rootDir,
-      'style-guide',
+      'configs',
       'eslint-config',
       'index.js',
     );
@@ -33,7 +33,7 @@ describe('ESLint Configuration Loading', () => {
   it('should load React config without errors', async () => {
     const configPath = join(
       rootDir,
-      'style-guide',
+      'configs',
       'eslint-config-react',
       'index.js',
     );
@@ -46,7 +46,7 @@ describe('ESLint Configuration Loading', () => {
   it('should load Vue config without errors', async () => {
     const configPath = join(
       rootDir,
-      'style-guide',
+      'configs',
       'eslint-config-vue',
       'index.js',
     );
@@ -59,7 +59,7 @@ describe('ESLint Configuration Loading', () => {
   it('should load Svelte config without errors', async () => {
     const configPath = join(
       rootDir,
-      'style-guide',
+      'configs',
       'eslint-config-svelte',
       'index.js',
     );
@@ -72,7 +72,7 @@ describe('ESLint Configuration Loading', () => {
   it('should load Angular config without errors', async () => {
     const configPath = join(
       rootDir,
-      'style-guide',
+      'configs',
       'eslint-config-angular',
       'index.js',
     );
@@ -83,7 +83,7 @@ describe('ESLint Configuration Loading', () => {
   });
 
   it('should load base config without errors', async () => {
-    const configPath = join(rootDir, 'style-guide', 'eslint-config', 'flat.js');
+    const configPath = join(rootDir, 'configs', 'eslint-config', 'flat.js');
     const config = await import(configPath);
 
     expect(config.default).toBeDefined();
@@ -104,7 +104,7 @@ describe('ESLint Configuration Execution', () => {
   it('should create ESLint instance with React config', async () => {
     const configPath = join(
       rootDir,
-      'style-guide',
+      'configs',
       'eslint-config-react',
       'index.js',
     );
@@ -118,7 +118,7 @@ describe('ESLint Configuration Execution', () => {
   it('should create ESLint instance with Vue config', async () => {
     const configPath = join(
       rootDir,
-      'style-guide',
+      'configs',
       'eslint-config-vue',
       'index.js',
     );
@@ -132,7 +132,7 @@ describe('ESLint Configuration Execution', () => {
   it('should create ESLint instance with Svelte config', async () => {
     const configPath = join(
       rootDir,
-      'style-guide',
+      'configs',
       'eslint-config-svelte',
       'index.js',
     );
@@ -146,7 +146,7 @@ describe('ESLint Configuration Execution', () => {
   it('should create ESLint instance with Angular config', async () => {
     const configPath = join(
       rootDir,
-      'style-guide',
+      'configs',
       'eslint-config-angular',
       'index.js',
     );

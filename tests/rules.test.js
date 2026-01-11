@@ -61,7 +61,7 @@ describe('Framework-Specific Rules', () => {
   it('should apply React rules to React files', async () => {
     const configPath = join(
       rootDir,
-      'style-guide',
+      'configs',
       'eslint-config-react',
       'index.js',
     );
@@ -82,7 +82,7 @@ describe('Framework-Specific Rules', () => {
   it('should apply Vue rules to Vue files', async () => {
     const configPath = join(
       rootDir,
-      'style-guide',
+      'configs',
       'eslint-config-vue',
       'index.js',
     );
@@ -103,7 +103,7 @@ describe('Framework-Specific Rules', () => {
   it('should apply Svelte rules to Svelte files', async () => {
     const configPath = join(
       rootDir,
-      'style-guide',
+      'configs',
       'eslint-config-svelte',
       'index.js',
     );
@@ -124,7 +124,7 @@ describe('Framework-Specific Rules', () => {
   it('should apply Angular rules to Angular files', async () => {
     const configPath = join(
       rootDir,
-      'style-guide',
+      'configs',
       'eslint-config-angular',
       'index.js',
     );

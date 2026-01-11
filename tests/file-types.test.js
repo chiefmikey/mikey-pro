@@ -180,7 +180,7 @@ describe('File Type Support', () => {
     it('should lint .jsx files with React config', async () => {
       const configPath = join(
         rootDir,
-        'style-guide',
+        'configs',
         'eslint-config-react',
         'index.js',
       );
@@ -209,7 +209,7 @@ describe('File Type Support', () => {
     it('should lint .vue files with Vue config', async () => {
       const configPath = join(
         rootDir,
-        'style-guide',
+        'configs',
         'eslint-config-vue',
         'index.js',
       );
@@ -238,7 +238,7 @@ describe('File Type Support', () => {
     it('should lint .svelte files with Svelte config', async () => {
       const configPath = join(
         rootDir,
-        'style-guide',
+        'configs',
         'eslint-config-svelte',
         'index.js',
       );
@@ -267,7 +267,7 @@ describe('File Type Support', () => {
     it('should lint Angular .ts files with Angular config', async () => {
       const configPath = join(
         rootDir,
-        'style-guide',
+        'configs',
         'eslint-config-angular',
         'index.js',
       );

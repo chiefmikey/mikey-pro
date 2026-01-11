@@ -113,7 +113,7 @@ console.log(x + y);
       const eslintConfigPath = join(testProjectDir, 'eslint.config.js');
       writeFileSync(
         eslintConfigPath,
-        `export { default } from '${join(rootDir, 'style-guide/eslint-config-react/index.js')}';`,
+        `export { default } from '${join(rootDir, 'configs/eslint-config-react/index.js')}';`,
       );
 
       // Create a React test file
@@ -149,7 +149,7 @@ export default Component;
       const eslintConfigPath = join(testProjectDir, 'eslint.config.js');
       writeFileSync(
         eslintConfigPath,
-        `export { default } from '${join(rootDir, 'style-guide/eslint-config-vue/index.js')}';`,
+        `export { default } from '${join(rootDir, 'configs/eslint-config-vue/index.js')}';`,
       );
 
       // Create a Vue test file
@@ -313,7 +313,7 @@ console.log(user);
     it('should load config correctly when used as installed package', async () => {
       // Simulate importing the config as a user would
       const coreConfig = await import(
-        join(rootDir, 'style-guide', 'eslint-config', 'index.js')
+        join(rootDir, 'configs', 'eslint-config', 'index.js')
       );
 
       expect(coreConfig.default).toBeDefined();
@@ -323,7 +323,7 @@ console.log(user);
       const eslint = new ESLint({
         overrideConfigFile: join(
           rootDir,
-          'style-guide',
+          'configs',
           'eslint-config',
           'index.js',
         ),
