@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [18, 20, 22]
+        node-version: [20, 22]
 
     steps:
     - uses: actions/checkout@v6
@@ -55,21 +55,8 @@ jobs:
         npm ci
         # Install peer dependencies needed for tests
         npm install eslint-plugin-import eslint-plugin-n eslint-plugin-jest eslint-plugin-jest-dom
-        # Install dependencies for style-guide packages
-        echo "Installing eslint-config dependencies..."
-        cd style-guide/eslint-config && npm install && cd ../..
-        echo "Installing eslint-config-react dependencies..."
-        cd style-guide/eslint-config-react && npm install && cd ../..
-        echo "Installing eslint-config-vue dependencies..."
-        cd style-guide/eslint-config-vue && npm install && cd ../..
-        echo "Installing eslint-config-svelte dependencies..."
-        cd style-guide/eslint-config-svelte && npm install && cd ../..
-        echo "Installing eslint-config-angular dependencies..."
-        cd style-guide/eslint-config-angular && npm install && cd ../..
-        echo "Installing prettier-config dependencies..."
-        cd style-guide/prettier-config && npm install && cd ../..
-        echo "Installing stylelint-config dependencies..."
-        cd style-guide/stylelint-config && npm install && cd ../..
+        # Install dependencies for style-guide packages (resolved via local file references)
+        npm run npm:install
 
     - name: Final validation
       run: npm run test:validate

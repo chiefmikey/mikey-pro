@@ -8,13 +8,13 @@
     "@angular-eslint/eslint-plugin": "^20.2.0",
     "@angular-eslint/eslint-plugin-template": "^20.2.0",
     "@angular-eslint/template-parser": "^20.2.0",
-    "@mikey-pro/eslint-config": "^9.0.6",
+    "@mikey-pro/eslint-config": "file:../eslint-config",
     "@typescript-eslint/eslint-plugin": "^8.43.0",
     "@typescript-eslint/parser": "^8.43.0",
     "eslint-plugin-prettier": "^5.5.4"
   },
   "peerDependencies": {
-    "@mikey-pro/eslint-config": "^9.0.6"
+    "@mikey-pro/eslint-config": "file:../eslint-config"
   },
   "peerDependenciesMeta": {
     "@angular/core": {
