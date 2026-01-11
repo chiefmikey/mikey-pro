@@ -28,7 +28,8 @@ jobs:
         # Install dependencies for style-guide packages
         for pkg in style-guide/*/; do
           if [ -f "$pkg/package.json" ]; then
-            cd "$pkg" && npm ci && cd ../..
+            echo "Installing dependencies for $pkg"
+            (cd "$pkg" && npm ci)
           fi
         done
 
