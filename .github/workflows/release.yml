@@ -6,6 +6,7 @@ on:
       - 'v*'
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   test:
@@ -15,7 +16,7 @@ jobs:
         node-version: [18, 20, 22]
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
 
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v4
@@ -40,17 +41,35 @@ jobs:
     runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/tags/v')
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
 
-    - name: Use Node.js 20
+    - name: Use Node.js 25
       uses: actions/setup-node@v4
       with:
-        node-version: 20
+        node-version: 25
         cache: 'npm'
         registry-url: 'https://registry.npmjs.org'
 
     - name: Install dependencies
-      run: npm ci
+      run: |
+        npm ci
+        # Install peer dependencies needed for tests
+        npm install eslint-plugin-import eslint-plugin-n eslint-plugin-jest eslint-plugin-jest-dom
+        # Install dependencies for style-guide packages
+        echo "Installing eslint-config dependencies..."
+        cd style-guide/eslint-config && npm install && cd ../..
+        echo "Installing eslint-config-react dependencies..."
+        cd style-guide/eslint-config-react && npm install && cd ../..
+        echo "Installing eslint-config-vue dependencies..."
+        cd style-guide/eslint-config-vue && npm install && cd ../..
+        echo "Installing eslint-config-svelte dependencies..."
+        cd style-guide/eslint-config-svelte && npm install && cd ../..
+        echo "Installing eslint-config-angular dependencies..."
+        cd style-guide/eslint-config-angular && npm install && cd ../..
+        echo "Installing prettier-config dependencies..."
+        cd style-guide/prettier-config && npm install && cd ../..
+        echo "Installing stylelint-config dependencies..."
+        cd style-guide/stylelint-config && npm install && cd ../..
 
     - name: Final validation
       run: npm run test:validate
