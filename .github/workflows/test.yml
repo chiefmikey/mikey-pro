@@ -68,12 +68,12 @@ jobs:
           echo "Testing core config..."
           npx eslint test-files/test.js test-files/test.ts --config eslint.config.js || true
           echo "Testing React config..."
-          npx eslint test-files/test-react.jsx --config style-guide/eslint-config-react/index.js || true
+          npx eslint test-files/test-react.jsx --config configs/eslint-config-react/index.js || true
           echo "Testing Vue config..."
-          npx eslint test-files/test-vue.vue --config style-guide/eslint-config-vue/index.js || true
+          npx eslint test-files/test-vue.vue --config configs/eslint-config-vue/index.js || true
           echo "Testing Svelte config..."
-          npx eslint test-files/test-svelte.svelte --config style-guide/eslint-config-svelte/index.js || true
+          npx eslint test-files/test-svelte.svelte --config configs/eslint-config-svelte/index.js || true
           echo "Testing Angular config..."
-          npx eslint test-files/test-angular.ts --config style-guide/eslint-config-angular/index.js || true
+          npx eslint test-files/test-angular.ts --config configs/eslint-config-angular/index.js || true
           echo "✅ All configs can be loaded and used"
 

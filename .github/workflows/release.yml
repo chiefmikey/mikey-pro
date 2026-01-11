@@ -55,9 +55,9 @@ jobs:
         npm ci
         # Install peer dependencies needed for tests
         npm install eslint-plugin-import eslint-plugin-n eslint-plugin-jest eslint-plugin-jest-dom
-        # Install dependencies for style-guide packages (resolved via local file references)
+        # Install dependencies for configs packages (resolved via local file references)
         npm run npm:install
-        # Install dependencies for style-guide packages (resolved via local file references)
+        # Install dependencies for configs packages (resolved via local file references)
         npm run npm:install
 
     - name: Final validation
