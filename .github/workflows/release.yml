@@ -25,7 +25,25 @@ jobs:
         cache: 'npm'
 
     - name: Install dependencies
-      run: npm ci
+      run: |
+        npm ci
+        # Install peer dependencies needed for tests
+        npm install eslint-plugin-import eslint-plugin-n eslint-plugin-jest eslint-plugin-jest-dom
+        # Install dependencies for configs packages
+        echo "Installing eslint-config dependencies..."
+        cd configs/eslint-config && npm install && cd ../..
+        echo "Installing eslint-config-react dependencies..."
+        cd configs/eslint-config-react && npm install && cd ../..
+        echo "Installing eslint-config-vue dependencies..."
+        cd configs/eslint-config-vue && npm install && cd ../..
+        echo "Installing eslint-config-svelte dependencies..."
+        cd configs/eslint-config-svelte && npm install && cd ../..
+        echo "Installing eslint-config-angular dependencies..."
+        cd configs/eslint-config-angular && npm install && cd ../..
+        echo "Installing prettier-config dependencies..."
+        cd configs/prettier-config && npm install && cd ../..
+        echo "Installing stylelint-config dependencies..."
+        cd configs/stylelint-config && npm install && cd ../..
 
     - name: Run full test suite
       run: npm test
