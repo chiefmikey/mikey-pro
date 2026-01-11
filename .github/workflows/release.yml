@@ -27,10 +27,10 @@ jobs:
       run: npm ci
 
     - name: Run full test suite
-      run: npx vitest run --exclude tests/configs.test.js --exclude tests/file-types.test.js --exclude tests/integration.test.js --exclude tests/install-run.test.js --exclude tests/linting.test.js --exclude tests/rules.test.js --exclude tests/run-manual-tests.js --exclude tests/validate-all.js --exclude tests/verify-setup.js
+      run: npm test
 
     - name: Run validation checks
-      run: echo "Skipping validation checks in CI (require local config dependencies)"
+      run: npm run test:validate
 
     - name: Test package publishing (dry-run)
       run: npm run publish:all -- --dry-run
