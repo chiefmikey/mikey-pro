@@ -29,21 +29,21 @@ jobs:
         npm ci
         # Install peer dependencies needed for tests
         npm install eslint-plugin-import eslint-plugin-n eslint-plugin-jest eslint-plugin-jest-dom
-        # Install dependencies for style-guide packages
+        # Install dependencies for configs packages
         echo "Installing eslint-config dependencies..."
-        cd style-guide/eslint-config && npm install && cd ../..
+        cd configs/eslint-config && npm install && cd ../..
         echo "Installing eslint-config-react dependencies..."
-        cd style-guide/eslint-config-react && npm install && cd ../..
+        cd configs/eslint-config-react && npm install && cd ../..
         echo "Installing eslint-config-vue dependencies..."
-        cd style-guide/eslint-config-vue && npm install && cd ../..
+        cd configs/eslint-config-vue && npm install && cd ../..
         echo "Installing eslint-config-svelte dependencies..."
-        cd style-guide/eslint-config-svelte && npm install && cd ../..
+        cd configs/eslint-config-svelte && npm install && cd ../..
         echo "Installing eslint-config-angular dependencies..."
-        cd style-guide/eslint-config-angular && npm install && cd ../..
+        cd configs/eslint-config-angular && npm install && cd ../..
         echo "Installing prettier-config dependencies..."
-        cd style-guide/prettier-config && npm install && cd ../..
+        cd configs/prettier-config && npm install && cd ../..
         echo "Installing stylelint-config dependencies..."
-        cd style-guide/stylelint-config && npm install && cd ../..
+        cd configs/stylelint-config && npm install && cd ../..
 
     - name: Run full test suite
       run: npm test

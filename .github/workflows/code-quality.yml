@@ -35,7 +35,7 @@ jobs:
 
     - name: Validate package.json files
       run: |
-        for pkg in style-guide/*/package.json; do
+        for pkg in configs/*/package.json; do
           echo "Validating $pkg..."
           node -e "JSON.parse(require('fs').readFileSync('$pkg', 'utf8'))"
         done
