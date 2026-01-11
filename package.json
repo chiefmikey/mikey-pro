@@ -1,14 +1,35 @@
 {
   "name": "mikey-pro",
-  "version": "7.5.2",
-  "description": "Mikey Pro Style Guide",
-  "dependencies": {
-    "@mikey-pro/eslint-config": "^7.5.2",
-    "@mikey-pro/prettier-config": "^7.2.5",
-    "@mikey-pro/stylelint-config": "^7.3.1",
-    "eslint": "^9.2.0",
-    "prettier": "^3.2.5",
-    "stylelint": "^16.5.0"
+  "version": "0.0.0",
+  "description": "Mikey Pro",
+  "type": "module",
+  "scripts": {
+    "fix": "eslint --fix '**/*'",
+    "ncu": "find . -name 'package.json' ! -path '*node_modules*' -exec sh -c 'cd $(dirname {}) && pwd && ncu -u' \\;",
+    "npm:install": "find . -name 'package.json' ! -path '*node_modules*' -exec sh -c 'cd $(dirname {}) && pwd && npm install' \\;",
+    "publish:all": "npm run publish:eslint && npm run publish:angular && npm run publish:react && npm run publish:svelte && npm run publish:vue && npm run publish:prettier && npm run publish:stylelint && npm run publish:mikey-pro && npm run publish:theme",
+    "publish:eslint": "cd ./style-guide/eslint-config && npm publish --access public",
+    "publish:react": "cd ./style-guide/eslint-config-react && npm publish --access public",
+    "publish:svelte": "cd ./style-guide/eslint-config-svelte && npm publish --access public",
+    "publish:vue": "cd ./style-guide/eslint-config-vue && npm publish --access public",
+    "publish:angular": "cd ./style-guide/eslint-config-angular && npm publish --access public",
+    "publish:mikey-pro": "CWD=$(pwd) && cd ./style-guide && npm publish --access public && sleep 15 && cd $CWD && npm run update",
+    "publish:prettier": "cd ./style-guide/prettier-config && npm publish --access public",
+    "publish:stylelint": "cd ./style-guide/stylelint-config && npm publish --access public",
+    "publish:theme": "cd ./theme && npm publish --access public",
+    "update": "ncu -u && npm i",
+    "eslint": "npx eslint --config ./eslint.config.js .",
+    "test": "npx vitest run",
+    "test:watch": "npx vitest",
+    "test:coverage": "npx vitest run --coverage",
+    "test:manual": "node tests/run-manual-tests.js",
+    "test:validate": "node tests/validate-all.js"
+  },
+  "devDependencies": {
+    "mikey-pro": "file:./style-guide",
+    "prettier": "^3.6.2",
+    "svelte": "^5.43.14",
+    "vitest": "^4.0.13"
   },
   "files": [
     "README.md",
@@ -27,14 +48,24 @@
     "mikey-pro",
     "mikey",
     "pro",
+    "style guide",
     "style-guide",
-    "styleguide",
-    "style",
-    "guide",
     "lint",
     "linter",
     "format",
     "formatter"
   ],
-  "author": "Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)"
+  "author": "Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)",
+  "funding": "https://github.com/sponsors/chiefmikey",
+  "prettier": "./.prettierrc.js",
+  "stylelint": {
+    "extends": "file:./style-guide/stylelint-config"
+  },
+  "dependencies": {
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-jest": "^29.12.1",
+    "eslint-plugin-jest-dom": "^5.5.0",
+    "eslint-plugin-n": "^17.23.1",
+    "eslint-plugin-unicorn": "^62.0.0"
+  }
 }
