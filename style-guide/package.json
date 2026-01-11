@@ -1,0 +1,41 @@
+{
+  "name": "mikey-pro",
+  "version": "9.0.7",
+  "description": "Mikey Pro Style Guide",
+  "type": "module",
+  "dependencies": {
+    "@mikey-pro/eslint-config": "file:./eslint-config",
+    "@mikey-pro/prettier-config": "file:./prettier-config",
+    "@mikey-pro/stylelint-config": "file:./stylelint-config",
+    "eslint": "^9.35.0",
+    "prettier": "^3.6.2",
+    "stylelint": "^16.24.0"
+  },
+  "files": [
+    "README.md",
+    "LICENSE"
+  ],
+  "homepage": "https://github.com/chiefmikey/mikey-pro#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chiefmikey/mikey-pro.git"
+  },
+  "bugs": {
+    "url": "https://github.com/chiefmikey/mikey-pro/issues"
+  },
+  "license": "MIT",
+  "keywords": [
+    "mikey-pro",
+    "mikey",
+    "pro",
+    "style-guide",
+    "styleguide",
+    "style",
+    "guide",
+    "lint",
+    "linter",
+    "format",
+    "formatter"
+  ],
+  "author": "Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)"
+}

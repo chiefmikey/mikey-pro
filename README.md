@@ -1,148 +1,178 @@
-<div width="100%" align="center">
-  <a href="https://github.com/chiefmikey/mikey-pro">
-    <b>Mikey Pro</b>
-  </a>
-  <h2>Style Guide</h2>
-  <h4>Lint and Format Code (the way Mikey likes it)</h4>
+# Mikey Pro Style Guide
 
-_A curated compilation of packages, plugins, style guides, custom configurations
-<br> and modified rules for consistently writing top shelf code_
+ESLint 9 compatible style guide with modern flat configuration. Supports JavaScript, TypeScript, React, Vue, Svelte, and Angular.
 
-#### Compatibility
+[![Tests](https://github.com/chiefmikey/mikey-pro/workflows/CI/badge.svg)](https://github.com/chiefmikey/mikey-pro/actions)
+[![npm version](https://img.shields.io/npm/v/@mikey-pro/eslint-config.svg)](https://www.npmjs.com/package/@mikey-pro/eslint-config)
 
-<table>
-  <thead>
-    <tr>
-      <th align="left">Languages</th>
-      <th align="left">Frameworks</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td valign="top">
-        JavaScript
-        <br>
-        TypeScript
-        <br>
-        HTML
-        <br>
-        CSS
-        <br>
-        SCSS
-        <br>
-        LESS
-        <br>
-        Markdown
-        <br>
-        YAML
-        <br>
-        JSON
-        <br>
-        JSONC
-        <br>
-        JSON5
-      </td>
-      <td valign="top">
-        React
-        <br>
-        Svelte
-        <br>
-        Vue
-        <br>
-        Jest
-        <br>
-        Cypress
-      </td>
-    </tr>
+## Features
 
-  </tbody>
-</table>
-</div>
+- ✅ **50+ ESLint plugins** for comprehensive code quality
+- ✅ **Auto-fixing** for formatting and common issues
+- ✅ **TypeScript first-class support** with strict type checking
+- ✅ **Framework optimized** configs for React, Vue, Svelte, Angular
+- ✅ **Security focused** with built-in vulnerability detection
+- ✅ **Performance oriented** with complexity and efficiency rules
+- ✅ **Accessibility ready** with a11y rules for React
+- ✅ **CI/CD ready** with automated testing and publishing
 
-## Requirements
+## Installation
 
-Install extensions:
-<a href="https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint">ESLint</a>
-|
-<a href="https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode">Prettier</a>
-|
-<a href="https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint">Stylelint</a>
-
-Additional support:
-<a href="https://marketplace.visualstudio.com/items?itemName=timonwong.shellcheck">ShellCheck</a>
+```bash
+npm install @mikey-pro/eslint-config
+```
 
 ## Usage
 
-### Install
+### Basic Configuration
 
-```shell
-npm i -D mikey-pro
+```javascript
+// eslint.config.js
+export { default } from '@mikey-pro/eslint-config';
 ```
 
-### Configuration
+### Framework-Specific Configurations
 
-Add bundled configs to `package.json`
+**React:**
+```bash
+npm install @mikey-pro/eslint-config-react
+```
 
-```json
-{
-  "prettier": "@mikey-pro/prettier-config",
-  "eslintConfig": {
-    "extends": "@mikey-pro/eslint-config"
+```javascript
+// eslint.config.js
+export { default } from '@mikey-pro/eslint-config-react';
+```
+
+**Vue:**
+```bash
+npm install @mikey-pro/eslint-config-vue
+```
+
+```javascript
+// eslint.config.js
+export { default } from '@mikey-pro/eslint-config-vue';
+```
+
+**Svelte:**
+```bash
+npm install @mikey-pro/eslint-config-svelte
+```
+
+```javascript
+// eslint.config.js
+export { default } from '@mikey-pro/eslint-config-svelte';
+```
+
+**Angular:**
+```bash
+npm install @mikey-pro/eslint-config-angular
+```
+
+```javascript
+// eslint.config.js
+export { default } from '@mikey-pro/eslint-config-angular';
+```
+
+### Custom Configuration
+
+```javascript
+// eslint.config.js
+import { default as reactConfig } from '@mikey-pro/eslint-config-react';
+
+export default [
+  ...reactConfig,
+  {
+    files: ['**/*.test.{js,ts}'],
+    rules: {
+      '@typescript-eslint/no-explicit-any': 'off',
+    },
   },
-  "stylelint": {
-    "extends": "@mikey-pro/stylelint-config"
-  }
-}
+];
 ```
+
+## Rule Categories
+
+### Code Quality
+- Import/export organization and validation
+- Unused variable detection
+- Code complexity limits (15 max)
+- Function length restrictions (50 lines max)
+
+### TypeScript
+- Strict type checking with project-aware rules
+- Consistent type imports and exports
+- Proper TypeScript patterns enforcement
+- TypeScript-specific best practices
+
+### Security
+- Unsafe regex pattern detection
+- Child process security validation
+- Buffer overflow prevention
+- SQL injection protection
+
+### Performance
+- Efficient regex optimization
+- Large file detection
+- Memory leak prevention
+- Bundle size awareness
 
 ### Frameworks
+- **React**: Hooks rules, prop validation, JSX best practices
+- **Vue**: Composition API patterns, template validation
+- **Svelte**: Component structure, reactivity rules
+- **Angular**: Dependency injection, lifecycle management
 
-Each framework configuration extends the base `@mikey-pro/eslint-config`
+### Formatting
+- Consistent import sorting
+- Object/array key ordering
+- Destructuring consistency
+- Prettier integration for code formatting
 
-#### React
+## Packages
 
-```shell
-npm i -D mikey-pro @mikey-pro/eslint-config-react
+| Package | Description |
+|---------|-------------|
+| `@mikey-pro/eslint-config` | Core ESLint configuration |
+| `@mikey-pro/eslint-config-react` | React-specific rules + core |
+| `@mikey-pro/eslint-config-vue` | Vue-specific rules + core |
+| `@mikey-pro/eslint-config-svelte` | Svelte-specific rules + core |
+| `@mikey-pro/eslint-config-angular` | Angular-specific rules + core |
+| `@mikey-pro/prettier-config` | Prettier configuration |
+| `@mikey-pro/stylelint-config` | Stylelint configuration |
+
+## Supported File Types
+
+- **JavaScript**: `.js`, `.mjs`, `.cjs`
+- **TypeScript**: `.ts`, `.tsx`
+- **Frameworks**: `.jsx`, `.vue`, `.svelte`
+- **Web**: `.html`, `.css`, `.scss`
+- **Config**: `.json`, `.jsonc`, `.yaml`, `.toml`
+
+## Commands
+
+```bash
+npm run eslint        # Lint all files
+npm run fix           # Auto-fix linting issues
+npm test              # Run test suite
+npm run test:validate # Run validation checks
 ```
 
-```json
-{
-  "eslintConfig": {
-    "extends": "@mikey-pro/eslint-config-react"
-  }
-}
+## Development
+
+```bash
+# Install all dependencies
+npm run npm:install
+
+# Run tests across all packages
+npm test
+
+# Update dependencies
+npm run ncu
+
+# Publish all packages
+npm run publish:all
 ```
 
-#### Svelte
+## License
 
-```shell
-npm i -D mikey-pro @mikey-pro/eslint-config-svelte
-```
-
-```json
-{
-  "eslintConfig": {
-    "extends": "@mikey-pro/eslint-config-svelte"
-  }
-}
-```
-
-<a href="https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode">Svelte
-Extension</a>
-
-#### Vue
-
-```shell
-npm i -D mikey-pro @mikey-pro/eslint-config-vue
-```
-
-```json
-{
-  "eslintConfig": {
-    "extends": "@mikey-pro/eslint-config-vue"
-  }
-}
-```
-
-<a href="https://marketplace.visualstudio.com/items?itemName=Vue.volar">Vue
-Extension</a>
+MIT
