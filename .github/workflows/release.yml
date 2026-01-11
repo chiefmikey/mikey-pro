@@ -52,7 +52,13 @@ jobs:
     - name: Install dependencies
       run: |
         npm ci
-        npm run npm:install
+        # Install dependencies for style-guide packages
+        for pkg in style-guide/eslint-config style-guide/eslint-config-react style-guide/eslint-config-vue style-guide/eslint-config-svelte style-guide/eslint-config-angular style-guide/prettier-config style-guide/stylelint-config; do
+          if [ -d "$pkg" ]; then
+            echo "Installing dependencies for $pkg"
+            cd "$pkg" && npm ci && cd ../..
+          fi
+        done
 
     - name: Final validation
       run: npm run test:validate
