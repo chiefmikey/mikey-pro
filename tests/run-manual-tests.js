@@ -50,7 +50,7 @@ async function runTests() {
   // Test 1: Configs can be imported
   await test('Core config can be imported', async () => {
     const config = await import(
-      join(rootDir, 'style-guide', 'eslint-config', 'index.js')
+      join(rootDir, 'configs', 'eslint-config', 'index.js')
     );
     if (!config.default || !Array.isArray(config.default)) {
       throw new Error('Config is not a valid array');
@@ -59,7 +59,7 @@ async function runTests() {
 
   await test('React config can be imported', async () => {
     const config = await import(
-      join(rootDir, 'style-guide', 'eslint-config-react', 'index.js')
+      join(rootDir, 'configs', 'eslint-config-react', 'index.js')
     );
     if (!config.default || !Array.isArray(config.default)) {
       throw new Error('Config is not a valid array');
@@ -68,7 +68,7 @@ async function runTests() {
 
   await test('Vue config can be imported', async () => {
     const config = await import(
-      join(rootDir, 'style-guide', 'eslint-config-vue', 'index.js')
+      join(rootDir, 'configs', 'eslint-config-vue', 'index.js')
     );
     if (!config.default || !Array.isArray(config.default)) {
       throw new Error('Config is not a valid array');
@@ -77,7 +77,7 @@ async function runTests() {
 
   await test('Svelte config can be imported', async () => {
     const config = await import(
-      join(rootDir, 'style-guide', 'eslint-config-svelte', 'index.js')
+      join(rootDir, 'configs', 'eslint-config-svelte', 'index.js')
     );
     if (!config.default || !Array.isArray(config.default)) {
       throw new Error('Config is not a valid array');
@@ -86,7 +86,7 @@ async function runTests() {
 
   await test('Angular config can be imported', async () => {
     const config = await import(
-      join(rootDir, 'style-guide', 'eslint-config-angular', 'index.js')
+      join(rootDir, 'configs', 'eslint-config-angular', 'index.js')
     );
     if (!config.default || !Array.isArray(config.default)) {
       throw new Error('Config is not a valid array');
@@ -161,7 +161,7 @@ async function runTests() {
   await test('Config works when used as installed package (core)', async () => {
     // Simulate importing config as user would: export { default } from '@mikey-pro/eslint-config'
     const config = await import(
-      join(rootDir, 'style-guide', 'eslint-config', 'index.js')
+      join(rootDir, 'configs', 'eslint-config', 'index.js')
     );
     if (!config.default || !Array.isArray(config.default)) {
       throw new Error('Config is not a valid array');
@@ -171,7 +171,7 @@ async function runTests() {
     const eslint = new ESLint({
       overrideConfigFile: join(
         rootDir,
-        'style-guide',
+        'configs',
         'eslint-config',
         'index.js',
       ),
@@ -189,7 +189,7 @@ async function runTests() {
 
   await test('Config works when used as installed package (React)', async () => {
     const config = await import(
-      join(rootDir, 'style-guide', 'eslint-config-react', 'index.js')
+      join(rootDir, 'configs', 'eslint-config-react', 'index.js')
     );
     if (!config.default || !Array.isArray(config.default)) {
       throw new Error('Config is not a valid array');
@@ -198,7 +198,7 @@ async function runTests() {
     const eslint = new ESLint({
       overrideConfigFile: join(
         rootDir,
-        'style-guide',
+        'configs',
         'eslint-config-react',
         'index.js',
       ),

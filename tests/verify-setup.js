@@ -46,7 +46,7 @@ const checks = [
     check: async () => {
       try {
         const config = await import(
-          join(rootDir, 'style-guide', 'eslint-config', 'index.js')
+          join(rootDir, 'configs', 'eslint-config', 'index.js')
         );
         return config.default && Array.isArray(config.default);
       } catch {

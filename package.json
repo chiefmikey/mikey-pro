@@ -8,14 +8,14 @@
     "ncu": "find . -name 'package.json' ! -path '*node_modules*' -exec sh -c 'cd $(dirname {}) && pwd && ncu -u' \\;",
     "npm:install": "find . -name 'package.json' ! -path '*node_modules*' -exec sh -c 'cd $(dirname {}) && pwd && npm install' \\;",
     "publish:all": "npm run publish:eslint && npm run publish:angular && npm run publish:react && npm run publish:svelte && npm run publish:vue && npm run publish:prettier && npm run publish:stylelint && npm run publish:mikey-pro && npm run publish:theme",
-    "publish:eslint": "cd ./style-guide/eslint-config && npm publish --access public",
-    "publish:react": "cd ./style-guide/eslint-config-react && npm publish --access public",
-    "publish:svelte": "cd ./style-guide/eslint-config-svelte && npm publish --access public",
-    "publish:vue": "cd ./style-guide/eslint-config-vue && npm publish --access public",
-    "publish:angular": "cd ./style-guide/eslint-config-angular && npm publish --access public",
-    "publish:mikey-pro": "CWD=$(pwd) && cd ./style-guide && npm publish --access public && sleep 15 && cd $CWD && npm run update",
-    "publish:prettier": "cd ./style-guide/prettier-config && npm publish --access public",
-    "publish:stylelint": "cd ./style-guide/stylelint-config && npm publish --access public",
+    "publish:eslint": "cd ./configs/eslint-config && npm publish --access public",
+    "publish:react": "cd ./configs/eslint-config-react && npm publish --access public",
+    "publish:svelte": "cd ./configs/eslint-config-svelte && npm publish --access public",
+    "publish:vue": "cd ./configs/eslint-config-vue && npm publish --access public",
+    "publish:angular": "cd ./configs/eslint-config-angular && npm publish --access public",
+    "publish:mikey-pro": "CWD=$(pwd) && cd ./configs && npm publish --access public && sleep 15 && cd $CWD && npm run update",
+    "publish:prettier": "cd ./configs/prettier-config && npm publish --access public",
+    "publish:stylelint": "cd ./configs/stylelint-config && npm publish --access public",
     "publish:theme": "cd ./theme && npm publish --access public",
     "update": "ncu -u && npm i",
     "eslint": "npx eslint --config ./eslint.config.js .",
@@ -25,8 +25,8 @@
     "test:manual": "node tests/run-manual-tests.js",
     "test:validate": "node tests/validate-all.js"
   },
-  "devDependencies": {
-    "mikey-pro": "file:./style-guide",
+    "devDependencies": {
+    "mikey-pro": "file:./configs",
     "prettier": "^3.6.2",
     "svelte": "^5.43.14",
     "vitest": "^4.0.13"
@@ -59,7 +59,7 @@
   "funding": "https://github.com/sponsors/chiefmikey",
   "prettier": "./.prettierrc.js",
   "stylelint": {
-    "extends": "file:./style-guide/stylelint-config"
+    "extends": "file:./configs/stylelint-config"
   },
   "dependencies": {
     "eslint-plugin-import": "^2.32.0",

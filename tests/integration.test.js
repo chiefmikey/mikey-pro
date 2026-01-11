@@ -75,7 +75,7 @@ describe('End-to-End Integration Tests', () => {
     it('should lint React files without breaking', async () => {
       const configPath = join(
         rootDir,
-        'style-guide',
+        'configs',
         'eslint-config-react',
         'index.js',
       );
@@ -95,7 +95,7 @@ describe('End-to-End Integration Tests', () => {
     it('should lint Vue files without breaking', async () => {
       const configPath = join(
         rootDir,
-        'style-guide',
+        'configs',
         'eslint-config-vue',
         'index.js',
       );
@@ -115,7 +115,7 @@ describe('End-to-End Integration Tests', () => {
     it('should lint Svelte files without breaking', async () => {
       const configPath = join(
         rootDir,
-        'style-guide',
+        'configs',
         'eslint-config-svelte',
         'index.js',
       );
@@ -135,7 +135,7 @@ describe('End-to-End Integration Tests', () => {
     it('should lint Angular files without breaking', async () => {
       const configPath = join(
         rootDir,
-        'style-guide',
+        'configs',
         'eslint-config-angular',
         'index.js',
       );

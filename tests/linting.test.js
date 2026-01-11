@@ -52,7 +52,7 @@ describe('React Linting', () => {
   it('should lint React JSX files without syntax errors', async () => {
     const configPath = join(
       rootDir,
-      'style-guide',
+      'configs',
       'eslint-config-react',
       'index.js',
     );
@@ -76,7 +76,7 @@ describe('Vue Linting', () => {
   it('should lint Vue files without syntax errors', async () => {
     const configPath = join(
       rootDir,
-      'style-guide',
+      'configs',
       'eslint-config-vue',
       'index.js',
     );
@@ -100,7 +100,7 @@ describe('Svelte Linting', () => {
   it('should lint Svelte files without syntax errors', async () => {
     const configPath = join(
       rootDir,
-      'style-guide',
+      'configs',
       'eslint-config-svelte',
       'index.js',
     );
@@ -124,7 +124,7 @@ describe('Angular Linting', () => {
   it('should lint Angular TypeScript files without syntax errors', async () => {
     const configPath = join(
       rootDir,
-      'style-guide',
+      'configs',
       'eslint-config-angular',
       'index.js',
     );
