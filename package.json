@@ -23,7 +23,8 @@
     "test:watch": "npx vitest",
     "test:coverage": "npx vitest run --coverage",
     "test:manual": "node tests/run-manual-tests.js",
-    "test:validate": "node tests/validate-all.js"
+    "test:validate": "node tests/validate-all.js",
+    "ci:local": "bash scripts/ci-local.sh"
   },
     "devDependencies": {
     "mikey-pro": "file:./configs",
