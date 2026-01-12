@@ -423,15 +423,17 @@ export const shellConfig = {
 };
 
 // .env files
-export const env = {
+export const envFilesConfig = {
   files: ['**/.env', '**/.env.*', '**/*.env'],
   languageOptions: {
     parser: parserPlain,
   },
+  plugins: {
+    shell,
+  },
   rules: {
-    // .env files are simple key=value format
-    // Basic validation - ensure no trailing spaces, proper format
-    // Note: Full .env validation may require external tools
+    // Relax JavaScript-specific variable rules for .env files
+    // Note: .env formatting and validation should be handled by external tools
     'no-unused-vars': 'off',
     'no-undef': 'off',
   },
@@ -454,5 +456,5 @@ export const baseOverrides = [
   jestTs,
   cypressConfig,
   shellConfig,
-  env,
+  envFilesConfig,
 ];
