@@ -27,7 +27,9 @@
     "ci:local": "bash scripts/ci-local.sh"
   },
   "devDependencies": {
-    "mikey-pro": "^9.0.6",
+    "@mikey-pro/eslint-config": "^9.0.7",
+    "@mikey-pro/prettier-config": "^9.0.7",
+    "@mikey-pro/stylelint-config": "^9.0.7",
     "svelte": "^5.43.14",
     "vitest": "^4.0.13"
   },
