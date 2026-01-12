@@ -33,14 +33,18 @@ jobs:
           npm install
 
       - name: Check code formatting
-        run: npx prettier --check "**/*.{js,ts,json,md,yml,yaml}" "!theme/**" --ignore-path .prettierignore
+        run:
+          npx prettier --check "**/*.{js,ts,json,md,yml,yaml}" "!theme/**"
+          --ignore-path .prettierignore
 
       - name: Run ESLint
         run: npx eslint "**/*.{js,ts}" --max-warnings 0
         continue-on-error: false
 
       - name: Check for unused dependencies
-        run: npx depcheck --ignores="@types/*,eslint-*,prettier-*,stylelint-*,vitest"
+        run:
+          npx depcheck
+          --ignores="@types/*,eslint-*,prettier-*,stylelint-*,vitest"
         continue-on-error: true
 
       - name: Validate package.json files
