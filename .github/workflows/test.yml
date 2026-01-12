@@ -68,16 +68,12 @@ jobs:
           fi
 
       - name: Run manual tests (fallback)
-        if:
-          steps.test_type.outputs.type == 'all' || steps.test_type.outputs.type
-          == 'manual'
+        if: steps.test_type.outputs.type == 'all' || steps.test_type.outputs.type == 'manual'
         run: npm run test:manual || echo "Manual tests completed"
         continue-on-error: true
 
       - name: Run comprehensive validation
-        if:
-          steps.test_type.outputs.type == 'all' || steps.test_type.outputs.type
-          == 'validate'
+        if: steps.test_type.outputs.type == 'all' || steps.test_type.outputs.type == 'validate'
         run: npm run test:validate || echo "Validation completed"
         continue-on-error: true
 
