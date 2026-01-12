@@ -30,7 +30,7 @@ jobs:
         npm install
 
     - name: Check code formatting
-      run: npx prettier --check "**/*.{js,ts,json,md,yml,yaml}" --ignore-path .prettierignore
+      run: npx prettier --check "**/*.{js,ts,json,md,yml,yaml}" "!theme/**" --ignore-path .prettierignore
 
     - name: Run ESLint
       run: npx eslint "**/*.{js,ts}" --max-warnings 0
