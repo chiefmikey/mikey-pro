@@ -175,7 +175,7 @@ describe('File Type Support', () => {
   });
 });
 
-  describe('Framework File Types', () => {
+describe('Framework File Types', () => {
   describe('React JSX Files', () => {
     it('should lint .jsx files with React config', async () => {
       const configPath = join(

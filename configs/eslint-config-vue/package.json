@@ -20,13 +20,7 @@
       "optional": true
     }
   },
-  "files": [
-    "index.js",
-    "flat.js",
-    "legacy.js",
-    "README.md",
-    "LICENSE"
-  ],
+  "files": ["index.js", "flat.js", "legacy.js", "README.md", "LICENSE"],
   "homepage": "https://github.com/chiefmikey/mikey-pro#readme",
   "repository": {
     "type": "git",
@@ -60,9 +54,7 @@
     "pnpm": ">=8.0.0",
     "yarn": ">=4.0.0"
   },
-  "browserslist": [
-    "defaults"
-  ],
+  "browserslist": ["defaults"],
   "exports": {
     ".": {
       "import": "./index.js",

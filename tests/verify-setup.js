@@ -85,4 +85,3 @@ if (failed === 0) {
   console.log('\n❌ Some checks failed');
   process.exit(1);
 }
-

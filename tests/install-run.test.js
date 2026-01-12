@@ -208,19 +208,23 @@ console.log(user);
       const tsconfigPath = join(testProjectDir, 'tsconfig.json');
       writeFileSync(
         tsconfigPath,
-        JSON.stringify({
-          compilerOptions: {
-            target: 'ES2022',
-            module: 'ESNext',
-            moduleResolution: 'node',
-            strict: true,
-            esModuleInterop: true,
-            skipLibCheck: true,
-            forceConsistentCasingInFileNames: true,
-            allowSyntheticDefaultImports: true,
+        JSON.stringify(
+          {
+            compilerOptions: {
+              target: 'ES2022',
+              module: 'ESNext',
+              moduleResolution: 'node',
+              strict: true,
+              esModuleInterop: true,
+              skipLibCheck: true,
+              forceConsistentCasingInFileNames: true,
+              allowSyntheticDefaultImports: true,
+            },
+            include: ['*.ts'],
           },
-          include: ['*.ts'],
-        }, null, 2),
+          null,
+          2,
+        ),
       );
 
       // Lint the TypeScript file
@@ -334,4 +338,3 @@ console.log(user);
     });
   });
 });
-
