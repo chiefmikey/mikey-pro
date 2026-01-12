@@ -157,6 +157,10 @@ export default [
 - **Frameworks**: `.jsx`, `.vue`, `.svelte`
 - **Web**: `.html`, `.css`, `.scss`
 - **Config**: `.json`, `.jsonc`, `.yaml`, `.toml`
+- **Shell Scripts**: `.sh`, `.bash`, `.zsh`
+- **Environment**: `.env`, `.env.*`
+
+Note: Shell script linting uses `eslint-plugin-shell` for basic validation. For comprehensive shell script linting, consider using `shellcheck` (external tool). .env files receive basic validation support.
 
 ## Commands
 
