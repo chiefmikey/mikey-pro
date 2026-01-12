@@ -3,6 +3,10 @@
   "version": "9.0.7",
   "description": "Mikey Pro Style Guide",
   "type": "module",
+  "main": "./eslint-config/index.js",
+  "exports": {
+    ".": "./eslint-config/index.js"
+  },
   "dependencies": {
     "@mikey-pro/eslint-config": "file:./eslint-config",
     "@mikey-pro/prettier-config": "file:./prettier-config",

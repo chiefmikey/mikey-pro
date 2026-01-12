@@ -23,10 +23,13 @@ jobs:
       run: |
         npm ci
         # Install dependencies for configs packages (needed for prettier/stylelint configs)
+        # Must install before prettier runs to resolve config references
         echo "Installing prettier-config dependencies..."
         cd configs/prettier-config && npm install && cd ../..
         echo "Installing stylelint-config dependencies..."
         cd configs/stylelint-config && npm install && cd ../..
+        # Reinstall root to ensure prettier can resolve configs
+        npm install
 
     - name: Check code formatting
       run: npx prettier --check "**/*.{js,ts,json,md,yml,yaml}"
