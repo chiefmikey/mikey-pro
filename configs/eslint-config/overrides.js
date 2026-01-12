@@ -1,6 +1,5 @@
 // Modern overrides for different file types and frameworks
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 
 import html from '@html-eslint/eslint-plugin';
 import htmlParser from '@html-eslint/parser';
@@ -9,7 +8,6 @@ import tsParser from '@typescript-eslint/parser';
 import cypress from 'eslint-plugin-cypress';
 import importPlugin from 'eslint-plugin-import';
 import jest from 'eslint-plugin-jest';
-import markdownlint from 'eslint-plugin-markdownlint';
 import prettier from 'eslint-plugin-prettier';
 import shell, { parserPlain } from 'eslint-plugin-shell';
 import yml from 'eslint-plugin-yml';
@@ -434,8 +432,8 @@ export const envFilesConfig = {
   rules: {
     // Relax JavaScript-specific variable rules for .env files
     // Note: .env formatting and validation should be handled by external tools
-    'no-unused-vars': 'off',
     'no-undef': 'off',
+    'no-unused-vars': 'off',
   },
 };
 
