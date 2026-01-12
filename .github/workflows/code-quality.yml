@@ -19,8 +19,8 @@ jobs:
           node-version: 25
           cache: 'npm'
 
-    - name: Install dependencies
-      run: |
+      - name: Install dependencies
+        run: |
         # Install prettier-config dependencies first so file: links resolve correctly
         echo "Installing prettier-config dependencies..."
         cd configs/prettier-config && npm install && cd ../..
@@ -40,9 +40,7 @@ jobs:
         continue-on-error: false
 
       - name: Check for unused dependencies
-        run:
-          npx depcheck
-          --ignores="@types/*,eslint-*,prettier-*,stylelint-*,vitest"
+        run: npx depcheck --ignores="@types/*,eslint-*,prettier-*,stylelint-*,vitest"
         continue-on-error: true
 
       - name: Validate package.json files
