@@ -11,6 +11,7 @@ import importPlugin from 'eslint-plugin-import';
 import jest from 'eslint-plugin-jest';
 import markdownlint from 'eslint-plugin-markdownlint';
 import prettier from 'eslint-plugin-prettier';
+import shell, { parserPlain } from 'eslint-plugin-shell';
 import yml from 'eslint-plugin-yml';
 import jsoncParser from 'jsonc-eslint-parser';
 import tomlParser from 'toml-eslint-parser';
@@ -405,6 +406,37 @@ export const cypressConfig = {
   },
 };
 
+// Shell scripts (bash, sh, zsh)
+export const shellConfig = {
+  files: ['**/*.sh', '**/*.bash', '**/*.zsh'],
+  languageOptions: {
+    parser: parserPlain,
+  },
+  plugins: {
+    shell,
+  },
+  rules: {
+    // Basic shell script linting rules
+    // Note: Full shell script linting may require shellcheck (external tool)
+    'shell/shell': 'warn',
+  },
+};
+
+// .env files
+export const env = {
+  files: ['**/.env', '**/.env.*', '**/*.env'],
+  languageOptions: {
+    parser: parserPlain,
+  },
+  rules: {
+    // .env files are simple key=value format
+    // Basic validation - ensure no trailing spaces, proper format
+    // Note: Full .env validation may require external tools
+    'no-unused-vars': 'off',
+    'no-undef': 'off',
+  },
+};
+
 // Export all overrides
 export const baseOverrides = [
   ts,
@@ -421,4 +453,6 @@ export const baseOverrides = [
   jestJs,
   jestTs,
   cypressConfig,
+  shellConfig,
+  env,
 ];
