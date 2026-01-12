@@ -31,6 +31,8 @@ jobs:
           cd configs/eslint-config && npm install && cd ../..
           # Now install root dependencies (npm install handles file: links better than npm ci)
           npm install
+          # Reinstall to ensure prettier plugin from eslint-config is accessible
+          npm install
 
       - name: Check code formatting
         run:
