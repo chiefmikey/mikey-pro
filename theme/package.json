@@ -7,7 +7,9 @@
     "update": "ncu -u && npm i"
   },
   "devDependencies": {
-    "mikey-pro": "file:../configs"
+    "@mikey-pro/eslint-config": "^9.0.7",
+    "@mikey-pro/prettier-config": "^9.0.7",
+    "@mikey-pro/stylelint-config": "^9.0.7"
   },
   "files": [
     "README.md",
@@ -30,11 +32,8 @@
   ],
   "author": "Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)",
   "funding": "https://github.com/sponsors/chiefmikey",
-  "prettier": "file:../configs/prettier-config",
-  "eslintConfig": {
-    "extends": "file:../configs/eslint-config"
-  },
+  "prettier": "@mikey-pro/prettier-config",
   "stylelint": {
-    "extends": "file:../configs/stylelint-config"
+    "extends": "@mikey-pro/stylelint-config"
   }
 }
