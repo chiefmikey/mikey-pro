@@ -116,6 +116,7 @@
     "pnpm": ">=8.0.0",
     "yarn": ">=4.0.0"
   },
+  "_comment": "Priority: Latest Node (25+) for latest features. Minimum: Node 20. Older versions tested but may break.",
   "exports": {
     ".": {
       "import": "./index.js",

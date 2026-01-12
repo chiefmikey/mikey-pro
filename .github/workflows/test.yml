@@ -25,7 +25,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [20.x, 22.x, 24.x]
+        # Prioritize latest Node (25) for latest features, test older versions for compatibility
+        node-version: [25.x, 22.x, 20.x]
     steps:
       - name: Checkout code
         uses: actions/checkout@v6
