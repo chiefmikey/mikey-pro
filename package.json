@@ -55,7 +55,7 @@
   ],
   "author": "Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)",
   "funding": "https://github.com/sponsors/chiefmikey",
-  "prettier": "./.prettierrc.js",
+  "prettier": "@mikey-pro/prettier-config",
   "stylelint": {
     "extends": "file:./configs/stylelint-config"
   },
