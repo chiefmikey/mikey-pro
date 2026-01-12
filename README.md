@@ -34,6 +34,7 @@ export { default } from '@mikey-pro/eslint-config';
 ### Framework-Specific Configurations
 
 **React:**
+
 ```bash
 npm install @mikey-pro/eslint-config-react
 ```
@@ -44,6 +45,7 @@ export { default } from '@mikey-pro/eslint-config-react';
 ```
 
 **Vue:**
+
 ```bash
 npm install @mikey-pro/eslint-config-vue
 ```
@@ -54,6 +56,7 @@ export { default } from '@mikey-pro/eslint-config-vue';
 ```
 
 **Svelte:**
+
 ```bash
 npm install @mikey-pro/eslint-config-svelte
 ```
@@ -64,6 +67,7 @@ export { default } from '@mikey-pro/eslint-config-svelte';
 ```
 
 **Angular:**
+
 ```bash
 npm install @mikey-pro/eslint-config-angular
 ```
@@ -93,36 +97,42 @@ export default [
 ## Rule Categories
 
 ### Code Quality
+
 - Import/export organization and validation
 - Unused variable detection
 - Code complexity limits (15 max)
 - Function length restrictions (50 lines max)
 
 ### TypeScript
+
 - Strict type checking with project-aware rules
 - Consistent type imports and exports
 - Proper TypeScript patterns enforcement
 - TypeScript-specific best practices
 
 ### Security
+
 - Unsafe regex pattern detection
 - Child process security validation
 - Buffer overflow prevention
 - SQL injection protection
 
 ### Performance
+
 - Efficient regex optimization
 - Large file detection
 - Memory leak prevention
 - Bundle size awareness
 
 ### Frameworks
+
 - **React**: Hooks rules, prop validation, JSX best practices
 - **Vue**: Composition API patterns, template validation
 - **Svelte**: Component structure, reactivity rules
 - **Angular**: Dependency injection, lifecycle management
 
 ### Formatting
+
 - Consistent import sorting
 - Object/array key ordering
 - Destructuring consistency
@@ -130,15 +140,15 @@ export default [
 
 ## Packages
 
-| Package | Description |
-|---------|-------------|
-| `@mikey-pro/eslint-config` | Core ESLint configuration |
-| `@mikey-pro/eslint-config-react` | React-specific rules + core |
-| `@mikey-pro/eslint-config-vue` | Vue-specific rules + core |
-| `@mikey-pro/eslint-config-svelte` | Svelte-specific rules + core |
+| Package                            | Description                   |
+| ---------------------------------- | ----------------------------- |
+| `@mikey-pro/eslint-config`         | Core ESLint configuration     |
+| `@mikey-pro/eslint-config-react`   | React-specific rules + core   |
+| `@mikey-pro/eslint-config-vue`     | Vue-specific rules + core     |
+| `@mikey-pro/eslint-config-svelte`  | Svelte-specific rules + core  |
 | `@mikey-pro/eslint-config-angular` | Angular-specific rules + core |
-| `@mikey-pro/prettier-config` | Prettier configuration |
-| `@mikey-pro/stylelint-config` | Stylelint configuration |
+| `@mikey-pro/prettier-config`       | Prettier configuration        |
+| `@mikey-pro/stylelint-config`      | Stylelint configuration       |
 
 ## Supported File Types
 

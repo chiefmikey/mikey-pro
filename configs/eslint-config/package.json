@@ -106,9 +106,7 @@
     "angular"
   ],
   "author": "Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)",
-  "browserslist": [
-    "defaults"
-  ],
+  "browserslist": ["defaults"],
   "type": "module",
   "engines": {
     "node": ">=20.0.0",

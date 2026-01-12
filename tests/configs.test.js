@@ -11,12 +11,7 @@ const rootDir = join(__dirname, '..');
 
 describe('ESLint Configuration Loading', () => {
   it('should load core config without errors', async () => {
-    const configPath = join(
-      rootDir,
-      'configs',
-      'eslint-config',
-      'index.js',
-    );
+    const configPath = join(rootDir, 'configs', 'eslint-config', 'index.js');
 
     // Skip if config file doesn't exist
     if (!existsSync(configPath)) {
@@ -157,4 +152,3 @@ describe('ESLint Configuration Execution', () => {
     expect(eslint).toBeDefined();
   });
 });
-

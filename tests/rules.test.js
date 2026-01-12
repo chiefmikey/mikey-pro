@@ -142,4 +142,3 @@ describe('Framework-Specific Rules', () => {
     expect(Array.isArray(messages)).toBe(true);
   });
 });
-

@@ -24,12 +24,7 @@
       "optional": false
     }
   },
-  "files": [
-    "index.js",
-    "flat.js",
-    "README.md",
-    "LICENSE"
-  ],
+  "files": ["index.js", "flat.js", "README.md", "LICENSE"],
   "homepage": "https://github.com/chiefmikey/mikey-pro#readme",
   "repository": {
     "type": "git",
@@ -57,9 +52,7 @@
     "flat-config"
   ],
   "author": "Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)",
-  "browserslist": [
-    "defaults"
-  ],
+  "browserslist": ["defaults"],
   "engines": {
     "node": ">=20.0.0",
     "npm": ">=9.0.0",

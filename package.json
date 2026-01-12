@@ -26,16 +26,13 @@
     "test:validate": "node tests/validate-all.js",
     "ci:local": "bash scripts/ci-local.sh"
   },
-    "devDependencies": {
+  "devDependencies": {
     "mikey-pro": "file:./configs",
     "prettier": "^3.6.2",
     "svelte": "^5.43.14",
     "vitest": "^4.0.13"
   },
-  "files": [
-    "README.md",
-    "LICENSE"
-  ],
+  "files": ["README.md", "LICENSE"],
   "homepage": "https://github.com/chiefmikey/mikey-pro#readme",
   "repository": {
     "type": "git",

@@ -169,12 +169,7 @@ async function runTests() {
 
     // Verify it can be used to lint files
     const eslint = new ESLint({
-      overrideConfigFile: join(
-        rootDir,
-        'configs',
-        'eslint-config',
-        'index.js',
-      ),
+      overrideConfigFile: join(rootDir, 'configs', 'eslint-config', 'index.js'),
     });
     const testFile = join(testFilesDir, 'test.js');
     const results = await eslint.lintFiles([testFile]);

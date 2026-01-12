@@ -17,105 +17,105 @@ jobs:
         node-version: [25, 22, 20]
 
     steps:
-    - uses: actions/checkout@v6
+      - uses: actions/checkout@v6
 
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
 
-    - name: Install dependencies
-      run: |
-        npm ci
-        # Install peer dependencies needed for tests
-        npm install eslint-plugin-import eslint-plugin-n eslint-plugin-jest eslint-plugin-jest-dom
-        # Install dependencies for configs packages
-        echo "Installing eslint-config dependencies..."
-        cd configs/eslint-config && npm install && cd ../..
-        echo "Installing eslint-config-react dependencies..."
-        cd configs/eslint-config-react && npm install && cd ../..
-        echo "Installing eslint-config-vue dependencies..."
-        cd configs/eslint-config-vue && npm install && cd ../..
-        echo "Installing eslint-config-svelte dependencies..."
-        cd configs/eslint-config-svelte && npm install && cd ../..
-        echo "Installing eslint-config-angular dependencies..."
-        cd configs/eslint-config-angular && npm install && cd ../..
-        echo "Installing prettier-config dependencies..."
-        cd configs/prettier-config && npm install && cd ../..
-        echo "Installing stylelint-config dependencies..."
-        cd configs/stylelint-config && npm install && cd ../..
+      - name: Install dependencies
+        run: |
+          npm ci
+          # Install peer dependencies needed for tests
+          npm install eslint-plugin-import eslint-plugin-n eslint-plugin-jest eslint-plugin-jest-dom
+          # Install dependencies for configs packages
+          echo "Installing eslint-config dependencies..."
+          cd configs/eslint-config && npm install && cd ../..
+          echo "Installing eslint-config-react dependencies..."
+          cd configs/eslint-config-react && npm install && cd ../..
+          echo "Installing eslint-config-vue dependencies..."
+          cd configs/eslint-config-vue && npm install && cd ../..
+          echo "Installing eslint-config-svelte dependencies..."
+          cd configs/eslint-config-svelte && npm install && cd ../..
+          echo "Installing eslint-config-angular dependencies..."
+          cd configs/eslint-config-angular && npm install && cd ../..
+          echo "Installing prettier-config dependencies..."
+          cd configs/prettier-config && npm install && cd ../..
+          echo "Installing stylelint-config dependencies..."
+          cd configs/stylelint-config && npm install && cd ../..
 
-    - name: Run full test suite
-      run: npm test
-      continue-on-error: true
+      - name: Run full test suite
+        run: npm test
+        continue-on-error: true
 
-    - name: Run validation checks
-      run: npm run test:validate
+      - name: Run validation checks
+        run: npm run test:validate
 
-    - name: Test package publishing (dry-run)
-      run: npm run publish:all -- --dry-run
-      continue-on-error: true
+      - name: Test package publishing (dry-run)
+        run: npm run publish:all -- --dry-run
+        continue-on-error: true
 
   release:
     runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/tags/v')
     steps:
-    - uses: actions/checkout@v6
+      - uses: actions/checkout@v6
 
-    - name: Use Node.js 25
-      uses: actions/setup-node@v4
-      with:
-        node-version: 25
-        cache: 'npm'
-        registry-url: 'https://registry.npmjs.org'
+      - name: Use Node.js 25
+        uses: actions/setup-node@v4
+        with:
+          node-version: 25
+          cache: 'npm'
+          registry-url: 'https://registry.npmjs.org'
 
-    - name: Install dependencies
-      run: |
-        npm ci
-        # Install peer dependencies needed for tests
-        npm install eslint-plugin-import eslint-plugin-n eslint-plugin-jest eslint-plugin-jest-dom
-        # Install dependencies for configs packages (resolved via local file references)
-        npm run npm:install
-        # Install dependencies for configs packages (resolved via local file references)
-        npm run npm:install
+      - name: Install dependencies
+        run: |
+          npm ci
+          # Install peer dependencies needed for tests
+          npm install eslint-plugin-import eslint-plugin-n eslint-plugin-jest eslint-plugin-jest-dom
+          # Install dependencies for configs packages (resolved via local file references)
+          npm run npm:install
+          # Install dependencies for configs packages (resolved via local file references)
+          npm run npm:install
 
-    - name: Final validation
-      run: npm run test:validate
+      - name: Final validation
+        run: npm run test:validate
 
-    - name: Verify package integrity
-      run: |
-        npm run publish:all -- --dry-run
-        echo "✅ Package integrity verified"
+      - name: Verify package integrity
+        run: |
+          npm run publish:all -- --dry-run
+          echo "✅ Package integrity verified"
 
-    - name: Publish packages to npm
-      run: npm run publish:all
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Publish packages to npm
+        run: npm run publish:all
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-    - name: Create GitHub release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
-        body: |
-          🚀 **Mikey Pro Style Guide v${{ github.ref }}**
+      - name: Create GitHub release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            🚀 **Mikey Pro Style Guide v${{ github.ref }}**
 
-          ## What's New
-          - Enhanced documentation and CI/CD automation
-          - Complete package README files
-          - Configuration improvements and fixes
-          - Comprehensive testing across Node.js versions
+            ## What's New
+            - Enhanced documentation and CI/CD automation
+            - Complete package README files
+            - Configuration improvements and fixes
+            - Comprehensive testing across Node.js versions
 
-          ## Packages Published
-          - `@mikey-pro/eslint-config@9.0.7`
-          - `@mikey-pro/eslint-config-react@9.0.7`
-          - `@mikey-pro/eslint-config-vue@9.0.7`
-          - `@mikey-pro/eslint-config-svelte@9.0.7`
-          - `@mikey-pro/eslint-config-angular@9.0.7`
-          - `@mikey-pro/prettier-config@9.0.7`
-          - `@mikey-pro/stylelint-config@9.0.7`
-        draft: false
-        prerelease: false
+            ## Packages Published
+            - `@mikey-pro/eslint-config@9.0.7`
+            - `@mikey-pro/eslint-config-react@9.0.7`
+            - `@mikey-pro/eslint-config-vue@9.0.7`
+            - `@mikey-pro/eslint-config-svelte@9.0.7`
+            - `@mikey-pro/eslint-config-angular@9.0.7`
+            - `@mikey-pro/prettier-config@9.0.7`
+            - `@mikey-pro/stylelint-config@9.0.7`
+          draft: false
+          prerelease: false
