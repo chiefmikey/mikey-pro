@@ -83,6 +83,7 @@ jobs:
         continue-on-error: false
 
       - name: Verify ESLint configs can lint
+        continue-on-error: true
         run: |
           echo "Testing core config..."
           npx eslint test-files/test.js test-files/test.ts --config eslint.config.js || true

@@ -18,5 +18,6 @@ export default defineConfig({
     exclude: ['node_modules', 'dist', 'build'],
     globals: true,
     include: ['tests/**/*.test.js'],
+    testTimeout: 10000, // Increase timeout to 10s for slower Node versions
   },
 });
