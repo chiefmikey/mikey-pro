@@ -173,6 +173,52 @@ describe('File Type Support', () => {
       expect(fatalErrors.length).toBe(0);
     });
   });
+
+  describe('Shell Script Files', () => {
+    it('should lint .sh files without syntax errors', async () => {
+      const eslint = new ESLint({
+        overrideConfigFile: configPath,
+      });
+      const testFile = join(testFilesDir, 'test.sh');
+      const results = await eslint.lintFiles([testFile]);
+
+      expect(results.length).toBeGreaterThan(0);
+
+      const fatalErrors = results[0].messages.filter((m) => m.fatal);
+
+      expect(fatalErrors.length).toBe(0);
+    });
+
+    it('should lint .zsh files without syntax errors', async () => {
+      const eslint = new ESLint({
+        overrideConfigFile: configPath,
+      });
+      const testFile = join(testFilesDir, 'test.zsh');
+      const results = await eslint.lintFiles([testFile]);
+
+      expect(results.length).toBeGreaterThan(0);
+
+      const fatalErrors = results[0].messages.filter((m) => m.fatal);
+
+      expect(fatalErrors.length).toBe(0);
+    });
+  });
+
+  describe('Environment Files', () => {
+    it('should lint .env files without syntax errors', async () => {
+      const eslint = new ESLint({
+        overrideConfigFile: configPath,
+      });
+      const testFile = join(testFilesDir, 'test.env');
+      const results = await eslint.lintFiles([testFile]);
+
+      expect(results.length).toBeGreaterThan(0);
+
+      const fatalErrors = results[0].messages.filter((m) => m.fatal);
+
+      expect(fatalErrors.length).toBe(0);
+    });
+  });
 });
 
 describe('Framework File Types', () => {
