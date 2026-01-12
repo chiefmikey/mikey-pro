@@ -19,15 +19,18 @@ jobs:
           node-version: 25
           cache: 'npm'
 
-      - name: Install dependencies
-        run: |
-          # Install prettier-config dependencies first so file: links resolve correctly
-          echo "Installing prettier-config dependencies..."
-          cd configs/prettier-config && npm install && cd ../..
-          echo "Installing stylelint-config dependencies..."
-          cd configs/stylelint-config && npm install && cd ../..
-          # Now install root dependencies (npm install handles file: links better than npm ci)
-          npm install
+    - name: Install dependencies
+      run: |
+        # Install prettier-config dependencies first so file: links resolve correctly
+        echo "Installing prettier-config dependencies..."
+        cd configs/prettier-config && npm install && cd ../..
+        echo "Installing stylelint-config dependencies..."
+        cd configs/stylelint-config && npm install && cd ../..
+        # Install eslint-config dependencies so prettier plugin is available
+        echo "Installing eslint-config dependencies..."
+        cd configs/eslint-config && npm install && cd ../..
+        # Now install root dependencies (npm install handles file: links better than npm ci)
+        npm install
 
       - name: Check code formatting
         run:
