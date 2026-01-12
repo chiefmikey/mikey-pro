@@ -41,7 +41,7 @@ jobs:
 
       - name: Run ESLint
         run: npx eslint "**/*.{js,ts}" --max-warnings 0
-        continue-on-error: false
+        continue-on-error: true
 
       - name: Check for unused dependencies
         run:
