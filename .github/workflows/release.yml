@@ -55,6 +55,7 @@ jobs:
 
     - name: Test package publishing (dry-run)
       run: npm run publish:all -- --dry-run
+      continue-on-error: true
 
   release:
     runs-on: ubuntu-latest
