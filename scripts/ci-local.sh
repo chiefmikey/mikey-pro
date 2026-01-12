@@ -26,9 +26,10 @@ print_warning() {
     echo -e "${YELLOW}⚠${NC} $1"
 }
 
-# Check Node.js version
+# Check Node.js version (prioritize latest - Node 25+)
 NODE_VERSION=$(node -v)
 echo "Node.js version: $NODE_VERSION"
+echo "Note: Latest Node (25+) is prioritized for latest features. Minimum: Node 20."
 echo ""
 
 # Step 1: Install root dependencies
