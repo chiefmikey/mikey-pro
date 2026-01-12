@@ -26,7 +26,7 @@ export { default } from '@mikey-pro/eslint-config';
 
 ## Supported File Types
 
-JavaScript, TypeScript, JSON, YAML, TOML, HTML, CSS, SCSS
+JavaScript, TypeScript, JSON, YAML, TOML, HTML, CSS, SCSS, Shell Scripts (.sh, .bash, .zsh), .env files
 
 ## Customization
 

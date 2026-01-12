@@ -61,7 +61,6 @@ export default [
       '*.psd',
       '*.ai',
       '*.ase',
-      '*.sh',
       '*.bat',
       '*.cmd',
       'package-lock.json',
