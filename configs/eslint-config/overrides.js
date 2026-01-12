@@ -1,6 +1,5 @@
 // Modern overrides for different file types and frameworks
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 
 import html from '@html-eslint/eslint-plugin';
 import htmlParser from '@html-eslint/parser';
@@ -9,8 +8,8 @@ import tsParser from '@typescript-eslint/parser';
 import cypress from 'eslint-plugin-cypress';
 import importPlugin from 'eslint-plugin-import';
 import jest from 'eslint-plugin-jest';
-import markdownlint from 'eslint-plugin-markdownlint';
 import prettier from 'eslint-plugin-prettier';
+import shell, { parserPlain } from 'eslint-plugin-shell';
 import yml from 'eslint-plugin-yml';
 import jsoncParser from 'jsonc-eslint-parser';
 import tomlParser from 'toml-eslint-parser';
@@ -405,6 +404,39 @@ export const cypressConfig = {
   },
 };
 
+// Shell scripts (bash, sh, zsh)
+export const shellConfig = {
+  files: ['**/*.sh', '**/*.bash', '**/*.zsh'],
+  languageOptions: {
+    parser: parserPlain,
+  },
+  plugins: {
+    shell,
+  },
+  rules: {
+    // Basic shell script linting rules
+    // Note: Full shell script linting may require shellcheck (external tool)
+    'shell/shell': 'warn',
+  },
+};
+
+// .env files
+export const envFilesConfig = {
+  files: ['**/.env', '**/.env.*', '**/*.env'],
+  languageOptions: {
+    parser: parserPlain,
+  },
+  plugins: {
+    shell,
+  },
+  rules: {
+    // Relax JavaScript-specific variable rules for .env files
+    // Note: .env formatting and validation should be handled by external tools
+    'no-undef': 'off',
+    'no-unused-vars': 'off',
+  },
+};
+
 // Export all overrides
 export const baseOverrides = [
   ts,
@@ -421,4 +453,6 @@ export const baseOverrides = [
   jestJs,
   jestTs,
   cypressConfig,
+  shellConfig,
+  envFilesConfig,
 ];
