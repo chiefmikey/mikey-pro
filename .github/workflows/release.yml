@@ -178,6 +178,22 @@ jobs:
         run: |
           timeout 30 node scripts/generate-release-notes.js "${{ steps.version.outputs.version }}" || exit 1
 
+      - name: Determine tag name
+        id: tag_name
+        run: |
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            PREPARE_TAG="${{ needs.prepare-release.outputs.tag_name }}"
+            if [ -n "${PREPARE_TAG}" ] && [ "${PREPARE_TAG}" != "" ]; then
+              TAG_NAME="${PREPARE_TAG}"
+            else
+              TAG_NAME="v${{ steps.version.outputs.version }}"
+            fi
+          else
+            TAG_NAME="${{ github.ref_name }}"
+          fi
+          echo "tag_name=${TAG_NAME}" >> $GITHUB_OUTPUT
+          echo "Using tag: ${TAG_NAME}"
+
       - name: Publish packages to npm
         run: npm run publish:all
         env:
@@ -186,7 +202,7 @@ jobs:
       - name: Create GitHub release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ github.ref_name || needs.prepare-release.outputs.tag_name }}
+          tag_name: ${{ steps.tag_name.outputs.tag_name }}
           name: Release ${{ steps.version.outputs.version }}
           body: ${{ steps.release_notes.outputs.release_notes }}
           draft: false
