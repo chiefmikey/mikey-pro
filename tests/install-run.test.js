@@ -94,8 +94,7 @@ console.log(x + y);
       expect(lintResults[0].messages.filter((m) => m.fatal).length).toBe(0);
 
       // Format the file with Prettier
-      const prettierConfig = (await import(join(rootDir, '.prettierrc.js')))
-        .default;
+      const prettierConfig = (await import('@mikey-pro/prettier-config')).default;
       const formatted = await format(messyFile, {
         ...prettierConfig,
         parser: 'babel',
@@ -257,8 +256,7 @@ console.log(user);
       writeFileSync(testFilePath, messyTs);
 
       // Format with Prettier
-      const prettierConfig = (await import(join(rootDir, '.prettierrc.js')))
-        .default;
+      const prettierConfig = (await import('@mikey-pro/prettier-config')).default;
       const formatted = await format(messyTs, {
         ...prettierConfig,
         parser: 'typescript',

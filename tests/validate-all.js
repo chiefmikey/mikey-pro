@@ -127,8 +127,7 @@ async function validateAll() {
 
   // 3. Prettier Functionality
   console.log('\n=== Prettier Functionality ===');
-  const prettierConfig = (await import(join(rootDir, '.prettierrc.js')))
-    .default;
+  const prettierConfig = (await import('@mikey-pro/prettier-config')).default;
 
   await test('Prettier formats JavaScript', async () => {
     const content = readFileSync(join(testFilesDir, 'test.js'), 'utf-8');

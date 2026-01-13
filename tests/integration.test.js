@@ -6,7 +6,7 @@ import { ESLint } from 'eslint';
 import { format } from 'prettier';
 import { describe, expect, it } from 'vitest';
 
-import prettierConfigModule from '../.prettierrc.js';
+import prettierConfigModule from '@mikey-pro/prettier-config';
 
 const __filename = import.meta.filename;
 const __dirname = import.meta.dirname;

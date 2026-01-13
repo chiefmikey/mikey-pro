@@ -130,8 +130,7 @@ async function runTests() {
   await test('Prettier can format JavaScript', async () => {
     const testFile = join(testFilesDir, 'test.js');
     const content = readFileSync(testFile, 'utf-8');
-    const prettierConfig = (await import(join(rootDir, '.prettierrc.js')))
-      .default;
+    const prettierConfig = (await import('@mikey-pro/prettier-config')).default;
     const formatted = await format(content, {
       ...prettierConfig,
       parser: 'babel',
@@ -144,8 +143,7 @@ async function runTests() {
   await test('Prettier can format TypeScript', async () => {
     const testFile = join(testFilesDir, 'test.ts');
     const content = readFileSync(testFile, 'utf-8');
-    const prettierConfig = (await import(join(rootDir, '.prettierrc.js')))
-      .default;
+    const prettierConfig = (await import('@mikey-pro/prettier-config')).default;
     const formatted = await format(content, {
       ...prettierConfig,
       parser: 'typescript',
@@ -229,8 +227,7 @@ async function runTests() {
 
     // Step 2: Format
     const content = readFileSync(testFile, 'utf-8');
-    const prettierConfig = (await import(join(rootDir, '.prettierrc.js')))
-      .default;
+    const prettierConfig = (await import('@mikey-pro/prettier-config')).default;
     const formatted = await format(content, {
       ...prettierConfig,
       parser: 'babel',
