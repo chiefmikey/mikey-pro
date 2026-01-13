@@ -1,6 +1,6 @@
 {
   "name": "@mikey-pro/eslint-config",
-  "version": "9.0.7",
+  "version": "9.0.8",
   "description": "Mikey Pro ESLint configuration - Ultimate coding style guide for excellence",
   "main": "index.js",
   "types": "index.d.ts",
@@ -108,7 +108,9 @@
     "angular"
   ],
   "author": "Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)",
-  "browserslist": ["defaults"],
+  "browserslist": [
+    "defaults"
+  ],
   "type": "module",
   "engines": {
     "node": ">=20.0.0",

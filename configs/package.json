@@ -1,6 +1,6 @@
 {
   "name": "mikey-pro",
-  "version": "9.0.7",
+  "version": "9.0.8",
   "description": "Mikey Pro Style Guide",
   "type": "module",
   "main": "./eslint-config/index.js",
@@ -15,7 +15,10 @@
     "prettier": "^3.6.2",
     "stylelint": "^16.24.0"
   },
-  "files": ["README.md", "LICENSE"],
+  "files": [
+    "README.md",
+    "LICENSE"
+  ],
   "homepage": "https://github.com/chiefmikey/mikey-pro#readme",
   "repository": {
     "type": "git",
