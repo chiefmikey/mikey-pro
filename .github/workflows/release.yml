@@ -4,11 +4,77 @@ on:
   push:
     tags:
       - 'v*'
-    branches:
-      - main
   workflow_dispatch:
+    inputs:
+      version_type:
+        description: 'Version bump type (major, minor, patch) or specific version (e.g., 1.2.3)'
+        required: true
+        type: string
+        default: 'patch'
 
 jobs:
+  prepare-release:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+      tag_name: ${{ steps.version.outputs.tag_name }}
+    steps:
+      - name: Check if should prepare release
+        id: should_prepare
+        run: |
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ] && [[ ! "${{ github.ref }}" =~ ^refs/tags/v ]]; then
+            echo "should_prepare=true" >> $GITHUB_OUTPUT
+          else
+            echo "should_prepare=false" >> $GITHUB_OUTPUT
+          fi
+      - uses: actions/checkout@v6
+        if: steps.should_prepare.outputs.should_prepare == 'true'
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Use Node.js 25
+        if: steps.should_prepare.outputs.should_prepare == 'true'
+        uses: actions/setup-node@v6
+        with:
+          node-version: 25
+          cache: 'npm'
+
+      - name: Configure Git
+        if: steps.should_prepare.outputs.should_prepare == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Bump version
+        if: steps.should_prepare.outputs.should_prepare == 'true'
+        id: version
+        run: |
+          timeout 30 node scripts/bump-version.js "${{ github.event.inputs.version_type }}" || exit 1
+          NEW_VERSION=$(node -e "const pkg = require('./configs/package.json'); console.log(pkg.version)")
+          echo "version=${NEW_VERSION}" >> $GITHUB_OUTPUT
+          echo "tag_name=v${NEW_VERSION}" >> $GITHUB_OUTPUT
+
+      - name: Set empty outputs when skipping
+        if: steps.should_prepare.outputs.should_prepare != 'true'
+        id: version
+        run: |
+          echo "version=" >> $GITHUB_OUTPUT
+          echo "tag_name=" >> $GITHUB_OUTPUT
+
+      - name: Commit version bump
+        if: steps.should_prepare.outputs.should_prepare == 'true'
+        run: |
+          git add -A
+          git commit -m "chore(release): bump version to ${{ steps.version.outputs.version }}" || exit 0
+          git push origin HEAD:${{ github.ref_name }} || exit 0
+
+      - name: Create and push tag
+        if: steps.should_prepare.outputs.should_prepare == 'true'
+        run: |
+          git tag -a "${{ steps.version.outputs.tag_name }}" -m "Release ${{ steps.version.outputs.version }}"
+          git push origin "${{ steps.version.outputs.tag_name }}"
+
   test:
     runs-on: ubuntu-latest
     strategy:
@@ -59,10 +125,12 @@ jobs:
 
   release:
     runs-on: ubuntu-latest
-    needs: test
-    if: startsWith(github.ref, 'refs/tags/v')
+    needs: [test, prepare-release]
+    if: always() && needs.test.result == 'success' && (startsWith(github.ref, 'refs/tags/v') || (github.event_name == 'workflow_dispatch' && needs.prepare-release.result == 'success'))
     steps:
       - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
 
       - name: Use Node.js 25
         uses: actions/setup-node@v6
@@ -87,37 +155,36 @@ jobs:
           npm run publish:all -- --dry-run
           echo "✅ Package integrity verified"
 
+      - name: Extract version from tag
+        id: version
+        run: |
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            # Try to get version from prepare-release job, fallback to tag if not available
+            VERSION="${{ needs.prepare-release.outputs.version }}"
+            if [ -z "${VERSION}" ]; then
+              VERSION="${GITHUB_REF#refs/tags/v}"
+            fi
+          else
+            VERSION="${GITHUB_REF#refs/tags/v}"
+          fi
+          echo "version=${VERSION}" >> $GITHUB_OUTPUT
+          echo "Extracted version: ${VERSION}"
+
+      - name: Generate release notes
+        id: release_notes
+        run: |
+          timeout 30 node scripts/generate-release-notes.js "${{ steps.version.outputs.version }}" || exit 1
+
       - name: Publish packages to npm
         run: npm run publish:all
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      - name: Extract version from tag
-        id: version
-        run: echo "version=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
 
       - name: Create GitHub release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ github.ref_name }}
           name: Release ${{ steps.version.outputs.version }}
-          body: |
-            🚀 **Mikey Pro Style Guide v${{ steps.version.outputs.version }}**
-
-            ## What's New
-            - Enhanced documentation and CI/CD automation
-            - Complete package README files
-            - Configuration improvements and fixes
-            - Comprehensive testing across Node.js versions
-
-            ## Packages Published
-            - `@mikey-pro/eslint-config@${{ steps.version.outputs.version }}`
-            - `@mikey-pro/eslint-config-react@${{ steps.version.outputs.version }}`
-            - `@mikey-pro/eslint-config-vue@${{ steps.version.outputs.version }}`
-            - `@mikey-pro/eslint-config-svelte@${{ steps.version.outputs.version }}`
-            - `@mikey-pro/eslint-config-angular@${{ steps.version.outputs.version }}`
-            - `@mikey-pro/prettier-config@${{ steps.version.outputs.version }}`
-            - `@mikey-pro/stylelint-config@${{ steps.version.outputs.version }}`
-            - `mikey-pro@${{ steps.version.outputs.version }}`
+          body: ${{ steps.release_notes.outputs.release_notes }}
           draft: false
           prerelease: false
