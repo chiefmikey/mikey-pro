@@ -219,9 +219,7 @@ const reactConfig = {
   },
   settings: {
     'import/resolver': {
-      typescript: {
-        alwaysTryTypes: true,
-      },
+      node: { extensions: ['.js', '.jsx', '.ts', '.tsx', '.mjs', '.cjs'] },
     },
     react: {
       version: 'detect',
