@@ -67,13 +67,25 @@ jobs:
         run: |
           git add -A
           git commit -m "chore(release): bump version to ${{ steps.version.outputs.version }}" || exit 0
-          git push origin HEAD:${{ github.ref_name }} || exit 0
+          # Try to push, but don't fail if branch is protected (will be handled by tag push)
+          git push origin HEAD:${{ github.ref_name }} || echo "Note: Could not push to protected branch, will create tag from current commit"
 
       - name: Create and push tag
         if: steps.should_prepare.outputs.should_prepare == 'true'
         run: |
-          git tag -a "${{ steps.version.outputs.tag_name }}" -m "Release ${{ steps.version.outputs.version }}"
-          git push origin "${{ steps.version.outputs.tag_name }}"
+          TAG_NAME="${{ steps.version.outputs.tag_name }}"
+          VERSION="${{ steps.version.outputs.version }}"
+          if [ -z "${TAG_NAME}" ] || [ -z "${VERSION}" ]; then
+            echo "Error: TAG_NAME or VERSION is empty"
+            exit 1
+          fi
+          # Check if tag already exists
+          if git rev-parse "${TAG_NAME}" >/dev/null 2>&1; then
+            echo "Tag ${TAG_NAME} already exists, skipping creation"
+          else
+            git tag -a "${TAG_NAME}" -m "Release ${VERSION}"
+            git push origin "${TAG_NAME}"
+          fi
 
   test:
     runs-on: ubuntu-latest
