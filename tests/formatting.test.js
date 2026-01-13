@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 import { format } from 'prettier';
 import { describe, expect, it } from 'vitest';
 
-import prettierConfigModule from '../.prettierrc.js';
+import prettierConfigModule from '@mikey-pro/prettier-config';
 const prettierConfig = prettierConfigModule.default || prettierConfigModule;
 
 const __filename = import.meta.filename;
