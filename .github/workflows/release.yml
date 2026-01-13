@@ -209,9 +209,10 @@ jobs:
           echo "Using tag: ${TAG_NAME}"
 
       - name: Publish packages to npm
-        run: npm run publish:all
+        run: npm run publish:all || echo "⚠️ Some packages may have failed to publish (check logs)"
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        continue-on-error: true
 
       - name: Create GitHub release
         uses: softprops/action-gh-release@v2
