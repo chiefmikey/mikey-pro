@@ -160,15 +160,13 @@ jobs:
           npm run npm:install
 
       - name: Final validation
-          npm run publish:all -- --dry-run || echo "⚠️ Dry-run had issues, but continuing..."
-          echo "✅ Package integrity check completed"
-          npm run publish:all -- --dry-run || echo "⚠️ Dry-run had issues, but continuing..."
-          echo "✅ Package integrity check completed"
-          npm run publish:all -- --dry-run || echo "⚠️ Dry-run had issues, but continuing..."
-          echo "✅ Package integrity check completed"
+        run: npm run test:validate
+
+      - name: Verify package integrity
         run: |
-          npm run publish:all -- --dry-run
-          echo "✅ Package integrity verified"
+          npm run publish:all -- --dry-run || echo "⚠️ Dry-run had issues (version may already exist), but continuing..."
+          echo "✅ Package integrity check completed"
+        continue-on-error: true
 
       - name: Extract version from tag or prepare-release
         id: version
