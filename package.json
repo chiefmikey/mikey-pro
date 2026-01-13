@@ -13,7 +13,7 @@
     "publish:svelte": "cd ./configs/eslint-config-svelte && npm publish --access public",
     "publish:vue": "cd ./configs/eslint-config-vue && npm publish --access public",
     "publish:angular": "cd ./configs/eslint-config-angular && npm publish --access public",
-    "publish:mikey-pro": "CWD=$(pwd) && cd ./configs && npm publish --access public && sleep 15 && cd $CWD && npm run update",
+    "publish:mikey-pro": "CWD=$(pwd) && cd ./configs && npm publish --access public",
     "publish:prettier": "cd ./configs/prettier-config && npm publish --access public",
     "publish:stylelint": "cd ./configs/stylelint-config && npm publish --access public",
     "publish:theme": "cd ./theme && npm publish --access public",
