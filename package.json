@@ -30,6 +30,8 @@
     "@mikey-pro/eslint-config": "^9.0.7",
     "@mikey-pro/prettier-config": "^9.0.7",
     "@mikey-pro/stylelint-config": "^9.0.7",
+    "prettier": "^3.6.2",
+    "stylelint": "^16.24.0",
     "svelte": "^5.43.14",
     "vitest": "^4.0.13"
   },
