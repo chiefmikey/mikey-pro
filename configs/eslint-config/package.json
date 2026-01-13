@@ -69,6 +69,7 @@
   },
   "files": [
     "index.js",
+    "base-config.js",
     "flat.js",
     "rules.js",
     "overrides.js",
