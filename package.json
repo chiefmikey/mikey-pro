@@ -24,7 +24,9 @@
     "test:coverage": "npx vitest run --coverage",
     "test:manual": "node tests/run-manual-tests.js",
     "test:validate": "node tests/validate-all.js",
-    "ci:local": "bash scripts/ci-local.sh"
+    "ci:local": "bash scripts/ci-local.sh",
+    "release:bump": "node scripts/bump-version.js",
+    "release:notes": "node scripts/generate-release-notes.js"
   },
   "devDependencies": {
     "@mikey-pro/eslint-config": "^9.0.7",
