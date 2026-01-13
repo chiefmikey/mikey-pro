@@ -56,6 +56,9 @@ jobs:
           cd configs/prettier-config && npm install && cd ../..
           echo "Installing stylelint-config dependencies..."
           cd configs/stylelint-config && npm install && cd ../..
+          # Link local packages to use local versions instead of npm
+          echo "Linking local packages..."
+          npm install --save-dev file:./configs/eslint-config file:./configs/prettier-config file:./configs/stylelint-config
 
       - name: Determine test type
         id: test_type
@@ -67,12 +70,16 @@ jobs:
           fi
 
       - name: Run manual tests
-        if: steps.test_type.outputs.type == 'all' || steps.test_type.outputs.type == 'manual'
+        if:
+          steps.test_type.outputs.type == 'all' || steps.test_type.outputs.type
+          == 'manual'
         run: npm run test:manual || echo "Manual tests completed"
         continue-on-error: true
 
       - name: Run comprehensive validation
-        if: steps.test_type.outputs.type == 'all' || steps.test_type.outputs.type == 'validate'
+        if:
+          steps.test_type.outputs.type == 'all' || steps.test_type.outputs.type
+          == 'validate'
         run: npm run test:validate || echo "Validation completed"
         continue-on-error: true
 
