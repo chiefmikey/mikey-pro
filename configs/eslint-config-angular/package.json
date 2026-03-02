@@ -1,6 +1,6 @@
 {
   "name": "@mikey-pro/eslint-config-angular",
-  "version": "9.0.7",
+  "version": "10.0.0",
   "description": "Mikey Pro ESLint Angular configuration - Ultimate Angular coding style guide",
   "type": "module",
   "main": "index.js",
@@ -9,9 +9,9 @@
     "@angular-eslint/eslint-plugin-template": "^20.2.0",
     "@angular-eslint/template-parser": "^20.2.0",
     "@mikey-pro/eslint-config": "file:../eslint-config",
-    "@typescript-eslint/eslint-plugin": "^8.43.0",
-    "@typescript-eslint/parser": "^8.43.0",
-    "eslint-plugin-prettier": "^5.5.4"
+    "@typescript-eslint/eslint-plugin": "^8.56.0",
+    "@typescript-eslint/parser": "^8.56.0",
+    "eslint-plugin-prettier": "^5.5.5"
   },
   "peerDependencies": {
     "@mikey-pro/eslint-config": "file:../eslint-config"
@@ -54,7 +54,7 @@
   "author": "Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)",
   "browserslist": ["defaults"],
   "engines": {
-    "node": ">=20.0.0",
+    "node": ">=20.19.0",
     "npm": ">=9.0.0",
     "pnpm": ">=8.0.0",
     "yarn": ">=4.0.0"

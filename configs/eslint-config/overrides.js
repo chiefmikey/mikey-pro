@@ -5,12 +5,14 @@ import html from '@html-eslint/eslint-plugin';
 import htmlParser from '@html-eslint/parser';
 import tsPlugin from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
+import markdown from '@eslint/markdown';
 import cypress from 'eslint-plugin-cypress';
-import importPlugin from 'eslint-plugin-import';
+import importX from 'eslint-plugin-import-x';
 import jest from 'eslint-plugin-jest';
-import prettier from 'eslint-plugin-prettier';
-import shell, { parserPlain } from 'eslint-plugin-shell';
-import yml from 'eslint-plugin-yml';
+import jestDom from 'eslint-plugin-jest-dom';
+import jsoncPlugin from 'eslint-plugin-jsonc';
+import testingLibrary from 'eslint-plugin-testing-library';
+import tomlPlugin from 'eslint-plugin-toml';
 import jsoncParser from 'jsonc-eslint-parser';
 import tomlParser from 'toml-eslint-parser';
 import yamlParser from 'yaml-eslint-parser';
@@ -31,15 +33,11 @@ export const ts = {
     },
     sourceType: 'module',
   },
-  plugins: {
-    '@typescript-eslint': tsPlugin,
-    import: importPlugin,
-  },
   rules: {
     // TypeScript-specific rules
     ...tsPlugin.configs.all.rules,
     ...tsPlugin.configs['recommended-requiring-type-checking'].rules,
-    ...importPlugin.configs.typescript.rules,
+    ...importX.flatConfigs.typescript.rules,
 
     // Override some rules for better developer experience
     '@typescript-eslint/class-methods-use-this': 'off',
@@ -208,10 +206,10 @@ export const ts = {
     '@typescript-eslint/use-unknown-in-catch-callback-variable': 'off',
   },
   settings: {
-    'import/parsers': {
+    'import-x/parsers': {
       '@typescript-eslint/parser': ['.ts', '.tsx', '.d.ts'],
     },
-    'import/resolver': {
+    'import-x/resolver': {
       typescript: { alwaysTryTypes: true },
     },
   },
@@ -247,11 +245,25 @@ export const yaml = {
   languageOptions: {
     parser: yamlParser,
   },
-  plugins: {
-    yml: yml,
-  },
   rules: {
+    'yml/block-mapping': 'error',
+    'yml/block-mapping-question-indicator-newline': 'error',
+    'yml/block-sequence': 'error',
+    'yml/block-sequence-hyphen-indicator-newline': 'error',
+    'yml/flow-mapping-curly-newline': 'error',
+    'yml/flow-mapping-curly-spacing': 'error',
+    'yml/flow-sequence-bracket-newline': 'error',
+    'yml/flow-sequence-bracket-spacing': 'error',
+    'yml/indent': ['error', 2],
+    'yml/key-spacing': 'error',
+    'yml/no-empty-document': 'error',
+    'yml/no-empty-key': 'error',
+    'yml/no-empty-mapping-value': 'error',
+    'yml/no-empty-sequence-entry': 'error',
+    'yml/no-irregular-whitespace': 'error',
+    'yml/no-tab-indent': 'error',
     'yml/quotes': ['warn', { avoidEscape: true, prefer: 'double' }],
+    'yml/require-string-key': 'error',
   },
 };
 
@@ -262,20 +274,40 @@ export const toml = {
     parser: tomlParser,
   },
   rules: {
+    ...tomlPlugin.configs['flat/recommended'].reduce(
+      (accumulator, config) => ({ ...accumulator, ...config.rules }),
+      {},
+    ),
     'prettier/prettier': 'off',
   },
 };
 
-// Markdown files - currently disabled due to processor configuration issues
+// Markdown files — uses @eslint/markdown language plugin
 export const md = {
   files: ['**/*.md'],
-  // TODO: Implement proper markdown linting with @eslint/markdown
+  language: 'markdown/commonmark',
+  rules: {
+    'markdown/fenced-code-language': 'error',
+    'markdown/heading-increment': 'error',
+    'markdown/no-duplicate-headings': 'error',
+    'markdown/no-empty-links': 'error',
+    'markdown/no-html': 'off',
+    'markdown/no-invalid-label-refs': 'error',
+    'markdown/no-missing-label-refs': 'error',
+  },
 };
 
 // Package.json files
 export const packageJson = {
   files: ['**/package.json'],
+  languageOptions: {
+    parser: jsoncParser,
+  },
   rules: {
+    ...jsoncPlugin.configs['flat/recommended-with-json'].reduce(
+      (accumulator, config) => ({ ...accumulator, ...config.rules }),
+      {},
+    ),
     'prettier/prettier': ['warn', { parser: 'json' }],
   },
   settings: {
@@ -316,11 +348,8 @@ export const htmlConfig = {
   languageOptions: {
     parser: htmlParser,
   },
-  plugins: {
-    '@html-eslint': html,
-  },
   rules: {
-    ...html.configs.recommended.rules,
+    ...html.configs['flat/recommended'].rules,
     '@html-eslint/element-newline': 'off',
     '@html-eslint/indent': 'off',
     '@html-eslint/no-extra-spacing-attrs': 'off',
@@ -333,11 +362,21 @@ export const htmlConfig = {
 
 // JSONC files
 export const jsonc = {
-  files: ['**/*.jsonc', '**/*rc'],
+  files: [
+    '**/*.jsonc',
+    '**/.babelrc',
+    '**/.eslintrc',
+    '**/.prettierrc',
+    '**/.stylelintrc',
+  ],
   languageOptions: {
     parser: jsoncParser,
   },
   rules: {
+    ...jsoncPlugin.configs['flat/recommended-with-jsonc'].reduce(
+      (accumulator, config) => ({ ...accumulator, ...config.rules }),
+      {},
+    ),
     'prettier/prettier': ['warn', { parser: 'json' }],
   },
 };
@@ -349,6 +388,10 @@ export const json5 = {
     parser: jsoncParser,
   },
   rules: {
+    ...jsoncPlugin.configs['flat/recommended-with-json5'].reduce(
+      (accumulator, config) => ({ ...accumulator, ...config.rules }),
+      {},
+    ),
     'prettier/prettier': ['warn', { parser: 'json5' }],
   },
 };
@@ -359,14 +402,42 @@ export const jestJs = {
   languageOptions: {
     globals: { jest: true },
   },
-  plugins: {
-    jest,
-  },
   rules: {
-    ...jest.configs.all.rules,
+    ...jest.configs['flat/all'].rules,
+    // Jest DOM rules for testing-library assertions
+    'jest-dom/prefer-checked': 'error',
+    'jest-dom/prefer-enabled-disabled': 'error',
+    'jest-dom/prefer-focus': 'error',
+    'jest-dom/prefer-in-document': 'error',
+    'jest-dom/prefer-required': 'error',
+    'jest-dom/prefer-to-have-attribute': 'error',
+    'jest-dom/prefer-to-have-class': 'error',
+    'jest-dom/prefer-to-have-style': 'error',
+    'jest-dom/prefer-to-have-text-content': 'error',
+    'jest-dom/prefer-to-have-value': 'error',
+    // Testing Library rules
+    'testing-library/await-async-queries': 'error',
+    'testing-library/await-async-utils': 'error',
+    'testing-library/no-await-sync-queries': 'error',
+    'testing-library/no-debugging-utils': 'warn',
+    'testing-library/no-dom-import': 'error',
+    'testing-library/no-manual-cleanup': 'error',
+    'testing-library/no-render-in-lifecycle': 'error',
+    'testing-library/no-unnecessary-act': 'error',
+    'testing-library/no-wait-for-multiple-assertions': 'error',
+    'testing-library/prefer-explicit-assert': 'warn',
+    'testing-library/prefer-find-by': 'error',
+    'testing-library/prefer-presence-queries': 'error',
+    'testing-library/prefer-query-by-disappearance': 'error',
+    'testing-library/prefer-screen-queries': 'error',
+    'testing-library/render-result-naming-convention': 'error',
+    // Disable rules requiring TypeScript type checking (not available in JS files)
+    'jest/no-error-equal': 'off',
+    'jest/no-unnecessary-assertion': 'off',
+    'jest/unbound-method': 'off',
+    'jest/valid-expect-with-promise': 'off',
     'jest/prefer-spy-on': 'warn',
     'jest/require-top-level-describe': 'error',
-    'jest/unbound-method': 'off',
     'unicorn/no-array-callback-reference': 'off',
     'unicorn/prevent-abbreviations': ['warn', { ignore: [/e2e/] }],
   },
@@ -379,12 +450,35 @@ export const jestTs = {
     globals: { jest: true },
     parser: tsParser,
   },
-  plugins: {
-    '@typescript-eslint': tsPlugin,
-    jest,
-  },
   rules: {
-    ...jest.configs.all.rules,
+    ...jest.configs['flat/all'].rules,
+    // Jest DOM rules for testing-library assertions
+    'jest-dom/prefer-checked': 'error',
+    'jest-dom/prefer-enabled-disabled': 'error',
+    'jest-dom/prefer-focus': 'error',
+    'jest-dom/prefer-in-document': 'error',
+    'jest-dom/prefer-required': 'error',
+    'jest-dom/prefer-to-have-attribute': 'error',
+    'jest-dom/prefer-to-have-class': 'error',
+    'jest-dom/prefer-to-have-style': 'error',
+    'jest-dom/prefer-to-have-text-content': 'error',
+    'jest-dom/prefer-to-have-value': 'error',
+    // Testing Library rules
+    'testing-library/await-async-queries': 'error',
+    'testing-library/await-async-utils': 'error',
+    'testing-library/no-await-sync-queries': 'error',
+    'testing-library/no-debugging-utils': 'warn',
+    'testing-library/no-dom-import': 'error',
+    'testing-library/no-manual-cleanup': 'error',
+    'testing-library/no-render-in-lifecycle': 'error',
+    'testing-library/no-unnecessary-act': 'error',
+    'testing-library/no-wait-for-multiple-assertions': 'error',
+    'testing-library/prefer-explicit-assert': 'warn',
+    'testing-library/prefer-find-by': 'error',
+    'testing-library/prefer-presence-queries': 'error',
+    'testing-library/prefer-query-by-disappearance': 'error',
+    'testing-library/prefer-screen-queries': 'error',
+    'testing-library/render-result-naming-convention': 'error',
     'jest/prefer-spy-on': 'warn',
     'jest/require-top-level-describe': 'error',
     'jest/unbound-method': 'off',
@@ -396,44 +490,8 @@ export const jestTs = {
 // Cypress files
 export const cypressConfig = {
   files: ['**/*.cy.*'],
-  plugins: {
-    cypress,
-  },
   rules: {
     ...cypress.configs.recommended.rules,
-  },
-};
-
-// Shell scripts (bash, sh, zsh)
-export const shellConfig = {
-  files: ['**/*.sh', '**/*.bash', '**/*.zsh'],
-  languageOptions: {
-    parser: parserPlain,
-  },
-  plugins: {
-    shell,
-  },
-  rules: {
-    // Basic shell script linting rules
-    // Note: Full shell script linting may require shellcheck (external tool)
-    'shell/shell': 'warn',
-  },
-};
-
-// .env files
-export const envFilesConfig = {
-  files: ['**/.env', '**/.env.*', '**/*.env'],
-  languageOptions: {
-    parser: parserPlain,
-  },
-  plugins: {
-    shell,
-  },
-  rules: {
-    // Relax JavaScript-specific variable rules for .env files
-    // Note: .env formatting and validation should be handled by external tools
-    'no-undef': 'off',
-    'no-unused-vars': 'off',
   },
 };
 
@@ -453,6 +511,4 @@ export const baseOverrides = [
   jestJs,
   jestTs,
   cypressConfig,
-  shellConfig,
-  envFilesConfig,
 ];
