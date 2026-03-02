@@ -28,11 +28,11 @@ jobs:
           cd configs/stylelint-config && npm install && cd ../..
           # Install eslint-config dependencies so prettier plugin is available
           echo "Installing eslint-config dependencies..."
-          cd configs/eslint-config && npm install && cd ../..
+          cd configs/eslint-config && npm install --legacy-peer-deps && cd ../..
           # Now install root dependencies (npm install handles file: links better than npm ci)
-          npm install
+          npm install --legacy-peer-deps
           # Reinstall to ensure prettier plugin from eslint-config is accessible
-          npm install
+          npm install --legacy-peer-deps
 
       - name: Check code formatting
         run:
