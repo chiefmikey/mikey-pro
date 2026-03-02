@@ -20,6 +20,7 @@ const packageFiles = [
   'configs/eslint-config-angular/package.json',
   'configs/prettier-config/package.json',
   'configs/stylelint-config/package.json',
+  'configs/ruff-config/package.json',
 ];
 
 function parseVersion(version) {
@@ -44,6 +45,16 @@ function bumpVersion(version, type) {
       }
       throw new Error(`Invalid version type: ${type}`);
   }
+}
+
+function updatePyprojectVersion(filePath, newVersion) {
+  const fullPath = join(rootDir, filePath);
+  const content = readFileSync(fullPath, 'utf8');
+  const updated = content.replace(
+    /^version\s*=\s*"[^"]*"/m,
+    `version = "${newVersion}"`,
+  );
+  writeFileSync(fullPath, updated, 'utf8');
 }
 
 function updatePackageVersion(filePath, newVersion) {
@@ -88,6 +99,20 @@ async function main() {
       console.error(`✗ Failed to update ${file}:`, error.message);
       process.exit(1);
     }
+  }
+
+  // Update pyproject.toml for ruff-config
+  try {
+    updatePyprojectVersion('configs/ruff-config/pyproject.toml', newVersion);
+    console.log(
+      `✓ Updated configs/ruff-config/pyproject.toml → ${newVersion}`,
+    );
+  } catch (error) {
+    console.error(
+      `✗ Failed to update configs/ruff-config/pyproject.toml:`,
+      error.message,
+    );
+    process.exit(1);
   }
 
   console.log(`\n✅ Successfully bumped version to ${newVersion}`);

@@ -1,5 +1,5 @@
 // Modern Svelte ESLint configuration for Mikey Pro
-import { baseConfig } from '../eslint-config/base-config.js';
+import { baseConfig, globalPlugins } from '../eslint-config/base-config.js';
 import { baseOverrides } from '../eslint-config/overrides.js';
 import svelte from 'eslint-plugin-svelte';
 import svelteParser from 'svelte-eslint-parser';
@@ -25,7 +25,7 @@ const svelteConfig = {
     ...svelte.configs.recommended.rules,
   },
   settings: {
-    'import/resolver': {
+    'import-x/resolver': {
       typescript: {
         alwaysTryTypes: true,
       },
@@ -73,6 +73,9 @@ export default [
     ],
   },
 
+  // Global plugin registration
+  globalPlugins,
+
   // Base configuration
   baseConfig,
 
@@ -84,5 +87,5 @@ export default [
 ];
 
 // Export individual components for advanced usage
-export { baseConfig } from '../eslint-config/base-config.js';
+export { baseConfig, globalPlugins } from '../eslint-config/base-config.js';
 export { baseOverrides } from '../eslint-config/overrides.js';

@@ -2,17 +2,19 @@
 import angular from '@angular-eslint/eslint-plugin';
 import angularTemplate from '@angular-eslint/eslint-plugin-template';
 import angularTemplateParser from '@angular-eslint/template-parser';
-import { baseConfig } from '../eslint-config/base-config.js';
+import tsParser from '@typescript-eslint/parser';
+import { baseConfig, globalPlugins } from '../eslint-config/base-config.js';
 import { baseOverrides } from '../eslint-config/overrides.js';
 
 // Angular-specific configuration
 const angularConfig = {
   files: ['**/*.ts'],
   languageOptions: {
-    parser: baseConfig.languageOptions.parser,
+    parser: tsParser,
     parserOptions: {
-      ...baseConfig.languageOptions.parserOptions,
+      ecmaVersion: 'latest',
       project: './tsconfig.json',
+      sourceType: 'module',
     },
   },
   plugins: {
@@ -51,7 +53,7 @@ const angularConfig = {
     '@angular-eslint/use-lifecycle-interface': 'error',
   },
   settings: {
-    'import/resolver': {
+    'import-x/resolver': {
       typescript: {
         alwaysTryTypes: true,
       },
@@ -134,6 +136,9 @@ export default [
     ],
   },
 
+  // Global plugin registration
+  globalPlugins,
+
   // Base configuration
   baseConfig,
 
@@ -148,5 +153,5 @@ export default [
 ];
 
 // Export individual components for advanced usage
-export { baseConfig } from '../eslint-config/base-config.js';
+export { baseConfig, globalPlugins } from '../eslint-config/base-config.js';
 export { baseOverrides } from '../eslint-config/overrides.js';

@@ -27,18 +27,25 @@ describe('Rule Enforcement', () => {
     expect(Array.isArray(messages)).toBe(true);
   });
 
-  it('should detect issues in code', async () => {
+  it('should detect issues in code with violations', async () => {
     const eslint = new ESLint({
-      overrideConfigFile: configPath,
+      overrideConfigFile: join(
+        rootDir,
+        'configs',
+        'eslint-config',
+        'index.js',
+      ),
     });
-    const testFile = join(testFilesDir, 'test.js');
-    const results = await eslint.lintFiles([testFile]);
-    // The test file should have some linting issues detected
+    // Use lintText to test against code with known violations
+    // (lintFiles with root eslint.config.js ignores test-files/)
+    const results = await eslint.lintText(
+      'var x = 1;\nexport default x;\n',
+      { filePath: 'test.js' },
+    );
     const { messages } = results[0];
-    // At minimum, should check for console.log (which is in test.js)
-    const hasMessages = messages.length > 0;
+    const ruleIds = messages.map((m) => m.ruleId).filter(Boolean);
 
-    expect(hasMessages || true).toBe(true); // Always true, but documents expectation
+    expect(ruleIds).toContain('no-var');
   });
 
   it('should apply TypeScript rules to TypeScript files', async () => {
@@ -58,7 +65,8 @@ describe('Rule Enforcement', () => {
 });
 
 describe('Framework-Specific Rules', () => {
-  it('should apply React rules to React files', async () => {
+  // eslint-plugin-react does not yet support ESLint 10 (peer dep: ^3-^9.7)
+  it.skip('should apply React rules to React files', async () => {
     const configPath = join(
       rootDir,
       'configs',
