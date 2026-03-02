@@ -182,7 +182,9 @@ async function runTests() {
 
   // eslint-plugin-react does not yet support ESLint 10 (peer dep: ^3-^9.7)
   // Skip React linting test until upstream adds ESLint 10 support
-  console.log('⏭️  Config works when used as installed package (React) [SKIPPED - eslint-plugin-react ESLint 10 incompatible]');
+  console.log(
+    '⏭️  Config works when used as installed package (React) [SKIPPED - eslint-plugin-react ESLint 10 incompatible]',
+  );
   passed++;
 
   await test('Linting and formatting work together in project scenario', async () => {

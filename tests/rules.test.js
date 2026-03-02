@@ -29,19 +29,13 @@ describe('Rule Enforcement', () => {
 
   it('should detect issues in code with violations', async () => {
     const eslint = new ESLint({
-      overrideConfigFile: join(
-        rootDir,
-        'configs',
-        'eslint-config',
-        'index.js',
-      ),
+      overrideConfigFile: join(rootDir, 'configs', 'eslint-config', 'index.js'),
     });
     // Use lintText to test against code with known violations
     // (lintFiles with root eslint.config.js ignores test-files/)
-    const results = await eslint.lintText(
-      'var x = 1;\nexport default x;\n',
-      { filePath: 'test.js' },
-    );
+    const results = await eslint.lintText('var x = 1;\nexport default x;\n', {
+      filePath: 'test.js',
+    });
     const { messages } = results[0];
     const ruleIds = messages.map((m) => m.ruleId).filter(Boolean);
 

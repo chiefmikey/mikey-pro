@@ -109,7 +109,11 @@ describe('Violation Detection', () => {
     });
 
     it('should prefer const over let (prefer-const)', async () => {
-      await expectRule(eslint, 'let x = 1;\nexport default x;\n', 'prefer-const');
+      await expectRule(
+        eslint,
+        'let x = 1;\nexport default x;\n',
+        'prefer-const',
+      );
     });
 
     it('should detect constant conditions (no-constant-condition)', async () => {
@@ -201,7 +205,7 @@ describe('Violation Detection', () => {
     it('should detect non-literal RegExp (security/detect-non-literal-regexp)', async () => {
       await expectRule(
         eslint,
-        "const pattern = process.argv[2];\nconst re = new RegExp(pattern);\nexport { pattern, re };\n",
+        'const pattern = process.argv[2];\nconst re = new RegExp(pattern);\nexport { pattern, re };\n',
         'security/detect-non-literal-regexp',
       );
     });
@@ -313,7 +317,9 @@ describe('Violation Detection', () => {
       for (let index = 0; index < 6; index++) {
         lines.push(`const v${index} = 'duplicated-string-value';`);
       }
-      lines.push(`export { ${Array.from({ length: 6 }, (_, index) => `v${index}`).join(', ')} };`);
+      lines.push(
+        `export { ${Array.from({ length: 6 }, (_, index) => `v${index}`).join(', ')} };`,
+      );
       lines.push('');
       await expectRule(eslint, lines.join('\n'), 'sonarjs/no-duplicate-string');
     });
@@ -440,11 +446,7 @@ describe('Violation Detection', () => {
     });
 
     it('should detect console.log (no-console)', async () => {
-      await expectRule(
-        eslint,
-        'console.log("debug");\n',
-        'no-console',
-      );
+      await expectRule(eslint, 'console.log("debug");\n', 'no-console');
     });
 
     it('should detect TODO comments (no-warning-comments)', async () => {

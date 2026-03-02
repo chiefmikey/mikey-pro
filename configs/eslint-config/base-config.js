@@ -246,8 +246,7 @@ export const baseConfig = {
         selector: 'ForInStatement',
       },
       {
-        message:
-          'Labels are a form of GOTO; using them makes code confusing.',
+        message: 'Labels are a form of GOTO; using them makes code confusing.',
         selector: 'LabeledStatement',
       },
       {

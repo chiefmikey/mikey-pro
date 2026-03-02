@@ -1,4 +1,5 @@
 # Design: Mikey Pro AI Agent Guardrails Pivot
+
 _Created: 2026-03-02_
 _Status: APPROVED_
 
@@ -23,6 +24,7 @@ configs/
 ## 1. Cleanup (Remove Redundancy, Keep All Opinions)
 
 ### Consolidate rules.js into base-config.js
+
 - Merge any rules from `rules.js` (607 lines) not already in `base-config.js` into `base-config.js`
 - Delete `rules.js` after consolidation
 - Remove `baseRules` re-export from `index.js`
@@ -30,6 +32,7 @@ configs/
 - Remove `rules.js` from `package.json` files array
 
 ### Remove unused dependencies from eslint-config/package.json
+
 - `@babel/core`, `@babel/eslint-parser`, `@babel/eslint-plugin`, `@babel/preset-env` — ESLint 10 doesn't need Babel
 - `@cypress/eslint-plugin-json` — replaced by `eslint-plugin-jsonc`
 - `postcss`, `postcss-scss` — stylelint concerns, not ESLint
@@ -38,16 +41,19 @@ configs/
 - `eslint-plugin-markdownlint` — we use `@eslint/markdown` instead; markdownlint rules never activated
 
 ### Remove from base-config.js
+
 - Any import statements for removed packages
 - `markdownlint` plugin registration in globalPlugins (keep `markdown` which is `@eslint/markdown`)
 
 ### Update docs
+
 - Mark ESLint 10 upgrade plan as COMPLETED
 - Delete stale research docs that reference pre-ESLint-10 state
 
 ## 2. AI Agent Rule Tuning
 
 ### Tightened limits (strict mode for AI agents)
+
 - `max-lines`: 500 → 300 (AI tends to generate bloated files)
 - `complexity`: 15 → 12 (force simpler branching)
 - `max-depth`: 4 → 3 (prevent deep nesting)
@@ -55,6 +61,7 @@ configs/
 - `sonarjs/cognitive-complexity`: 15 → 12
 
 ### New rules to add to base-config.js
+
 - `no-console: 'warn'` — AI agents scatter console.log everywhere
 - `curly: ['error', 'all']` — force braces on all blocks
 - `eqeqeq: ['error', 'always', { null: 'ignore' }]` — no loose equality
@@ -71,6 +78,7 @@ configs/
 - `require-unicode-regexp: 'error'` — use unicode-aware regex
 
 ### Keep unchanged
+
 - `noInlineConfig: true` — critical for AI agents (no eslint-disable escape hatch)
 - `reportUnusedDisableDirectives: true`
 - All security rules (already strict)
@@ -82,6 +90,7 @@ configs/
 ### Package: configs/ruff-config/
 
 **Files:**
+
 - `pyproject.toml` — PyPI package metadata + embedded ruff config
 - `ruff.toml` — standalone ruff config for projects using ruff directly
 - `package.json` — npm package metadata (zero Node deps, just config files)
@@ -92,6 +101,7 @@ configs/
 **npm:** `@mikey-pro/ruff-config`
 
 ### Ruff rules (strict, matching ESLint philosophy)
+
 - `pycodestyle` (E, W) — PEP 8 style
 - `pyflakes` (F) — logical errors
 - `isort` (I) — import sorting (mirrors simple-import-sort)
@@ -110,11 +120,13 @@ configs/
 **Target Python:** 3.11+
 
 ### CI integration
+
 - Add Python lint step to `.github/workflows/ci.yml`
 - Validate ruff.toml parses correctly
 - Run ruff check on a sample Python file
 
 ### Version sync
+
 - Add `configs/ruff-config/pyproject.toml` and `configs/ruff-config/package.json` to `scripts/bump-version.js`
 
 ## 4. Global Claude Integration
@@ -127,6 +139,7 @@ configs/
 When working in any project, check if @mikey-pro code quality configs are installed.
 
 ### JavaScript/TypeScript Projects
+
 - Check for `@mikey-pro/eslint-config` in package.json devDependencies
 - If missing: `npm i -D @mikey-pro/eslint-config`
 - Check for `eslint.config.js` — if missing or not using mikey-pro, create one:
@@ -140,11 +153,13 @@ When working in any project, check if @mikey-pro code quality configs are instal
 - NEVER use eslint-disable comments — the config has noInlineConfig: true
 
 ### Python Projects
+
 - Check for mikey-pro-ruff-config or a ruff config referencing mikey-pro
 - If missing: pip install mikey-pro-ruff-config and extend the config
 - Always run ruff check . and ruff format --check . after changes
 
 ### Rules
+
 - Never weaken or disable mikey-pro rules
 - If a rule blocks valid code, refactor the code to comply
 - Run linting as part of verification before claiming work is done
@@ -160,12 +175,14 @@ When working in any project, check if @mikey-pro code quality configs are instal
 ## 6. Project CLAUDE.md Update
 
 Rewrite to reflect:
+
 - New identity as AI agent guardrails
 - Updated package list (add ruff-config)
 - Updated commands (add Python-related commands)
 - Updated architecture description
 
 ## What Stays Unchanged
+
 - All framework configs (React, Vue, Svelte, Angular)
 - Prettier config
 - Stylelint config
@@ -177,6 +194,7 @@ Rewrite to reflect:
 - Test infrastructure (Vitest)
 
 ## Decision Log
+
 - **Approach A chosen** over repo split or CLI orchestrator — monorepo keeps everything in one place
 - **Dual publish** Python config to both PyPI and npm for maximum agent accessibility
 - **Strict rule limits** chosen — forces Claude to write clean, small, focused code

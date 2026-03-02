@@ -3,11 +3,7 @@
   "version": "10.0.0",
   "description": "Mikey Pro Prettier configuration",
   "main": "index.js",
-  "files": [
-    "index.js",
-    "README.md",
-    "LICENSE"
-  ],
+  "files": ["index.js", "README.md", "LICENSE"],
   "homepage": "https://github.com/chiefmikey/mikey-pro#readme",
   "repository": {
     "type": "git",

@@ -69,10 +69,9 @@ describe('Plugin Registration', () => {
 
     for (const [name, plugin] of Object.entries(globalPlugins.plugins)) {
       expect(plugin, `Plugin ${name} should be an object`).toBeDefined();
-      expect(
-        typeof plugin,
-        `Plugin ${name} should be an object`,
-      ).toBe('object');
+      expect(typeof plugin, `Plugin ${name} should be an object`).toBe(
+        'object',
+      );
     }
   });
 
@@ -181,9 +180,12 @@ describe('Rule Definition Integrity', () => {
 
   it('should not produce fatal errors on YAML', async () => {
     const eslint = new ESLint({ overrideConfigFile: configPath });
-    const results = await eslint.lintText('key: value\nlist:\n  - item1\n  - item2\n', {
-      filePath: 'test.yaml',
-    });
+    const results = await eslint.lintText(
+      'key: value\nlist:\n  - item1\n  - item2\n',
+      {
+        filePath: 'test.yaml',
+      },
+    );
     const fatalErrors = results[0].messages.filter((m) => m.fatal);
     expect(fatalErrors).toHaveLength(0);
   });

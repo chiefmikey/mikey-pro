@@ -1,4 +1,5 @@
 # Research: Latest ESLint vs Current Project Configuration
+
 _Date: 2026-03-01_
 
 ## Overview
@@ -9,15 +10,15 @@ ESLint 10.0.0 was released February 6, 2026. This project currently pins ESLint 
 
 ### Versions Pinned
 
-| Package | Current Version | Latest Available |
-|---------|----------------|------------------|
-| `eslint` | `^9.35.0` | `10.0.0` |
-| `@eslint/js` | `^9.35.0` | Ships with ESLint 10 |
-| `@typescript-eslint/parser` | `^8.43.0` | `^8.56.1` |
-| `@typescript-eslint/eslint-plugin` | `^8.43.0` | `^8.56.1` |
-| `eslint-plugin-unicorn` | `^61.0.2` (config) / `^62.0.0` (root) | Needs verification |
-| `@stylistic/eslint-plugin` | `^5.3.1` | Needs verification |
-| `eslint-plugin-sonarjs` | `^3.0.5` | Needs verification |
+| Package                            | Current Version                       | Latest Available     |
+| ---------------------------------- | ------------------------------------- | -------------------- |
+| `eslint`                           | `^9.35.0`                             | `10.0.0`             |
+| `@eslint/js`                       | `^9.35.0`                             | Ships with ESLint 10 |
+| `@typescript-eslint/parser`        | `^8.43.0`                             | `^8.56.1`            |
+| `@typescript-eslint/eslint-plugin` | `^8.43.0`                             | `^8.56.1`            |
+| `eslint-plugin-unicorn`            | `^61.0.2` (config) / `^62.0.0` (root) | Needs verification   |
+| `@stylistic/eslint-plugin`         | `^5.3.1`                              | Needs verification   |
+| `eslint-plugin-sonarjs`            | `^3.0.5`                              | Needs verification   |
 
 ### Config Architecture
 
@@ -33,6 +34,7 @@ The project uses ESLint 9 flat config correctly:
 ### Plugin Count
 
 49 direct dependencies in `configs/eslint-config/package.json`, including:
+
 - 24+ ESLint plugins
 - Multiple parsers (TypeScript, Vue, Svelte, Angular, HTML, YAML, TOML, JSONC)
 - Babel toolchain for legacy JS parsing
@@ -41,38 +43,38 @@ The project uses ESLint 9 flat config correctly:
 
 ### High Impact
 
-| Change | Current Code | Required Action |
-|--------|-------------|-----------------|
-| **Node.js >= 20.19.0** | `engines.node: ">=20.0.0"` | Bump engine requirement to `>=20.19.0` |
-| **eslintrc fully removed** | Not used (already flat config) | No action — already compliant |
-| **`eslint:recommended` updated** | Uses `js.configs.recommended.rules` | Review new rules added to recommended set; some may conflict with existing overrides |
-| **Config lookup from file directory** | Currently works from CWD | Monorepo behavior may change — each config in `configs/` could get its own lookup. Test carefully |
+| Change                                | Current Code                        | Required Action                                                                                   |
+| ------------------------------------- | ----------------------------------- | ------------------------------------------------------------------------------------------------- |
+| **Node.js >= 20.19.0**                | `engines.node: ">=20.0.0"`          | Bump engine requirement to `>=20.19.0`                                                            |
+| **eslintrc fully removed**            | Not used (already flat config)      | No action — already compliant                                                                     |
+| **`eslint:recommended` updated**      | Uses `js.configs.recommended.rules` | Review new rules added to recommended set; some may conflict with existing overrides              |
+| **Config lookup from file directory** | Currently works from CWD            | Monorepo behavior may change — each config in `configs/` could get its own lookup. Test carefully |
 
 ### Medium Impact
 
-| Change | Current Code | Required Action |
-|--------|-------------|-----------------|
-| **Plugin API removals** | 30+ third-party plugins | Each plugin must be compatible with ESLint 10's removed context methods (`context.getSourceCode()` → `context.sourceCode`, etc.). Plugins using removed APIs will crash at runtime |
-| **`@eslint/compat`** | Not currently used | May need to add as dependency if any plugins haven't updated |
-| **`/* eslint-env */` comments trigger errors** | `noInlineConfig: true` already set in base-config | Minimal impact — inline config already blocked |
-| **SourceCode method removals** | Custom rules unlikely (this is a config package, not rules) | No custom rules to update |
-| **`radix` rule changes** | Need to check if rule is configured | Verify current `radix` rule options |
-| **`no-shadow-restricted-names` reports `globalThis`** | Need to check | May cause new warnings |
+| Change                                                | Current Code                                                | Required Action                                                                                                                                                                    |
+| ----------------------------------------------------- | ----------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Plugin API removals**                               | 30+ third-party plugins                                     | Each plugin must be compatible with ESLint 10's removed context methods (`context.getSourceCode()` → `context.sourceCode`, etc.). Plugins using removed APIs will crash at runtime |
+| **`@eslint/compat`**                                  | Not currently used                                          | May need to add as dependency if any plugins haven't updated                                                                                                                       |
+| **`/* eslint-env */` comments trigger errors**        | `noInlineConfig: true` already set in base-config           | Minimal impact — inline config already blocked                                                                                                                                     |
+| **SourceCode method removals**                        | Custom rules unlikely (this is a config package, not rules) | No custom rules to update                                                                                                                                                          |
+| **`radix` rule changes**                              | Need to check if rule is configured                         | Verify current `radix` rule options                                                                                                                                                |
+| **`no-shadow-restricted-names` reports `globalThis`** | Need to check                                               | May cause new warnings                                                                                                                                                             |
 
 ### Low Impact
 
-| Change | Details |
-|--------|---------|
-| AST `Program` node range change | Only affects custom rule authors, not config consumers |
-| CLI flags removed (`--no-eslintrc`, etc.) | Project doesn't use any removed flags |
-| `LegacyESLint` removed | Not used |
+| Change                                    | Details                                                |
+| ----------------------------------------- | ------------------------------------------------------ |
+| AST `Program` node range change           | Only affects custom rule authors, not config consumers |
+| CLI flags removed (`--no-eslintrc`, etc.) | Project doesn't use any removed flags                  |
+| `LegacyESLint` removed                    | Not used                                               |
 
 ## New ESLint Features Available
 
 ### `defineConfig()` (available since ESLint 9.x, March 2025)
 
 ```javascript
-import { defineConfig } from "eslint/config";
+import { defineConfig } from 'eslint/config';
 ```
 
 - Provides type safety and auto-flattening of config arrays
@@ -83,8 +85,8 @@ import { defineConfig } from "eslint/config";
 
 ```javascript
 export default defineConfig({
-  files: ["**/*.js"],
-  extends: ["js/recommended", reactPlugin.configs.flat.recommended],
+  files: ['**/*.js'],
+  extends: ['js/recommended', reactPlugin.configs.flat.recommended],
 });
 ```
 
@@ -94,10 +96,8 @@ export default defineConfig({
 ### `globalIgnores()`
 
 ```javascript
-import { globalIgnores } from "eslint/config";
-export default defineConfig([
-  globalIgnores(["dist", "build"]),
-]);
+import { globalIgnores } from 'eslint/config';
+export default defineConfig([globalIgnores(['dist', 'build'])]);
 ```
 
 - Replaces the current pattern of a standalone `{ ignores: [...] }` object
@@ -126,15 +126,15 @@ export default defineConfig([
 
 These plugins are most likely to have compatibility issues with ESLint 10 due to using deprecated/removed APIs:
 
-| Plugin | Risk Level | Reason |
-|--------|-----------|--------|
-| `eslint-plugin-shell` | **High** | Version `^0.0.1`, extremely low maintenance |
-| `eslint-plugin-filenames` | **High** | Version `^1.3.2`, legacy plugin |
-| `eslint-plugin-css-modules` | **Medium** | Version `^2.12.0`, niche plugin |
-| `eslint-plugin-write-good-comments` | **Medium** | Version `^0.2.0`, low version number |
-| `eslint-plugin-optimize-regex` | **Medium** | Version `^1.2.1`, may not be actively maintained |
-| `eslint-plugin-no-secrets` | **Medium** | Version `^2.2.1` |
-| `eslint-plugin-only-warn` | **Low** | Simple wrapper, likely compatible |
+| Plugin                              | Risk Level | Reason                                           |
+| ----------------------------------- | ---------- | ------------------------------------------------ |
+| `eslint-plugin-shell`               | **High**   | Version `^0.0.1`, extremely low maintenance      |
+| `eslint-plugin-filenames`           | **High**   | Version `^1.3.2`, legacy plugin                  |
+| `eslint-plugin-css-modules`         | **Medium** | Version `^2.12.0`, niche plugin                  |
+| `eslint-plugin-write-good-comments` | **Medium** | Version `^0.2.0`, low version number             |
+| `eslint-plugin-optimize-regex`      | **Medium** | Version `^1.2.1`, may not be actively maintained |
+| `eslint-plugin-no-secrets`          | **Medium** | Version `^2.2.1`                                 |
+| `eslint-plugin-only-warn`           | **Low**    | Simple wrapper, likely compatible                |
 
 ### Known Safe Plugins
 
@@ -176,11 +176,13 @@ Key gap: tests assert "no fatal errors" but don't assert specific rule behavior.
 ## Dependencies
 
 ### Internal Dependencies
+
 - Framework configs (`eslint-config-react`, `-vue`, `-svelte`, `-angular`) depend on `eslint-config` via `file:` links in `configs/package.json`
 - Root `eslint.config.js` imports directly from `./configs/eslint-config/index.js`
 - Root `package.json` references published packages (`@mikey-pro/*`) as devDependencies
 
 ### External Dependencies Critical to ESLint 10 Migration
+
 - `@eslint/compat` — needed if any plugin uses removed APIs
 - `eslint-plugin-import` — peer dependency; `eslint-plugin-import` v2.x has known flat config issues; `eslint-plugin-import-x` is the community fork with better support
 - `eslint-import-resolver-typescript` — needs ESLint 10 compatibility check
