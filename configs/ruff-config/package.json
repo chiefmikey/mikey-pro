@@ -1,0 +1,29 @@
+{
+  "name": "@mikey-pro/ruff-config",
+  "version": "10.0.0",
+  "description": "Mikey Pro Ruff configuration - AI agent code quality guardrails for Python",
+  "files": [
+    "ruff.toml",
+    "README.md",
+    "LICENSE"
+  ],
+  "homepage": "https://github.com/chiefmikey/mikey-pro#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chiefmikey/mikey-pro.git"
+  },
+  "bugs": {
+    "url": "https://github.com/chiefmikey/mikey-pro/issues"
+  },
+  "license": "MIT",
+  "keywords": [
+    "ruff",
+    "python",
+    "linting",
+    "formatting",
+    "mikey-pro",
+    "code-quality",
+    "ai-agent"
+  ],
+  "author": "Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)"
+}

@@ -1,5 +1,5 @@
 // Modern React ESLint configuration for Mikey Pro
-import { baseConfig } from '../eslint-config/base-config.js';
+import { baseConfig, globalPlugins } from '../eslint-config/base-config.js';
 import { baseOverrides } from '../eslint-config/overrides.js';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
 import react from 'eslint-plugin-react';
@@ -218,7 +218,7 @@ const reactConfig = {
     'react/void-dom-elements-no-children': 'error',
   },
   settings: {
-    'import/resolver': {
+    'import-x/resolver': {
       node: { extensions: ['.js', '.jsx', '.ts', '.tsx', '.mjs', '.cjs'] },
     },
     react: {
@@ -267,6 +267,9 @@ export default [
     ],
   },
 
+  // Global plugin registration
+  globalPlugins,
+
   // Base configuration
   baseConfig,
 
@@ -278,5 +281,5 @@ export default [
 ];
 
 // Export individual components for advanced usage
-export { baseConfig } from '../eslint-config/base-config.js';
+export { baseConfig, globalPlugins } from '../eslint-config/base-config.js';
 export { baseOverrides } from '../eslint-config/overrides.js';

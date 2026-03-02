@@ -1,16 +1,17 @@
 {
   "name": "@mikey-pro/eslint-config-vue",
-  "version": "9.0.7",
+  "version": "10.0.0",
   "description": "Mikey Pro ESLint Vue configuration - Ultimate Vue coding style guide",
   "type": "module",
   "main": "index.js",
   "dependencies": {
     "@mikey-pro/eslint-config": "file:../eslint-config",
-    "eslint-plugin-vue": "^10.4.0",
-    "vue-eslint-parser": "^10.2.0"
+    "eslint-plugin-vue": "^10.8.0",
+    "vue-eslint-parser": "^10.4.0"
   },
   "peerDependencies": {
-    "@mikey-pro/eslint-config": "file:../eslint-config"
+    "@mikey-pro/eslint-config": "file:../eslint-config",
+    "eslint": "^10.0.0"
   },
   "peerDependenciesMeta": {
     "@types/node": {
@@ -20,7 +21,13 @@
       "optional": true
     }
   },
-  "files": ["index.js", "flat.js", "legacy.js", "README.md", "LICENSE"],
+  "files": [
+    "index.js",
+    "flat.js",
+    "legacy.js",
+    "README.md",
+    "LICENSE"
+  ],
   "homepage": "https://github.com/chiefmikey/mikey-pro#readme",
   "repository": {
     "type": "git",
@@ -49,12 +56,14 @@
   ],
   "author": "Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)",
   "engines": {
-    "node": ">=20.0.0",
+    "node": ">=20.19.0",
     "npm": ">=9.0.0",
     "pnpm": ">=8.0.0",
     "yarn": ">=4.0.0"
   },
-  "browserslist": ["defaults"],
+  "browserslist": [
+    "defaults"
+  ],
   "exports": {
     ".": {
       "import": "./index.js",
