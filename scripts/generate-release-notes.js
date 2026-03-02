@@ -4,7 +4,9 @@ import { execSync } from 'child_process';
 
 function getLatestTag() {
   try {
-    return execSync('git describe --tags --abbrev=0', { encoding: 'utf8' }).trim();
+    return execSync('git describe --tags --abbrev=0', {
+      encoding: 'utf8',
+    }).trim();
   } catch {
     return null;
   }
@@ -18,7 +20,9 @@ function getCommitsSinceTag(tag) {
       .slice(0, 50);
   }
 
-  return execSync(`git log ${tag}..HEAD --pretty=format:"%s"`, { encoding: 'utf8' })
+  return execSync(`git log ${tag}..HEAD --pretty=format:"%s"`, {
+    encoding: 'utf8',
+  })
     .trim()
     .split('\n')
     .filter(Boolean);
@@ -36,11 +40,23 @@ function categorizeCommits(commits) {
 
     if (lower.includes('breaking') || lower.includes('!:')) {
       breaking.push(commit);
-    } else if (lower.startsWith('feat') || lower.includes('feature') || lower.includes('add')) {
+    } else if (
+      lower.startsWith('feat') ||
+      lower.includes('feature') ||
+      lower.includes('add')
+    ) {
       features.push(commit);
-    } else if (lower.startsWith('fix') || lower.includes('bug') || lower.includes('issue')) {
+    } else if (
+      lower.startsWith('fix') ||
+      lower.includes('bug') ||
+      lower.includes('issue')
+    ) {
       fixes.push(commit);
-    } else if (lower.startsWith('docs') || lower.includes('readme') || lower.includes('documentation')) {
+    } else if (
+      lower.startsWith('docs') ||
+      lower.includes('readme') ||
+      lower.includes('documentation')
+    ) {
       docs.push(commit);
     } else {
       chore.push(commit);
@@ -52,7 +68,12 @@ function categorizeCommits(commits) {
 
 function formatCommitMessage(commit) {
   // Remove type prefix if present (feat:, fix:, etc.)
-  return commit.replace(/^(feat|fix|docs|chore|refactor|style|test|build|ci|perf|revert)(\(.+\))?:\s*/i, '').trim();
+  return commit
+    .replace(
+      /^(feat|fix|docs|chore|refactor|style|test|build|ci|perf|revert)(\(.+\))?:\s*/i,
+      '',
+    )
+    .trim();
 }
 
 function generateReleaseNotes(version, previousTag = null) {
@@ -131,7 +152,10 @@ async function main() {
   if (process.env.GITHUB_OUTPUT) {
     const { appendFile } = await import('fs/promises');
     // Use heredoc format for multiline output
-    await appendFile(process.env.GITHUB_OUTPUT, `release_notes<<EOF\n${notes}\nEOF\n`);
+    await appendFile(
+      process.env.GITHUB_OUTPUT,
+      `release_notes<<EOF\n${notes}\nEOF\n`,
+    );
   }
 }
 

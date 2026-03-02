@@ -1,7 +1,8 @@
-// Modern ESLint 9 Flat Configuration for Mikey Pro
-// Ultimate coding style guide for excellence
+// Modern ESLint 10 Flat Configuration for Mikey Pro
+// Simplified flat config entry point
 
-import { baseConfig } from './base-config.js';
+import { baseConfig, globalPlugins } from './base-config.js';
+import { baseOverrides } from './overrides.js';
 
 export default [
   // Global ignores
@@ -39,9 +40,16 @@ export default [
       'CNAME',
       '*.min.js',
       '*.min.css',
+      '**/*.npmrc',
     ],
   },
 
-  // Base configuration
+  // Global plugin registration (available to all config objects)
+  globalPlugins,
+
+  // Base configuration for JS/TS files
   baseConfig,
+
+  // File-specific overrides
+  ...baseOverrides,
 ];

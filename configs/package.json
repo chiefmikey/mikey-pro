@@ -1,6 +1,6 @@
 {
   "name": "mikey-pro",
-  "version": "9.0.7",
+  "version": "10.0.0",
   "description": "Mikey Pro Style Guide",
   "type": "module",
   "main": "./eslint-config/index.js",
@@ -11,7 +11,7 @@
     "@mikey-pro/eslint-config": "file:./eslint-config",
     "@mikey-pro/prettier-config": "file:./prettier-config",
     "@mikey-pro/stylelint-config": "file:./stylelint-config",
-    "eslint": "^9.35.0",
+    "eslint": "^10.0.0",
     "prettier": "^3.6.2",
     "stylelint": "^16.24.0"
   },
