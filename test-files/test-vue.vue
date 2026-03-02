@@ -2,7 +2,7 @@
   <div class="test-component">
     <h1>{{ title }}</h1>
     <p>{{ message }}</p>
-    <button @click="increment">Count: {{ count }}</button>
+    <button type="button" @click="increment">Count: {{ count }}</button>
   </div>
 </template>
 
