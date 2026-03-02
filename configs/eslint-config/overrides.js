@@ -274,8 +274,10 @@ export const toml = {
     parser: tomlParser,
   },
   rules: {
-    ...tomlPlugin.configs['flat/recommended']
-      .reduce((accumulator, config) => ({ ...accumulator, ...config.rules }), {}),
+    ...tomlPlugin.configs['flat/recommended'].reduce(
+      (accumulator, config) => ({ ...accumulator, ...config.rules }),
+      {},
+    ),
     'prettier/prettier': 'off',
   },
 };
@@ -302,8 +304,10 @@ export const packageJson = {
     parser: jsoncParser,
   },
   rules: {
-    ...jsoncPlugin.configs['flat/recommended-with-json']
-      .reduce((accumulator, config) => ({ ...accumulator, ...config.rules }), {}),
+    ...jsoncPlugin.configs['flat/recommended-with-json'].reduce(
+      (accumulator, config) => ({ ...accumulator, ...config.rules }),
+      {},
+    ),
     'prettier/prettier': ['warn', { parser: 'json' }],
   },
   settings: {
@@ -358,13 +362,21 @@ export const htmlConfig = {
 
 // JSONC files
 export const jsonc = {
-  files: ['**/*.jsonc', '**/.babelrc', '**/.eslintrc', '**/.prettierrc', '**/.stylelintrc'],
+  files: [
+    '**/*.jsonc',
+    '**/.babelrc',
+    '**/.eslintrc',
+    '**/.prettierrc',
+    '**/.stylelintrc',
+  ],
   languageOptions: {
     parser: jsoncParser,
   },
   rules: {
-    ...jsoncPlugin.configs['flat/recommended-with-jsonc']
-      .reduce((accumulator, config) => ({ ...accumulator, ...config.rules }), {}),
+    ...jsoncPlugin.configs['flat/recommended-with-jsonc'].reduce(
+      (accumulator, config) => ({ ...accumulator, ...config.rules }),
+      {},
+    ),
     'prettier/prettier': ['warn', { parser: 'json' }],
   },
 };
@@ -376,8 +388,10 @@ export const json5 = {
     parser: jsoncParser,
   },
   rules: {
-    ...jsoncPlugin.configs['flat/recommended-with-json5']
-      .reduce((accumulator, config) => ({ ...accumulator, ...config.rules }), {}),
+    ...jsoncPlugin.configs['flat/recommended-with-json5'].reduce(
+      (accumulator, config) => ({ ...accumulator, ...config.rules }),
+      {},
+    ),
     'prettier/prettier': ['warn', { parser: 'json5' }],
   },
 };

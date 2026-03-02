@@ -15,6 +15,7 @@
 Merge all valuable rules from `rules.js` into `base-config.js`, then delete `rules.js`.
 
 **Files:**
+
 - Modify: `configs/eslint-config/base-config.js`
 - Delete: `configs/eslint-config/rules.js`
 - Modify: `configs/eslint-config/index.js` (remove baseRules export)
@@ -211,6 +212,7 @@ git commit -m "refactor: consolidate rules.js into base-config.js (single source
 ## Task 2: Remove Unused Dependencies
 
 **Files:**
+
 - Modify: `configs/eslint-config/package.json`
 - Modify: `configs/eslint-config/base-config.js` (remove markdownlint import + plugin registration)
 
@@ -264,6 +266,7 @@ git commit -m "chore: remove unused dependencies (babel, postcss, markdownlint, 
 Tighten limits and add rules that catch common AI agent mistakes.
 
 **Files:**
+
 - Modify: `configs/eslint-config/base-config.js`
 
 **Step 1: Tighten existing limits**
@@ -297,6 +300,7 @@ git commit -m "feat: tighten rule limits for AI agent code quality"
 ## Task 4: Add Violation Tests for New Rules
 
 **Files:**
+
 - Modify: `tests/violations.test.js`
 
 **Step 1: Add new violation tests**
@@ -322,11 +326,7 @@ describe('AI Agent Quality Rules', () => {
   });
 
   it('should detect console.log (no-console)', async () => {
-    await expectRule(
-      eslint,
-      'console.log("debug");\n',
-      'no-console',
-    );
+    await expectRule(eslint, 'console.log("debug");\n', 'no-console');
   });
 
   it('should detect TODO comments (no-warning-comments)', async () => {
@@ -380,6 +380,7 @@ git commit -m "test: add violation tests for AI agent quality rules"
 ## Task 5: Create Python Ruff Config Package
 
 **Files:**
+
 - Create: `configs/ruff-config/ruff.toml`
 - Create: `configs/ruff-config/pyproject.toml`
 - Create: `configs/ruff-config/package.json`
@@ -525,11 +526,7 @@ Create `configs/ruff-config/package.json`:
   "name": "@mikey-pro/ruff-config",
   "version": "10.0.0",
   "description": "Mikey Pro Ruff configuration - AI agent code quality guardrails for Python",
-  "files": [
-    "ruff.toml",
-    "README.md",
-    "LICENSE"
-  ],
+  "files": ["ruff.toml", "README.md", "LICENSE"],
   "homepage": "https://github.com/chiefmikey/mikey-pro#readme",
   "repository": {
     "type": "git",
@@ -564,9 +561,11 @@ AI agent code quality guardrails for Python. Strict Ruff configuration enforcing
 ## Install
 
 ### PyPI
+
 pip install mikey-pro-ruff-config
 
 ### npm
+
 npm i -D @mikey-pro/ruff-config
 
 ## Usage
@@ -601,6 +600,7 @@ cp LICENSE configs/ruff-config/LICENSE
 **Step 6: Add to bump-version.js**
 
 In `scripts/bump-version.js`, add to the `packageFiles` array:
+
 ```js
   'configs/ruff-config/package.json',
 ```
@@ -611,23 +611,21 @@ Also add a function to update `pyproject.toml` version (since it's TOML, not JSO
 function updatePyprojectVersion(filePath, newVersion) {
   const fullPath = join(rootDir, filePath);
   let content = readFileSync(fullPath, 'utf8');
-  content = content.replace(
-    /^version = ".*"$/m,
-    `version = "${newVersion}"`,
-  );
+  content = content.replace(/^version = ".*"$/m, `version = "${newVersion}"`);
   writeFileSync(fullPath, content, 'utf8');
 }
 ```
 
 And in the `main()` function, after the package.json loop, add:
+
 ```js
-  // Update pyproject.toml version
-  try {
-    updatePyprojectVersion('configs/ruff-config/pyproject.toml', newVersion);
-    console.log(`✓ Updated configs/ruff-config/pyproject.toml → ${newVersion}`);
-  } catch (error) {
-    console.error(`✗ Failed to update pyproject.toml:`, error.message);
-  }
+// Update pyproject.toml version
+try {
+  updatePyprojectVersion('configs/ruff-config/pyproject.toml', newVersion);
+  console.log(`✓ Updated configs/ruff-config/pyproject.toml → ${newVersion}`);
+} catch (error) {
+  console.error(`✗ Failed to update pyproject.toml:`, error.message);
+}
 ```
 
 **Step 7: Commit**
@@ -642,6 +640,7 @@ git commit -m "feat: add Python ruff-config package with dual PyPI+npm publishin
 ## Task 6: Add Python CI Step
 
 **Files:**
+
 - Modify: `.github/workflows/ci.yml`
 
 **Step 1: Add Python verification step**
@@ -649,17 +648,17 @@ git commit -m "feat: add Python ruff-config package with dual PyPI+npm publishin
 Add after the "Run full test suite" step in `.github/workflows/ci.yml`:
 
 ```yaml
-      - name: Verify Ruff config
-        if: steps.test_type.outputs.type == 'all'
-        run: |
-          pip install ruff
-          echo "Validating ruff.toml syntax..."
-          cd configs/ruff-config && ruff check --config ruff.toml --stdin-filename test.py <<'EOF'
-          import os
-          x = 1
-          print(x)
-          EOF
-          echo "Ruff config validated successfully"
+- name: Verify Ruff config
+  if: steps.test_type.outputs.type == 'all'
+  run: |
+    pip install ruff
+    echo "Validating ruff.toml syntax..."
+    cd configs/ruff-config && ruff check --config ruff.toml --stdin-filename test.py <<'EOF'
+    import os
+    x = 1
+    print(x)
+    EOF
+    echo "Ruff config validated successfully"
 ```
 
 **Step 2: Commit**
@@ -674,18 +673,20 @@ git commit -m "ci: add Python ruff config validation step"
 ## Task 7: Global Claude Integration
 
 **Files:**
+
 - Modify: `~/.claude/CLAUDE.md`
 
 **Step 1: Add Mikey Pro guardrails section**
 
 Append to `~/.claude/CLAUDE.md`:
 
-```markdown
+````markdown
 ## Code Quality: Mikey Pro Guardrails
 
 When working in any project, check if @mikey-pro code quality configs are installed.
 
 ### JavaScript/TypeScript Projects
+
 - Check for `@mikey-pro/eslint-config` in package.json devDependencies
 - If missing: `npm i -D @mikey-pro/eslint-config`
 - Check for `eslint.config.js` — if missing or not using mikey-pro, create one:
@@ -693,6 +694,8 @@ When working in any project, check if @mikey-pro code quality configs are instal
   import config from '@mikey-pro/eslint-config';
   export default config;
   ```
+````
+
 - For React projects: use `@mikey-pro/eslint-config-react` instead
 - For Vue: `@mikey-pro/eslint-config-vue`
 - For Svelte: `@mikey-pro/eslint-config-svelte`
@@ -701,15 +704,18 @@ When working in any project, check if @mikey-pro code quality configs are instal
 - NEVER use eslint-disable comments — the config has `noInlineConfig: true`
 
 ### Python Projects
+
 - Check for `mikey-pro-ruff-config` or a ruff.toml referencing mikey-pro
 - If missing: `pip install mikey-pro-ruff-config` and add to project
 - Always run `ruff check .` and `ruff format --check .` after changes
 
 ### Rules
+
 - Never weaken or disable mikey-pro rules
 - If a rule blocks valid code, refactor the code to comply
 - Run linting as part of verification before claiming work is done
-```
+
+````
 
 **Step 2: No commit needed** (global config, not in repo)
 
@@ -743,7 +749,7 @@ In `docs/plans/2026-03-01-eslint-10-upgrade.md`, change:
 ```bash
 git add CLAUDE.md docs/
 git commit -m "docs: update project identity to AI agent guardrails"
-```
+````
 
 ---
 
@@ -779,14 +785,14 @@ git commit -m "fix: final verification fixes"
 
 ## Summary
 
-| Task | Description | Estimated Size |
-|------|-------------|---------------|
-| 1 | Consolidate rules.js into base-config.js | Large (many rule additions) |
-| 2 | Remove unused dependencies | Small |
-| 3 | AI agent rule tuning (tighten limits) | Small |
-| 4 | Add violation tests for new rules | Medium |
-| 5 | Create Python ruff-config package | Medium |
-| 6 | Add Python CI step | Small |
-| 7 | Global Claude integration | Small |
-| 8 | Update project CLAUDE.md and docs | Small |
-| 9 | Final verification | Small |
+| Task | Description                              | Estimated Size              |
+| ---- | ---------------------------------------- | --------------------------- |
+| 1    | Consolidate rules.js into base-config.js | Large (many rule additions) |
+| 2    | Remove unused dependencies               | Small                       |
+| 3    | AI agent rule tuning (tighten limits)    | Small                       |
+| 4    | Add violation tests for new rules        | Medium                      |
+| 5    | Create Python ruff-config package        | Medium                      |
+| 6    | Add Python CI step                       | Small                       |
+| 7    | Global Claude integration                | Small                       |
+| 8    | Update project CLAUDE.md and docs        | Small                       |
+| 9    | Final verification                       | Small                       |

@@ -104,9 +104,7 @@ async function main() {
   // Update pyproject.toml for ruff-config
   try {
     updatePyprojectVersion('configs/ruff-config/pyproject.toml', newVersion);
-    console.log(
-      `✓ Updated configs/ruff-config/pyproject.toml → ${newVersion}`,
-    );
+    console.log(`✓ Updated configs/ruff-config/pyproject.toml → ${newVersion}`);
   } catch (error) {
     console.error(
       `✗ Failed to update configs/ruff-config/pyproject.toml:`,

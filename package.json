@@ -38,10 +38,7 @@
     "svelte": "^5.43.14",
     "vitest": "^4.0.13"
   },
-  "files": [
-    "README.md",
-    "LICENSE"
-  ],
+  "files": ["README.md", "LICENSE"],
   "homepage": "https://github.com/chiefmikey/mikey-pro#readme",
   "repository": {
     "type": "git",

@@ -10,30 +10,31 @@ The ESLint ecosystem is undergoing its most significant transformation since inc
 
 ### Tier 1: Legacy Giants (High Downloads, Questionable Maintenance)
 
-| Package | Weekly Downloads | ESLint 10 Support | Flat Config | Status |
-|---------|-----------------|-------------------|-------------|--------|
-| eslint-config-airbnb | ~3.7M | NO | NO | Effectively dead. No release in 4+ years. |
-| eslint-config-airbnb-base | ~3.5M (est.) | NO | NO | Same status as airbnb. |
-| eslint-config-standard | ~2.8M (est.) | NO | NO | Dead since July 2025 per community consensus. |
+| Package                   | Weekly Downloads | ESLint 10 Support | Flat Config | Status                                        |
+| ------------------------- | ---------------- | ----------------- | ----------- | --------------------------------------------- |
+| eslint-config-airbnb      | ~3.7M            | NO                | NO          | Effectively dead. No release in 4+ years.     |
+| eslint-config-airbnb-base | ~3.5M (est.)     | NO                | NO          | Same status as airbnb.                        |
+| eslint-config-standard    | ~2.8M (est.)     | NO                | NO          | Dead since July 2025 per community consensus. |
 
 ### Tier 2: Modern Leaders (Growing Fast, Actively Maintained)
 
-| Package | Weekly Downloads | ESLint 10 Support | Flat Config | Status |
-|---------|-----------------|-------------------|-------------|--------|
-| @antfu/eslint-config | ~290K | YES (v7.4.2+) | YES (native) | Gold standard for modern configs. 6.1k stars. |
-| eslint-config-xo | ~214K (via xo) | YES (v0.50.0) | YES | Sindre Sorhus maintained, opinionated. |
-| neostandard | growing | YES | YES | Community fork of Standard JS with ESLint Stylistic. |
-| eslint-config-airbnb-extended | ~18 projects | partial | YES | Community replacement for dead Airbnb config. |
+| Package                       | Weekly Downloads | ESLint 10 Support | Flat Config  | Status                                               |
+| ----------------------------- | ---------------- | ----------------- | ------------ | ---------------------------------------------------- |
+| @antfu/eslint-config          | ~290K            | YES (v7.4.2+)     | YES (native) | Gold standard for modern configs. 6.1k stars.        |
+| eslint-config-xo              | ~214K (via xo)   | YES (v0.50.0)     | YES          | Sindre Sorhus maintained, opinionated.               |
+| neostandard                   | growing          | YES               | YES          | Community fork of Standard JS with ESLint Stylistic. |
+| eslint-config-airbnb-extended | ~18 projects     | partial           | YES          | Community replacement for dead Airbnb config.        |
 
 ### Tier 3: Framework-Specific
 
-| Package | Notes |
-|---------|-------|
-| eslint-config-next | Next.js official. Maintained by Vercel. ESLint 9 flat config support. |
-| @nuxt/eslint-config | Nuxt official. Uses @antfu/eslint-config under the hood. |
-| eslint-config-alloy | Progressive config for React/Vue/TypeScript. |
+| Package             | Notes                                                                 |
+| ------------------- | --------------------------------------------------------------------- |
+| eslint-config-next  | Next.js official. Maintained by Vercel. ESLint 9 flat config support. |
+| @nuxt/eslint-config | Nuxt official. Uses @antfu/eslint-config under the hood.              |
+| eslint-config-alloy | Progressive config for React/Vue/TypeScript.                          |
 
 ### Key Takeaway
+
 The download numbers are misleading. Airbnb still dominates downloads because of legacy projects, but it's dead software. The real competition is between @antfu/eslint-config and xo for modern projects.
 
 ---
@@ -43,7 +44,8 @@ The download numbers are misleading. Airbnb still dominates downloads because of
 ### What Changed (Released February 7, 2026)
 
 **Breaking Changes:**
-- eslintrc config system COMPLETELY REMOVED (no .eslintrc.*, no .eslintignore)
+
+- eslintrc config system COMPLETELY REMOVED (no .eslintrc.\*, no .eslintignore)
 - Node.js requirement: ^20.19.0 || ^22.13.0 || >=24
 - Config lookup now starts from each linted file's directory (not cwd) — huge for monorepos
 - ESLINT_USE_FLAT_CONFIG env var removed
@@ -56,6 +58,7 @@ The download numbers are misleading. Airbnb still dominates downloads because of
 - Three new rules added to eslint:recommended: no-unassigned-vars, no-useless-assignment, preserve-caught-error
 
 **New Features:**
+
 - JSX references now properly tracked (fixes no-unused-vars and no-undef for JSX)
 - Built-in type definitions for Espree and ESLint Scope (no more @types/ packages needed)
 - Enhanced RuleTester with requireMessage, requireLocation, requireData assertions
@@ -64,18 +67,18 @@ The download numbers are misleading. Airbnb still dominates downloads because of
 
 ### Plugin ESLint 10 Compatibility (as of March 2026)
 
-| Plugin | ESLint 10 Support | Notes |
-|--------|-------------------|-------|
-| typescript-eslint | YES (^8.57.0 \|\| ^9.0.0 \|\| ^10.0.0) | Full support. |
-| eslint-plugin-unicorn | YES | Actively maintained by Sindre Sorhus. |
-| eslint-plugin-import-x | Likely YES | Peer deps: ^8.57.0 \|\| ^9.0.0. May need update for explicit ^10. |
-| eslint-plugin-react | PENDING | Compatibility issue filed. Fix in progress. |
-| eslint-plugin-react-hooks | PENDING | PR to add ^10.0.0 peer dep filed. Flat config works since v7.0.0. |
-| eslint-plugin-vue | Likely YES | Actively maintained. |
-| eslint-plugin-perfectionist | YES | Actively maintained. |
-| @eslint/css | YES | Official ESLint language plugin. |
-| @eslint/json | YES | Official ESLint language plugin. |
-| @eslint/markdown | YES | Official ESLint language plugin. |
+| Plugin                      | ESLint 10 Support                      | Notes                                                             |
+| --------------------------- | -------------------------------------- | ----------------------------------------------------------------- |
+| typescript-eslint           | YES (^8.57.0 \|\| ^9.0.0 \|\| ^10.0.0) | Full support.                                                     |
+| eslint-plugin-unicorn       | YES                                    | Actively maintained by Sindre Sorhus.                             |
+| eslint-plugin-import-x      | Likely YES                             | Peer deps: ^8.57.0 \|\| ^9.0.0. May need update for explicit ^10. |
+| eslint-plugin-react         | PENDING                                | Compatibility issue filed. Fix in progress.                       |
+| eslint-plugin-react-hooks   | PENDING                                | PR to add ^10.0.0 peer dep filed. Flat config works since v7.0.0. |
+| eslint-plugin-vue           | Likely YES                             | Actively maintained.                                              |
+| eslint-plugin-perfectionist | YES                                    | Actively maintained.                                              |
+| @eslint/css                 | YES                                    | Official ESLint language plugin.                                  |
+| @eslint/json                | YES                                    | Official ESLint language plugin.                                  |
+| @eslint/markdown            | YES                                    | Official ESLint language plugin.                                  |
 
 ---
 
@@ -118,11 +121,13 @@ The download numbers are misleading. Airbnb still dominates downloads because of
    export default antfu({
      typescript: true,
      vue: true,
-     stylistic: { indent: 2, quotes: 'single' }
+     stylistic: { indent: 2, quotes: 'single' },
    })
      .prepend(/* custom configs before */)
-     .override('antfu/typescript', { /* override specific named block */ })
-     .renamePlugins({ '@typescript-eslint': 'ts' })
+     .override('antfu/typescript', {
+       /* override specific named block */
+     })
+     .renamePlugins({ '@typescript-eslint': 'ts' });
    ```
 3. **Replaces Prettier** — Uses ESLint Stylistic for formatting. No Prettier needed.
 4. **Auto-Detection** — Detects TypeScript, Vue, React, etc. from package.json
@@ -151,6 +156,7 @@ antfu()  →  FlatConfigComposer (extends Promise)
 ```
 
 ### Opinionated Choices That May Not Suit Everyone
+
 - No semicolons (can be toggled)
 - Single quotes (can be toggled)
 - Replaces Prettier entirely (some teams want Prettier)
@@ -158,6 +164,7 @@ antfu()  →  FlatConfigComposer (extends Promise)
 - Sorted imports enforced
 
 ### Stats
+
 - ~290K weekly npm downloads (and growing)
 - 6.1K GitHub stars, 577 forks
 - Version 7.4.3 (Feb 2026)
@@ -168,32 +175,38 @@ antfu()  →  FlatConfigComposer (extends Promise)
 ## 5. How Top Configs Handle ESLint 10 Migration
 
 ### @antfu/eslint-config
+
 - Already native flat config since v1.0 (2023)
 - v7.4.2 relaxed ESLint peer dependency range to include ESLint 10
 - No migration needed for existing users — was never on eslintrc
 
 ### XO (Sindre Sorhus)
+
 - eslint-config-xo v0.50.0 supports flat config
 - Maintained actively, likely ESLint 10 compatible
 - XO itself wraps ESLint with additional tooling
 
 ### Neostandard
+
 - Community-driven replacement for dead Standard JS
 - Uses @eslint-stylistic for formatting
 - Native flat config from the start
 - Designed specifically for ESLint 9/10 era
 
 ### typescript-eslint
+
 - Explicit ESLint 10 support: `peerDependencies: "eslint": "^8.57.0 || ^9.0.0 || ^10.0.0"`
 - v8 series shipped with full flat config support
 - "project service" for monorepos: zero-config typed linting
 
 ### eslint-config-airbnb
+
 - NO migration. Dead project.
 - Community alternatives: eslint-config-airbnb-extended (small adoption), airbnb-eslint9 (temporary)
 - FlatCompat from @eslint/eslintrc can translate legacy configs but is a band-aid
 
 ### eslint-config-standard
+
 - Dead since ~July 2025
 - Neostandard is the recommended migration path
 
@@ -202,6 +215,7 @@ antfu()  →  FlatConfigComposer (extends Promise)
 ## 6. eslint-plugin-import vs eslint-plugin-import-x
 
 ### eslint-plugin-import (LEGACY - Avoid)
+
 - 117 dependencies
 - Uses `resolve` package (no `exports` field support in package.json)
 - Uses `tsconfig-paths` + `typescript` for TS config loading (slow, heavy)
@@ -210,6 +224,7 @@ antfu()  →  FlatConfigComposer (extends Promise)
 - Maintenance is sporadic at best
 
 ### eslint-plugin-import-x (MODERN - Use This)
+
 - 16 dependencies (87% reduction)
 - Built-in Rust-based resolver: `unrs-resolver` (supports `exports` field in package.json)
 - Uses `get-tsconfig` instead of tsconfig-paths (faster, cleaner)
@@ -220,6 +235,7 @@ antfu()  →  FlatConfigComposer (extends Promise)
 - ~635K weekly downloads for eslint-plugin-perfectionist shows momentum for modern alternatives
 
 ### Migration Path
+
 ```js
 // Old (eslint-plugin-import)
 import importPlugin from 'eslint-plugin-import';
@@ -230,6 +246,7 @@ import importX from 'eslint-plugin-import-x';
 ```
 
 ### Verdict
+
 eslint-plugin-import is dead weight. eslint-plugin-import-x is the clear successor — faster, lighter, modern resolver, exports support. Every elite config uses it now.
 
 ---
@@ -237,7 +254,9 @@ eslint-plugin-import is dead weight. eslint-plugin-import-x is the clear success
 ## 7. Trending Plugins & Features in 2026
 
 ### Official ESLint Language Plugins (NEW - Big Deal)
+
 ESLint is now language-agnostic. Official plugins for non-JS languages:
+
 - **@eslint/css** — CSS linting via CSSTree parser (released Feb 2025)
 - **@eslint/json** — JSON linting (released Oct 2024)
 - **@eslint/markdown** — Markdown linting (released Oct 2024)
@@ -246,6 +265,7 @@ ESLint is now language-agnostic. Official plugins for non-JS languages:
 This is ESLint's answer to Biome — one tool for all web languages.
 
 ### ESLint Core Features
+
 - **defineConfig()** — Type-safe config helper from `eslint/config`
 - **globalIgnores()** — Explicit global ignore helper from `eslint/config`
 - **extends in flat config** — Native extends support for composing shared configs
@@ -255,17 +275,18 @@ This is ESLint's answer to Biome — one tool for all web languages.
 
 ### Hot Plugins
 
-| Plugin | Weekly Downloads | What It Does |
-|--------|-----------------|-------------|
-| eslint-plugin-perfectionist | ~636K | Sorting everything: imports, objects, types, enums, JSX props. All auto-fixable. |
-| eslint-plugin-unicorn | ~4.8M | 100+ modern JS best practice rules. |
-| @eslint-stylistic | growing | Formatting rules extracted from ESLint core. Replaces Prettier for some teams. |
-| eslint-plugin-oxlint | growing | Disables ESLint rules that Oxlint already covers, for hybrid setups. |
-| eslint-plugin-regexp | steady | Regex mistake detection and style enforcement. |
+| Plugin                      | Weekly Downloads | What It Does                                                                     |
+| --------------------------- | ---------------- | -------------------------------------------------------------------------------- |
+| eslint-plugin-perfectionist | ~636K            | Sorting everything: imports, objects, types, enums, JSX props. All auto-fixable. |
+| eslint-plugin-unicorn       | ~4.8M            | 100+ modern JS best practice rules.                                              |
+| @eslint-stylistic           | growing          | Formatting rules extracted from ESLint core. Replaces Prettier for some teams.   |
+| eslint-plugin-oxlint        | growing          | Disables ESLint rules that Oxlint already covers, for hybrid setups.             |
+| eslint-plugin-regexp        | steady           | Regex mistake detection and style enforcement.                                   |
 
 ### Rust-Based Challengers
 
 **Biome v2.3+**
+
 - 423+ lint rules, 10-25x faster than ESLint
 - Type-aware linting since v2 (scans .d.ts files)
 - 97% Prettier-compatible formatter built in
@@ -273,6 +294,7 @@ This is ESLint's answer to Biome — one tool for all web languages.
 - BUT: smaller rule ecosystem, less community plugins, no custom rule ecosystem like ESLint
 
 **Oxlint v1.0+ (Stable since Aug 2025)**
+
 - 520+ rules, 50-100x faster than ESLint, 2x faster than Biome
 - Now supports JavaScript plugins with ESLint-compatible API
 - eslint-plugin-oxlint for gradual migration (run both tools)
@@ -280,11 +302,13 @@ This is ESLint's answer to Biome — one tool for all web languages.
 - Part of VoidZero (Evan You's company)
 
 **Impact on ESLint Configs:**
+
 - Elite configs now offer Oxlint integration (disable overlapping rules)
 - ESLint responds with multithreaded linting, language plugins, cross-file analysis
 - The ecosystem is NOT replacing ESLint — it's layering. Oxlint for speed + ESLint for depth/plugins.
 
 ### ESLint's Strategic Response
+
 - Language-agnostic core rewrite (in progress for 2026)
 - Official CSS, JSON, Markdown, HTML plugins
 - Async core planned
@@ -297,6 +321,7 @@ This is ESLint's answer to Biome — one tool for all web languages.
 ## 8. Competitive Positioning for @mikey-pro/eslint-config
 
 ### What Mikey Pro Already Does Well
+
 - ESLint 9 flat config (native)
 - Framework coverage (React, Vue, Svelte, Angular)
 - 50+ plugins integrated
@@ -305,21 +330,22 @@ This is ESLint's answer to Biome — one tool for all web languages.
 
 ### Gaps vs Elite Configs (Opportunities)
 
-| Feature | antfu | xo | Mikey Pro | Priority |
-|---------|-------|----|-----------|----------|
-| ESLint 10 support | YES | YES | NOT YET | CRITICAL |
-| defineConfig() | N/A (own factory) | N/A | Could adopt | HIGH |
-| FlatConfigComposer / chainable API | YES | NO | NO | MEDIUM |
-| eslint-plugin-import-x | YES | likely | CHECK | HIGH |
-| ESLint Stylistic option | YES (default) | NO | NO (uses Prettier) | LOW |
-| CLI setup wizard | YES | YES | NO | LOW |
-| Config Inspector support | YES | NO | FREE | LOW |
-| Multi-language (JSON/YAML/MD/CSS) | YES | partial | CHECK | MEDIUM |
-| Plugin renaming (ts/ etc) | YES | NO | CHECK | LOW |
-| Oxlint integration | planned | NO | NO | FUTURE |
-| Monorepo per-file config | YES (via ESLint 10) | N/A | NOT YET | MEDIUM |
+| Feature                            | antfu               | xo      | Mikey Pro          | Priority |
+| ---------------------------------- | ------------------- | ------- | ------------------ | -------- |
+| ESLint 10 support                  | YES                 | YES     | NOT YET            | CRITICAL |
+| defineConfig()                     | N/A (own factory)   | N/A     | Could adopt        | HIGH     |
+| FlatConfigComposer / chainable API | YES                 | NO      | NO                 | MEDIUM   |
+| eslint-plugin-import-x             | YES                 | likely  | CHECK              | HIGH     |
+| ESLint Stylistic option            | YES (default)       | NO      | NO (uses Prettier) | LOW      |
+| CLI setup wizard                   | YES                 | YES     | NO                 | LOW      |
+| Config Inspector support           | YES                 | NO      | FREE               | LOW      |
+| Multi-language (JSON/YAML/MD/CSS)  | YES                 | partial | CHECK              | MEDIUM   |
+| Plugin renaming (ts/ etc)          | YES                 | NO      | CHECK              | LOW      |
+| Oxlint integration                 | planned             | NO      | NO                 | FUTURE   |
+| Monorepo per-file config           | YES (via ESLint 10) | N/A     | NOT YET            | MEDIUM   |
 
 ### Recommended Next Steps
+
 1. **ESLint 10 support** — The single most critical upgrade. Update peer deps, test all 50+ plugins.
 2. **Switch to eslint-plugin-import-x** — If still on eslint-plugin-import, migrate immediately.
 3. **Add defineConfig() and globalIgnores() examples** — Show modern usage patterns.
