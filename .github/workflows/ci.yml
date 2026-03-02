@@ -101,11 +101,9 @@ jobs:
         run: |
           pip install ruff
           echo "Validating ruff.toml syntax..."
-          cd configs/ruff-config && ruff check --config ruff.toml --stdin-filename test.py <<'EOF'
-          import os
-          x = 1
-          print(x)
-          EOF
+          cd configs/ruff-config && echo 'def greet(name: str) -> str:
+              """Return a greeting."""
+              return f"Hello, {name}"' | ruff check --config ruff.toml --stdin-filename test.py -
           echo "Ruff config validated successfully"
 
       - name: Check package integrity
