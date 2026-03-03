@@ -4,6 +4,12 @@ import { baseOverrides } from '@mikey-pro/eslint-config/overrides.js';
 import svelte from 'eslint-plugin-svelte';
 import svelteParser from 'svelte-eslint-parser';
 
+// Extract rules from the flat config array (recommended is an array, not a legacy object)
+const svelteRecommendedRules = svelte.configs['flat/recommended'].reduce(
+  (rules, item) => ({ ...rules, ...(item.rules || {}) }),
+  {},
+);
+
 // Svelte-specific configuration
 const svelteConfig = {
   files: ['**/*.svelte'],
@@ -21,8 +27,7 @@ const svelteConfig = {
     svelte,
   },
   rules: {
-    // Svelte rules - use recommended configuration
-    ...svelte.configs.recommended.rules,
+    ...svelteRecommendedRules,
   },
   settings: {
     'import-x/resolver': {
