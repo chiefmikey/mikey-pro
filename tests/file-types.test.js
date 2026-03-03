@@ -94,46 +94,38 @@ describe('File Type Support', () => {
   });
 
   describe('CSS Files', () => {
-    it('should handle .css files (may not lint but should not error)', async () => {
+    // CSS is configured for prettier-via-eslint formatting (parser: 'css').
+    // ESLint does not parse CSS syntax natively but must not throw or crash.
+    it('should process .css files without throwing or producing fatal errors', async () => {
       const eslint = new ESLint({
         overrideConfigFile: configPath,
       });
       const testFile = join(testFilesDir, 'test.css');
-      // CSS files may not be linted by ESLint, but should not cause errors
-      try {
-        const results = await eslint.lintFiles([testFile]);
-        // If it returns results, check for fatal errors
-        if (results.length > 0) {
-          const fatalErrors = results[0].messages.filter((m) => m.fatal);
+      const results = await eslint.lintFiles([testFile]);
 
-          expect(fatalErrors.length).toBe(0);
-        }
-      } catch (error) {
-        // Some configs may not support CSS linting, which is OK
-        expect(error).toBeDefined();
-      }
+      expect(results.length).toBeGreaterThan(0);
+
+      const fatalErrors = results[0].messages.filter((m) => m.fatal);
+
+      expect(fatalErrors.length).toBe(0);
     });
   });
 
   describe('SCSS Files', () => {
-    it('should handle .scss files (may not lint but should not error)', async () => {
+    // SCSS is configured for prettier-via-eslint formatting (parser: 'scss').
+    // ESLint does not parse SCSS syntax natively but must not throw or crash.
+    it('should process .scss files without throwing or producing fatal errors', async () => {
       const eslint = new ESLint({
         overrideConfigFile: configPath,
       });
       const testFile = join(testFilesDir, 'test.scss');
-      // SCSS files may not be linted by ESLint, but should not cause errors
-      try {
-        const results = await eslint.lintFiles([testFile]);
-        // If it returns results, check for fatal errors
-        if (results.length > 0) {
-          const fatalErrors = results[0].messages.filter((m) => m.fatal);
+      const results = await eslint.lintFiles([testFile]);
 
-          expect(fatalErrors.length).toBe(0);
-        }
-      } catch (error) {
-        // Some configs may not support SCSS linting, which is OK
-        expect(error).toBeDefined();
-      }
+      expect(results.length).toBeGreaterThan(0);
+
+      const fatalErrors = results[0].messages.filter((m) => m.fatal);
+
+      expect(fatalErrors.length).toBe(0);
     });
   });
 
@@ -143,18 +135,13 @@ describe('File Type Support', () => {
         overrideConfigFile: configPath,
       });
       const testFile = join(testFilesDir, 'test.html');
-      try {
-        const results = await eslint.lintFiles([testFile]);
+      const results = await eslint.lintFiles([testFile]);
 
-        expect(results.length).toBeGreaterThan(0);
+      expect(results.length).toBeGreaterThan(0);
 
-        const fatalErrors = results[0].messages.filter((m) => m.fatal);
+      const fatalErrors = results[0].messages.filter((m) => m.fatal);
 
-        expect(fatalErrors.length).toBe(0);
-      } catch (error) {
-        // HTML plugin may require proper setup, but file should be processable
-        expect(error).toBeDefined();
-      }
+      expect(fatalErrors.length).toBe(0);
     });
   });
 
