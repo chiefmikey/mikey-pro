@@ -37,26 +37,7 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
 
       - name: Install dependencies
-        run: |
-          npm ci --legacy-peer-deps || npm install --legacy-peer-deps
-          # Install dependencies for configs packages
-          echo "Installing eslint-config dependencies..."
-          cd configs/eslint-config && npm install --legacy-peer-deps && cd ../..
-          echo "Installing eslint-config-react dependencies..."
-          cd configs/eslint-config-react && npm install --legacy-peer-deps && cd ../..
-          echo "Installing eslint-config-vue dependencies..."
-          cd configs/eslint-config-vue && npm install --legacy-peer-deps && cd ../..
-          echo "Installing eslint-config-svelte dependencies..."
-          cd configs/eslint-config-svelte && npm install --legacy-peer-deps && cd ../..
-          echo "Installing eslint-config-angular dependencies..."
-          cd configs/eslint-config-angular && npm install --legacy-peer-deps && cd ../..
-          echo "Installing prettier-config dependencies..."
-          cd configs/prettier-config && npm install && cd ../..
-          echo "Installing stylelint-config dependencies..."
-          cd configs/stylelint-config && npm install && cd ../..
-          # Link local packages to use local versions instead of npm
-          echo "Linking local packages..."
-          npm install --save-dev --legacy-peer-deps file:./configs/eslint-config file:./configs/prettier-config file:./configs/stylelint-config
+        run: npm ci --legacy-peer-deps || npm install --legacy-peer-deps
 
       - name: Determine test type
         id: test_type

@@ -217,10 +217,7 @@ describe('Packaging & Publishing', () => {
     ]);
 
     // Load semver — it is a transitive dependency available in root node_modules
-    const semverMod = await import(
-      join(rootDir, 'node_modules', 'semver', 'index.js')
-    );
-    const semver = semverMod.default;
+    const semver = await import('semver').then((m) => m.default || m);
 
     const eslintConfigPkgJson = JSON.parse(
       readFileSync(
