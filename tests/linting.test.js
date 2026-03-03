@@ -49,8 +49,7 @@ describe('TypeScript Linting', () => {
 });
 
 describe('React Linting', () => {
-  // eslint-plugin-react does not yet support ESLint 10 (peer dep: ^3-^9.7)
-  it.skip('should lint React JSX files without syntax errors', async () => {
+  it('should lint React JSX files without syntax errors', async () => {
     const configPath = join(
       rootDir,
       'configs',

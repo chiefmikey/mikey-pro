@@ -222,7 +222,7 @@ const reactConfig = {
       node: { extensions: ['.js', '.jsx', '.ts', '.tsx', '.mjs', '.cjs'] },
     },
     react: {
-      version: 'detect',
+      version: '18',
     },
   },
 };

@@ -1,6 +1,6 @@
 {
   "name": "@mikey-pro/eslint-config",
-  "version": "10.0.1",
+  "version": "10.0.2",
   "description": "Mikey Pro ESLint configuration - Ultimate coding style guide for excellence",
   "main": "index.js",
   "types": "index.d.ts",
@@ -8,8 +8,8 @@
   "dependencies": {
     "@eslint/js": "^10.0.0",
     "@eslint/markdown": "^7.5.1",
-    "@html-eslint/eslint-plugin": "^0.46.2",
-    "@html-eslint/parser": "^0.46.2",
+    "@html-eslint/eslint-plugin": "^0.57.1",
+    "@html-eslint/parser": "^0.57.1",
     "@typescript-eslint/eslint-plugin": "^8.56.0",
     "@typescript-eslint/parser": "^8.56.0",
     "eslint": "^10.0.0",
@@ -33,7 +33,7 @@
     "eslint-plugin-sort-destructure-keys": "^3.0.0",
     "eslint-plugin-testing-library": "^7.6.8",
     "eslint-plugin-toml": "^0.12.0",
-    "eslint-plugin-unicorn": "^62.0.0",
+    "eslint-plugin-unicorn": "^63.0.0",
     "eslint-plugin-yml": "^1.18.0",
     "globals": "^16.4.0",
     "jsonc-eslint-parser": "^2.4.0",

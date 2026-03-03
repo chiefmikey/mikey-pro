@@ -222,8 +222,7 @@ describe('Rule Definition Integrity', () => {
 });
 
 describe('Framework Config Integrity', () => {
-  // eslint-plugin-react does not yet support ESLint 10 (peer dep: ^3-^9.7)
-  it.skip('should load React config as valid array', async () => {
+  it('should load React config as valid array', async () => {
     const config = await import(
       join(rootDir, 'configs', 'eslint-config-react', 'index.js')
     );
