@@ -7,7 +7,7 @@
     "update": "ncu -u && npm i"
   },
   "devDependencies": {
-    "@mikey-pro/eslint-config": "^9.0.7",
+    "@mikey-pro/eslint-config": "^10.0.0",
     "@mikey-pro/prettier-config": "^9.0.7",
     "@mikey-pro/stylelint-config": "^9.0.7"
   },

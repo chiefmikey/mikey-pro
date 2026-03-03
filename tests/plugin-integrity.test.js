@@ -2,7 +2,7 @@
  * Plugin Integrity & Config Structure Tests
  *
  * Verifies that:
- * - All 29 plugins are registered in globalPlugins
+ * - All 25 plugins are registered in globalPlugins
  * - Config structure is valid (array of objects with correct fields)
  * - No rule definition errors on any supported file type
  * - Framework configs export correct format

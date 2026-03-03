@@ -5,12 +5,12 @@
   "type": "module",
   "main": "index.js",
   "dependencies": {
-    "@mikey-pro/eslint-config": "file:../eslint-config",
+    "@mikey-pro/eslint-config": "^10.0.0",
     "eslint-plugin-vue": "^10.8.0",
     "vue-eslint-parser": "^10.4.0"
   },
   "peerDependencies": {
-    "@mikey-pro/eslint-config": "file:../eslint-config",
+    "@mikey-pro/eslint-config": "^10.0.0",
     "eslint": "^10.0.0"
   },
   "peerDependenciesMeta": {
@@ -45,7 +45,7 @@
     "style-guide",
     "style",
     "guide",
-    "eslint-9",
+    "eslint-10",
     "flat-config"
   ],
   "author": "Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)",
