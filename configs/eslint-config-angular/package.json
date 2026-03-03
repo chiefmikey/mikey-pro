@@ -1,6 +1,6 @@
 {
   "name": "@mikey-pro/eslint-config-angular",
-  "version": "10.0.2",
+  "version": "10.0.3",
   "description": "Mikey Pro ESLint Angular configuration - Ultimate Angular coding style guide",
   "type": "module",
   "main": "index.js",
