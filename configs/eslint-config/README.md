@@ -1,48 +1,34 @@
 # @mikey-pro/eslint-config
 
-Core ESLint configuration for the Mikey Pro style guide.
+Core ESLint 10 flat config — 25+ plugins for code quality, security, and formatting.
 
-## Installation
+**Recommended:** Install `mikey-pro` instead for the full suite (ESLint + Prettier + Stylelint):
 
 ```bash
-npm install @mikey-pro/eslint-config
+npm install --save-dev mikey-pro
 ```
 
-## Usage
+## Standalone Install
 
-```javascript
+```bash
+npm install --save-dev @mikey-pro/eslint-config
+```
+
+```js
 // eslint.config.js
 export { default } from '@mikey-pro/eslint-config';
 ```
 
 ## Features
 
-- 50+ ESLint plugins for comprehensive code quality
-- TypeScript first-class support
-- Security-focused rules
-- Performance optimizations
-- Import/export organization
-- Auto-fixable formatting rules
+- 25+ ESLint plugins for comprehensive code quality
+- TypeScript strict mode with project-aware rules
+- Security, performance, and import organization rules
+- Prettier integration for formatting
+- noInlineConfig enabled — disable comments are blocked
 
 ## Supported File Types
 
-JavaScript, TypeScript, JSON, YAML, TOML, HTML, CSS, SCSS, Shell Scripts (.sh, .bash, .zsh), .env files
-
-## Customization
-
-```javascript
-// eslint.config.js
-import { default as baseConfig } from '@mikey-pro/eslint-config';
-
-export default [
-  ...baseConfig,
-  {
-    files: ['**/*.test.{js,ts}'],
-    rules: {
-      'no-console': 'off',
-    },
-  },
-];
-```
+JavaScript, TypeScript, JSON, YAML, TOML, HTML, CSS, SCSS, Markdown
 
 See [Mikey Pro](https://github.com/chiefmikey/mikey-pro) for full documentation.

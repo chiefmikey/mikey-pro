@@ -6,13 +6,13 @@
   "main": "index.js",
   "dependencies": {
     "@babel/eslint-parser": "^7.28.6",
-    "@mikey-pro/eslint-config": "^10.0.2",
+    "mikey-pro": "^10.0.4",
     "@typescript-eslint/parser": "^8.56.1",
     "eslint-plugin-svelte": "^3.15.0",
     "svelte-eslint-parser": "^1.5.1"
   },
   "peerDependencies": {
-    "@mikey-pro/eslint-config": "^10.0.2"
+    "mikey-pro": "^10.0.4"
   },
   "peerDependenciesMeta": {
     "typescript": {

@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-Mikey Pro is an AI agent code quality guardrails suite — ESLint 10 flat config, Ruff config for Python, Prettier config, and Stylelint config. Designed to make Claude and other AI coding agents write better, safer, more maintainable code. Published as `@mikey-pro/*` scoped npm packages (+ PyPI for Python) supporting JavaScript, TypeScript, React, Vue, Svelte, Angular, and Python.
+Mikey Pro is an AI agent code quality guardrails suite — ESLint 10 flat config, Ruff config for Python, Prettier config, and Stylelint config. Designed to make Claude and other AI coding agents write better, safer, more maintainable code. The unscoped `mikey-pro` npm package is the unified base (ESLint + Prettier + Stylelint). Framework variants (`@mikey-pro/eslint-config-react`, `-vue`, `-svelte`, `-angular`) depend on `mikey-pro` transitively. Python guardrails are in `@mikey-pro/ruff-config` (npm) / `mikey-pro-ruff-config` (PyPI).
 
 ## Tech Stack
 
@@ -29,7 +29,8 @@ configs/                  # Published packages (each has own package.json + node
   prettier-config/        # @mikey-pro/prettier-config
   stylelint-config/       # @mikey-pro/stylelint-config
   ruff-config/            # @mikey-pro/ruff-config + mikey-pro-ruff-config (PyPI) — Python guardrails
-  package.json            # configs/ meta-package (mikey-pro@10.0.0, uses file: links)
+  index.js                # mikey-pro entry point — re-exports ESLint flat config from eslint-config/
+  package.json            # mikey-pro unified base package (ESLint + Prettier + Stylelint)
 tests/                    # Vitest test suite
   plugin-integrity.test.js # Plugin registration & config structure tests
   violations.test.js      # Rule violation detection tests
@@ -75,14 +76,16 @@ npm run ci:local          # Run CI checks locally
 - **Tests** use Vitest's `describe`/`it`/`expect`, with `globals: true` in vitest config
 - **Test files** use `import.meta.dirname` / `import.meta.filename` for path resolution
 - **Commit style:** conventional commits — `feat:`, `fix:`, `chore:`, `ci:`, `refactor:`, `test:`, `docs:`
-- **Version:** all packages share a single version (currently 10.0.0), bumped together via `scripts/bump-version.js`
-- **Publishing:** each sub-package published independently to npm under `@mikey-pro/` scope; ruff-config also published to PyPI
+- **Version:** all packages share a single version (currently 10.0.4), bumped together via `scripts/bump-version.js`
+- **Publishing:** `mikey-pro` (unified base) published first, then framework configs and other scoped packages; ruff-config also published to PyPI
+- **Framework config imports:** framework configs import base components from `mikey-pro/eslint/base-config.js` and `mikey-pro/eslint/overrides.js` (NOT from `@mikey-pro/eslint-config/*`)
 - **Single source of truth:** all ESLint rules live in `base-config.js` (no separate rules.js)
 - **noInlineConfig:** `true` — prevents AI agents from using `// eslint-disable` escape hatches
 
 ## Common Mistakes to Avoid
 
-- **Don't confuse the two package.json files** — root `package.json` (v0.0.0) is for development; `configs/package.json` (v10.0.0) is the publishable meta-package
+- **Don't confuse the two package.json files** — root `package.json` is for development; `configs/package.json` is the publishable `mikey-pro` unified base package
+- **Framework configs depend on `mikey-pro`** not `@mikey-pro/eslint-config` — imports use `mikey-pro/eslint/*` subpath exports
 - **Sub-packages have their own node_modules** — each config in `configs/` manages its own dependencies separately. `npm run npm:install` handles all of them
 - **The project lints itself** — `eslint.config.js` at root imports from `./configs/eslint-config/index.js` directly (not the published package), so changes to the config are immediately reflected when linting
 

@@ -14,6 +14,7 @@ const eslintConfigPkgs = [
 ];
 
 const allPublishablePkgs = [
+  'mikey-pro',
   'eslint-config',
   'eslint-config-react',
   'eslint-config-vue',
@@ -30,6 +31,13 @@ const frameworkConfigs = [
   'eslint-config-svelte',
   'eslint-config-angular',
 ];
+
+function getConfigPkgJsonPath(pkgName) {
+  if (pkgName === 'mikey-pro') {
+    return join(rootDir, 'configs', 'package.json');
+  }
+  return join(rootDir, 'configs', pkgName, 'package.json');
+}
 
 describe('Packaging & Publishing', () => {
   it('should not use import.meta.dirname to construct relative paths in published config files', () => {
@@ -53,7 +61,7 @@ describe('Packaging & Publishing', () => {
 
   it('should not have file: references in dependencies of publishable packages', () => {
     for (const pkgName of allPublishablePkgs) {
-      const pkgJsonPath = join(rootDir, 'configs', pkgName, 'package.json');
+      const pkgJsonPath = getConfigPkgJsonPath(pkgName);
       const pkgJson = JSON.parse(readFileSync(pkgJsonPath, 'utf8'));
 
       const deps = pkgJson.dependencies ?? {};
@@ -99,8 +107,35 @@ describe('Packaging & Publishing', () => {
 
       expect(
         hasRelativeSiblingImport,
-        `${pkgName}/index.js uses relative sibling import (../eslint-config/). Use @mikey-pro/eslint-config instead.`,
+        `${pkgName}/index.js uses relative sibling import (../eslint-config/). Use mikey-pro/eslint/* instead.`,
       ).toBe(false);
+    }
+  });
+
+  it('should import base config from mikey-pro (not @mikey-pro/eslint-config) in framework configs', () => {
+    for (const pkgName of frameworkConfigs) {
+      const indexPath = join(rootDir, 'configs', pkgName, 'index.js');
+      const content = readFileSync(indexPath, 'utf8');
+
+      // Framework configs should import from 'mikey-pro/eslint/*' not '@mikey-pro/eslint-config/*'
+      const hasScopedImport =
+        content.includes("from '@mikey-pro/eslint-config/") ||
+        content.includes('from "@mikey-pro/eslint-config/');
+
+      expect(
+        hasScopedImport,
+        `${pkgName}/index.js imports from @mikey-pro/eslint-config — should use mikey-pro/eslint/* instead.`,
+      ).toBe(false);
+
+      // Verify correct imports are present
+      const hasMikeyProImport =
+        content.includes("from 'mikey-pro/eslint/") ||
+        content.includes('from "mikey-pro/eslint/');
+
+      expect(
+        hasMikeyProImport,
+        `${pkgName}/index.js does not import from mikey-pro/eslint/* — missing base config imports.`,
+      ).toBe(true);
     }
   });
 
@@ -129,7 +164,7 @@ describe('Packaging & Publishing', () => {
 
   it('should have consistent versions across all packages', () => {
     const versions = allPublishablePkgs.map((pkgName) => {
-      const pkgJsonPath = join(rootDir, 'configs', pkgName, 'package.json');
+      const pkgJsonPath = getConfigPkgJsonPath(pkgName);
       const pkgJson = JSON.parse(readFileSync(pkgJsonPath, 'utf8'));
       return { pkgName, version: pkgJson.version };
     });
@@ -146,7 +181,7 @@ describe('Packaging & Publishing', () => {
 
   it('should have correct eslint version in keywords', () => {
     for (const pkgName of eslintConfigPkgs) {
-      const pkgJsonPath = join(rootDir, 'configs', pkgName, 'package.json');
+      const pkgJsonPath = getConfigPkgJsonPath(pkgName);
       const pkgJson = JSON.parse(readFileSync(pkgJsonPath, 'utf8'));
       const keywords = pkgJson.keywords ?? [];
 
@@ -292,5 +327,55 @@ describe('Packaging & Publishing', () => {
       (m) => m.ruleId === 'no-var',
     );
     expect(noVarMessages.length).toBeGreaterThan(0);
+  });
+
+  it('should have prettier as a direct dependency of mikey-pro', () => {
+    const pkgJson = JSON.parse(
+      readFileSync(getConfigPkgJsonPath('mikey-pro'), 'utf8'),
+    );
+    const deps = pkgJson.dependencies ?? {};
+
+    expect(
+      deps.prettier,
+      'prettier must be in mikey-pro dependencies — eslint-plugin-prettier requires it',
+    ).toBeDefined();
+  });
+
+  it('should include all required config files in mikey-pro files array', () => {
+    const pkgJson = JSON.parse(
+      readFileSync(getConfigPkgJsonPath('mikey-pro'), 'utf8'),
+    );
+    const files = pkgJson.files ?? [];
+
+    const requiredFiles = [
+      'index.js',
+      'eslint-config/index.js',
+      'eslint-config/base-config.js',
+      'eslint-config/overrides.js',
+      'prettier-config/index.js',
+      'stylelint-config/index.js',
+    ];
+
+    for (const required of requiredFiles) {
+      expect(
+        files.includes(required),
+        `mikey-pro files array missing "${required}"`,
+      ).toBe(true);
+    }
+  });
+
+  it('should have exports map entries that resolve to existing files in mikey-pro', () => {
+    const pkgJsonPath = getConfigPkgJsonPath('mikey-pro');
+    const pkgJson = JSON.parse(readFileSync(pkgJsonPath, 'utf8'));
+    const configsDir = join(rootDir, 'configs');
+
+    for (const [exportPath, mapping] of Object.entries(pkgJson.exports)) {
+      const target = typeof mapping === 'string' ? mapping : mapping.import;
+
+      expect(
+        existsSync(join(configsDir, target)),
+        `mikey-pro exports "${exportPath}" → "${target}" but the file does not exist`,
+      ).toBe(true);
+    }
   });
 });

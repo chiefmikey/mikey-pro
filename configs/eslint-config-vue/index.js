@@ -1,6 +1,6 @@
 // Modern Vue ESLint configuration for Mikey Pro
-import { baseConfig, globalPlugins } from '@mikey-pro/eslint-config/base-config.js';
-import { baseOverrides } from '@mikey-pro/eslint-config/overrides.js';
+import { baseConfig, globalPlugins } from 'mikey-pro/eslint/base-config.js';
+import { baseOverrides } from 'mikey-pro/eslint/overrides.js';
 import vue from 'eslint-plugin-vue';
 import vueParser from 'vue-eslint-parser';
 
@@ -153,5 +153,5 @@ export default [
 ];
 
 // Export individual components for advanced usage
-export { baseConfig, globalPlugins } from '@mikey-pro/eslint-config/base-config.js';
-export { baseOverrides } from '@mikey-pro/eslint-config/overrides.js';
+export { baseConfig, globalPlugins } from 'mikey-pro/eslint/base-config.js';
+export { baseOverrides } from 'mikey-pro/eslint/overrides.js';

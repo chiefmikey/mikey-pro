@@ -1,36 +1,32 @@
 # @mikey-pro/prettier-config
 
-Prettier configuration for the Mikey Pro style guide.
+Prettier configuration for consistent code formatting.
 
-## Installation
+**Recommended:** Install `mikey-pro` instead — includes this config plus ESLint and Stylelint:
 
 ```bash
-npm install @mikey-pro/prettier-config
+npm install --save-dev mikey-pro
 ```
-
-## Usage
-
-```javascript
-// .prettierrc.js
-module.exports = {
-  ...require('@mikey-pro/prettier-config'),
-};
-```
-
-Or in package.json:
 
 ```json
-{
-  "prettier": "@mikey-pro/prettier-config"
-}
+{ "prettier": "mikey-pro/prettier" }
+```
+
+## Standalone Install
+
+```bash
+npm install --save-dev @mikey-pro/prettier-config
+```
+
+```json
+{ "prettier": "@mikey-pro/prettier-config" }
 ```
 
 ## Features
 
-- Consistent code formatting
-- JavaScript/TypeScript optimization
+- Single quotes, trailing commas, semicolons
+- 80 character print width
 - Framework-aware formatting
-- Trailing commas and semicolons
-- Single quotes preference
+- JS, TS, JSON, CSS, HTML, Markdown, YAML support
 
 See [Mikey Pro](https://github.com/chiefmikey/mikey-pro) for full documentation.
