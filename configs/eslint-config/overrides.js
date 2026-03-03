@@ -1,6 +1,4 @@
 // Modern overrides for different file types and frameworks
-import path from 'node:path';
-
 import html from '@html-eslint/eslint-plugin';
 import htmlParser from '@html-eslint/parser';
 import tsPlugin from '@typescript-eslint/eslint-plugin';
@@ -17,8 +15,6 @@ import jsoncParser from 'jsonc-eslint-parser';
 import tomlParser from 'toml-eslint-parser';
 import yamlParser from 'yaml-eslint-parser';
 
-const currentDirectory = import.meta.dirname;
-
 // TypeScript configuration
 export const ts = {
   files: ['**/*.ts', '**/*.tsx'],
@@ -28,8 +24,8 @@ export const ts = {
     parserOptions: {
       ecmaFeatures: { jsx: true },
       extraFileExtensions: ['.vue', '.svelte'],
-      project: path.join(currentDirectory, '../../tsconfig.json'),
-      tsconfigRootDir: path.join(currentDirectory, '../..'),
+      project: true,
+      tsconfigRootDir: process.cwd(),
     },
     sourceType: 'module',
   },
