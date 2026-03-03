@@ -179,8 +179,7 @@ describe('File Type Support', () => {
 
 describe('Framework File Types', () => {
   describe('React JSX Files', () => {
-    // eslint-plugin-react does not yet support ESLint 10 (peer dep: ^3-^9.7)
-    it.skip('should lint .jsx files with React config', async () => {
+    it('should lint .jsx files with React config', async () => {
       const configPath = join(
         rootDir,
         'configs',

@@ -59,8 +59,7 @@ describe('Rule Enforcement', () => {
 });
 
 describe('Framework-Specific Rules', () => {
-  // eslint-plugin-react does not yet support ESLint 10 (peer dep: ^3-^9.7)
-  it.skip('should apply React rules to React files', async () => {
+  it('should apply React rules to React files', async () => {
     const configPath = join(
       rootDir,
       'configs',

@@ -180,12 +180,33 @@ async function runTests() {
     }
   });
 
-  // eslint-plugin-react does not yet support ESLint 10 (peer dep: ^3-^9.7)
-  // Skip React linting test until upstream adds ESLint 10 support
-  console.log(
-    '⏭️  Config works when used as installed package (React) [SKIPPED - eslint-plugin-react ESLint 10 incompatible]',
-  );
-  passed++;
+  await test('Config works when used as installed package (React)', async () => {
+    const config = await import(
+      join(rootDir, 'configs', 'eslint-config-react', 'index.js')
+    );
+    if (!config.default || !Array.isArray(config.default)) {
+      throw new Error('Config is not a valid array');
+    }
+
+    // Verify it can be used to lint files
+    const eslint = new ESLint({
+      overrideConfigFile: join(
+        rootDir,
+        'configs',
+        'eslint-config-react',
+        'index.js',
+      ),
+    });
+    const testFile = join(testFilesDir, 'test-react.jsx');
+    const results = await eslint.lintFiles([testFile]);
+    if (results.length === 0) {
+      throw new Error('No results returned');
+    }
+    const fatalErrors = results[0].messages.filter((m) => m.fatal);
+    if (fatalErrors.length > 0) {
+      throw new Error(`Fatal errors found: ${fatalErrors.length}`);
+    }
+  });
 
   await test('Linting and formatting work together in project scenario', async () => {
     // Simulate a real project: lint then format
