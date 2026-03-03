@@ -8,13 +8,13 @@
     "@angular-eslint/eslint-plugin": "^20.2.0",
     "@angular-eslint/eslint-plugin-template": "^20.2.0",
     "@angular-eslint/template-parser": "^20.2.0",
-    "@mikey-pro/eslint-config": "file:../eslint-config",
+    "@mikey-pro/eslint-config": "^10.0.0",
     "@typescript-eslint/eslint-plugin": "^8.56.0",
     "@typescript-eslint/parser": "^8.56.0",
     "eslint-plugin-prettier": "^5.5.5"
   },
   "peerDependencies": {
-    "@mikey-pro/eslint-config": "file:../eslint-config"
+    "@mikey-pro/eslint-config": "^10.0.0"
   },
   "peerDependenciesMeta": {
     "@angular/core": {
@@ -48,7 +48,7 @@
     "style-guide",
     "style",
     "guide",
-    "eslint-9",
+    "eslint-10",
     "flat-config"
   ],
   "author": "Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)",

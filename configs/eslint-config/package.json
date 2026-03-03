@@ -106,11 +106,23 @@
       "import": "./flat.js",
       "require": "./flat.js"
     },
+    "./flat.js": {
+      "import": "./flat.js",
+      "require": "./flat.js"
+    },
     "./overrides": {
       "import": "./overrides.js",
       "require": "./overrides.js"
     },
+    "./overrides.js": {
+      "import": "./overrides.js",
+      "require": "./overrides.js"
+    },
     "./base-config": {
+      "import": "./base-config.js",
+      "require": "./base-config.js"
+    },
+    "./base-config.js": {
       "import": "./base-config.js",
       "require": "./base-config.js"
     }
