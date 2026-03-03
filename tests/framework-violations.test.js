@@ -7,14 +7,12 @@
  * passing everything through.
  *
  * Architecture note on Svelte/Angular:
- * - Framework packages live in each config's own node_modules, not the root.
- * - For Svelte/Angular tests, we build a minimal inline config using file: URLs
- *   to import from the sub-package's node_modules directly. This is necessary
- *   because the main Angular config requires project: './tsconfig.json' for
- *   type-aware rules, which breaks lintText without a real project on disk.
+ * - Framework plugins are hoisted to root node_modules via file: devDependencies.
+ * - For Svelte/Angular tests, we build a minimal inline config because the main
+ *   Angular config requires project: './tsconfig.json' for type-aware rules,
+ *   which breaks lintText without a real project on disk.
  */
 
-import { createRequire } from 'node:module';
 import { join } from 'node:path';
 
 import { ESLint } from 'eslint';
@@ -37,19 +35,7 @@ const vueConfigPath = join(
   'index.js',
 );
 
-// Paths to sub-package node_modules for packages not accessible from root
-const svelteNodeModules = join(
-  rootDir,
-  'configs',
-  'eslint-config-svelte',
-  'node_modules',
-);
-const angularNodeModules = join(
-  rootDir,
-  'configs',
-  'eslint-config-angular',
-  'node_modules',
-);
+// Framework plugins are available in root node_modules via file: devDependencies
 
 /**
  * Assert that a specific rule fires on the given code
@@ -219,15 +205,8 @@ describe('Svelte Framework Violations', () => {
   let eslint;
 
   beforeAll(async () => {
-    // Svelte packages live only in eslint-config-svelte/node_modules, so we
-    // import them by absolute path and build a minimal inline config.
-    // NOTE: The published eslint-config-svelte/index.js has a bug where it
-    // spreads `...svelte.configs.recommended.rules`, but `recommended` is an
-    // array (ESLint 9 flat format), not a legacy object, so `.rules` is
-    // undefined and no rules land in the config. These tests use a corrected
-    // inline config that properly wires the svelte rules.
-    const sveltePlugin = (await import(`file://${svelteNodeModules}/eslint-plugin-svelte/lib/index.js`)).default;
-    const svelteParser = (await import(`file://${svelteNodeModules}/svelte-eslint-parser/lib/index.js`)).default;
+    const sveltePlugin = (await import('eslint-plugin-svelte')).default;
+    const svelteParser = (await import('svelte-eslint-parser')).default;
 
     eslint = new ESLint({
       overrideConfig: [
@@ -318,12 +297,9 @@ describe('Angular Framework Violations', () => {
   let eslint;
 
   beforeAll(async () => {
-    // The published eslint-config-angular/index.js sets project: './tsconfig.json'
-    // in parserOptions, which causes ESLint to fail during lintText when no real
-    // tsconfig is resolved relative to the virtual file path. We build a minimal
-    // inline config without type-aware rules so the parser works with lintText.
-    const angularPlugin = (await import(`file://${angularNodeModules}/@angular-eslint/eslint-plugin/dist/index.js`)).default;
-    const tsParser = (await import(`file://${angularNodeModules}/@typescript-eslint/parser/dist/index.js`));
+    // Build a minimal inline config without type-aware rules so the parser works with lintText.
+    const angularPlugin = (await import('@angular-eslint/eslint-plugin')).default;
+    const tsParser = (await import('@typescript-eslint/parser'));
 
     eslint = new ESLint({
       overrideConfig: [
