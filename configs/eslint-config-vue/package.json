@@ -1,6 +1,6 @@
 {
   "name": "@mikey-pro/eslint-config-vue",
-  "version": "10.0.0",
+  "version": "10.0.1",
   "description": "Mikey Pro ESLint Vue configuration - Ultimate Vue coding style guide",
   "type": "module",
   "main": "index.js",
@@ -21,7 +21,13 @@
       "optional": true
     }
   },
-  "files": ["index.js", "flat.js", "legacy.js", "README.md", "LICENSE"],
+  "files": [
+    "index.js",
+    "flat.js",
+    "legacy.js",
+    "README.md",
+    "LICENSE"
+  ],
   "homepage": "https://github.com/chiefmikey/mikey-pro#readme",
   "repository": {
     "type": "git",
@@ -55,7 +61,9 @@
     "pnpm": ">=8.0.0",
     "yarn": ">=4.0.0"
   },
-  "browserslist": ["defaults"],
+  "browserslist": [
+    "defaults"
+  ],
   "exports": {
     ".": {
       "import": "./index.js",

@@ -1,6 +1,6 @@
 {
   "name": "mikey-pro",
-  "version": "10.0.0",
+  "version": "10.0.1",
   "description": "Mikey Pro",
   "type": "module",
   "scripts": {
@@ -39,7 +39,10 @@
     "svelte": "^5.43.14",
     "vitest": "^4.0.13"
   },
-  "files": ["README.md", "LICENSE"],
+  "files": [
+    "README.md",
+    "LICENSE"
+  ],
   "homepage": "https://github.com/chiefmikey/mikey-pro#readme",
   "repository": {
     "type": "git",
