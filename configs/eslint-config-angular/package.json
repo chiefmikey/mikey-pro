@@ -5,16 +5,16 @@
   "type": "module",
   "main": "index.js",
   "dependencies": {
-    "@angular-eslint/eslint-plugin": "^20.2.0",
-    "@angular-eslint/eslint-plugin-template": "^20.2.0",
-    "@angular-eslint/template-parser": "^20.2.0",
-    "@mikey-pro/eslint-config": "^10.0.0",
-    "@typescript-eslint/eslint-plugin": "^8.56.0",
-    "@typescript-eslint/parser": "^8.56.0",
+    "@angular-eslint/eslint-plugin": "^21.2.0",
+    "@angular-eslint/eslint-plugin-template": "^21.2.0",
+    "@angular-eslint/template-parser": "^21.2.0",
+    "@mikey-pro/eslint-config": "^10.0.2",
+    "@typescript-eslint/eslint-plugin": "^8.56.1",
+    "@typescript-eslint/parser": "^8.56.1",
     "eslint-plugin-prettier": "^5.5.5"
   },
   "peerDependencies": {
-    "@mikey-pro/eslint-config": "^10.0.0"
+    "@mikey-pro/eslint-config": "^10.0.2"
   },
   "peerDependenciesMeta": {
     "@angular/core": {

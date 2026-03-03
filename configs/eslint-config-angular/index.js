@@ -49,7 +49,6 @@ const angularConfig = {
         type: 'attribute',
       },
     ],
-    '@angular-eslint/no-multiple-template-root': 'off', // Angular 17+ allows multiple roots
     '@angular-eslint/use-lifecycle-interface': 'error',
   },
   settings: {

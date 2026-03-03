@@ -5,12 +5,12 @@
   "main": "index.js",
   "dependencies": {
     "stylelint-config-recommended-vue": "^1.6.1",
-    "stylelint-config-standard": "^39.0.0",
-    "stylelint-config-standard-scss": "^16.0.0",
+    "stylelint-config-standard": "^40.0.0",
+    "stylelint-config-standard-scss": "^17.0.0",
     "stylelint-declaration-strict-value": "^1.10.11",
     "stylelint-order": "^7.0.0",
-    "stylelint-scss": "^6.12.1",
-    "postcss": "^8.5.6",
+    "stylelint-scss": "^7.0.0",
+    "postcss": "^8.5.8",
     "postcss-scss": "^4.0.9"
   },
   "type": "module",
