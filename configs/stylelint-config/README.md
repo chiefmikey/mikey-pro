@@ -1,30 +1,25 @@
 # @mikey-pro/stylelint-config
 
-Stylelint configuration for the Mikey Pro style guide.
+Stylelint configuration for CSS/SCSS best practices.
 
-## Installation
+**Recommended:** Install `mikey-pro` instead — includes this config plus ESLint and Prettier:
 
 ```bash
-npm install @mikey-pro/stylelint-config
+npm install --save-dev mikey-pro
 ```
-
-## Usage
-
-```javascript
-// .stylelintrc.js
-module.exports = {
-  extends: ['@mikey-pro/stylelint-config'],
-};
-```
-
-Or in package.json:
 
 ```json
-{
-  "stylelint": {
-    "extends": "@mikey-pro/stylelint-config"
-  }
-}
+{ "stylelint": { "extends": "mikey-pro/stylelint" } }
+```
+
+## Standalone Install
+
+```bash
+npm install --save-dev @mikey-pro/stylelint-config
+```
+
+```json
+{ "stylelint": { "extends": "@mikey-pro/stylelint-config" } }
 ```
 
 ## Features
@@ -33,6 +28,5 @@ Or in package.json:
 - Property ordering
 - Selector specificity limits
 - Color and font consistency
-- Performance optimizations
 
 See [Mikey Pro](https://github.com/chiefmikey/mikey-pro) for full documentation.

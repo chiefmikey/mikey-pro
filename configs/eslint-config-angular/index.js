@@ -3,8 +3,8 @@ import angular from '@angular-eslint/eslint-plugin';
 import angularTemplate from '@angular-eslint/eslint-plugin-template';
 import angularTemplateParser from '@angular-eslint/template-parser';
 import tsParser from '@typescript-eslint/parser';
-import { baseConfig, globalPlugins } from '@mikey-pro/eslint-config/base-config.js';
-import { baseOverrides } from '@mikey-pro/eslint-config/overrides.js';
+import { baseConfig, globalPlugins } from 'mikey-pro/eslint/base-config.js';
+import { baseOverrides } from 'mikey-pro/eslint/overrides.js';
 
 // Angular-specific configuration
 const angularConfig = {
@@ -152,5 +152,5 @@ export default [
 ];
 
 // Export individual components for advanced usage
-export { baseConfig, globalPlugins } from '@mikey-pro/eslint-config/base-config.js';
-export { baseOverrides } from '@mikey-pro/eslint-config/overrides.js';
+export { baseConfig, globalPlugins } from 'mikey-pro/eslint/base-config.js';
+export { baseOverrides } from 'mikey-pro/eslint/overrides.js';

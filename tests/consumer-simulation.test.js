@@ -46,6 +46,7 @@ import { join } from 'node:path';
 const rootDir = join(import.meta.dirname, '..');
 const baseConfigDir = join(rootDir, 'configs', 'eslint-config');
 const reactConfigDir = join(rootDir, 'configs', 'eslint-config-react');
+const mikeyProConfigDir = join(rootDir, 'configs');
 
 // Use a longer timeout for beforeAll hooks since npm install is slow.
 // Passed as the second argument to beforeAll().
@@ -152,6 +153,15 @@ function runESLintInConsumer(consumerDir, filePath, { timeout = 60_000 } = {}) {
       'node_modules',
       '@mikey-pro',
       'eslint-config',
+      'node_modules',
+      'eslint',
+      'bin',
+      'eslint.js',
+    ),
+    join(
+      consumerDir,
+      'node_modules',
+      'mikey-pro',
       'node_modules',
       'eslint',
       'bin',
@@ -381,6 +391,164 @@ console.log(JSON.stringify({ ok: true, entries: config.length }));
 });
 
 // ---------------------------------------------------------------------------
+// Unified mikey-pro package consumer suite
+// ---------------------------------------------------------------------------
+
+describe(
+  'Consumer Simulation — mikey-pro (unified package)',
+  { timeout: 30_000 },
+  () => {
+    let consumerDir;
+    let tgzPath;
+
+    beforeAll(async () => {
+      tgzPath = packPackage(mikeyProConfigDir);
+      consumerDir = createConsumerDir('mikey-pro');
+
+      writeFileSync(
+        join(consumerDir, 'package.json'),
+        JSON.stringify(
+          { name: 'test-consumer-mikey-pro', private: true, type: 'module' },
+          null,
+          2,
+        ),
+      );
+
+      writeFileSync(
+        join(consumerDir, 'eslint.config.js'),
+        `export { default } from 'mikey-pro';\n`,
+      );
+
+      writeFileSync(
+        join(consumerDir, 'tsconfig.json'),
+        JSON.stringify(
+          {
+            compilerOptions: {
+              allowSyntheticDefaultImports: true,
+              esModuleInterop: true,
+              module: 'ESNext',
+              moduleResolution: 'node',
+              skipLibCheck: true,
+              strict: true,
+              target: 'ES2022',
+            },
+            include: ['*.ts'],
+          },
+          null,
+          2,
+        ),
+      );
+
+      writeFileSync(
+        join(consumerDir, 'test.js'),
+        ['var x = 1;', 'export default x;', ''].join('\n'),
+      );
+
+      // mikey-pro bundles eslint, prettier, and typescript as direct dependencies
+      // so no additional installs are needed beyond the tgz itself
+      npmInstall(consumerDir, `"${tgzPath}"`);
+    }, HOOK_TIMEOUT);
+
+    afterAll(() => {
+      try {
+        if (consumerDir) {
+          rmSync(consumerDir, { force: true, recursive: true });
+        }
+      } finally {
+        if (tgzPath) {
+          try {
+            unlinkSync(tgzPath);
+          } catch {
+            // Best-effort
+          }
+        }
+      }
+    });
+
+    it('installs without errors and the package.json is present', () => {
+      const req = createRequire(import.meta.url);
+      const installedPkgJson = join(
+        consumerDir,
+        'node_modules',
+        'mikey-pro',
+        'package.json',
+      );
+      const pkg = req(installedPkgJson);
+
+      expect(pkg.name).toBe('mikey-pro');
+      expect(pkg.version).toBeDefined();
+    });
+
+    it('default import loads the ESLint flat config array', () => {
+      const result = runNodeScript(
+        consumerDir,
+        `
+import config from 'mikey-pro';
+if (!Array.isArray(config)) throw new Error('Expected default export to be an array, got: ' + typeof config);
+if (config.length === 0) throw new Error('Config array is empty');
+console.log(JSON.stringify({ ok: true, entries: config.length }));
+`,
+        { timeout: 30_000 },
+      );
+
+      const parsed = JSON.parse(result);
+      expect(parsed.ok).toBe(true);
+      expect(parsed.entries).toBeGreaterThan(0);
+    });
+
+    it('subpath imports resolve correctly', () => {
+      const result = runNodeScript(
+        consumerDir,
+        `
+import { baseConfig } from 'mikey-pro/eslint/base-config.js';
+import { baseOverrides } from 'mikey-pro/eslint/overrides.js';
+const prettierConfig = await import('mikey-pro/prettier');
+const stylelintConfig = await import('mikey-pro/stylelint');
+
+const checks = {
+  baseConfig: typeof baseConfig === 'object' && baseConfig !== null,
+  baseOverrides: Array.isArray(baseOverrides),
+  prettier: typeof prettierConfig.default === 'object',
+  stylelint: typeof stylelintConfig.default === 'object',
+};
+
+console.log(JSON.stringify(checks));
+`,
+        { timeout: 30_000 },
+      );
+
+      const checks = JSON.parse(result);
+      expect(checks.baseConfig).toBe(true);
+      expect(checks.baseOverrides).toBe(true);
+      expect(checks.prettier).toBe(true);
+      expect(checks.stylelint).toBe(true);
+    });
+
+    it('lints a JS file with no fatal errors and fires no-var rule', () => {
+      const results = runESLintInConsumer(consumerDir, 'test.js', {
+        timeout: 60_000,
+      });
+
+      expect(results).toHaveLength(1);
+
+      const fatalErrors = results[0].messages.filter((m) => m.fatal);
+      expect(
+        fatalErrors,
+        `Fatal errors: ${JSON.stringify(fatalErrors)}`,
+      ).toHaveLength(0);
+
+      const noVarMessages = results[0].messages.filter(
+        (m) => m.ruleId === 'no-var',
+      );
+      expect(
+        noVarMessages,
+        'Expected no-var to report on `var x = 1` — no messages means rules are not loading',
+      ).not.toHaveLength(0);
+    });
+  },
+);
+
+// ---------------------------------------------------------------------------
 // React config consumer suite
 // ---------------------------------------------------------------------------
 
@@ -389,12 +557,12 @@ describe(
   { timeout: 30_000 },
   () => {
     let consumerDir;
-    let baseTgzPath;
+    let mikeyProTgzPath;
     let reactTgzPath;
 
     beforeAll(async () => {
-      // 1. Pack both packages (react config depends on base config)
-      baseTgzPath = packPackage(baseConfigDir);
+      // 1. Pack both packages (react config depends on mikey-pro base)
+      mikeyProTgzPath = packPackage(mikeyProConfigDir);
       reactTgzPath = packPackage(reactConfigDir);
 
       // 2. Create isolated consumer project
@@ -428,13 +596,12 @@ describe(
         ].join('\n'),
       );
 
-      // 4. Install both .tgz files so npm resolves the peer dep chain
+      // 4. Install both .tgz files so npm resolves the dep chain
+      //    mikey-pro bundles prettier + typescript, so no separate installs needed
       npmInstall(
         consumerDir,
-        `"${baseTgzPath}"`,
+        `"${mikeyProTgzPath}"`,
         `"${reactTgzPath}"`,
-        'typescript',
-        'prettier',
       );
     }, HOOK_TIMEOUT);
 
@@ -444,7 +611,7 @@ describe(
           rmSync(consumerDir, { force: true, recursive: true });
         }
       } finally {
-        for (const p of [baseTgzPath, reactTgzPath]) {
+        for (const p of [mikeyProTgzPath, reactTgzPath]) {
           if (p) {
             try {
               unlinkSync(p);
@@ -472,10 +639,8 @@ describe(
     });
 
     it('config module loads without import errors (no broken relative imports to base config)', () => {
-      // This specifically catches the bug where index.js uses:
-      //   import from '../eslint-config/base-config.js'  ← breaks in node_modules
-      // instead of:
-      //   import from '@mikey-pro/eslint-config/base-config.js'  ← correct
+      // This catches bugs where index.js uses broken import paths.
+      // The correct import path is 'mikey-pro/eslint/base-config.js'.
       const result = runNodeScript(
         consumerDir,
         `

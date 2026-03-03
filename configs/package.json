@@ -1,24 +1,118 @@
 {
   "name": "mikey-pro",
   "version": "10.0.4",
-  "description": "Mikey Pro Style Guide",
+  "description": "AI agent code quality guardrails — ESLint, Prettier, and Stylelint unified config",
   "type": "module",
-  "main": "./eslint-config/index.js",
-  "exports": {
-    ".": "./eslint-config/index.js"
-  },
+  "main": "./index.js",
+  "sideEffects": false,
   "dependencies": {
-    "@mikey-pro/eslint-config": "file:./eslint-config",
-    "@mikey-pro/prettier-config": "file:./prettier-config",
-    "@mikey-pro/stylelint-config": "file:./stylelint-config",
-    "eslint": "^10.0.0",
-    "prettier": "^3.6.2",
-    "stylelint": "^16.24.0"
+    "@eslint/js": "^10.0.1",
+    "@eslint/markdown": "^7.5.1",
+    "@html-eslint/eslint-plugin": "^0.57.1",
+    "@html-eslint/parser": "^0.57.1",
+    "@typescript-eslint/eslint-plugin": "^8.56.1",
+    "@typescript-eslint/parser": "^8.56.1",
+    "eslint": "^10.0.2",
+    "eslint-plugin-boundaries": "^5.4.0",
+    "eslint-plugin-compat": "^7.0.1",
+    "eslint-plugin-cypress": "^6.1.0",
+    "eslint-plugin-import-x": "^4.16.1",
+    "eslint-plugin-jest": "^29.15.0",
+    "eslint-plugin-jest-dom": "^5.5.0",
+    "eslint-plugin-jsonc": "^3.1.1",
+    "eslint-plugin-n": "^17.24.0",
+    "eslint-plugin-no-only-tests": "^3.3.0",
+    "eslint-plugin-no-secrets": "^2.3.3",
+    "eslint-plugin-perfectionist": "^5.6.0",
+    "eslint-plugin-prettier": "^5.5.5",
+    "eslint-plugin-promise": "^7.2.1",
+    "eslint-plugin-regexp": "^3.0.0",
+    "eslint-plugin-security": "^4.0.0",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
+    "eslint-plugin-sonarjs": "^4.0.0",
+    "eslint-plugin-sort-destructure-keys": "^3.0.0",
+    "eslint-plugin-testing-library": "^7.16.0",
+    "eslint-plugin-toml": "^1.3.0",
+    "eslint-plugin-unicorn": "^63.0.0",
+    "eslint-plugin-yml": "^3.3.0",
+    "globals": "^17.4.0",
+    "jsonc-eslint-parser": "^3.1.0",
+    "postcss": "^8.5.8",
+    "postcss-scss": "^4.0.9",
+    "prettier": ">=3.0.0",
+    "stylelint": "^16.24.0",
+    "stylelint-config-recommended-vue": "^1.6.1",
+    "stylelint-config-standard": "^40.0.0",
+    "stylelint-config-standard-scss": "^17.0.0",
+    "stylelint-declaration-strict-value": "^1.10.11",
+    "stylelint-order": "^7.0.0",
+    "stylelint-scss": "^7.0.0",
+    "toml-eslint-parser": "^1.0.3",
+    "typescript": "^5.9.3",
+    "yaml-eslint-parser": "^2.0.0"
+  },
+  "peerDependenciesMeta": {
+    "typescript": {
+      "optional": true
+    },
+    "@typescript-eslint/parser": {
+      "optional": true
+    }
   },
   "files": [
+    "index.js",
+    "eslint-config/index.js",
+    "eslint-config/base-config.js",
+    "eslint-config/overrides.js",
+    "eslint-config/flat.js",
+    "eslint-config/index.d.ts",
+    "prettier-config/index.js",
+    "stylelint-config/index.js",
     "README.md",
     "LICENSE"
   ],
+  "exports": {
+    ".": {
+      "import": "./index.js",
+      "require": "./index.js"
+    },
+    "./eslint": {
+      "import": "./eslint-config/index.js",
+      "require": "./eslint-config/index.js"
+    },
+    "./eslint/base-config": {
+      "import": "./eslint-config/base-config.js",
+      "require": "./eslint-config/base-config.js"
+    },
+    "./eslint/base-config.js": {
+      "import": "./eslint-config/base-config.js",
+      "require": "./eslint-config/base-config.js"
+    },
+    "./eslint/overrides": {
+      "import": "./eslint-config/overrides.js",
+      "require": "./eslint-config/overrides.js"
+    },
+    "./eslint/overrides.js": {
+      "import": "./eslint-config/overrides.js",
+      "require": "./eslint-config/overrides.js"
+    },
+    "./eslint/flat": {
+      "import": "./eslint-config/flat.js",
+      "require": "./eslint-config/flat.js"
+    },
+    "./eslint/flat.js": {
+      "import": "./eslint-config/flat.js",
+      "require": "./eslint-config/flat.js"
+    },
+    "./prettier": {
+      "import": "./prettier-config/index.js",
+      "require": "./prettier-config/index.js"
+    },
+    "./stylelint": {
+      "import": "./stylelint-config/index.js",
+      "require": "./stylelint-config/index.js"
+    }
+  },
   "homepage": "https://github.com/chiefmikey/mikey-pro#readme",
   "repository": {
     "type": "git",
@@ -32,14 +126,30 @@
     "mikey-pro",
     "mikey",
     "pro",
-    "style-guide",
-    "styleguide",
-    "style",
-    "guide",
+    "eslint",
+    "prettier",
+    "stylelint",
     "lint",
-    "linter",
     "format",
-    "formatter"
+    "code-quality",
+    "guardrails",
+    "ai-agent",
+    "flat-config",
+    "eslint-10",
+    "typescript",
+    "react",
+    "vue",
+    "svelte",
+    "angular"
   ],
-  "author": "Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)"
+  "author": "Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)",
+  "browserslist": [
+    "defaults"
+  ],
+  "engines": {
+    "node": ">=20.19.0",
+    "npm": ">=9.0.0",
+    "pnpm": ">=8.0.0",
+    "yarn": ">=4.0.0"
+  }
 }
