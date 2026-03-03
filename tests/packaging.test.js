@@ -183,7 +183,7 @@ describe('Packaging & Publishing', () => {
 
     // Load semver — it is a transitive dependency available in root node_modules
     const semverMod = await import(
-      join(rootDir, 'node_modules', 'semver', 'semver.js')
+      join(rootDir, 'node_modules', 'semver', 'index.js')
     );
     const semver = semverMod.default;
 
@@ -203,8 +203,8 @@ describe('Packaging & Publishing', () => {
         dep.startsWith('@typescript-eslint/eslint-plugin'),
     );
 
-    // Determine the installed ESLint version
-    const eslintPkgJsonPath = join(
+    // Determine the installed ESLint version — may be hoisted to root node_modules
+    const eslintPkgJsonPathLocal = join(
       rootDir,
       'configs',
       'eslint-config',
@@ -212,6 +212,15 @@ describe('Packaging & Publishing', () => {
       'eslint',
       'package.json',
     );
+    const eslintPkgJsonPathRoot = join(
+      rootDir,
+      'node_modules',
+      'eslint',
+      'package.json',
+    );
+    const eslintPkgJsonPath = existsSync(eslintPkgJsonPathLocal)
+      ? eslintPkgJsonPathLocal
+      : eslintPkgJsonPathRoot;
     const eslintVersion = JSON.parse(readFileSync(eslintPkgJsonPath, 'utf8'))
       .version;
 

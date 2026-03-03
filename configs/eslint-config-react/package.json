@@ -5,18 +5,18 @@
   "type": "module",
   "main": "index.js",
   "dependencies": {
-    "@babel/preset-react": "^7.27.1",
-    "@mikey-pro/eslint-config": "^10.0.0",
+    "@babel/preset-react": "^7.28.5",
+    "@mikey-pro/eslint-config": "^10.0.2",
     "eslint-plugin-jest-dom": "^5.5.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-react": "^7.37.5",
-    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-perf": "^3.3.3",
-    "eslint-plugin-react-refresh": "^0.4.20",
-    "eslint-plugin-testing-library": "^7.6.8"
+    "eslint-plugin-react-refresh": "^0.5.2",
+    "eslint-plugin-testing-library": "^7.16.0"
   },
   "peerDependencies": {
-    "@mikey-pro/eslint-config": "^10.0.0"
+    "@mikey-pro/eslint-config": "^10.0.2"
   },
   "peerDependenciesMeta": {
     "@types/react": {

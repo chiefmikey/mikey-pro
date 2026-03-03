@@ -11,9 +11,9 @@ import jestDom from 'eslint-plugin-jest-dom';
 import jsoncPlugin from 'eslint-plugin-jsonc';
 import testingLibrary from 'eslint-plugin-testing-library';
 import tomlPlugin from 'eslint-plugin-toml';
-import jsoncParser from 'jsonc-eslint-parser';
-import tomlParser from 'toml-eslint-parser';
-import yamlParser from 'yaml-eslint-parser';
+import * as jsoncParser from 'jsonc-eslint-parser';
+import * as tomlParser from 'toml-eslint-parser';
+import * as yamlParser from 'yaml-eslint-parser';
 
 // TypeScript configuration
 export const ts = {
