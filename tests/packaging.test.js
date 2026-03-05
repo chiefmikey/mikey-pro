@@ -82,14 +82,14 @@ describe('Packaging & Publishing', () => {
     // eslint-plugin-prettier uses synckit to run prettier in a worker thread.
     // If prettier is not installed, the synckit worker hangs indefinitely with
     // no error output, causing ESLint to freeze for all consumers.
-    // prettier must be a direct dependency so npm installs it automatically.
+    // prettier must be declared so npm installs it for consumers.
     const pkgJsonPath = join(rootDir, 'configs', 'eslint-config', 'package.json');
     const pkgJson = JSON.parse(readFileSync(pkgJsonPath, 'utf8'));
-    const deps = pkgJson.dependencies ?? {};
+    const peers = pkgJson.peerDependencies ?? {};
 
     expect(
-      deps.prettier,
-      'prettier must be in @mikey-pro/eslint-config dependencies — ' +
+      peers.prettier,
+      'prettier must be in @mikey-pro/eslint-config peerDependencies — ' +
         'eslint-plugin-prettier requires it via synckit worker and hangs if missing',
     ).toBeDefined();
   });
@@ -330,11 +330,11 @@ describe('Packaging & Publishing', () => {
     const pkgJson = JSON.parse(
       readFileSync(getConfigPkgJsonPath('mikey-pro'), 'utf8'),
     );
-    const deps = pkgJson.dependencies ?? {};
+    const peers = pkgJson.peerDependencies ?? {};
 
     expect(
-      deps.prettier,
-      'prettier must be in mikey-pro dependencies — eslint-plugin-prettier requires it',
+      peers.prettier,
+      'prettier must be in mikey-pro peerDependencies — eslint-plugin-prettier requires it',
     ).toBeDefined();
   });
 
