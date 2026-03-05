@@ -8,16 +8,16 @@ AI agent code quality guardrails for JavaScript, TypeScript, React, Vue, Svelte,
 ## Install
 
 ```bash
-npm install --save-dev mikey-pro
+npm install --save-dev mikey-pro eslint prettier stylelint
 ```
 
 Framework projects — one install, base comes transitively:
 
 ```bash
-npm install --save-dev @mikey-pro/eslint-config-react    # React / Next.js
-npm install --save-dev @mikey-pro/eslint-config-vue      # Vue / Nuxt
-npm install --save-dev @mikey-pro/eslint-config-svelte   # Svelte / SvelteKit
-npm install --save-dev @mikey-pro/eslint-config-angular  # Angular
+npm install --save-dev @mikey-pro/eslint-config-react eslint prettier    # React / Next.js
+npm install --save-dev @mikey-pro/eslint-config-vue eslint prettier      # Vue / Nuxt
+npm install --save-dev @mikey-pro/eslint-config-svelte eslint prettier   # Svelte / SvelteKit
+npm install --save-dev @mikey-pro/eslint-config-angular eslint prettier  # Angular
 ```
 
 Python:
