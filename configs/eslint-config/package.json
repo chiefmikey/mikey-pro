@@ -12,7 +12,6 @@
     "@html-eslint/parser": "^0.57.1",
     "@typescript-eslint/eslint-plugin": "^8.56.1",
     "@typescript-eslint/parser": "^8.56.1",
-    "eslint": "^10.0.2",
     "eslint-plugin-boundaries": "^5.4.0",
     "eslint-plugin-compat": "^7.0.1",
     "eslint-plugin-cypress": "^6.1.0",
@@ -37,10 +36,13 @@
     "eslint-plugin-yml": "^3.3.0",
     "globals": "^17.4.0",
     "jsonc-eslint-parser": "^3.1.0",
-    "prettier": ">=3.0.0",
     "toml-eslint-parser": "^1.0.3",
     "typescript": "^5.9.3",
     "yaml-eslint-parser": "^2.0.0"
+  },
+  "peerDependencies": {
+    "eslint": "^10.0.0",
+    "prettier": ">=3.0.0"
   },
   "peerDependenciesMeta": {
     "typescript": {

@@ -295,10 +295,11 @@ describe('Consumer Simulation — @mikey-pro/eslint-config', { timeout: 30_000 }
 
     // 4. Install the packed .tgz + typescript + prettier
     //    - typescript: needed by @typescript-eslint parser
-    //    - prettier: needed by eslint-plugin-prettier (via synckit worker)
+    //    - eslint: peer dep of @mikey-pro/eslint-config
+    //    - prettier: peer dep, needed by eslint-plugin-prettier (via synckit worker)
     //      Without prettier installed, the prettier/prettier rule will hang
     //      indefinitely because the synckit worker fails silently.
-    npmInstall(consumerDir, `"${tgzPath}"`, 'typescript', 'prettier');
+    npmInstall(consumerDir, `"${tgzPath}"`, 'eslint', 'prettier', 'typescript');
   }, HOOK_TIMEOUT);
 
   afterAll(() => {
@@ -444,9 +445,8 @@ describe(
         ['var x = 1;', 'export default x;', ''].join('\n'),
       );
 
-      // mikey-pro bundles eslint, prettier, and typescript as direct dependencies
-      // so no additional installs are needed beyond the tgz itself
-      npmInstall(consumerDir, `"${tgzPath}"`);
+      // eslint, prettier, stylelint are peer deps of mikey-pro
+      npmInstall(consumerDir, `"${tgzPath}"`, 'eslint', 'prettier', 'stylelint');
     }, HOOK_TIMEOUT);
 
     afterAll(() => {
@@ -596,12 +596,13 @@ describe(
         ].join('\n'),
       );
 
-      // 4. Install both .tgz files so npm resolves the dep chain
-      //    mikey-pro bundles prettier + typescript, so no separate installs needed
+      // 4. Install both .tgz files + peer deps
       npmInstall(
         consumerDir,
         `"${mikeyProTgzPath}"`,
         `"${reactTgzPath}"`,
+        'eslint',
+        'prettier',
       );
     }, HOOK_TIMEOUT);
 
