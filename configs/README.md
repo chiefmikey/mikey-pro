@@ -7,16 +7,16 @@ AI agent code quality guardrails — ESLint 10, Prettier, and Stylelint in one i
 ## Install
 
 ```bash
-npm install --save-dev mikey-pro
+npm install --save-dev mikey-pro eslint prettier stylelint
 ```
 
 For framework projects, install the framework variant instead (mikey-pro comes transitively):
 
 ```bash
-npm install --save-dev @mikey-pro/eslint-config-react    # React / Next.js
-npm install --save-dev @mikey-pro/eslint-config-vue      # Vue / Nuxt
-npm install --save-dev @mikey-pro/eslint-config-svelte   # Svelte / SvelteKit
-npm install --save-dev @mikey-pro/eslint-config-angular  # Angular
+npm install --save-dev @mikey-pro/eslint-config-react eslint prettier    # React / Next.js
+npm install --save-dev @mikey-pro/eslint-config-vue eslint prettier      # Vue / Nuxt
+npm install --save-dev @mikey-pro/eslint-config-svelte eslint prettier   # Svelte / SvelteKit
+npm install --save-dev @mikey-pro/eslint-config-angular eslint prettier  # Angular
 ```
 
 ## Setup
