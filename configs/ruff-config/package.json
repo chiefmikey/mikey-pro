@@ -1,6 +1,6 @@
 {
   "name": "@mikey-pro/ruff-config",
-  "version": "10.1.0",
+  "version": "10.2.0",
   "description": "Mikey Pro Ruff configuration - AI agent code quality guardrails for Python",
   "files": [
     "ruff.toml",

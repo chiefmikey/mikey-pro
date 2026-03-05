@@ -1,6 +1,6 @@
 {
   "name": "mikey-pro",
-  "version": "10.1.0",
+  "version": "10.2.0",
   "description": "AI agent code quality guardrails — ESLint, Prettier, and Stylelint unified config",
   "type": "module",
   "main": "./index.js",
