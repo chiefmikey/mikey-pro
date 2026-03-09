@@ -1,6 +1,6 @@
 {
   "name": "@mikey-pro/eslint-config",
-  "version": "10.2.0",
+  "version": "10.3.0",
   "description": "Mikey Pro ESLint configuration - Ultimate coding style guide for excellence",
   "main": "index.js",
   "types": "index.d.ts",
@@ -12,6 +12,7 @@
     "@html-eslint/parser": "^0.57.1",
     "@typescript-eslint/eslint-plugin": "^8.56.1",
     "@typescript-eslint/parser": "^8.56.1",
+    "eslint-import-resolver-typescript": "^4.4.3",
     "eslint-plugin-boundaries": "^5.4.0",
     "eslint-plugin-compat": "^7.0.1",
     "eslint-plugin-cypress": "^6.1.0",
