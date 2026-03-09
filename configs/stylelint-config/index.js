@@ -28,7 +28,6 @@ const config = {
     },
     'declaration-property-value-disallowed-list': {
       '/^grid/': ['auto'],
-      position: ['fixed'],
     },
     'declaration-strict-value': [
       ['/color/', 'z-index'],

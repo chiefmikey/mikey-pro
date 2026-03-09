@@ -1,7 +1,7 @@
 # Mikey Pro Ruff Configuration
 # AI Agent Code Quality Guardrails for Python
 
-target-version = "py311"
+target-version = "py312"
 line-length = 88
 
 [lint]
@@ -39,6 +39,8 @@ ignore = [
   "E501",    # line too long (handled by formatter)
   "PLR0913", # too many arguments (we set our own limit)
   "PLR2004", # magic value comparison (too noisy)
+  "T201",    # print — allowed; agents use logging module but print is valid for scripts/CLIs
+  "S101",    # assert — allowed in non-test code for invariant checks; pytest relies on it
 ]
 
 [lint.mccabe]
@@ -51,10 +53,10 @@ combine-as-imports = true
 force-sort-within-sections = true
 
 [lint.pylint]
-max-args = 3
+max-args = 5
 max-branches = 12
 max-returns = 6
-max-statements = 50
+max-statements = 75
 
 [lint.flake8-bandit]
 check-typed-exception = true
