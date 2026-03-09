@@ -80,7 +80,28 @@ npm run ci:local          # Run CI checks locally
 - **Publishing:** `mikey-pro` (unified base) published first, then framework configs and other scoped packages; ruff-config also published to PyPI
 - **Framework config imports:** framework configs import base components from `mikey-pro/eslint/base-config.js` and `mikey-pro/eslint/overrides.js` (NOT from `@mikey-pro/eslint-config/*`)
 - **Single source of truth:** all ESLint rules live in `base-config.js` (no separate rules.js)
-- **noInlineConfig:** `true` — prevents AI agents from using `// eslint-disable` escape hatches
+- **noInlineConfig:** `false` — allows targeted `// eslint-disable` for genuine edge cases
+- **Version:** all packages currently at 10.3.x — bump together via `scripts/bump-version.js`
+
+## Hardcoded Versions to Watch
+
+These values are hardcoded and must be bumped when new major versions release:
+
+- **React version** in `eslint-config-react/index.js` `settings.react.version: '19'` — update when React 20 releases. Cannot use `'detect'` because `eslint-plugin-react` 7.x uses `context.getFilename()` which was removed in ESLint 10; detection crashes multiple rules.
+- **Python target** in `ruff-config/ruff.toml` `target-version = "py312"` — update when targeting newer Python versions
+- **Node.js version** in `base-config.js` `n/no-unsupported-features/es-syntax` `version: '>=20.0.0'` — update when minimum Node version changes
+
+## Dangerous Autofix Patterns (Resolved)
+
+These rules were disabled in 10.3.0 because their autofix breaks code. If re-enabling, always test thoroughly:
+
+- **`@typescript-eslint/promise-function-async`** — adds `async` to React `render()` methods (silent empty components) and `.map()` callbacks
+- **`unicorn/prefer-query-selector`** — changes `getElementById` return type from `HTMLElement` to `Element`, breaking `.focus()`, `.dataset`
+- **`unicorn/no-array-for-each`** — autofix on `Map.forEach()` creates broken destructuring
+- **`unicorn/prefer-at`** — `.at()` doesn't exist on `NodeListOf`, `SpeechRecognitionResultList`
+- **`unicorn/prefer-spread`** — spread doesn't work on all iterable/array-like types
+- **`import-x/consistent-type-specifier-style`** — autofix conflicts with `@typescript-eslint/consistent-type-imports`, creates invalid `import X, type { Y }` syntax
+- **`unicorn/no-null`** — null is fundamental to React refs, state, DOM APIs, JSON
 
 ## Common Mistakes to Avoid
 
@@ -88,6 +109,10 @@ npm run ci:local          # Run CI checks locally
 - **Framework configs depend on `mikey-pro`** not `@mikey-pro/eslint-config` — imports use `mikey-pro/eslint/*` subpath exports
 - **Sub-packages have their own node_modules** — each config in `configs/` manages its own dependencies separately. `npm run npm:install` handles all of them
 - **The project lints itself** — `eslint.config.js` at root imports from `./configs/eslint-config/index.js` directly (not the published package), so changes to the config are immediately reflected when linting
+- **`eslint-plugin-react` doesn't fully support ESLint 10** — version detection (`react.version: 'detect'`) crashes rules. Hardcode the React version instead.
+- **`eslint-import-resolver-typescript` is required** — without it, the TypeScript resolver config in `overrides.js` is dead code and all import-x rules produce false positives
+- **`unicorn.configs.all.rules` spread is a footgun** — every new unicorn plugin release can introduce rules that break autofix. After upgrading unicorn, verify the disabled rules list in `base-config.js` still covers all dangerous ones.
+- **Publishing order matters** — `mikey-pro` (unified base) must publish first since framework configs depend on it transitively. Use `npm run publish:all` or publish in order: mikey-pro, eslint-config, then framework configs.
 
 ## Testing
 
