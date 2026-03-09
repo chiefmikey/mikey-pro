@@ -170,6 +170,7 @@ const reactConfig = {
         shorthandFirst: true,
       },
     ],
+    'react/display-name': 'off', // Crashes on ESLint 10 (getFilename removed)
     'react/no-array-index-key': 'warn',
     'react/no-danger': 'warn',
     'react/no-deprecated': 'error',
