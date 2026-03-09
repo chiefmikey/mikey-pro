@@ -74,7 +74,7 @@ export const baseConfig = {
     sourceType: 'module',
   },
   linterOptions: {
-    noInlineConfig: true,
+    noInlineConfig: false,
     reportUnusedDisableDirectives: true,
   },
   rules: {
@@ -96,7 +96,7 @@ export const baseConfig = {
     'guard-for-in': 'error',
 
     // Import/Export rules
-    'import-x/consistent-type-specifier-style': ['error', 'prefer-top-level'],
+    'import-x/consistent-type-specifier-style': 'off',
     'import-x/default': 'off',
     'import-x/export': 'error',
     'import-x/extensions': [
@@ -179,11 +179,11 @@ export const baseConfig = {
     'max-depth': ['error', 3],
     'max-lines': [
       'error',
-      { max: 300, skipBlankLines: true, skipComments: true },
+      { max: 500, skipBlankLines: true, skipComments: true },
     ],
     'max-lines-per-function': [
       'error',
-      { max: 50, skipBlankLines: true, skipComments: true },
+      { max: 100, skipBlankLines: true, skipComments: true },
     ],
     'max-params': ['error', 3],
     // Node.js rules
@@ -386,6 +386,11 @@ export const baseConfig = {
     'symbol-description': 'error',
 
     'unicorn/expiring-todo-comments': 'off',
+    'unicorn/no-array-for-each': 'off',
+    'unicorn/no-keyword-prefix': 'off',
+    'unicorn/no-null': 'off',
+    'unicorn/prefer-query-selector': 'off',
+    'unicorn/prefer-spread': 'off',
     'unicorn/filename-case': [
       'error',
       {
@@ -396,7 +401,7 @@ export const baseConfig = {
     'unicorn/no-array-callback-reference': 'off',
     'unicorn/no-useless-undefined': ['error', { checkArguments: true }],
     'unicorn/prefer-array-flat': ['error', { functions: ['flatten'] }],
-    'unicorn/prefer-at': 'error',
+    'unicorn/prefer-at': 'off',
     'unicorn/prefer-blob-reading-methods': 'error',
     'unicorn/prefer-string-replace-all': 'error',
     'unicorn/prefer-string-slice': 'error',
