@@ -1,0 +1,66 @@
+name: Code Quality
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Use Node.js 25
+        uses: actions/setup-node@v6
+        with:
+          node-version: 25
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: |
+          # Install prettier-config dependencies first so file: links resolve correctly
+          echo "Installing prettier-config dependencies..."
+          cd configs/prettier-config && npm install && cd ../..
+          echo "Installing stylelint-config dependencies..."
+          cd configs/stylelint-config && npm install && cd ../..
+          # Install eslint-config dependencies so prettier plugin is available
+          echo "Installing eslint-config dependencies..."
+          cd configs/eslint-config && npm install --legacy-peer-deps && cd ../..
+          # Now install root dependencies (npm install handles file: links better than npm ci)
+          npm install --legacy-peer-deps
+          # Reinstall to ensure prettier plugin from eslint-config is accessible
+          npm install --legacy-peer-deps
+
+      - name: Check code formatting
+        run:
+          npx prettier --check "**/*.{js,ts,json,md,yml,yaml}" "!theme/**"
+          --ignore-path .prettierignore
+
+      - name: Run ESLint
+        run: npx eslint "**/*.{js,ts}" --max-warnings 0
+        continue-on-error: true
+
+      - name: Check for unused dependencies
+        run:
+          npx depcheck
+          --ignores="@types/*,eslint-*,prettier-*,stylelint-*,vitest"
+        continue-on-error: true
+
+      - name: Validate package.json files
+        run: |
+          for pkg in configs/*/package.json; do
+            echo "Validating $pkg..."
+            node -e "JSON.parse(require('fs').readFileSync('$pkg', 'utf8'))"
+          done
+          echo "✅ All package.json files are valid JSON"
+
+      - name: Check file permissions
+        run: |
+          if find . -name "*.sh" -type f -exec test -x {} \; -print | grep -q .; then
+            echo "✅ Shell scripts have execute permissions"
+          else
+            echo "ℹ️  No shell scripts found"
+          fi

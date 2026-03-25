@@ -1,0 +1,71 @@
+# Mikey Pro Ruff Configuration
+# AI Agent Code Quality Guardrails for Python
+
+target-version = "py312"
+line-length = 88
+
+[lint]
+select = [
+  "E",    # pycodestyle errors
+  "W",    # pycodestyle warnings
+  "F",    # pyflakes
+  "I",    # isort
+  "N",    # pep8-naming
+  "B",    # flake8-bugbear
+  "C4",   # flake8-comprehensions
+  "SIM",  # flake8-simplify
+  "S",    # bandit (security)
+  "C90",  # mccabe (complexity)
+  "RUF",  # ruff-specific rules
+  "PL",   # pylint
+  "RET",  # flake8-return
+  "PT",   # flake8-pytest-style
+  "UP",   # pyupgrade
+  "ARG",  # flake8-unused-arguments
+  "PTH",  # flake8-use-pathlib
+  "ERA",  # eradicate (commented-out code)
+  "TID",  # flake8-tidy-imports
+  "ICN",  # flake8-import-conventions
+  "PIE",  # flake8-pie
+  "T20",  # flake8-print
+  "Q",    # flake8-quotes
+  "RSE",  # flake8-raise
+  "FLY",  # flynt
+  "PERF", # perflint
+  "FURB", # refurb
+]
+
+ignore = [
+  "E501",    # line too long (handled by formatter)
+  "PLR0913", # too many arguments (we set our own limit)
+  "PLR2004", # magic value comparison (too noisy)
+  "T201",    # print — allowed; agents use logging module but print is valid for scripts/CLIs
+  "S101",    # assert — allowed in non-test code for invariant checks; pytest relies on it
+]
+
+[lint.mccabe]
+max-complexity = 12
+
+[lint.isort]
+force-single-line = false
+known-first-party = []
+combine-as-imports = true
+force-sort-within-sections = true
+
+[lint.pylint]
+max-args = 5
+max-branches = 12
+max-returns = 6
+max-statements = 75
+
+[lint.flake8-bandit]
+check-typed-exception = true
+
+[lint.flake8-pytest-style]
+fixture-parentheses = false
+
+[format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "lf"

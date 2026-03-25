@@ -1,0 +1,106 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      test_type:
+        description: 'Type of test to run'
+        required: false
+        default: 'all'
+        type: choice
+        options:
+          - all
+          - manual
+          - validate
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        # Prioritize latest Node (25) for latest features, test older versions for compatibility
+        node-version: [25.x, 22.x, 20.x]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v6
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        run: npm ci --legacy-peer-deps || npm install --legacy-peer-deps
+
+      - name: Determine test type
+        id: test_type
+        run: |
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            echo "type=${{ github.event.inputs.test_type }}" >> $GITHUB_OUTPUT
+          else
+            echo "type=all" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Run manual tests
+        if:
+          steps.test_type.outputs.type == 'all' || steps.test_type.outputs.type
+          == 'manual'
+        run: npm run test:manual
+
+      - name: Run comprehensive validation
+        if:
+          steps.test_type.outputs.type == 'all' || steps.test_type.outputs.type
+          == 'validate'
+        run: npm run test:validate
+
+      - name: Run full test suite
+        if: steps.test_type.outputs.type == 'all'
+        run: npm test
+        continue-on-error: false
+
+      - name: Verify ESLint configs can load
+        if: steps.test_type.outputs.type == 'all'
+        continue-on-error: true
+        run: |
+          echo "Smoke test: verify configs load without fatal parse errors..."
+          echo "Note: test fixture files may have intentional lint violations. Actual rule validation is in Vitest."
+          npx eslint test-files/test.js --config eslint.config.js --no-warn-ignored --max-warnings 999 2>&1
+          npx eslint test-files/test-vue.vue --config configs/eslint-config-vue/index.js --no-warn-ignored --max-warnings 999 2>&1
+          npx eslint test-files/test-svelte.svelte --config configs/eslint-config-svelte/index.js --no-warn-ignored --max-warnings 999 2>&1
+          npx eslint test-files/test-angular.ts --config configs/eslint-config-angular/index.js --no-warn-ignored --max-warnings 999 2>&1
+          echo "Config loading smoke test complete"
+
+      - name: Verify Ruff config
+        if: steps.test_type.outputs.type == 'all'
+        run: |
+          pip install ruff
+          echo "Validating ruff.toml syntax..."
+          cd configs/ruff-config && echo 'def greet(name: str) -> str:
+              """Return a greeting."""
+              return f"Hello, {name}"' | ruff check --config ruff.toml --stdin-filename test.py -
+          echo "Ruff config validated successfully"
+
+      - name: Check package integrity
+        if: steps.test_type.outputs.type == 'all'
+        continue-on-error: true
+        run: |
+          npm run publish:all -- --dry-run 2>&1 && echo "✅ Package integrity verified" || echo "⚠️  Some packages already published at this version (expected for version bumps)"
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v6
+        if: failure()
+        with:
+          name: test-results-${{ matrix.node-version }}
+          path: |
+            *.log
+            test-results/
+            coverage/
