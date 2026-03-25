@@ -1,0 +1,39 @@
+{
+  "name": "mikey-pro-theme",
+  "version": "0.0.1",
+  "description": "Mikey Pro theme",
+  "scripts": {
+    "fix": "eslint --fix '**/*'",
+    "update": "ncu -u && npm i"
+  },
+  "devDependencies": {
+    "@mikey-pro/eslint-config": "^10.0.0",
+    "@mikey-pro/prettier-config": "^9.0.7",
+    "@mikey-pro/stylelint-config": "^9.0.7"
+  },
+  "files": [
+    "README.md",
+    "LICENSE"
+  ],
+  "homepage": "https://github.com/chiefmikey/mikey-pro#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chiefmikey/mikey-pro.git"
+  },
+  "bugs": {
+    "url": "https://github.com/chiefmikey/mikey-pro/issues"
+  },
+  "license": "MIT",
+  "keywords": [
+    "mikey-pro",
+    "mikey",
+    "pro",
+    "theme"
+  ],
+  "author": "Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)",
+  "funding": "https://github.com/sponsors/chiefmikey",
+  "prettier": "@mikey-pro/prettier-config",
+  "stylelint": {
+    "extends": "@mikey-pro/stylelint-config"
+  }
+}

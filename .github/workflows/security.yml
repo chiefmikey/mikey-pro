@@ -1,0 +1,49 @@
+name: Security
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    # Run weekly on Mondays at 8 AM UTC
+    - cron: '0 8 * * 1'
+
+jobs:
+  security:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Use Node.js 25
+        uses: actions/setup-node@v6
+        with:
+          node-version: 25
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+
+      - name: Run security audit
+        run: npm audit --audit-level moderate
+        continue-on-error: true
+
+      - name: Run npm audit fix (dry-run)
+        run: npm audit fix --dry-run
+        continue-on-error: true
+
+      - name: Check for known vulnerabilities
+        run: |
+          if npm audit --audit-level high; then
+            echo "✅ No high or critical security vulnerabilities found"
+          else
+            echo "⚠️  Security vulnerabilities detected - review npm audit output"
+            npm audit
+          fi
+        continue-on-error: true
+
+      - name: Check dependencies for updates
+        run: |
+          npx npm-check-updates --target minor
+          echo "📋 Run 'npm run ncu' to update dependencies"

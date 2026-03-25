@@ -1,26 +1,77 @@
 {
-  "name": "mikey-pro-theme",
-  "version": "1.0.1",
-  "description": "Mikey Pro Theme",
-  "main": " ",
-  "license": "MIT",
+  "name": "mikey-pro",
+  "version": "10.3.0",
+  "description": "Mikey Pro",
+  "type": "module",
+  "scripts": {
+    "fix": "eslint --fix '**/*'",
+    "ncu": "find . -name 'package.json' ! -path '*node_modules*' -exec sh -c 'cd $(dirname {}) && pwd && ncu -u' \\;",
+    "npm:install": "find . -name 'package.json' ! -path '*node_modules*' -exec sh -c 'cd $(dirname {}) && pwd && npm install' \\;",
+    "publish:all": "npm run publish:mikey-pro && npm run publish:eslint && npm run publish:angular && npm run publish:react && npm run publish:svelte && npm run publish:vue && npm run publish:prettier && npm run publish:stylelint && npm run publish:ruff",
+    "publish:mikey-pro": "cd ./configs && npm publish --access public",
+    "publish:ruff": "cd ./configs/ruff-config && npm publish --access public",
+    "publish:eslint": "cd ./configs/eslint-config && npm publish --access public",
+    "publish:react": "cd ./configs/eslint-config-react && npm publish --access public",
+    "publish:svelte": "cd ./configs/eslint-config-svelte && npm publish --access public",
+    "publish:vue": "cd ./configs/eslint-config-vue && npm publish --access public",
+    "publish:angular": "cd ./configs/eslint-config-angular && npm publish --access public",
+    "publish:prettier": "cd ./configs/prettier-config && npm publish --access public",
+    "publish:stylelint": "cd ./configs/stylelint-config && npm publish --access public",
+    "publish:theme": "cd ./theme && npm publish --access public",
+    "update": "ncu -u && npm i",
+    "eslint": "npx eslint --config ./eslint.config.js .",
+    "test": "npx vitest run",
+    "test:watch": "npx vitest",
+    "test:coverage": "npx vitest run --coverage",
+    "test:manual": "node tests/run-manual-tests.js",
+    "test:validate": "node tests/validate-all.js",
+    "ci:local": "bash scripts/ci-local.sh",
+    "release:bump": "node scripts/bump-version.js",
+    "release:notes": "node scripts/generate-release-notes.js"
+  },
+  "devDependencies": {
+    "mikey-pro": "file:./configs",
+    "@mikey-pro/eslint-config": "file:./configs/eslint-config",
+    "@mikey-pro/eslint-config-react": "file:./configs/eslint-config-react",
+    "@mikey-pro/eslint-config-vue": "file:./configs/eslint-config-vue",
+    "@mikey-pro/eslint-config-svelte": "file:./configs/eslint-config-svelte",
+    "@mikey-pro/eslint-config-angular": "file:./configs/eslint-config-angular",
+    "@mikey-pro/prettier-config": "file:./configs/prettier-config",
+    "@mikey-pro/stylelint-config": "file:./configs/stylelint-config",
+    "eslint": "^10.0.0",
+    "prettier": "^3.6.2",
+    "stylelint": "^16.24.0",
+    "svelte": "^5.43.14",
+    "vitest": "^4.0.13"
+  },
+  "files": [
+    "README.md",
+    "LICENSE"
+  ],
+  "homepage": "https://github.com/chiefmikey/mikey-pro#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mikey-pro/theme.git"
+    "url": "git+https://github.com/chiefmikey/mikey-pro.git"
   },
-  "homepage": "https://github.com/mikey-pro/theme#readme",
-  "author": "Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)",
   "bugs": {
-    "url": "https://github.com/mikey-pro/theme/issues"
+    "url": "https://github.com/chiefmikey/mikey-pro/issues"
   },
+  "license": "MIT",
   "keywords": [
-    "mikey-pro-theme",
     "mikey-pro",
     "mikey",
     "pro",
-    "theme"
+    "style guide",
+    "style-guide",
+    "lint",
+    "linter",
+    "format",
+    "formatter"
   ],
-  "contributors": [
-    "Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)"
-  ]
+  "author": "Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)",
+  "funding": "https://github.com/sponsors/chiefmikey",
+  "prettier": "@mikey-pro/prettier-config",
+  "stylelint": {
+    "extends": "@mikey-pro/stylelint-config"
+  }
 }
