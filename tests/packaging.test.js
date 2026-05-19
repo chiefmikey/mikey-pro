@@ -55,7 +55,10 @@ describe('Packaging & Publishing', () => {
         /import\.meta\.dirname[^;]*\.\.\//u.test(content) ||
         /join\(import\.meta\.dirname[^)]*,\s*['"][^'"]*\.\.\//u.test(content);
 
-      expect(hasDirnameThenTraversal, `${filePath} uses import.meta.dirname with ../ traversal`).toBe(false);
+      expect(
+        hasDirnameThenTraversal,
+        `${filePath} uses import.meta.dirname with ../ traversal`,
+      ).toBe(false);
     }
   });
 
@@ -83,7 +86,12 @@ describe('Packaging & Publishing', () => {
     // If prettier is not installed, the synckit worker hangs indefinitely with
     // no error output, causing ESLint to freeze for all consumers.
     // prettier must be declared so npm installs it for consumers.
-    const pkgJsonPath = join(rootDir, 'configs', 'eslint-config', 'package.json');
+    const pkgJsonPath = join(
+      rootDir,
+      'configs',
+      'eslint-config',
+      'package.json',
+    );
     const pkgJson = JSON.parse(readFileSync(pkgJsonPath, 'utf8'));
     const peers = pkgJson.peerDependencies ?? {};
 
@@ -141,11 +149,18 @@ describe('Packaging & Publishing', () => {
 
   it('should only export recognized Prettier options', async () => {
     const { getSupportInfo } = await import('prettier');
-    const prettierConfigPath = join(rootDir, 'configs', 'prettier-config', 'index.js');
+    const prettierConfigPath = join(
+      rootDir,
+      'configs',
+      'prettier-config',
+      'index.js',
+    );
     const { default: prettierConfig } = await import(prettierConfigPath);
 
     const supportInfo = await getSupportInfo();
-    const validOptionNames = new Set(supportInfo.options.map((opt) => opt.name));
+    const validOptionNames = new Set(
+      supportInfo.options.map((opt) => opt.name),
+    );
 
     // These top-level keys are meta-keys, not Prettier formatting options
     const metaKeys = new Set(['overrides', 'plugins']);
@@ -253,8 +268,9 @@ describe('Packaging & Publishing', () => {
     const eslintPkgJsonPath = existsSync(eslintPkgJsonPathLocal)
       ? eslintPkgJsonPathLocal
       : eslintPkgJsonPathRoot;
-    const eslintVersion = JSON.parse(readFileSync(eslintPkgJsonPath, 'utf8'))
-      .version;
+    const eslintVersion = JSON.parse(
+      readFileSync(eslintPkgJsonPath, 'utf8'),
+    ).version;
 
     const pluginNodeModulesDir = join(
       rootDir,
@@ -302,16 +318,12 @@ describe('Packaging & Publishing', () => {
     }
   });
 
-  it('should enforce noInlineConfig (inline disable comments should be reported)', async () => {
-    // When noInlineConfig is true, eslint-disable comments are ignored by ESLint,
-    // so the rules they attempt to suppress still fire.
+  it('should allow inline disable comments (noInlineConfig is false)', async () => {
+    // noInlineConfig is intentionally set to false to allow targeted eslint-disable
+    // comments for genuine edge cases. This test verifies that inline disable
+    // comments ARE respected (suppress rules as intended).
     const eslint = new ESLint({
-      overrideConfigFile: join(
-        rootDir,
-        'configs',
-        'eslint-config',
-        'index.js',
-      ),
+      overrideConfigFile: join(rootDir, 'configs', 'eslint-config', 'index.js'),
     });
 
     const results = await eslint.lintText(
@@ -319,11 +331,11 @@ describe('Packaging & Publishing', () => {
       { filePath: 'test-noinline.js' },
     );
 
-    // With noInlineConfig, the disable comment is ignored, so no-var still fires
+    // With noInlineConfig: false, the disable comment works, so no-var should NOT fire
     const noVarMessages = results[0].messages.filter(
       (m) => m.ruleId === 'no-var',
     );
-    expect(noVarMessages.length).toBeGreaterThan(0);
+    expect(noVarMessages.length).toBe(0);
   });
 
   it('should have prettier as a direct dependency of mikey-pro', () => {
