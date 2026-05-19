@@ -123,7 +123,8 @@ function runNodeScript(consumerDir, script, { timeout = 30_000 } = {}) {
   } catch (error) {
     const stderr = error.stderr?.toString() ?? '';
     const stdout = error.stdout?.toString() ?? '';
-    const code = error.code === 'ETIMEDOUT' ? 'TIMEOUT' : `exit ${error.status}`;
+    const code =
+      error.code === 'ETIMEDOUT' ? 'TIMEOUT' : `exit ${error.status}`;
     throw new Error(
       `Node script failed (${code}):\n--- script ---\n${script}\n--- stderr ---\n${stderr}\n--- stdout ---\n${stdout}`,
     );
@@ -224,172 +225,182 @@ function runESLintInConsumer(consumerDir, filePath, { timeout = 60_000 } = {}) {
 // Base config consumer suite
 // ---------------------------------------------------------------------------
 
-describe('Consumer Simulation — @mikey-pro/eslint-config', { timeout: 30_000 }, () => {
-  let consumerDir;
-  let tgzPath;
+describe(
+  'Consumer Simulation — @mikey-pro/eslint-config',
+  { timeout: 30_000 },
+  () => {
+    let consumerDir;
+    let tgzPath;
 
-  beforeAll(async () => {
-    // 1. Pack the base config
-    tgzPath = packPackage(baseConfigDir);
+    beforeAll(async () => {
+      // 1. Pack the base config
+      tgzPath = packPackage(baseConfigDir);
 
-    // 2. Create isolated consumer project
-    consumerDir = createConsumerDir('base');
+      // 2. Create isolated consumer project
+      consumerDir = createConsumerDir('base');
 
-    // 3. Write consumer project files
-    writeFileSync(
-      join(consumerDir, 'package.json'),
-      JSON.stringify(
-        { name: 'test-consumer', private: true, type: 'module' },
-        null,
-        2,
-      ),
-    );
+      // 3. Write consumer project files
+      writeFileSync(
+        join(consumerDir, 'package.json'),
+        JSON.stringify(
+          { name: 'test-consumer', private: true, type: 'module' },
+          null,
+          2,
+        ),
+      );
 
-    // eslint.config.js — exactly how a real consumer would write it
-    writeFileSync(
-      join(consumerDir, 'eslint.config.js'),
-      `export { default } from '@mikey-pro/eslint-config';\n`,
-    );
+      // eslint.config.js — exactly how a real consumer would write it
+      writeFileSync(
+        join(consumerDir, 'eslint.config.js'),
+        `export { default } from '@mikey-pro/eslint-config';\n`,
+      );
 
-    // Minimal tsconfig so TypeScript-aware rules can find project config
-    writeFileSync(
-      join(consumerDir, 'tsconfig.json'),
-      JSON.stringify(
-        {
-          compilerOptions: {
-            allowSyntheticDefaultImports: true,
-            esModuleInterop: true,
-            module: 'ESNext',
-            moduleResolution: 'node',
-            skipLibCheck: true,
-            strict: true,
-            target: 'ES2022',
+      // Minimal tsconfig so TypeScript-aware rules can find project config
+      writeFileSync(
+        join(consumerDir, 'tsconfig.json'),
+        JSON.stringify(
+          {
+            compilerOptions: {
+              allowSyntheticDefaultImports: true,
+              esModuleInterop: true,
+              module: 'ESNext',
+              moduleResolution: 'node',
+              skipLibCheck: true,
+              strict: true,
+              target: 'ES2022',
+            },
+            include: ['*.ts'],
           },
-          include: ['*.ts'],
-        },
-        null,
-        2,
-      ),
-    );
+          null,
+          2,
+        ),
+      );
 
-    // JS test file — uses `var` so the no-var rule should fire
-    writeFileSync(
-      join(consumerDir, 'test.js'),
-      ['var x = 1;', 'export default x;', ''].join('\n'),
-    );
+      // JS test file — uses `var` so the no-var rule should fire
+      writeFileSync(
+        join(consumerDir, 'test.js'),
+        ['var x = 1;', 'export default x;', ''].join('\n'),
+      );
 
-    // TS test file — clean enough to parse
-    writeFileSync(
-      join(consumerDir, 'test.ts'),
-      [
-        'interface Config {',
-        '  value: number;',
-        '}',
-        '',
-        'const config: Config = { value: 42 };',
-        '',
-        'export default config;',
-        '',
-      ].join('\n'),
-    );
+      // TS test file — clean enough to parse
+      writeFileSync(
+        join(consumerDir, 'test.ts'),
+        [
+          'interface Config {',
+          '  value: number;',
+          '}',
+          '',
+          'const config: Config = { value: 42 };',
+          '',
+          'export default config;',
+          '',
+        ].join('\n'),
+      );
 
-    // 4. Install the packed .tgz + typescript + prettier
-    //    - typescript: needed by @typescript-eslint parser
-    //    - eslint: peer dep of @mikey-pro/eslint-config
-    //    - prettier: peer dep, needed by eslint-plugin-prettier (via synckit worker)
-    //      Without prettier installed, the prettier/prettier rule will hang
-    //      indefinitely because the synckit worker fails silently.
-    npmInstall(consumerDir, `"${tgzPath}"`, 'eslint', 'prettier', 'typescript');
-  }, HOOK_TIMEOUT);
+      // 4. Install the packed .tgz + typescript + prettier
+      //    - typescript: needed by @typescript-eslint parser
+      //    - eslint: peer dep of @mikey-pro/eslint-config
+      //    - prettier: peer dep, needed by eslint-plugin-prettier (via synckit worker)
+      //      Without prettier installed, the prettier/prettier rule will hang
+      //      indefinitely because the synckit worker fails silently.
+      npmInstall(
+        consumerDir,
+        `"${tgzPath}"`,
+        'eslint',
+        'prettier',
+        'typescript',
+      );
+    }, HOOK_TIMEOUT);
 
-  afterAll(() => {
-    try {
-      if (consumerDir) {
-        rmSync(consumerDir, { force: true, recursive: true });
-      }
-    } finally {
-      if (tgzPath) {
-        try {
-          unlinkSync(tgzPath);
-        } catch {
-          // Best-effort
+    afterAll(() => {
+      try {
+        if (consumerDir) {
+          rmSync(consumerDir, { force: true, recursive: true });
+        }
+      } finally {
+        if (tgzPath) {
+          try {
+            unlinkSync(tgzPath);
+          } catch {
+            // Best-effort
+          }
         }
       }
-    }
-  });
+    });
 
-  it('installs without errors and the package.json is present', () => {
-    const req = createRequire(import.meta.url);
-    const installedPkgJson = join(
-      consumerDir,
-      'node_modules',
-      '@mikey-pro',
-      'eslint-config',
-      'package.json',
-    );
-    const pkg = req(installedPkgJson);
+    it('installs without errors and the package.json is present', () => {
+      const req = createRequire(import.meta.url);
+      const installedPkgJson = join(
+        consumerDir,
+        'node_modules',
+        '@mikey-pro',
+        'eslint-config',
+        'package.json',
+      );
+      const pkg = req(installedPkgJson);
 
-    expect(pkg.name).toBe('@mikey-pro/eslint-config');
-    expect(pkg.version).toBeDefined();
-  });
+      expect(pkg.name).toBe('@mikey-pro/eslint-config');
+      expect(pkg.version).toBeDefined();
+    });
 
-  it('config module loads without import errors (no file: refs, no bad relative imports)', () => {
-    // Run a Node.js script in the consumer dir that imports the installed config.
-    // If there are file: deps, broken relative imports, or tsconfig path issues,
-    // this will throw and the test fails with a clear error.
-    const result = runNodeScript(
-      consumerDir,
-      `
+    it('config module loads without import errors (no file: refs, no bad relative imports)', () => {
+      // Run a Node.js script in the consumer dir that imports the installed config.
+      // If there are file: deps, broken relative imports, or tsconfig path issues,
+      // this will throw and the test fails with a clear error.
+      const result = runNodeScript(
+        consumerDir,
+        `
 import config from '@mikey-pro/eslint-config';
 if (!Array.isArray(config)) throw new Error('Expected default export to be an array, got: ' + typeof config);
 if (config.length === 0) throw new Error('Config array is empty');
 console.log(JSON.stringify({ ok: true, entries: config.length }));
 `,
-      { timeout: 30_000 },
-    );
+        { timeout: 30_000 },
+      );
 
-    const parsed = JSON.parse(result);
-    expect(parsed.ok).toBe(true);
-    expect(parsed.entries).toBeGreaterThan(0);
-  });
-
-  it('lints a JS file with no fatal errors and fires no-var rule', () => {
-    const results = runESLintInConsumer(consumerDir, 'test.js', {
-      timeout: 60_000,
+      const parsed = JSON.parse(result);
+      expect(parsed.ok).toBe(true);
+      expect(parsed.entries).toBeGreaterThan(0);
     });
 
-    expect(results).toHaveLength(1);
+    it('lints a JS file with no fatal errors and fires no-var rule', () => {
+      const results = runESLintInConsumer(consumerDir, 'test.js', {
+        timeout: 60_000,
+      });
 
-    const fatalErrors = results[0].messages.filter((m) => m.fatal);
-    expect(
-      fatalErrors,
-      `Fatal errors: ${JSON.stringify(fatalErrors)}`,
-    ).toHaveLength(0);
+      expect(results).toHaveLength(1);
 
-    // Verify the no-var rule actually fired — proves rules are loaded
-    const noVarMessages = results[0].messages.filter(
-      (m) => m.ruleId === 'no-var',
-    );
-    expect(
-      noVarMessages,
-      'Expected no-var to report on `var x = 1` — no messages means rules are not loading',
-    ).not.toHaveLength(0);
-  });
+      const fatalErrors = results[0].messages.filter((m) => m.fatal);
+      expect(
+        fatalErrors,
+        `Fatal errors: ${JSON.stringify(fatalErrors)}`,
+      ).toHaveLength(0);
 
-  it('lints a TS file with no fatal errors', () => {
-    const results = runESLintInConsumer(consumerDir, 'test.ts', {
-      timeout: 60_000,
+      // Verify the no-var rule actually fired — proves rules are loaded
+      const noVarMessages = results[0].messages.filter(
+        (m) => m.ruleId === 'no-var',
+      );
+      expect(
+        noVarMessages,
+        'Expected no-var to report on `var x = 1` — no messages means rules are not loading',
+      ).not.toHaveLength(0);
     });
 
-    expect(results).toHaveLength(1);
+    it('lints a TS file with no fatal errors', () => {
+      const results = runESLintInConsumer(consumerDir, 'test.ts', {
+        timeout: 60_000,
+      });
 
-    const fatalErrors = results[0].messages.filter((m) => m.fatal);
-    expect(
-      fatalErrors,
-      `Fatal errors: ${JSON.stringify(fatalErrors)}`,
-    ).toHaveLength(0);
-  });
-});
+      expect(results).toHaveLength(1);
+
+      const fatalErrors = results[0].messages.filter((m) => m.fatal);
+      expect(
+        fatalErrors,
+        `Fatal errors: ${JSON.stringify(fatalErrors)}`,
+      ).toHaveLength(0);
+    });
+  },
+);
 
 // ---------------------------------------------------------------------------
 // Unified mikey-pro package consumer suite
@@ -446,7 +457,13 @@ describe(
       );
 
       // eslint, prettier, stylelint are peer deps of mikey-pro
-      npmInstall(consumerDir, `"${tgzPath}"`, 'eslint', 'prettier', 'stylelint');
+      npmInstall(
+        consumerDir,
+        `"${tgzPath}"`,
+        'eslint',
+        'prettier',
+        'stylelint',
+      );
     }, HOOK_TIMEOUT);
 
     afterAll(() => {

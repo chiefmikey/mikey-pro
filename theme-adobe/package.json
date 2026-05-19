@@ -12,12 +12,6 @@
   "bugs": {
     "url": "https://github.com/mikey-pro/theme-adobe/issues"
   },
-  "keywords": [
-    "mikey-pro",
-    "theme",
-    "adobe"
-  ],
-  "contributors": [
-    "Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)"
-  ]
+  "keywords": ["mikey-pro", "theme", "adobe"],
+  "contributors": ["Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)"]
 }
