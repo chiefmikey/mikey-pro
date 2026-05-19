@@ -28,12 +28,7 @@ const reactConfigPath = join(
   'eslint-config-react',
   'index.js',
 );
-const vueConfigPath = join(
-  rootDir,
-  'configs',
-  'eslint-config-vue',
-  'index.js',
-);
+const vueConfigPath = join(rootDir, 'configs', 'eslint-config-vue', 'index.js');
 
 // Framework plugins are available in root node_modules via file: devDependencies
 
@@ -43,7 +38,10 @@ const vueConfigPath = join(
 async function expectRule(eslint, code, ruleId, filePath) {
   const results = await eslint.lintText(code, { filePath });
   const ruleIds = results[0].messages.map((m) => m.ruleId).filter(Boolean);
-  expect(ruleIds, `Expected rule "${ruleId}" to fire but got: ${JSON.stringify(ruleIds)}`).toContain(ruleId);
+  expect(
+    ruleIds,
+    `Expected rule "${ruleId}" to fire but got: ${JSON.stringify(ruleIds)}`,
+  ).toContain(ruleId);
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -106,12 +104,7 @@ describe('React Framework Violations', () => {
       '',
     ].join('\n');
 
-    await expectRule(
-      eslint,
-      badCode,
-      'react/self-closing-comp',
-      'Empty.jsx',
-    );
+    await expectRule(eslint, badCode, 'react/self-closing-comp', 'Empty.jsx');
   });
 
   it('should detect button missing type attribute (react/button-has-type)', async () => {
@@ -241,12 +234,7 @@ describe('Svelte Framework Violations', () => {
       '',
     ].join('\n');
 
-    await expectRule(
-      eslint,
-      badCode,
-      'svelte/no-at-html-tags',
-      'Test.svelte',
-    );
+    await expectRule(eslint, badCode, 'svelte/no-at-html-tags', 'Test.svelte');
   });
 
   it('should detect #each block missing key expression (svelte/require-each-key)', async () => {
@@ -262,12 +250,7 @@ describe('Svelte Framework Violations', () => {
       '',
     ].join('\n');
 
-    await expectRule(
-      eslint,
-      badCode,
-      'svelte/require-each-key',
-      'Test.svelte',
-    );
+    await expectRule(eslint, badCode, 'svelte/require-each-key', 'Test.svelte');
   });
 
   it('should detect useless mustache wrapping a literal (svelte/no-useless-mustaches)', async () => {
@@ -298,8 +281,9 @@ describe('Angular Framework Violations', () => {
 
   beforeAll(async () => {
     // Build a minimal inline config without type-aware rules so the parser works with lintText.
-    const angularPlugin = (await import('@angular-eslint/eslint-plugin')).default;
-    const tsParser = (await import('@typescript-eslint/parser'));
+    const angularPlugin = (await import('@angular-eslint/eslint-plugin'))
+      .default;
+    const tsParser = await import('@typescript-eslint/parser');
 
     eslint = new ESLint({
       overrideConfig: [

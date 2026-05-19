@@ -46,21 +46,21 @@ export { default } from 'mikey-pro';
 ## Subpath Exports
 
 ```js
-import config from 'mikey-pro';                              // ESLint flat config array
+import config from 'mikey-pro'; // ESLint flat config array
 import { baseConfig } from 'mikey-pro/eslint/base-config.js'; // Base config object
 import { baseOverrides } from 'mikey-pro/eslint/overrides.js'; // File-specific overrides
 ```
 
 ## Packages
 
-| Package | Description |
-|---|---|
-| `mikey-pro` | Unified base — ESLint + Prettier + Stylelint |
-| `@mikey-pro/eslint-config-react` | React/Next.js rules |
-| `@mikey-pro/eslint-config-vue` | Vue/Nuxt rules |
-| `@mikey-pro/eslint-config-svelte` | Svelte/SvelteKit rules |
-| `@mikey-pro/eslint-config-angular` | Angular rules |
-| `@mikey-pro/ruff-config` | Python guardrails (Ruff) |
+| Package                            | Description                                  |
+| ---------------------------------- | -------------------------------------------- |
+| `mikey-pro`                        | Unified base — ESLint + Prettier + Stylelint |
+| `@mikey-pro/eslint-config-react`   | React/Next.js rules                          |
+| `@mikey-pro/eslint-config-vue`     | Vue/Nuxt rules                               |
+| `@mikey-pro/eslint-config-svelte`  | Svelte/SvelteKit rules                       |
+| `@mikey-pro/eslint-config-angular` | Angular rules                                |
+| `@mikey-pro/ruff-config`           | Python guardrails (Ruff)                     |
 
 ## License
 
