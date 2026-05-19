@@ -91,3 +91,6 @@ temp/
 
 # Test project directory
 .test-project/
+
+# Claude Code agent worktrees & local state
+.claude/
