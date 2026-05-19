@@ -37,6 +37,9 @@ export const ts = {
 
     // Override some rules for better developer experience
     '@typescript-eslint/class-methods-use-this': 'off',
+    // Disabled: calls sourceCode.getJSDocComment() which was removed in ESLint 10.
+    // The rule was deprecated in @typescript-eslint v7 in favor of no-this-alias.
+    '@typescript-eslint/no-invalid-this': 'off',
     '@typescript-eslint/consistent-generic-constructors': [
       'error',
       'constructor',
