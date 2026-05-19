@@ -155,8 +155,9 @@ describe('Violation Detection', () => {
 
   describe('Complexity Rules', () => {
     it('should detect excessive function length (max-lines-per-function)', async () => {
+      // max-lines-per-function is set to 100; generate 102 body lines to trigger it
       let lines = 'function long() {\n';
-      for (let index = 0; index < 52; index++) {
+      for (let index = 0; index < 102; index++) {
         lines += `  const v${index} = ${index};\n`;
       }
       lines += '  return v0;\n}\nexport default long;\n';

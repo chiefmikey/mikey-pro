@@ -18,6 +18,7 @@ export default defineConfig({
     exclude: ['node_modules', 'dist', 'build'],
     globals: true,
     include: ['tests/**/*.test.js'],
-    testTimeout: 10000, // Increase timeout to 10s for slower Node versions
+    hookTimeout: 180000, // 3 minutes for consumer-simulation npm install + cleanup
+    testTimeout: 60000, // 60s for ESLint cold-start under parallel load
   },
 });
