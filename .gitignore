@@ -94,3 +94,11 @@ temp/
 
 # Claude Code agent worktrees & local state
 .claude/
+.playwright-mcp/
+
+# Python build venvs (e.g. configs/ruff-config/.venv-build)
+.venv*/
+
+# Python build artifacts
+dist/
+*.egg-info/
