@@ -63,17 +63,17 @@ JavaScript, TypeScript, JSX, TSX, Vue, Svelte, JSON, YAML, TOML, HTML, CSS, SCSS
 
 ## Packages
 
-| Package | Description |
-|---|---|
-| `mikey-pro` | Unified base — ESLint + Prettier + Stylelint |
-| `@mikey-pro/eslint-config` | Standalone ESLint config (same rules, no Prettier/Stylelint) |
-| `@mikey-pro/eslint-config-react` | React/Next.js rules |
-| `@mikey-pro/eslint-config-vue` | Vue/Nuxt rules |
-| `@mikey-pro/eslint-config-svelte` | Svelte/SvelteKit rules |
-| `@mikey-pro/eslint-config-angular` | Angular rules |
-| `@mikey-pro/prettier-config` | Standalone Prettier config |
-| `@mikey-pro/stylelint-config` | Standalone Stylelint config |
-| `@mikey-pro/ruff-config` | Python guardrails (Ruff) |
+| Package                            | Description                                                  |
+| ---------------------------------- | ------------------------------------------------------------ |
+| `mikey-pro`                        | Unified base — ESLint + Prettier + Stylelint                 |
+| `@mikey-pro/eslint-config`         | Standalone ESLint config (same rules, no Prettier/Stylelint) |
+| `@mikey-pro/eslint-config-react`   | React/Next.js rules                                          |
+| `@mikey-pro/eslint-config-vue`     | Vue/Nuxt rules                                               |
+| `@mikey-pro/eslint-config-svelte`  | Svelte/SvelteKit rules                                       |
+| `@mikey-pro/eslint-config-angular` | Angular rules                                                |
+| `@mikey-pro/prettier-config`       | Standalone Prettier config                                   |
+| `@mikey-pro/stylelint-config`      | Standalone Stylelint config                                  |
+| `@mikey-pro/ruff-config`           | Python guardrails (Ruff)                                     |
 
 ## Custom Configuration
 
@@ -81,10 +81,7 @@ JavaScript, TypeScript, JSX, TSX, Vue, Svelte, JSON, YAML, TOML, HTML, CSS, SCSS
 // eslint.config.js
 import config from '@mikey-pro/eslint-config-react';
 
-export default [
-  ...config,
-  { ignores: ['dist/', '.next/', 'coverage/'] },
-];
+export default [...config, { ignores: ['dist/', '.next/', 'coverage/'] }];
 ```
 
 ## Development
