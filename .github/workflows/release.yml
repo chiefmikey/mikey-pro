@@ -120,7 +120,7 @@ jobs:
         run: npm run test:validate
 
       - name: Test package publishing (dry-run)
-        run: npm run publish:all -- --dry-run
+        run: npm run publish:dry
         continue-on-error: true
 
   release:
@@ -152,9 +152,7 @@ jobs:
         run: npm run test:validate
 
       - name: Verify package integrity
-        run: |
-          npm run publish:all -- --dry-run || echo "⚠️ Dry-run had issues (version may already exist), but continuing..."
-          echo "✅ Package integrity check completed"
+        run: npm run publish:dry
         continue-on-error: true
 
       - name: Extract version from tag or prepare-release
@@ -196,13 +194,15 @@ jobs:
           echo "tag_name=${TAG_NAME}" >> $GITHUB_OUTPUT
           echo "Using tag: ${TAG_NAME}"
 
-      - name: Publish packages to npm
-        run:
-          npm run publish:all || echo "⚠️ Some packages may have failed to
-          publish (check logs)"
+      - name: Verify npm authentication
+        run: npm whoami
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        continue-on-error: true
+
+      - name: Publish packages to npm
+        run: npm run publish:all
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Create GitHub release
         uses: softprops/action-gh-release@v3
