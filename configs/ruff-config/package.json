@@ -1,8 +1,12 @@
 {
   "name": "@mikey-pro/ruff-config",
-  "version": "10.3.3",
+  "version": "10.3.4",
   "description": "Mikey Pro Ruff configuration - AI agent code quality guardrails for Python",
-  "files": ["ruff.toml", "README.md", "LICENSE"],
+  "files": [
+    "ruff.toml",
+    "README.md",
+    "LICENSE"
+  ],
   "homepage": "https://github.com/chiefmikey/mikey-pro#readme",
   "repository": {
     "type": "git",
