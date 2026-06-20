@@ -76,12 +76,11 @@ npm run ci:local          # Run CI checks locally
 - **Tests** use Vitest's `describe`/`it`/`expect`, with `globals: true` in vitest config
 - **Test files** use `import.meta.dirname` / `import.meta.filename` for path resolution
 - **Commit style:** conventional commits — `feat:`, `fix:`, `chore:`, `ci:`, `refactor:`, `test:`, `docs:`
-- **Version:** all packages share a single version (currently 10.0.4), bumped together via `scripts/bump-version.js`
+- **Version:** all packages share a single version (currently 10.3.4), bumped together via `scripts/bump-version.js`
 - **Publishing:** `mikey-pro` (unified base) published first, then framework configs and other scoped packages; ruff-config also published to PyPI
 - **Framework config imports:** framework configs import base components from `mikey-pro/eslint/base-config.js` and `mikey-pro/eslint/overrides.js` (NOT from `@mikey-pro/eslint-config/*`)
 - **Single source of truth:** all ESLint rules live in `base-config.js` (no separate rules.js)
 - **noInlineConfig:** `false` — allows targeted `// eslint-disable` for genuine edge cases
-- **Version:** all packages currently at 10.3.x — bump together via `scripts/bump-version.js`
 
 ## Hardcoded Versions to Watch
 
