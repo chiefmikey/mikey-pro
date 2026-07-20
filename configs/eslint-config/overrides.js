@@ -195,6 +195,16 @@ export const ts = {
     '@typescript-eslint/switch-exhaustiveness-check': 'error',
     '@typescript-eslint/unbound-method': 'off',
     '@typescript-eslint/use-unknown-in-catch-callback-variable': 'off',
+    // Override base config's babel parser for TypeScript files
+    'prettier/prettier': [
+      'warn',
+      {
+        endOfLine: 'lf',
+        parser: 'typescript',
+        singleQuote: true,
+        trailingComma: 'all',
+      },
+    ],
   },
   settings: {
     'import-x/parsers': {
@@ -432,6 +442,12 @@ export const jestJs = {
     'unicorn/no-array-callback-reference': 'off',
     'unicorn/prevent-abbreviations': ['warn', { ignore: [/e2e/] }],
   },
+  settings: {
+    jest: {
+      // Recognize Vitest's import { describe, it, expect } from 'vitest' as test globals
+      globalPackage: 'vitest',
+    },
+  },
 };
 
 // Jest TypeScript files
@@ -475,6 +491,12 @@ export const jestTs = {
     'jest/unbound-method': 'off',
     'unicorn/no-array-callback-reference': 'off',
     'unicorn/prevent-abbreviations': ['warn', { ignore: [/e2e/] }],
+  },
+  settings: {
+    jest: {
+      // Recognize Vitest's import { describe, it, expect } from 'vitest' as test globals
+      globalPackage: 'vitest',
+    },
   },
 };
 

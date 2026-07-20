@@ -1,6 +1,6 @@
 {
   "name": "@mikey-pro/eslint-config-svelte",
-  "version": "10.3.4",
+  "version": "10.3.5",
   "description": "Mikey Pro ESLint Svelte configuration - Ultimate Svelte coding style guide",
   "type": "module",
   "main": "index.js",
