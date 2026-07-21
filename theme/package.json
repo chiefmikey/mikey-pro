@@ -2,7 +2,17 @@
   "name": "mikey-pro-theme",
   "version": "0.0.1",
   "description": "Mikey Pro theme",
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": {
+      "import": "./index.js",
+      "require": "./index.js"
+    },
+    "./palette.json": "./palette.json"
+  },
   "scripts": {
+    "build": "node build.js",
     "fix": "eslint --fix '**/*'",
     "update": "ncu -u && npm i"
   },
@@ -12,6 +22,9 @@
     "@mikey-pro/stylelint-config": "^9.0.7"
   },
   "files": [
+    "index.js",
+    "palette.json",
+    "terminal/",
     "README.md",
     "LICENSE"
   ],
@@ -28,7 +41,13 @@
     "mikey-pro",
     "mikey",
     "pro",
-    "theme"
+    "theme",
+    "monokai",
+    "terminal",
+    "iterm",
+    "ghostty",
+    "palette",
+    "colors"
   ],
   "author": "Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)",
   "funding": "https://github.com/sponsors/chiefmikey",
