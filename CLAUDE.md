@@ -31,14 +31,20 @@ configs/                  # Published packages (each has own package.json + node
   ruff-config/            # @mikey-pro/ruff-config + mikey-pro-ruff-config (PyPI) — Python guardrails
   index.js                # mikey-pro entry point — re-exports ESLint flat config from eslint-config/
   package.json            # mikey-pro unified base package (ESLint + Prettier + Stylelint)
-tests/                    # Vitest test suite
-  plugin-integrity.test.js # Plugin registration & config structure tests
-  violations.test.js      # Rule violation detection tests
-  linting.test.js         # Linting behavior tests
-  formatting.test.js      # Formatting tests
-  integration.test.js     # Integration tests
+tests/                    # Vitest test suite (13 files, ~209 tests)
+  autofix.test.js         # Autofix safety — dangerous autofix patterns don't break code
+  configs.test.js         # Config package structure / exports
+  consumer-simulation.test.js # Simulated downstream consumer usage
   file-types.test.js      # File type handling tests
+  formatting.test.js      # Prettier formatting tests
+  framework-violations.test.js # Framework (React/Vue/Svelte/Angular) rule violations
   install-run.test.js     # Installation/runtime tests
+  integration.test.js     # Integration tests
+  linting.test.js         # Linting behavior tests
+  packaging.test.js       # Package publishing / packaging checks
+  plugin-integrity.test.js # Plugin registration & config structure tests
+  rules.test.js           # Rule presence / behavior tests
+  violations.test.js      # Rule violation detection tests
 test-files/               # Sample files for testing linting rules
 scripts/                  # Release & CI utilities
   bump-version.js         # Version bumping across all packages
@@ -76,7 +82,7 @@ npm run ci:local          # Run CI checks locally
 - **Tests** use Vitest's `describe`/`it`/`expect`, with `globals: true` in vitest config
 - **Test files** use `import.meta.dirname` / `import.meta.filename` for path resolution
 - **Commit style:** conventional commits — `feat:`, `fix:`, `chore:`, `ci:`, `refactor:`, `test:`, `docs:`
-- **Version:** all packages share a single version (currently 10.3.4), bumped together via `scripts/bump-version.js`
+- **Version:** all packages share a single version (currently 10.3.5), bumped together via `scripts/bump-version.js`
 - **Publishing:** `mikey-pro` (unified base) published first, then framework configs and other scoped packages; ruff-config also published to PyPI
 - **Framework config imports:** framework configs import base components from `mikey-pro/eslint/base-config.js` and `mikey-pro/eslint/overrides.js` (NOT from `@mikey-pro/eslint-config/*`)
 - **Single source of truth:** all ESLint rules live in `base-config.js` (no separate rules.js)
