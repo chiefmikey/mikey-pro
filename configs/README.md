@@ -36,12 +36,33 @@ export { default } from 'mikey-pro';
 }
 ```
 
+Or as standalone config files, using the same subpaths:
+
+**prettier.config.js**
+
+```js
+export { default } from 'mikey-pro/prettier';
+```
+
+**stylelint.config.js**
+
+```js
+export { default } from 'mikey-pro/stylelint';
+```
+
+> Import the `mikey-pro/prettier` and `mikey-pro/stylelint` subpaths, not
+> `@mikey-pro/prettier-config` / `@mikey-pro/stylelint-config`. Those standalone
+> packages are for projects that want only that one config and are not installed
+> by the command above, so importing them from a shim fails with
+> `ERR_MODULE_NOT_FOUND`.
+
 ## What's Included
 
 - **ESLint 10** flat config with 25+ plugins — code quality, security, imports, TypeScript, formatting
 - **Prettier** config — consistent formatting across JS, TS, JSON, CSS, HTML, Markdown, YAML
 - **Stylelint** config — CSS/SCSS best practices, property ordering, selector limits
-- **noInlineConfig** enabled — `// eslint-disable` comments are blocked
+- **Targeted escapes** — `// eslint-disable` comments are allowed
+  (`noInlineConfig: false`) for genuine edge cases, and unused ones are reported
 
 ## Subpath Exports
 

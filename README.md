@@ -47,6 +47,26 @@ export { default } from '@mikey-pro/eslint-config-react';
 }
 ```
 
+Or, if you prefer standalone config files, use the same `mikey-pro` subpaths:
+
+**prettier.config.js**
+
+```js
+export { default } from 'mikey-pro/prettier';
+```
+
+**stylelint.config.js**
+
+```js
+export { default } from 'mikey-pro/stylelint';
+```
+
+> Use the `mikey-pro/prettier` and `mikey-pro/stylelint` subpaths, not
+> `@mikey-pro/prettier-config` / `@mikey-pro/stylelint-config`. The standalone
+> packages exist for projects that want only that one config; the install
+> commands above do not pull them in, so importing them from a shim fails with
+> `ERR_MODULE_NOT_FOUND`.
+
 ## Features
 
 - **ESLint 10** flat config with 25+ plugins
@@ -55,7 +75,8 @@ export { default } from '@mikey-pro/eslint-config-react';
 - **Performance** — complexity limits, efficient patterns
 - **Formatting** — Prettier integration, import sorting, key ordering
 - **Accessibility** — a11y rules for React
-- **noInlineConfig** — `// eslint-disable` comments are blocked
+- **Targeted escapes** — `// eslint-disable` comments are allowed
+  (`noInlineConfig: false`) for genuine edge cases, and unused ones are reported
 
 ## Supported File Types
 

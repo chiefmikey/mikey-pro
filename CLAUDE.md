@@ -31,12 +31,12 @@ configs/                  # Published packages (each has own package.json + node
   ruff-config/            # @mikey-pro/ruff-config + mikey-pro-ruff-config (PyPI) — Python guardrails
   index.js                # mikey-pro entry point — re-exports ESLint flat config from eslint-config/
   package.json            # mikey-pro unified base package (ESLint + Prettier + Stylelint)
-tests/                    # Vitest test suite (13 files, ~209 tests)
+tests/                    # Vitest test suite (13 files, 218 tests)
   autofix.test.js         # Autofix safety — dangerous autofix patterns don't break code
   configs.test.js         # Config package structure / exports
   consumer-simulation.test.js # Simulated downstream consumer usage
   file-types.test.js      # File type handling tests
-  formatting.test.js      # Prettier formatting tests
+  formatting.test.js      # Prettier formatting + prettier/prettier parser resolution per file type
   framework-violations.test.js # Framework (React/Vue/Svelte/Angular) rule violations
   install-run.test.js     # Installation/runtime tests
   integration.test.js     # Integration tests
@@ -118,6 +118,9 @@ These rules were disabled in 10.3.0 because their autofix breaks code. If re-ena
 - **`eslint-import-resolver-typescript` is required** — without it, the TypeScript resolver config in `overrides.js` is dead code and all import-x rules produce false positives
 - **`unicorn.configs.all.rules` spread is a footgun** — every new unicorn plugin release can introduce rules that break autofix. After upgrading unicorn, verify the disabled rules list in `base-config.js` still covers all dangerous ones.
 - **Publishing order matters** — `mikey-pro` (unified base) must publish first since framework configs depend on it transitively. Use `npm run publish:all` or publish in order: mikey-pro, eslint-config, then framework configs.
+- **`prettier/prettier` needs an explicit parser per file type** — the rule does NOT infer the parser from the file extension. `base-config.js` sets `parser: 'babel'`, so every non-JS file type needs an override in `overrides.js` or it fails with a `Parsing error` *warning* — which still exits 0, so formatting goes silently unenforced. This is exactly how the TS `import type` breakage in 10.3.4 and earlier went unnoticed. `tests/formatting.test.js` guards the resolution table.
+- **Consumer shims use `mikey-pro` subpaths, not the standalone scoped packages** — `mikey-pro/eslint`, `mikey-pro/prettier`, `mikey-pro/stylelint`. `@mikey-pro/prettier-config` and `@mikey-pro/stylelint-config` are separate publishes for single-tool consumers; the documented install command does not pull them in, so a shim importing them fails with `ERR_MODULE_NOT_FOUND`. Keep README, `configs/README.md`, and `~/.claude/rules/mikey-pro.md` consistent on this.
+- **New TS extensions must be added in three places** — `base-config.js` `files` glob, the `ts` override `files` in `overrides.js`, and `settings['import-x/parsers']`. Miss the base glob and the file is not linted at all (silent, no error).
 
 ## Testing
 
@@ -126,3 +129,6 @@ These rules were disabled in 10.3.0 because their autofix breaks code. If re-ena
 - **Timeout:** 10s per test (ESLint config loading can be slow)
 - **Run:** `npm test` (or `npx vitest run`)
 - **Coverage:** `npm run test:coverage` — V8 provider, outputs text + JSON + HTML
+- **Use `npx vitest run --no-file-parallelism` for a trustworthy full-suite signal.** Every test file builds its own ESLint instance (and the TS-aware ones a full TypeScript program), so running all 13 files in parallel starves the workers and produces a cascade of bogus 60-120s timeouts across unrelated files. Measured on an M1 Ultra: parallel ~1210s with 12 failing files; serial ~211s with the 4 genuine failures. The parallel result is noise, not signal.
+- **4 `consumer-simulation.test.js` failures are pre-existing and environmental** — the simulated consumer install resolves TypeScript 7, and typescript-eslint refuses to run against TS 7 (`typescript-eslint does not support TS 7.0`). Unrelated to config changes; do not chase them when validating a change.
+- **`npm run eslint` does not pass on this repo's own `tests/` directory** — the `jest/*` rules (`prefer-expect-assertions`, `padding-around-*`) flag nearly every existing test. Pre-existing across all test files, not something a change introduced.

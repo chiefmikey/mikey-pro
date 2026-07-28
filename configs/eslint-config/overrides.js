@@ -17,7 +17,7 @@ import * as yamlParser from 'yaml-eslint-parser';
 
 // TypeScript configuration
 export const ts = {
-  files: ['**/*.ts', '**/*.tsx'],
+  files: ['**/*.ts', '**/*.tsx', '**/*.mts', '**/*.cts'],
   languageOptions: {
     ecmaVersion: 'latest',
     parser: tsParser,
@@ -208,7 +208,7 @@ export const ts = {
   },
   settings: {
     'import-x/parsers': {
-      '@typescript-eslint/parser': ['.ts', '.tsx', '.d.ts'],
+      '@typescript-eslint/parser': ['.ts', '.tsx', '.mts', '.cts', '.d.ts'],
     },
     'import-x/resolver': {
       typescript: { alwaysTryTypes: true },

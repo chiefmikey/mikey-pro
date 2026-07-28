@@ -63,7 +63,7 @@ export const globalPlugins = {
 };
 
 export const baseConfig = {
-  files: ['**/*.{js,jsx,ts,tsx,mjs,cjs}'],
+  files: ['**/*.{js,jsx,ts,tsx,mjs,cjs,mts,cts}'],
   languageOptions: {
     ecmaVersion: 'latest',
     globals: {
