@@ -109,7 +109,7 @@ export default [...config, { ignores: ['dist/', '.next/', 'coverage/'] }];
 
 ```bash
 npm run npm:install   # Install all sub-package dependencies
-npm test              # Run test suite (209 tests)
+npm test              # Run test suite (236 tests)
 npm run eslint        # Self-lint
 npm run publish:all   # Publish all packages
 ```

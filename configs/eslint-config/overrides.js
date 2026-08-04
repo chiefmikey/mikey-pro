@@ -399,7 +399,11 @@ export const json5 = {
 
 // Jest JavaScript files
 export const jestJs = {
-  files: ['**/*.test.js', '**/__tests__/**/*.js'],
+  files: [
+    '**/*.{test,spec}.{js,jsx,mjs,cjs}',
+    '**/__tests__/**/*.{js,jsx,mjs,cjs}',
+    '**/__mocks__/**/*.{js,jsx,mjs,cjs}',
+  ],
   languageOptions: {
     globals: { jest: true },
   },
@@ -452,10 +456,26 @@ export const jestJs = {
 
 // Jest TypeScript files
 export const jestTs = {
-  files: ['**/*.test.ts', '**/__tests__/**/*.ts'],
+  files: [
+    '**/*.{test,spec}.{ts,tsx,mts,cts}',
+    '**/__tests__/**/*.{ts,tsx,mts,cts}',
+    '**/__mocks__/**/*.{ts,tsx,mts,cts}',
+  ],
   languageOptions: {
     globals: { jest: true },
     parser: tsParser,
+    // Preserve the `ts` override's JSX + type-aware parserOptions (overrides.js:20-29).
+    // Flat config merges languageOptions per matching block in array order; this
+    // block matches after `ts`, and without an explicit parserOptions here a naive
+    // merge could drop JSX support for `.test.tsx`/`.spec.tsx` files. ESLint 10's
+    // languageOptions merge actually preserves keys the later block omits, but this
+    // is pinned explicitly so the behavior doesn't silently depend on merge internals.
+    parserOptions: {
+      ecmaFeatures: { jsx: true },
+      extraFileExtensions: ['.vue', '.svelte'],
+      project: true,
+      tsconfigRootDir: process.cwd(),
+    },
   },
   rules: {
     ...jest.configs['flat/all'].rules,
