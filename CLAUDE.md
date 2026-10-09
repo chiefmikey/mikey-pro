@@ -31,7 +31,7 @@ configs/                  # Published packages (each has own package.json + node
   ruff-config/            # @mikey-pro/ruff-config + mikey-pro-ruff-config (PyPI) — Python guardrails
   index.js                # mikey-pro entry point — re-exports ESLint flat config from eslint-config/
   package.json            # mikey-pro unified base package (ESLint + Prettier + Stylelint)
-tests/                    # Vitest test suite (14 files, 236 tests)
+tests/                    # Vitest test suite (15 files, 249 tests)
   autofix.test.js         # Autofix safety — dangerous autofix patterns don't break code
   configs.test.js         # Config package structure / exports
   consumer-simulation.test.js # Simulated downstream consumer usage
@@ -46,6 +46,7 @@ tests/                    # Vitest test suite (14 files, 236 tests)
   rules.test.js           # Rule presence / behavior tests
   test-file-globs.test.js # Test-file glob recognition regression guard (import-x/no-extraneous-dependencies, jestJs/jestTs)
   violations.test.js      # Rule violation detection tests
+  stylelint-and-comment-rules.test.js # Stylelint config validity (unknown rules, patterns) + triple-slash spaced-comment guard
 test-files/               # Sample files for testing linting rules
 scripts/                  # Release & CI utilities
   bump-version.js         # Version bumping across all packages
@@ -124,6 +125,9 @@ These rules were disabled in 10.3.0 because their autofix breaks code. If re-ena
 - **Test-file globs must cover the full extension matrix, not just `.js`/`.ts`** — the `import-x/no-extraneous-dependencies` devDependencies allowlist in `base-config.js` and the `jestJs`/`jestTs` `files` globs in `overrides.js` all key off test-file patterns. Before 10.3.6 they omitted `tsx`, so every React component test (`*.test.tsx`) importing `@testing-library/react` or `vitest` hit a false-positive error in consumer projects. Use `{test,spec}.{js,jsx,mjs,cjs,ts,tsx,mts,cts}` plus `__tests__`/`__mocks__`/setup-file patterns. The allowlist must stay narrow enough that a NON-test `.tsx` importing a devDependency still errors — `tests/test-file-globs.test.js` guards both directions.
 - **New TS extensions must be added in three places** — `base-config.js` `files` glob, the `ts` override `files` in `overrides.js`, and `settings['import-x/parsers']`. Miss the base glob and the file is not linted at all (silent, no error).
 
+- **Stylelint rule names and patterns are easy to get silently wrong** — `custom-property-pattern` matches the name WITHOUT the leading `--`; plugin rules must use their namespaced name (`scale-unlimited/declaration-strict-value`, bare name = "Unknown rule" on every stylesheet); stylelint 16 removed formatting rules like `media-query-list-comma-newline-after`. `tests/stylelint-and-comment-rules.test.js` lints real CSS through the config to catch this.
+- **`spaced-comment` needs `markers: ['/']`** — otherwise its autofix turns TS triple-slash directives (`/// <reference ... />`) into `// / <reference ...`.
+
 ## Testing
 
 - **Framework:** Vitest v4 with `environment: 'node'`
@@ -131,6 +135,6 @@ These rules were disabled in 10.3.0 because their autofix breaks code. If re-ena
 - **Timeout:** 10s per test (ESLint config loading can be slow)
 - **Run:** `npm test` (or `npx vitest run`)
 - **Coverage:** `npm run test:coverage` — V8 provider, outputs text + JSON + HTML
-- **Use `npx vitest run --no-file-parallelism` for a trustworthy full-suite signal.** Every test file builds its own ESLint instance (and the TS-aware ones a full TypeScript program), so running all 14 files in parallel starves the workers and produces a cascade of bogus 60-120s timeouts across unrelated files. Measured on an M1 Ultra: parallel ~1210s with 12 failing files; serial ~211s with the 4 genuine failures. The parallel result is noise, not signal.
+- **Use `npx vitest run --no-file-parallelism` for a trustworthy full-suite signal.** Every test file builds its own ESLint instance (and the TS-aware ones a full TypeScript program), so running all 15 files in parallel starves the workers and produces a cascade of bogus 60-120s timeouts across unrelated files. Measured on an M1 Ultra: parallel ~1210s with 12 failing files; serial ~211s with the 4 genuine failures. The parallel result is noise, not signal.
 - **4 `consumer-simulation.test.js` failures are pre-existing and environmental** — the simulated consumer install resolves TypeScript 7, and typescript-eslint refuses to run against TS 7 (`typescript-eslint does not support TS 7.0`). Unrelated to config changes; do not chase them when validating a change.
 - **`npm run eslint` does not pass on this repo's own `tests/` directory** — the `jest/*` rules (`prefer-expect-assertions`, `padding-around-*`) flag nearly every existing test. Pre-existing across all test files, not something a change introduced.
