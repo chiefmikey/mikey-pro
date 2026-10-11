@@ -391,7 +391,8 @@ export const baseConfig = {
     'sort-imports': 'off',
 
     'sort-vars': 'warn',
-    'spaced-comment': ['warn', 'always'],
+    // markers: ['/'] exempts TypeScript triple-slash directives (`/// <reference />`)
+    'spaced-comment': ['warn', 'always', { markers: ['/'] }],
     strict: ['error', 'never'],
     'symbol-description': 'error',
 
