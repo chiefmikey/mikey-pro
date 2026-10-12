@@ -118,6 +118,10 @@ export const baseConfig = {
       {
         devDependencies: [
           '**/*.{test,spec}.{js,jsx,mjs,cjs,ts,tsx,mts,cts}',
+          // Cypress specs: the `cypressConfig` override (overrides.js) already
+          // treats `**/*.cy.*` as test files, so devDependencies must be
+          // importable from them too.
+          '**/*.cy.{js,jsx,mjs,cjs,ts,tsx,mts,cts}',
           '**/__tests__/**',
           '**/__mocks__/**',
           '**/test/**',
