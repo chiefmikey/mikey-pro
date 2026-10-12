@@ -31,7 +31,7 @@ configs/                  # Published packages (each has own package.json + node
   ruff-config/            # @mikey-pro/ruff-config + mikey-pro-ruff-config (PyPI) — Python guardrails
   index.js                # mikey-pro entry point — re-exports ESLint flat config from eslint-config/
   package.json            # mikey-pro unified base package (ESLint + Prettier + Stylelint)
-tests/                    # Vitest test suite (15 files, 249 tests)
+tests/                    # Vitest test suite (16 files, 253 tests)
   autofix.test.js         # Autofix safety — dangerous autofix patterns don't break code
   configs.test.js         # Config package structure / exports
   consumer-simulation.test.js # Simulated downstream consumer usage
@@ -84,7 +84,7 @@ npm run ci:local          # Run CI checks locally
 - **Tests** use Vitest's `describe`/`it`/`expect`, with `globals: true` in vitest config
 - **Test files** use `import.meta.dirname` / `import.meta.filename` for path resolution
 - **Commit style:** conventional commits — `feat:`, `fix:`, `chore:`, `ci:`, `refactor:`, `test:`, `docs:`
-- **Version:** all packages share a single version (currently 10.3.7), bumped together via `scripts/bump-version.js`
+- **Version:** all packages share a single version (currently 10.3.8), bumped together via `scripts/bump-version.js`
 - **Publishing:** `mikey-pro` (unified base) published first, then framework configs and other scoped packages; ruff-config also published to PyPI
 - **Framework config imports:** framework configs import base components from `mikey-pro/eslint/base-config.js` and `mikey-pro/eslint/overrides.js` (NOT from `@mikey-pro/eslint-config/*`)
 - **Single source of truth:** all ESLint rules live in `base-config.js` (no separate rules.js)
@@ -126,6 +126,7 @@ These rules were disabled in 10.3.0 because their autofix breaks code. If re-ena
 - **New TS extensions must be added in three places** — `base-config.js` `files` glob, the `ts` override `files` in `overrides.js`, and `settings['import-x/parsers']`. Miss the base glob and the file is not linted at all (silent, no error).
 
 - **Stylelint rule names and patterns are easy to get silently wrong** — `custom-property-pattern` matches the name WITHOUT the leading `--`; plugin rules must use their namespaced name (`scale-unlimited/declaration-strict-value`, bare name = "Unknown rule" on every stylesheet); stylelint 16 removed formatting rules like `media-query-list-comma-newline-after`. `tests/stylelint-and-comment-rules.test.js` lints real CSS through the config to catch this.
+- **`import-x/order` and `simple-import-sort/imports` are both on and must agree** — simple-import-sort owns ordering within a group, import-x/order only enforces group boundaries (explicit `groups`, `@/`/`~/` aliases as `internal` before a merged parent/sibling/index group, no `alphabetize`, no `@*` pathGroup). Reintroducing any of those makes `--fix` ping-pong. `tests/import-order-agreement.test.js` guards it.
 - **`spaced-comment` needs `markers: ['/']`** — otherwise its autofix turns TS triple-slash directives (`/// <reference ... />`) into `// / <reference ...`.
 
 ## Testing
