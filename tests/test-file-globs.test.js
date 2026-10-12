@@ -18,10 +18,17 @@
  *   - testFileCases: claimed by BOTH the allowlist and a jest override
  *     (`*.{test,spec}.<every ext>`, `__tests__/**`, `__mocks__/**`).
  *   - devDependencyOnlyCases: claimed by the allowlist but not the jest
- *     override (`test/`, `tests/`, setup files, tool configs, `*.cy.*`).
+ *     override (`test/`, `tests/`, setup files, tool configs, `*.cy.*`,
+ *     `*.e2e.*`, `*.test-d.*`, anything under a `.storybook` directory).
  *   - nonTestCases: must STILL error and must NOT get jest rules; includes
- *     look-alike names (latest.ts, contest.tsx, my__tests__x/, ...) so a
- *     sloppy substring glob (anything like `*test*`) fails here.
+ *     look-alike names (latest.ts, contest.tsx, my__tests__x/, e2e.ts,
+ *     .storybooks/, ...) so a sloppy substring glob (anything like `*test*`
+ *     or `*storybook*`) fails here.
+ *
+ * Dot-directory note: import-x matches the allowlist with minimatch WITHOUT
+ * `dot: true`, so `**` never crosses a dot-directory. `.storybook` therefore
+ * has to be named explicitly in the glob, and is checked both at the project
+ * root and nested (monorepo `packages/ui/.storybook/`).
  *
  * Note: only devDependencies declared in this repo's package.json can be used
  * as the probe import (`vitest`); `@testing-library/react` is exercised in
@@ -46,6 +53,8 @@ const configPath = join(rootDir, 'configs', 'eslint-config', 'index.js');
 
 const TEST_KINDS = ['test', 'spec'];
 const EXTENSIONS = ['js', 'jsx', 'mjs', 'cjs', 'ts', 'tsx', 'mts', 'cts'];
+// `*.test-d.*` are Vitest/tsd type-test files; only TS-family extensions.
+const TYPE_TEST_EXTENSIONS = ['ts', 'tsx', 'mts', 'cts'];
 
 // `vitest` is a devDependency of this repo's package.json, so importing it
 // from a file the allowlist does NOT claim is exactly the consumer bug.
@@ -103,6 +112,11 @@ const testFileCases = [
   ['src/deep/__mocks__/fs.js', true],
   ['src/__mocks__/service.mjs', true],
   ['src/__mocks__/Widget.tsx', true],
+  // A real test file living in a .storybook dir is both allowlisted (only via
+  // the explicit `.storybook` glob, since `**` skips dot-dirs) AND a jest file.
+  ['.storybook/preview.test.js', true],
+  ['.storybook/preview.spec.tsx', true],
+  ['packages/ui/.storybook/preview.test.ts', true],
 ];
 
 const developmentDependencyOnlyCases = [
@@ -136,6 +150,26 @@ const developmentDependencyOnlyCases = [
   ['cypress/e2e/login.cy.js', false],
   ['src/Button.cy.tsx', false],
   ['src/Button.cy.mts', false],
+  // End-to-end specs: allowlist-only, they are not jest tests.
+  ...EXTENSIONS.map((extension) => [`src/util.e2e.${extension}`, false]),
+  ['login.e2e.ts', false],
+  ['packages/app/flows/checkout.e2e.tsx', false],
+  // Vitest type tests: TS-family extensions only.
+  ...TYPE_TEST_EXTENSIONS.map((extension) => [
+    `src/util.test-d.${extension}`,
+    false,
+  ]),
+  ['packages/app/src/types/api.test-d.ts', false],
+  // Storybook: anything under a `.storybook` dir, at the project root...
+  ...EXTENSIONS.map((extension) => [`.storybook/main.${extension}`, false]),
+  ['.storybook/preview.tsx', false],
+  ['.storybook/addons/deep/nested/manager.ts', false],
+  // ...and nested in a monorepo package.
+  ...EXTENSIONS.map((extension) => [
+    `packages/ui/.storybook/main.${extension}`,
+    false,
+  ]),
+  ['apps/web/packages/ui/.storybook/decorators/theme.tsx', false],
 ];
 
 // Non-test files must keep erroring and must not pick up the jest override.
@@ -178,6 +212,38 @@ const nonTestCases = [
   ['src/vite-config.js'],
   ['src/app.config.ts'],
   ['src/cy.ts'],
+  // `*.e2e.*` look-alikes: the `.e2e.` segment must be a whole dot-delimited
+  // piece after a non-empty basename prefix.
+  ['src/e2e.ts'],
+  ['src/e2e-helper.ts'],
+  ['src/latest2e.ts'],
+  ['src/my.e2e-utils.ts'],
+  ['src/util.e2es.ts'],
+  ['src/util.e2.ts'],
+  ['src/Button.ts'], // non-test sibling of src/Button.e2e.ts
+  // `*.test-d.*` look-alikes. A bare `test-d.ts` has no leading name + dot,
+  // so it is NOT claimed (same as the existing bare `test.ts` above).
+  ['src/test-d.ts'],
+  ['src/latest-d.ts'],
+  ['src/x.test-dx.ts'],
+  ['src/x.test-d-helpers.ts'],
+  ['src/types.ts'], // non-test sibling of src/types.test-d.ts
+  // JS-family `.test-d.` files are deliberately NOT claimed: type tests are
+  // TypeScript-only, so the allowlist is limited to ts/tsx/mts/cts.
+  ['src/util.test-d.js'],
+  ['src/util.test-d.mjs'],
+  // `.storybook` look-alikes: the directory name must match exactly,
+  // including the leading dot (so `storybook/` is NOT a Storybook config dir).
+  ['.storybooks/x.ts'],
+  ['storybook/x.ts'],
+  ['src/storybook/x.ts'],
+  ['my.storybook/x.ts'],
+  ['packages/ui/my.storybook/x.ts'],
+  ['.storybook-static/x.ts'],
+  ['src/.storybook.ts'],
+  ['src/Button.stories.ts'], // not under .storybook, not a test file
+  ['packages/ui/src/main.ts'], // non-test sibling of packages/ui/.storybook/main.ts
+  ['src/main.ts'], // non-test sibling of .storybook/main.ts
 ];
 
 function getExtraneousDepsErrors(messages) {
@@ -243,7 +309,14 @@ describe('test-file glob recognition (import-x/no-extraneous-dependencies)', () 
     // extension matrix for real.
     writeFileSync(
       join(temporaryDirectory, 'tsconfig.json'),
-      JSON.stringify({ extends: '../tsconfig.json', include: ['**/*'] }),
+      JSON.stringify({
+        extends: '../tsconfig.json',
+        // TypeScript's `**` and `*` skip dot-directories and dotfiles too, so
+        // they have to be included explicitly (root-level and nested) to avoid
+        // a fatal "TSConfig does not include this file" masking the rule under
+        // test for `.storybook/` and its look-alikes.
+        include: ['**/*', '.*/**/*', '**/.*/**/*', '**/.*.ts'],
+      }),
       'utf8',
     );
 
@@ -306,4 +379,80 @@ describe('test-file glob recognition (import-x/no-extraneous-dependencies)', () 
       60_000,
     );
   });
+});
+
+// Project-root `.storybook/` when the project root itself sits below a
+// dot-directory (`~/.cache/app`, `~/.local/src/app`, some CI workspaces): `**`
+// cannot cross the dotted ancestor in the absolute path, so this only works
+// because import-x also matches every entry resolved against cwd
+// (`<cwd>/**/.storybook/**`). Simulate it with the fixture root `<tmp>/.project`.
+describe('project-root .storybook below a dot-directory ancestor', () => {
+  const rootCases = [
+    '.storybook/main.ts',
+    '.storybook/main.js',
+    '.storybook/manager.mts',
+    '.storybook/addons/deep/nested/panel.tsx',
+  ];
+  const lookAlikeCases = ['.storybooks/x.ts', 'storybook/x.ts', 'src/main.ts'];
+
+  let eslint;
+  let temporaryDirectory;
+  let projectRoot;
+
+  async function lintInProject(relativePath, content) {
+    const filePath = join(projectRoot, relativePath);
+    mkdirSync(dirname(filePath), { recursive: true });
+    writeFileSync(filePath, content, 'utf8');
+    try {
+      const results = await eslint.lintText(content, { filePath });
+      return results[0].messages;
+    } finally {
+      rmSync(filePath, { force: true });
+    }
+  }
+
+  beforeAll(async () => {
+    temporaryDirectory = join(
+      rootDir,
+      `test-file-globs-tmp-${randomBytes(6).toString('hex')}`,
+    );
+    projectRoot = join(temporaryDirectory, '.project');
+    mkdirSync(projectRoot, { recursive: true });
+    writeFileSync(
+      join(projectRoot, 'tsconfig.json'),
+      JSON.stringify({
+        extends: '../../tsconfig.json',
+        include: ['**/*', '.*/**/*', '**/.*/**/*'],
+      }),
+      'utf8',
+    );
+    eslint = new ESLint({ cwd: projectRoot, overrideConfigFile: configPath });
+    await lintInProject('warmup.ts', 'export const warmup = 1;\n');
+  }, 240_000);
+
+  afterAll(() => {
+    rmSync(temporaryDirectory, { force: true, recursive: true });
+  });
+
+  it.each(rootCases)(
+    '%s: devDependency import is allowed (cwd-resolved glob)',
+    async (relativePath) => {
+      const messages = await lintInProject(relativePath, vitestImportContent);
+
+      expect(getFatalErrors(messages)).toHaveLength(0);
+      expect(getExtraneousDepsErrors(messages)).toHaveLength(0);
+    },
+    60_000,
+  );
+
+  it.each(lookAlikeCases)(
+    '%s: devDependency import still triggers import-x/no-extraneous-dependencies',
+    async (relativePath) => {
+      const messages = await lintInProject(relativePath, nonTestContent);
+
+      expect(getFatalErrors(messages)).toHaveLength(0);
+      expect(getExtraneousDepsErrors(messages)).toHaveLength(1);
+    },
+    60_000,
+  );
 });
