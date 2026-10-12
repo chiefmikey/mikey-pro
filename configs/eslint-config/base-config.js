@@ -150,10 +150,20 @@ export const baseConfig = {
     ],
     'import-x/no-useless-path-segments': 'error',
     'import-x/no-webpack-loader-syntax': 'error',
+    // Must agree with simple-import-sort/imports (node: builtins, packages,
+    // then aliases like @/, then relative with parent/sibling/index merged).
+    // simple-import-sort owns ordering within a group (no alphabetize here:
+    // it would put '.' before '../x', the opposite of simple-import-sort), and
+    // scoped packages (@scope/pkg) sort among externals, so no '@*' pathGroup.
     'import-x/order': [
       'error',
       {
-        alphabetize: { order: 'asc' },
+        groups: [
+          'builtin',
+          'external',
+          'internal',
+          ['parent', 'sibling', 'index'],
+        ],
         'newlines-between': 'always',
         pathGroups: [
           {
@@ -162,14 +172,8 @@ export const baseConfig = {
             position: 'before',
           },
           {
-            group: 'external',
-            pattern: '@*',
-            position: 'after',
-          },
-          {
             group: 'internal',
-            pattern: '@/**',
-            position: 'after',
+            pattern: '{@,~}/**',
           },
         ],
         pathGroupsExcludedImportTypes: ['builtin'],
