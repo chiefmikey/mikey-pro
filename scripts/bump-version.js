@@ -65,6 +65,12 @@ function updatePackageVersion(filePath, newVersion) {
   const oldVersion = packageJson.version;
   packageJson.version = newVersion;
 
+  // Framework presets bundle their base config via mikey-pro; keep the floor
+  // at the release that ships them so a lockfile cannot pin a stale nested copy.
+  if (packageJson.dependencies?.['mikey-pro']) {
+    packageJson.dependencies['mikey-pro'] = `^${newVersion}`;
+  }
+
   writeFileSync(fullPath, JSON.stringify(packageJson, null, 2) + '\n', 'utf8');
 
   return oldVersion;
