@@ -30,8 +30,7 @@ Repository = "https://github.com/chiefmikey/mikey-pro"
 Issues = "https://github.com/chiefmikey/mikey-pro/issues"
 
 [tool.hatch.build.targets.wheel]
-packages = ["."]
-include = ["ruff.toml"]
+only-include = ["ruff.toml"]
 
 [tool.hatch.build.targets.sdist]
-include = ["ruff.toml", "pyproject.toml", "README.md", "LICENSE"]
+include = ["/ruff.toml", "/pyproject.toml", "/README.md", "/LICENSE"]
