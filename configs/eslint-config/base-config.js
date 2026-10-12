@@ -118,6 +118,21 @@ export const baseConfig = {
       {
         devDependencies: [
           '**/*.{test,spec}.{js,jsx,mjs,cjs,ts,tsx,mts,cts}',
+          // Cypress specs: the `cypressConfig` override (overrides.js) already
+          // treats `**/*.cy.*` as test files, so devDependencies must be
+          // importable from them too.
+          '**/*.cy.{js,jsx,mjs,cjs,ts,tsx,mts,cts}',
+          // End-to-end specs (`*.e2e.*`, Playwright/Vitest style) and Vitest
+          // type tests (`*.test-d.*`). Neither is a jest test, so these are
+          // allowlist-only; no jest override applies to them.
+          '**/*.e2e.{js,jsx,mjs,cjs,ts,tsx,mts,cts}',
+          '**/*.test-d.{ts,tsx,mts,cts}',
+          // Storybook config/stories. import-x's minimatch has no `dot: true`,
+          // so `**` does not cross dot-directories: `.storybook` must be named
+          // explicitly. import-x also matches each entry resolved against cwd,
+          // so this one entry covers the project-root `.storybook/` and nested
+          // monorepo packages (a separate `.storybook/**` entry is redundant).
+          '**/.storybook/**',
           '**/__tests__/**',
           '**/__mocks__/**',
           '**/test/**',
