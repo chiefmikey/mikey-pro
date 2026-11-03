@@ -130,6 +130,8 @@ function generateReleaseNotes(version, previousTag = null) {
   notes += `- \`@mikey-pro/eslint-config-angular@${version}\`\n`;
   notes += `- \`@mikey-pro/prettier-config@${version}\`\n`;
   notes += `- \`@mikey-pro/stylelint-config@${version}\`\n`;
+  notes += `- \`@mikey-pro/ruff-config@${version}\` (npm)\n`;
+  notes += `- \`mikey-pro-ruff-config@${version}\` (PyPI)\n`;
   notes += `- \`mikey-pro@${version}\`\n`;
 
   return notes;

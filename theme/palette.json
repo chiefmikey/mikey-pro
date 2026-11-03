@@ -1,0 +1,47 @@
+{
+  "name": "Mikey Pro",
+  "description": "Monokai-Pro-derived terminal palette. Blue intentionally folds to neutral gray; several slots deliberately share the same hex.",
+  "background": "#1d1b1d",
+  "foreground": "#fcfcfa",
+  "cursor": "#7e6fb2",
+  "selection": {
+    "background": "#7e6fb2",
+    "foreground": "#1d1b1d"
+  },
+  "ansi": [
+    "#4f4e4f",
+    "#9e475e",
+    "#96c766",
+    "#ddbd53",
+    "#4f4e4f",
+    "#7e6fb2",
+    "#5dacb7",
+    "#727072",
+    "#727072",
+    "#ff6188",
+    "#a9dc76",
+    "#ffd866",
+    "#727072",
+    "#ab9df2",
+    "#78dce8",
+    "#727072"
+  ],
+  "named": {
+    "black": "#4f4e4f",
+    "red": "#9e475e",
+    "green": "#96c766",
+    "yellow": "#ddbd53",
+    "blue": "#4f4e4f",
+    "magenta": "#7e6fb2",
+    "cyan": "#5dacb7",
+    "white": "#727072",
+    "brightBlack": "#727072",
+    "brightRed": "#ff6188",
+    "brightGreen": "#a9dc76",
+    "brightYellow": "#ffd866",
+    "brightBlue": "#727072",
+    "brightMagenta": "#ab9df2",
+    "brightCyan": "#78dce8",
+    "brightWhite": "#727072"
+  }
+}

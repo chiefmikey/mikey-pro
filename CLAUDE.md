@@ -31,14 +31,22 @@ configs/                  # Published packages (each has own package.json + node
   ruff-config/            # @mikey-pro/ruff-config + mikey-pro-ruff-config (PyPI) — Python guardrails
   index.js                # mikey-pro entry point — re-exports ESLint flat config from eslint-config/
   package.json            # mikey-pro unified base package (ESLint + Prettier + Stylelint)
-tests/                    # Vitest test suite
-  plugin-integrity.test.js # Plugin registration & config structure tests
-  violations.test.js      # Rule violation detection tests
-  linting.test.js         # Linting behavior tests
-  formatting.test.js      # Formatting tests
-  integration.test.js     # Integration tests
+tests/                    # Vitest test suite (16 files, 253 tests)
+  autofix.test.js         # Autofix safety — dangerous autofix patterns don't break code
+  configs.test.js         # Config package structure / exports
+  consumer-simulation.test.js # Simulated downstream consumer usage
   file-types.test.js      # File type handling tests
+  formatting.test.js      # Prettier formatting + prettier/prettier parser resolution per file type
+  framework-violations.test.js # Framework (React/Vue/Svelte/Angular) rule violations
   install-run.test.js     # Installation/runtime tests
+  integration.test.js     # Integration tests
+  linting.test.js         # Linting behavior tests
+  packaging.test.js       # Package publishing / packaging checks
+  plugin-integrity.test.js # Plugin registration & config structure tests
+  rules.test.js           # Rule presence / behavior tests
+  test-file-globs.test.js # Test-file glob recognition regression guard (import-x/no-extraneous-dependencies, jestJs/jestTs)
+  violations.test.js      # Rule violation detection tests
+  stylelint-and-comment-rules.test.js # Stylelint config validity (unknown rules, patterns) + triple-slash spaced-comment guard
 test-files/               # Sample files for testing linting rules
 scripts/                  # Release & CI utilities
   bump-version.js         # Version bumping across all packages
@@ -76,7 +84,7 @@ npm run ci:local          # Run CI checks locally
 - **Tests** use Vitest's `describe`/`it`/`expect`, with `globals: true` in vitest config
 - **Test files** use `import.meta.dirname` / `import.meta.filename` for path resolution
 - **Commit style:** conventional commits — `feat:`, `fix:`, `chore:`, `ci:`, `refactor:`, `test:`, `docs:`
-- **Version:** all packages share a single version (currently 10.3.4), bumped together via `scripts/bump-version.js`
+- **Version:** all packages share a single version (currently 10.3.9), bumped together via `scripts/bump-version.js`
 - **Publishing:** `mikey-pro` (unified base) published first, then framework configs and other scoped packages; ruff-config also published to PyPI
 - **Framework config imports:** framework configs import base components from `mikey-pro/eslint/base-config.js` and `mikey-pro/eslint/overrides.js` (NOT from `@mikey-pro/eslint-config/*`)
 - **Single source of truth:** all ESLint rules live in `base-config.js` (no separate rules.js)
@@ -112,6 +120,14 @@ These rules were disabled in 10.3.0 because their autofix breaks code. If re-ena
 - **`eslint-import-resolver-typescript` is required** — without it, the TypeScript resolver config in `overrides.js` is dead code and all import-x rules produce false positives
 - **`unicorn.configs.all.rules` spread is a footgun** — every new unicorn plugin release can introduce rules that break autofix. After upgrading unicorn, verify the disabled rules list in `base-config.js` still covers all dangerous ones.
 - **Publishing order matters** — `mikey-pro` (unified base) must publish first since framework configs depend on it transitively. Use `npm run publish:all` or publish in order: mikey-pro, eslint-config, then framework configs.
+- **`prettier/prettier` needs an explicit parser per file type** — the rule does NOT infer the parser from the file extension. `base-config.js` sets `parser: 'babel'`, so every non-JS file type needs an override in `overrides.js` or it fails with a `Parsing error` *warning* — which still exits 0, so formatting goes silently unenforced. This is exactly how the TS `import type` breakage in 10.3.4 and earlier went unnoticed. `tests/formatting.test.js` guards the resolution table.
+- **Consumer shims use `mikey-pro` subpaths, not the standalone scoped packages** — `mikey-pro/eslint`, `mikey-pro/prettier`, `mikey-pro/stylelint`. `@mikey-pro/prettier-config` and `@mikey-pro/stylelint-config` are separate publishes for single-tool consumers; the documented install command does not pull them in, so a shim importing them fails with `ERR_MODULE_NOT_FOUND`. Keep README, `configs/README.md`, and `~/.claude/rules/mikey-pro.md` consistent on this.
+- **Test-file globs must cover the full extension matrix, not just `.js`/`.ts`** — the `import-x/no-extraneous-dependencies` devDependencies allowlist in `base-config.js` and the `jestJs`/`jestTs` `files` globs in `overrides.js` all key off test-file patterns. Before 10.3.6 they omitted `tsx`, so every React component test (`*.test.tsx`) importing `@testing-library/react` or `vitest` hit a false-positive error in consumer projects. Use `{test,spec}.{js,jsx,mjs,cjs,ts,tsx,mts,cts}` plus `__tests__`/`__mocks__`/setup-file patterns and Cypress `*.cy.*` specs (the `cypressConfig` override already treats them as tests, so the allowlist must too). Also claimed (allowlist only, no jest rules): `*.e2e.*`, `*.test-d.{ts,tsx,mts,cts}`, and anything under `.storybook/` — the latter needs the dot-dir named explicitly (`**/.storybook/**`) because import-x's minimatch has no `dot: true`, so `**` never crosses dot-directories. The allowlist must stay narrow enough that a NON-test `.tsx` importing a devDependency still errors — `tests/test-file-globs.test.js` guards both directions.
+- **New TS extensions must be added in three places** — `base-config.js` `files` glob, the `ts` override `files` in `overrides.js`, and `settings['import-x/parsers']`. Miss the base glob and the file is not linted at all (silent, no error).
+
+- **Stylelint rule names and patterns are easy to get silently wrong** — `custom-property-pattern` matches the name WITHOUT the leading `--`; plugin rules must use their namespaced name (`scale-unlimited/declaration-strict-value`, bare name = "Unknown rule" on every stylesheet); stylelint 16 removed formatting rules like `media-query-list-comma-newline-after`. `tests/stylelint-and-comment-rules.test.js` lints real CSS through the config to catch this.
+- **`import-x/order` and `simple-import-sort/imports` are both on and must agree** — simple-import-sort owns ordering within a group, import-x/order only enforces group boundaries (explicit `groups`, `@/`/`~/` aliases as `internal` before a merged parent/sibling/index group, no `alphabetize`, no `@*` pathGroup). Reintroducing any of those makes `--fix` ping-pong. `tests/import-order-agreement.test.js` guards it.
+- **`spaced-comment` needs `markers: ['/']`** — otherwise its autofix turns TS triple-slash directives (`/// <reference ... />`) into `// / <reference ...`.
 
 ## Testing
 
@@ -120,3 +136,6 @@ These rules were disabled in 10.3.0 because their autofix breaks code. If re-ena
 - **Timeout:** 10s per test (ESLint config loading can be slow)
 - **Run:** `npm test` (or `npx vitest run`)
 - **Coverage:** `npm run test:coverage` — V8 provider, outputs text + JSON + HTML
+- **Use `npx vitest run --no-file-parallelism` for a trustworthy full-suite signal.** Every test file builds its own ESLint instance (and the TS-aware ones a full TypeScript program), so running all 15 files in parallel starves the workers and produces a cascade of bogus 60-120s timeouts across unrelated files. Measured on an M1 Ultra: parallel ~1210s with 12 failing files; serial ~211s with the 4 genuine failures. The parallel result is noise, not signal.
+- **4 `consumer-simulation.test.js` failures are pre-existing and environmental** — the simulated consumer install resolves TypeScript 7, and typescript-eslint refuses to run against TS 7 (`typescript-eslint does not support TS 7.0`). Unrelated to config changes; do not chase them when validating a change.
+- **`npm run eslint` does not pass on this repo's own `tests/` directory** — the `jest/*` rules (`prefer-expect-assertions`, `padding-around-*`) flag nearly every existing test. Pre-existing across all test files, not something a change introduced.

@@ -63,7 +63,7 @@ export const globalPlugins = {
 };
 
 export const baseConfig = {
-  files: ['**/*.{js,jsx,ts,tsx,mjs,cjs}'],
+  files: ['**/*.{js,jsx,ts,tsx,mjs,cjs,mts,cts}'],
   languageOptions: {
     ecmaVersion: 'latest',
     globals: {
@@ -117,9 +117,34 @@ export const baseConfig = {
       'error',
       {
         devDependencies: [
-          '**/*.test.{js,ts}',
-          '**/*.spec.{js,ts}',
+          '**/*.{test,spec}.{js,jsx,mjs,cjs,ts,tsx,mts,cts}',
+          // Cypress specs: the `cypressConfig` override (overrides.js) already
+          // treats `**/*.cy.*` as test files, so devDependencies must be
+          // importable from them too.
+          '**/*.cy.{js,jsx,mjs,cjs,ts,tsx,mts,cts}',
+          // End-to-end specs (`*.e2e.*`, Playwright/Vitest style) and Vitest
+          // type tests (`*.test-d.*`). Neither is a jest test, so these are
+          // allowlist-only; no jest override applies to them.
+          '**/*.e2e.{js,jsx,mjs,cjs,ts,tsx,mts,cts}',
+          '**/*.test-d.{ts,tsx,mts,cts}',
+          // Storybook config/stories. import-x's minimatch has no `dot: true`,
+          // so `**` does not cross dot-directories: `.storybook` must be named
+          // explicitly. import-x also matches each entry resolved against cwd,
+          // so this one entry covers the project-root `.storybook/` and nested
+          // monorepo packages (a separate `.storybook/**` entry is redundant).
+          '**/.storybook/**',
+          '**/__tests__/**',
+          '**/__mocks__/**',
           '**/test/**',
+          '**/tests/**',
+          '**/{test,vitest,jest}.setup.*',
+          '**/setupTests.*',
+          '**/testSetup.*',
+          '**/vitest.config.*',
+          '**/vite.config.*',
+          '**/jest.config.*',
+          '**/playwright.config.*',
+          '**/cypress.config.*',
         ],
       },
     ],
@@ -140,10 +165,20 @@ export const baseConfig = {
     ],
     'import-x/no-useless-path-segments': 'error',
     'import-x/no-webpack-loader-syntax': 'error',
+    // Must agree with simple-import-sort/imports (node: builtins, packages,
+    // then aliases like @/, then relative with parent/sibling/index merged).
+    // simple-import-sort owns ordering within a group (no alphabetize here:
+    // it would put '.' before '../x', the opposite of simple-import-sort), and
+    // scoped packages (@scope/pkg) sort among externals, so no '@*' pathGroup.
     'import-x/order': [
       'error',
       {
-        alphabetize: { order: 'asc' },
+        groups: [
+          'builtin',
+          'external',
+          'internal',
+          ['parent', 'sibling', 'index'],
+        ],
         'newlines-between': 'always',
         pathGroups: [
           {
@@ -152,14 +187,8 @@ export const baseConfig = {
             position: 'before',
           },
           {
-            group: 'external',
-            pattern: '@*',
-            position: 'after',
-          },
-          {
             group: 'internal',
-            pattern: '@/**',
-            position: 'after',
+            pattern: '{@,~}/**',
           },
         ],
         pathGroupsExcludedImportTypes: ['builtin'],
@@ -381,7 +410,8 @@ export const baseConfig = {
     'sort-imports': 'off',
 
     'sort-vars': 'warn',
-    'spaced-comment': ['warn', 'always'],
+    // markers: ['/'] exempts TypeScript triple-slash directives (`/// <reference />`)
+    'spaced-comment': ['warn', 'always', { markers: ['/'] }],
     strict: ['error', 'never'],
     'symbol-description': 'error',
 
