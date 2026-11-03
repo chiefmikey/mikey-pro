@@ -1,3 +1,9 @@
+const durationValues = [
+  String.raw`/\d*\.?\d+m?s\b/`,
+  '/^(none|inherit|initial|unset|revert)$/i',
+  '/var\\(/',
+];
+
 const config = {
   extends: [
     'stylelint-config-standard',
@@ -20,16 +26,20 @@ const config = {
   rules: {
     'color-function-notation': 'modern',
     'color-named': 'never',
-    'custom-property-pattern': '^--[a-z0-9-]+$',
+    // Stylelint matches the name WITHOUT the leading `--`.
+    'custom-property-pattern': '^[a-z0-9-]+$',
     'declaration-no-important': true,
+    // Require an explicit time unit anywhere in the value (decimals and any
+    // component order are fine); keywords and var() pass through.
     'declaration-property-value-allowed-list': {
-      animation: [String.raw`/^\d+ms/`, String.raw`/^\d+s/`],
-      transition: [String.raw`/^\d+ms/`, String.raw`/^\d+s/`],
+      animation: durationValues,
+      transition: durationValues,
     },
     'declaration-property-value-disallowed-list': {
       '/^grid/': ['auto'],
     },
-    'declaration-strict-value': [
+    // Plugin rules are namespaced; the bare name is an "Unknown rule".
+    'scale-unlimited/declaration-strict-value': [
       ['/color/', 'z-index'],
       {
         ignoreKeywords: ['transparent', 'inherit', 'currentColor'],
@@ -38,7 +48,6 @@ const config = {
     'function-calc-no-unspaced-operator': true,
     'max-nesting-depth': 3,
     'media-feature-name-no-vendor-prefix': true,
-    'media-query-list-comma-newline-after': 'always-multi-line',
     'number-max-precision': 4,
     'order/properties-alphabetical-order': true,
     'property-no-vendor-prefix': true,

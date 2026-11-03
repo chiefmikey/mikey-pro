@@ -388,6 +388,6 @@ describe('Base Config Rules', () => {
     const { baseConfig } = await import(
       join(rootDir, 'configs', 'eslint-config', 'base-config.js')
     );
-    expect(baseConfig.files).toContain('**/*.{js,jsx,ts,tsx,mjs,cjs}');
+    expect(baseConfig.files).toContain('**/*.{js,jsx,ts,tsx,mjs,cjs,mts,cts}');
   });
 });

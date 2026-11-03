@@ -4,6 +4,7 @@ import { readFileSync, writeFileSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { execSync } from 'child_process';
+import { setLockfileVersion } from './lockfile-version.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -22,6 +23,10 @@ const packageFiles = [
   'configs/stylelint-config/package.json',
   'configs/ruff-config/package.json',
 ];
+
+// Lockfile that mirrors the root package.json version (top-level and
+// packages[""] only; see lockfile-version.js)
+const lockfile = 'package-lock.json';
 
 function parseVersion(version) {
   const parts = version.split('.').map(Number);
@@ -65,9 +70,32 @@ function updatePackageVersion(filePath, newVersion) {
   const oldVersion = packageJson.version;
   packageJson.version = newVersion;
 
+  // Framework presets bundle their base config via mikey-pro; keep the floor
+  // at the release that ships them so a lockfile cannot pin a stale nested copy.
+  if (packageJson.dependencies?.['mikey-pro']) {
+    packageJson.dependencies['mikey-pro'] = `^${newVersion}`;
+  }
+
   writeFileSync(fullPath, JSON.stringify(packageJson, null, 2) + '\n', 'utf8');
 
   return oldVersion;
+}
+
+function updateLockfileVersion(filePath, newVersion) {
+  const fullPath = join(rootDir, filePath);
+
+  let content;
+  try {
+    content = readFileSync(fullPath, 'utf8');
+  } catch (error) {
+    if (error.code === 'ENOENT') {
+      return false;
+    }
+    throw error;
+  }
+
+  writeFileSync(fullPath, setLockfileVersion(content, newVersion), 'utf8');
+  return true;
 }
 
 async function main() {
@@ -110,6 +138,18 @@ async function main() {
       `✗ Failed to update configs/ruff-config/pyproject.toml:`,
       error.message,
     );
+    process.exit(1);
+  }
+
+  // Update package-lock.json so it does not drift behind package.json
+  try {
+    if (updateLockfileVersion(lockfile, newVersion)) {
+      console.log(`✓ Updated ${lockfile} → ${newVersion}`);
+    } else {
+      console.log(`- Skipped ${lockfile} (not found)`);
+    }
+  } catch (error) {
+    console.error(`✗ Failed to update ${lockfile}:`, error.message);
     process.exit(1);
   }
 
