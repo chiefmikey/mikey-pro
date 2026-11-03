@@ -35,13 +35,14 @@ import {
   existsSync,
   mkdirSync,
   readdirSync,
+  readFileSync,
   rmSync,
   unlinkSync,
   writeFileSync,
 } from 'node:fs';
 import { createRequire } from 'node:module';
 import { tmpdir } from 'node:os';
-import { join } from 'node:path';
+import { dirname, join } from 'node:path';
 
 const rootDir = join(import.meta.dirname, '..');
 const baseConfigDir = join(rootDir, 'configs', 'eslint-config');
@@ -145,6 +146,8 @@ function runNodeScript(consumerDir, script, { timeout = 30_000 } = {}) {
  * a fatal error (config load failure, parse error, etc.).
  */
 function runESLintInConsumer(consumerDir, filePath, { timeout = 60_000 } = {}) {
+  const filePaths = [filePath].flat();
+
   // Find eslint binary — it may be hoisted to top-level or nested inside
   // @mikey-pro/eslint-config's own node_modules.
   const candidates = [
@@ -182,7 +185,7 @@ function runESLintInConsumer(consumerDir, filePath, { timeout = 60_000 } = {}) {
   try {
     stdout = execFileSync(
       process.execPath,
-      [eslintBin, '--format', 'json', filePath],
+      [eslintBin, '--format', 'json', ...filePaths],
       {
         cwd: consumerDir,
         stdio: 'pipe',
@@ -196,7 +199,7 @@ function runESLintInConsumer(consumerDir, filePath, { timeout = 60_000 } = {}) {
 
     if (error.code === 'ETIMEDOUT') {
       throw new Error(
-        `ESLint timed out after ${timeout}ms while linting ${filePath}.\n` +
+        `ESLint timed out after ${timeout}ms while linting ${filePaths.join(' ')}.\n` +
           `This usually means a plugin is blocking (e.g. 'prettier' not installed, ` +
           `synckit worker hanging, or a network call in a plugin).`,
       );
@@ -220,6 +223,130 @@ function runESLintInConsumer(consumerDir, filePath, { timeout = 60_000 } = {}) {
     throw new Error(`ESLint output was not valid JSON:\n${stdout}`);
   }
 }
+
+// ---------------------------------------------------------------------------
+// Test-file recognition fixtures (import-x/no-extraneous-dependencies)
+//
+// A consumer's test files import devDependencies (vitest, @testing-library/*).
+// The allowlist in base-config.js must let those through for every test-file
+// naming convention, while a NON-test file importing the same devDependency
+// must still error. tests/test-file-globs.test.js covers the full matrix
+// in-repo; these cases prove it survives `npm pack` + a real install.
+// ---------------------------------------------------------------------------
+
+const EXTRANEOUS_DEPS_RULE = 'import-x/no-extraneous-dependencies';
+
+// Two devDependency imports -> a non-test file reports exactly two violations.
+const PROBE_DEV_DEPENDENCIES = ['@testing-library/react', 'vitest'];
+const PROBE_FILE_CONTENT = [
+  "import { render } from '@testing-library/react';",
+  "import { describe, expect, it } from 'vitest';",
+  '',
+  'export { describe, expect, it, render };',
+  '',
+].join('\n');
+
+/**
+ * Declare the probe packages as devDependencies of the consumer, backed by
+ * empty stub packages in node_modules. Two constraints drive this:
+ *   - import-x/no-extraneous-dependencies only classifies an import as
+ *     "external" (and so checks it against package.json) when it RESOLVES to a
+ *     node_modules path; an unresolvable specifier is silently skipped, which
+ *     would make every assertion here pass vacuously.
+ *   - Real `npm install`s of vitest + @testing-library/react are slow and need
+ *     network, while only their resolvability matters, not their contents.
+ * Must run AFTER the real `npm install` (which would otherwise download them).
+ */
+function installProbeDevDependencies(consumerDir) {
+  const packageJsonPath = join(consumerDir, 'package.json');
+  const packageJson = JSON.parse(readFileSync(packageJsonPath, 'utf8'));
+  packageJson.devDependencies = Object.fromEntries(
+    PROBE_DEV_DEPENDENCIES.map((name) => [name, '*']),
+  );
+  writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
+
+  for (const name of PROBE_DEV_DEPENDENCIES) {
+    const packageDir = join(consumerDir, 'node_modules', name);
+    mkdirSync(packageDir, { recursive: true });
+    writeFileSync(
+      join(packageDir, 'package.json'),
+      JSON.stringify({ main: 'index.js', name, version: '1.0.0' }),
+    );
+    writeFileSync(join(packageDir, 'index.js'), 'module.exports = {};\n');
+  }
+}
+
+function writeProbeFiles(consumerDir, relativePaths) {
+  for (const relativePath of relativePaths) {
+    const filePath = join(consumerDir, relativePath);
+    mkdirSync(dirname(filePath), { recursive: true });
+    writeFileSync(filePath, PROBE_FILE_CONTENT);
+  }
+}
+
+/**
+ * Lint every probe file in a single ESLint run and return a lookup from the
+ * consumer-relative path to its messages (matched by path suffix, since the
+ * child process reports the realpath of the temp dir).
+ */
+function lintProbeFiles(consumerDir, relativePaths) {
+  const results = runESLintInConsumer(consumerDir, relativePaths, {
+    timeout: 120_000,
+  });
+  return (relativePath) => {
+    const result = results.find((r) => r.filePath.endsWith(`/${relativePath}`));
+    if (!result) {
+      throw new Error(`ESLint returned no result for ${relativePath}`);
+    }
+    return result.messages;
+  };
+}
+
+const extraneousDependencyErrors = (messages) =>
+  messages.filter((m) => m.ruleId === EXTRANEOUS_DEPS_RULE);
+const fatalErrors = (messages) => messages.filter((m) => m.fatal);
+
+// Recognized test files: NO import-x/no-extraneous-dependencies violations.
+const JS_TEST_FILES = [
+  'widget.test.js',
+  'Widget.spec.jsx',
+  'widget.test.mjs',
+  'widget.spec.cjs',
+  '__tests__/helper.js',
+  'src/deep/__tests__/fixture.jsx',
+  '__mocks__/api.mjs',
+  'tests/setup.js',
+  'vitest.setup.js',
+];
+const TS_TEST_FILES = [
+  'widget.test.ts',
+  'Widget.spec.tsx',
+  'widget.test.mts',
+  'widget.spec.cts',
+  '__tests__/helper.ts',
+  'src/deep/__tests__/Fixture.tsx',
+  '__mocks__/api.ts',
+  'vitest.setup.ts',
+];
+// Not test files (some are look-alikes): exactly 2 violations each.
+const JS_NON_TEST_FILES = [
+  'util.js',
+  'Component.jsx',
+  'util.mjs',
+  'util.cjs',
+  'latest.js',
+  'my__tests__x/helper.js',
+];
+// React suite: JSX only (the React consumer does not install TypeScript).
+const REACT_TEST_FILES = ['App.test.jsx', 'App.spec.jsx', '__tests__/App.jsx'];
+const REACT_NON_TEST_FILES = ['AppShell.jsx', 'latest.jsx'];
+const TS_NON_TEST_FILES = [
+  'util.ts',
+  'Component.tsx',
+  'contest.ts',
+  'tests-util.tsx',
+  'spec-helper.ts',
+];
 
 // ---------------------------------------------------------------------------
 // Base config consumer suite
@@ -444,7 +571,7 @@ describe(
               strict: true,
               target: 'ES2022',
             },
-            include: ['*.ts'],
+            include: ['**/*.ts', '**/*.tsx', '**/*.mts', '**/*.cts'],
           },
           null,
           2,
@@ -464,6 +591,15 @@ describe(
         'prettier',
         'stylelint',
       );
+
+      // Test-file recognition fixtures (stubbed AFTER install, see helper).
+      installProbeDevDependencies(consumerDir);
+      writeProbeFiles(consumerDir, [
+        ...JS_TEST_FILES,
+        ...TS_TEST_FILES,
+        ...JS_NON_TEST_FILES,
+        ...TS_NON_TEST_FILES,
+      ]);
     }, HOOK_TIMEOUT);
 
     afterAll(() => {
@@ -562,6 +698,45 @@ console.log(JSON.stringify(checks));
         'Expected no-var to report on `var x = 1` — no messages means rules are not loading',
       ).not.toHaveLength(0);
     });
+
+    describe('test-file recognition (import-x/no-extraneous-dependencies)', () => {
+      let messagesFor;
+
+      // One ESLint run for all fixtures; the first test pays for it.
+      const getMessages = (relativePath) => {
+        messagesFor ??= lintProbeFiles(consumerDir, [
+          ...JS_TEST_FILES,
+          ...TS_TEST_FILES,
+          ...JS_NON_TEST_FILES,
+          ...TS_NON_TEST_FILES,
+        ]);
+        return messagesFor(relativePath);
+      };
+
+      it.each([...JS_TEST_FILES, ...TS_TEST_FILES])(
+        '%s may import devDependencies',
+        (relativePath) => {
+          const messages = getMessages(relativePath);
+
+          expect(fatalErrors(messages)).toHaveLength(0);
+          expect(extraneousDependencyErrors(messages)).toHaveLength(0);
+        },
+        120_000,
+      );
+
+      it.each([...JS_NON_TEST_FILES, ...TS_NON_TEST_FILES])(
+        '%s (not a test file) still errors on devDependency imports',
+        (relativePath) => {
+          const messages = getMessages(relativePath);
+
+          expect(fatalErrors(messages)).toHaveLength(0);
+          expect(extraneousDependencyErrors(messages)).toHaveLength(
+            PROBE_DEV_DEPENDENCIES.length,
+          );
+        },
+        120_000,
+      );
+    });
   },
 );
 
@@ -621,6 +796,13 @@ describe(
         'eslint',
         'prettier',
       );
+
+      // Test-file recognition fixtures (stubbed AFTER install, see helper).
+      installProbeDevDependencies(consumerDir);
+      writeProbeFiles(consumerDir, [
+        ...REACT_TEST_FILES,
+        ...REACT_NON_TEST_FILES,
+      ]);
     }, HOOK_TIMEOUT);
 
     afterAll(() => {
@@ -690,6 +872,43 @@ console.log(JSON.stringify({ ok: true, entries: config.length, hasReact }));
         fatalErrors,
         `Fatal errors: ${JSON.stringify(fatalErrors)}`,
       ).toHaveLength(0);
+    });
+
+    describe('test-file recognition (import-x/no-extraneous-dependencies)', () => {
+      let messagesFor;
+
+      // One ESLint run for all fixtures; the first test pays for it.
+      const getMessages = (relativePath) => {
+        messagesFor ??= lintProbeFiles(consumerDir, [
+          ...REACT_TEST_FILES,
+          ...REACT_NON_TEST_FILES,
+        ]);
+        return messagesFor(relativePath);
+      };
+
+      it.each(REACT_TEST_FILES)(
+        '%s may import devDependencies',
+        (relativePath) => {
+          const messages = getMessages(relativePath);
+
+          expect(fatalErrors(messages)).toHaveLength(0);
+          expect(extraneousDependencyErrors(messages)).toHaveLength(0);
+        },
+        120_000,
+      );
+
+      it.each(REACT_NON_TEST_FILES)(
+        '%s (not a test file) still errors on devDependency imports',
+        (relativePath) => {
+          const messages = getMessages(relativePath);
+
+          expect(fatalErrors(messages)).toHaveLength(0);
+          expect(extraneousDependencyErrors(messages)).toHaveLength(
+            PROBE_DEV_DEPENDENCIES.length,
+          );
+        },
+        120_000,
+      );
     });
   },
 );
