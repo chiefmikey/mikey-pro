@@ -63,75 +63,84 @@ for config in eslint-config eslint-config-react eslint-config-vue eslint-config-
 done
 echo ""
 
+# Steps 4-9 do not abort the run: each result is recorded and a summary table
+# is printed at the end (exit non-zero if any step failed).
+#
+# Known environmental failures on a clean checkout (not regressions):
+#   - Step 6: the consumer-simulation tests fail (3-4 seen) because the simulated consumer
+#     resolves TypeScript 7.
+#   - Step 8: prettier --check reports warnings on pre-existing files.
+#   - Step 9: `eslint` flags jest/* rules (and others) on tests/.
+STEP_NAMES=()
+STEP_RESULTS=()
+
+# run_step <label> <command...>: run a command, record pass/fail, keep going
+run_step() {
+    local label="$1"
+    shift
+    if "$@"; then
+        print_status "$label passed"
+        STEP_RESULTS+=("pass")
+    else
+        print_error "$label failed"
+        STEP_RESULTS+=("FAIL")
+    fi
+    STEP_NAMES+=("$label")
+    echo ""
+}
+
 # Step 4: Run validation checks
 echo "🧪 Step 4: Running validation checks..."
-if npm run test:validate; then
-    print_status "Validation checks passed"
-else
-    print_error "Validation checks failed"
-    exit 1
-fi
-echo ""
+run_step "Step 4: Validation checks" npm run test:validate
 
 # Step 5: Run manual tests
 echo "🧪 Step 5: Running manual tests..."
-if npm run test:manual; then
-    print_status "Manual tests passed"
-else
-    print_warning "Manual tests had issues (continuing...)"
-fi
-echo ""
+run_step "Step 5: Manual tests" npm run test:manual
 
-# Step 6: Run full test suite
-echo "🧪 Step 6: Running full test suite..."
-if npm test; then
-    print_status "Full test suite passed"
-else
-    print_error "Full test suite failed"
-    exit 1
-fi
-echo ""
+# Step 6: Run full test suite (serial: parallel runs starve workers and time out)
+echo "🧪 Step 6: Running full test suite (serial)..."
+run_step "Step 6: Full test suite" npx vitest run --no-file-parallelism
 
-# Step 7: Verify ESLint configs can lint
+# Step 7: Verify ESLint configs can lint (findings are reported, not fatal)
+verify_configs() {
+    local rc=0
+    echo "Testing core config..."
+    npx eslint test-files/test.js test-files/test.ts --config eslint.config.js || rc=1
+    echo "Testing React config..."
+    npx eslint test-files/test-react.jsx --config configs/eslint-config-react/index.js || rc=1
+    echo "Testing Vue config..."
+    npx eslint test-files/test-vue.vue --config configs/eslint-config-vue/index.js || rc=1
+    echo "Testing Svelte config..."
+    npx eslint test-files/test-svelte.svelte --config configs/eslint-config-svelte/index.js || rc=1
+    echo "Testing Angular config..."
+    npx eslint test-files/test-angular.ts --config configs/eslint-config-angular/index.js || rc=1
+    return $rc
+}
 echo "🔍 Step 7: Verifying ESLint configs can lint..."
-echo "Testing core config..."
-npx eslint test-files/test.js test-files/test.ts --config eslint.config.js || print_warning "Core config linting had issues"
-
-echo "Testing React config..."
-npx eslint test-files/test-react.jsx --config configs/eslint-config-react/index.js || print_warning "React config linting had issues"
-
-echo "Testing Vue config..."
-npx eslint test-files/test-vue.vue --config configs/eslint-config-vue/index.js || print_warning "Vue config linting had issues"
-
-echo "Testing Svelte config..."
-npx eslint test-files/test-svelte.svelte --config configs/eslint-config-svelte/index.js || print_warning "Svelte config linting had issues"
-
-echo "Testing Angular config..."
-npx eslint test-files/test-angular.ts --config configs/eslint-config-angular/index.js || print_warning "Angular config linting had issues"
-
-print_status "ESLint config verification completed"
-echo ""
+run_step "Step 7: ESLint config verification" verify_configs
 
 # Step 8: Check code formatting
 echo "🎨 Step 8: Checking code formatting..."
-if npx prettier --check "**/*.{js,ts,json,md,yml,yaml}"; then
-    print_status "Code formatting check passed"
-else
-    print_error "Code formatting check failed"
-    exit 1
-fi
-echo ""
+run_step "Step 8: Code formatting" npx prettier --check "**/*.{js,ts,json,md,yml,yaml}"
 
 # Step 9: Run ESLint
 echo "🔍 Step 9: Running ESLint..."
-if npx eslint "**/*.{js,ts}" --max-warnings 0; then
-    print_status "ESLint check passed"
-else
-    print_error "ESLint check failed"
-    exit 1
-fi
-echo ""
+run_step "Step 9: ESLint" npx eslint "**/*.{js,ts}" --max-warnings 0
 
-echo -e "${GREEN}✅ All CI checks passed locally!${NC}"
+# Summary
+echo "=============================="
+echo "CI summary"
+echo "=============================="
+FAILED=0
+for i in "${!STEP_NAMES[@]}"; do
+    printf '%-40s %s\n' "${STEP_NAMES[$i]}" "${STEP_RESULTS[$i]}"
+    [ "${STEP_RESULTS[$i]}" = "FAIL" ] && FAILED=1
+done
 echo ""
-echo "You can safely push your changes."
+if [ "$FAILED" -eq 0 ]; then
+    echo -e "${GREEN}✅ All CI checks passed locally!${NC}"
+    echo "You can safely push your changes."
+    exit 0
+fi
+echo -e "${RED}One or more steps failed (see table above).${NC}"
+exit 1
