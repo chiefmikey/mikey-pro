@@ -19,6 +19,11 @@
       "optional": true
     }
   },
+  "overrides": {
+    "@babel/eslint-parser": {
+      "eslint": "^10.0.0"
+    }
+  },
   "files": [
     "index.js",
     "flat.js",

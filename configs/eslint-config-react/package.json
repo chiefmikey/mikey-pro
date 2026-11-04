@@ -26,6 +26,14 @@
       "optional": true
     }
   },
+  "overrides": {
+    "eslint-plugin-jsx-a11y": {
+      "eslint": "^10.0.0"
+    },
+    "eslint-plugin-react": {
+      "eslint": "^10.0.0"
+    }
+  },
   "files": [
     "index.js",
     "flat.js",

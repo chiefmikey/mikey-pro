@@ -45,7 +45,8 @@ echo ""
 
 # Step 2: Install peer dependencies
 echo "📦 Step 2: Installing peer dependencies..."
-npm install eslint-plugin-import eslint-plugin-n eslint-plugin-jest eslint-plugin-jest-dom
+# --no-save keeps tracked package.json / package-lock.json untouched
+npm install --no-save eslint-plugin-import eslint-plugin-n eslint-plugin-jest eslint-plugin-jest-dom
 print_status "Peer dependencies installed"
 echo ""
 
@@ -53,7 +54,7 @@ echo ""
 echo "📦 Step 3: Installing config package dependencies..."
 for config in eslint-config eslint-config-react eslint-config-vue eslint-config-svelte eslint-config-angular prettier-config stylelint-config; do
     echo "Installing $config dependencies..."
-    if (cd "configs/$config" && npm install); then
+    if (cd "configs/$config" && npm install --no-package-lock); then
         print_status "$config dependencies installed"
     else
         print_error "Failed to install $config dependencies"
