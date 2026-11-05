@@ -20,6 +20,8 @@ npm install --save-dev @mikey-pro/eslint-config-svelte eslint prettier   # Svelt
 npm install --save-dev @mikey-pro/eslint-config-angular eslint prettier  # Angular
 ```
 
+> **TypeScript 7 is not yet supported by typescript-eslint.** Keep `typescript` below 6.1 (for example `typescript@~6.0`) for linting until typescript-eslint adds TS 7 support.
+
 Python:
 
 ```bash
