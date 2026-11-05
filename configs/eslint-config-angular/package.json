@@ -1,6 +1,6 @@
 {
   "name": "@mikey-pro/eslint-config-angular",
-  "version": "10.3.9",
+  "version": "10.3.10",
   "description": "Mikey Pro ESLint Angular configuration - Ultimate Angular coding style guide",
   "type": "module",
   "main": "index.js",
@@ -8,7 +8,7 @@
     "@angular-eslint/eslint-plugin": "^21.2.0",
     "@angular-eslint/eslint-plugin-template": "^21.2.0",
     "@angular-eslint/template-parser": "^21.2.0",
-    "mikey-pro": "^10.3.9",
+    "mikey-pro": "^10.3.10",
     "@typescript-eslint/eslint-plugin": "^8.56.1",
     "@typescript-eslint/parser": "^8.56.1",
     "eslint-plugin-prettier": "^5.5.5"
@@ -24,12 +24,7 @@
       "optional": false
     }
   },
-  "files": [
-    "index.js",
-    "flat.js",
-    "README.md",
-    "LICENSE"
-  ],
+  "files": ["index.js", "flat.js", "README.md", "LICENSE"],
   "homepage": "https://github.com/chiefmikey/mikey-pro#readme",
   "repository": {
     "type": "git",
@@ -57,9 +52,7 @@
     "flat-config"
   ],
   "author": "Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)",
-  "browserslist": [
-    "defaults"
-  ],
+  "browserslist": ["defaults"],
   "engines": {
     "node": ">=20.19.0",
     "npm": ">=9.0.0",
