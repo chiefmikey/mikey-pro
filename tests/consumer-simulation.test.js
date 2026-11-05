@@ -425,7 +425,9 @@ describe(
       );
 
       // 4. Install the packed .tgz + typescript + prettier
-      //    - typescript: needed by @typescript-eslint parser
+      //    - typescript: needed by @typescript-eslint parser. Pinned to ~6.0
+      //      because typescript-eslint peers typescript "<6.1.0" and refuses
+      //      TS 7. Lift the pin once typescript-eslint peers TS 7.
       //    - eslint: peer dep of @mikey-pro/eslint-config
       //    - prettier: peer dep, needed by eslint-plugin-prettier (via synckit worker)
       //      Without prettier installed, the prettier/prettier rule will hang
@@ -435,7 +437,7 @@ describe(
         `"${tgzPath}"`,
         'eslint',
         'prettier',
-        'typescript',
+        '"typescript@~6.0"',
       );
     }, HOOK_TIMEOUT);
 
