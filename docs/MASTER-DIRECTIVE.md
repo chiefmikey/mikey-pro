@@ -7,6 +7,8 @@
 
 | ID | Ask | Source (who, when) | Owner thread | Next step | Status | Due | Accept |
 |---|---|---|---|---|---|---|---|
+| D-0007 | Consumer-sim gate red on TS 7: pin the simulated consumer's typescript to typescript-eslint's supported range (>=4.8.4 <6.1.0), note TS 7 limit for consumers in README, drop the 'pre-existing failures' caveat from project CLAUDE.md | operator 2026-11-05 sweep (npm: typescript latest 7.0.2, typescript-eslint 8.72.1 peers ts <6.1.0) | worker sonnet, fix/consumer-install-health | worker running; operator reviews diff + reruns serial suite | running | 2026-11-06 | serial vitest: consumer-simulation file 0 failures on clean main+branch, checked by operator |
+| D-0008 | Svelte preset forces ERESOLVE on eslint 10 via @babel/eslint-parser 7 (peers eslint <=9; v8 needs Node >=22.18 + babel core 8): remove the parser if espree default keeps all svelte tests green, else leave + record why | operator 2026-11-05 sweep | same worker/branch | worker running | running | 2026-11-06 | fresh consumer `npm install` of packed svelte preset + eslint 10 succeeds with no overrides/legacy flag, svelte tests green; or a recorded no-go reason |
 
 ## Done (last 7 days; older rows move to directive-archive.md)
 
