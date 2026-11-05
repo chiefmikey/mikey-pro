@@ -1,6 +1,6 @@
 {
   "name": "mikey-pro",
-  "version": "10.3.9",
+  "version": "10.3.10",
   "description": "AI agent code quality guardrails — ESLint, Prettier, and Stylelint unified config",
   "type": "module",
   "main": "./index.js",
@@ -146,9 +146,7 @@
     "angular"
   ],
   "author": "Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)",
-  "browserslist": [
-    "defaults"
-  ],
+  "browserslist": ["defaults"],
   "engines": {
     "node": ">=20.19.0",
     "npm": ">=9.0.0",
