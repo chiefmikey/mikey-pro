@@ -8,7 +8,7 @@ AI agent code quality guardrails for JavaScript, TypeScript, React, Vue, Svelte,
 ## Install
 
 ```bash
-npm install --save-dev mikey-pro eslint prettier stylelint
+npm install --save-dev mikey-pro eslint prettier stylelint@^17
 ```
 
 Framework projects — one install, base comes transitively:

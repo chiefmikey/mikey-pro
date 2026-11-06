@@ -97,6 +97,7 @@ These values are hardcoded and must be bumped when new major versions release:
 - **React version** in `eslint-config-react/index.js` `settings.react.version: '19'` — update when React 20 releases. Cannot use `'detect'` because `eslint-plugin-react` 7.x uses `context.getFilename()` which was removed in ESLint 10; detection crashes multiple rules.
 - **Python target** in `ruff-config/ruff.toml` `target-version = "py312"` — update when targeting newer Python versions
 - **Node.js version** in `base-config.js` `n/no-unsupported-features/es-syntax` `version: '>=20.0.0'` — update when minimum Node version changes
+- **Stylelint line** — `mikey-pro` and `@mikey-pro/stylelint-config` peer `stylelint ^17` and pin `stylelint-config-recommended ^18`, `stylelint-config-html ^1` and `postcss-html ^1` as direct deps. stylelint 18, `stylelint-config-standard` 41, `stylelint-config-recommended` 19 and the v2 html/vue presets all require Node 22, so they move together only when the Node floor rises. Without the direct pins, `stylelint-config-recommended-vue`'s open ranges pull those Node 22 majors and fresh consumer installs warn or hang in npm resolution.
 
 ## Dangerous Autofix Patterns (Resolved)
 
