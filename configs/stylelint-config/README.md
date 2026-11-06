@@ -15,7 +15,7 @@ npm install --save-dev mikey-pro
 ## Standalone Install
 
 ```bash
-npm install --save-dev @mikey-pro/stylelint-config
+npm install --save-dev @mikey-pro/stylelint-config stylelint@^17
 ```
 
 ```json

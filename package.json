@@ -53,7 +53,7 @@
     "mikey-pro": "file:./configs",
     "minimatch": "^3.1.5",
     "prettier": "^3.6.2",
-    "stylelint": "^16.24.0",
+    "stylelint": "^17.0.0",
     "svelte": "^5.43.14",
     "vitest": "^4.0.13"
   },

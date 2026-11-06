@@ -7,7 +7,7 @@ AI agent code quality guardrails — ESLint 10, Prettier, and Stylelint in one i
 ## Install
 
 ```bash
-npm install --save-dev mikey-pro eslint prettier stylelint
+npm install --save-dev mikey-pro eslint prettier stylelint@^17
 ```
 
 For framework projects, install the framework variant instead (mikey-pro comes transitively):
