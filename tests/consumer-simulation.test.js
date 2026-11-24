@@ -37,6 +37,7 @@ import {
   readdirSync,
   readFileSync,
   rmSync,
+  statfsSync,
   unlinkSync,
   writeFileSync,
 } from 'node:fs';
@@ -78,9 +79,33 @@ function packPackage(pkgDir) {
  * Create an isolated consumer project directory under the OS temp dir.
  */
 function createConsumerDir(suffix) {
-  const dir = join(tmpdir(), `mikey-pro-consumer-${suffix}-${Date.now()}`);
+  const dir = join(scratchBase(), `mikey-pro-consumer-${suffix}-${Date.now()}`);
   mkdirSync(dir, { recursive: true });
   return dir;
+}
+
+/**
+ * Base dir for the consumer installs. Every install writes thousands of
+ * node_modules files, so they go on hey's RAM disk when it is mounted with
+ * headroom (named dir, never a shared one) and fall back to the OS temp dir
+ * (the internal SSD) otherwise. MIKEY_PRO_TEST_SCRATCH=off forces the fallback.
+ */
+function scratchBase() {
+  const ram = process.env.CONFIGS_TEST_RAM_DISK || '/Volumes/HeyRam';
+  if (process.env.MIKEY_PRO_TEST_SCRATCH === 'off' || !existsSync(join(ram, '.hey-ram-scratch'))) {
+    return tmpdir();
+  }
+  try {
+    const fs = statfsSync(ram);
+    if (fs.bavail * fs.bsize < 2 * 1024 ** 3) {
+      return tmpdir();
+    }
+    const base = join(ram, 'mikey-pro-consumer-sim');
+    mkdirSync(base, { recursive: true });
+    return base;
+  } catch {
+    return tmpdir();
+  }
 }
 
 /**
